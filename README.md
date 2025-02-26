@@ -1,4 +1,4 @@
-## Learnify - 📚💡
+## Learnfy - 📚💡
 
 Análise de Dados Educacionais, utilizando dados para promover insights estratégicos e otimizar a gestão educacional em diversos contextos.
 
