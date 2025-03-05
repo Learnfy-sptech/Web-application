@@ -130,6 +130,7 @@ sliderContainer.addEventListener('mouseenter', stopAutoSlide);
 sliderContainer.addEventListener('mouseleave', startAutoSlide);
 
 
+
 const toggles = document.querySelectorAll('.faq-toggle')
 
 toggles.forEach(toggle => {
