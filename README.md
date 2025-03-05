@@ -5,7 +5,7 @@ Análise de Dados Educacionais, utilizando dados para promover insights estraté
 ## 💻 Tecnologias
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=html,scss,js,nodejs,mysql,github,java,git" alt="Skills" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,nodejs,mysql,github,java,git" alt="Skills" />
   <br />
 </div>
 
