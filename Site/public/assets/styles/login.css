@@ -105,7 +105,7 @@ main form {
     width: 100%;
     display: flex;
     align-items: center;
-    background: #00000056;
+    background: #c6c6c671;
     border-radius: 25px;
     padding: 10px;
     margin: 4px 0 10px 0;
@@ -138,10 +138,8 @@ input[type="text"] {
     font-size: 16px;
     padding: 4px 0;
     outline: none;
-    color: white;
+    color: rgb(0, 0, 0);
 }
-
-
 
 section.images {
     width: 50vw;

@@ -21,7 +21,7 @@ $(document).ready(function() {
 
         sections.each(function(i) {
             const section = $(this);
-            const sectionTop = section.offset().top - 96;
+            const sectionTop = section.offset().top - header.outerHeight();
             const sectionBottom = sectionTop+ section.outerHeight();
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
@@ -40,6 +40,12 @@ $(document).ready(function() {
         distance: '20%'
     });
 
+    ScrollReveal().reveal('#banner', {
+        origin: 'left',
+        duration: 2000,
+        distance: '20%'
+    });
+
     ScrollReveal().reveal('.dish', {
         origin: 'left',
         duration: 2000,
@@ -53,7 +59,7 @@ $(document).ready(function() {
     })
     
     
-    ScrollReveal().reveal('#testimonials_image', {
+    ScrollReveal().reveal('#avaliacoesImagem', {
         origin: 'left',
         duration: 1000,
         distance: '20%'
@@ -124,10 +130,11 @@ function stopAutoSlide() {
 showSlide(slideIndex); 
 startAutoSlide(); 
 
-
 const sliderContainer = document.querySelector('.slider-container');
 sliderContainer.addEventListener('mouseenter', stopAutoSlide);
 sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+
 
 
 
@@ -140,5 +147,21 @@ toggles.forEach(toggle => {
 })
 
 
+// Isso aqui faz o icone de mensagem sumir no Contate-nos 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.querySelector('#message');
+    const icon = document.querySelector('.input-message .icon');
 
+    function toggleIconVisibility() {
+        if (textarea.value.trim() !== '') {
+            icon.style.opacity = 0; 
+        } else {
+            icon.style.opacity = 1; 
+        }
+    }
+
+    textarea.addEventListener('input', toggleIconVisibility);
+
+    toggleIconVisibility();
+});

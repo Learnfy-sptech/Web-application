@@ -34,27 +34,96 @@
     margin-bottom: 20px;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
 
-.form-group label {
-    display: block;
+.form-home label {
+    font-size: 15px;
+    color: #000000;
     margin-bottom: 5px;
 }
 
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+.form-home span{
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 5px;
 }
 
-.form-group textarea {
-    height: 150px;
-    resize: none;
+.input-name,
+.input-email,
+.input-password {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #c6c6c671;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 4px 0 10px 0;
+    border: 2px solid transparent;
+    transition: border-color 0.3s cubic-bezier(.25, .01, .25, 1), background 0.2s cubic-bezier(.25, .01, .25, 1);
 }
+
+.input-name:hover,
+.input-email:hover,
+.input-password:hover,
+.input-email:focus-within,
+.input-name:focus-within,
+.input-password:focus-within {
+    border-color: var(--color-primary-6)
+}
+
+.icon {
+    padding: 4px;
+    color: var(--color-primary-5);
+    min-width: 30px;
+    text-align: center;
+}
+
+input[type="email"], 
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 4px 0;
+    outline: none;
+    color: rgb(0, 0, 0);
+}
+
+.input-message {
+    position: relative;
+}
+
+.input-message .icon {
+    position: absolute;
+    left: 10px;
+    top: 20%;
+    transform: translateY(-50%);
+    color: var(--color-primary-5);
+    transition: opacity 0.3s ease;
+}
+
+.input-message textarea {
+    padding-left: 30px;
+    width: 100%;
+    border: 2px solid transparent;
+    background: #c6c6c671;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 4px 0 10px 0;
+    resize: none;
+    transition: border-color 0.3s cubic-bezier(.25, .01, .25, 1), background 0.2s cubic-bezier(.25, .01, .25, 1);
+}
+
+.input-message textarea:hover,
+.input-message textarea:focus-within {
+    border-color: var(--color-primary-6);
+}
+
+.input-message textarea:not(:empty) + .icon {
+    opacity: 0;
+    color: transparent;
+}
+
 
 .form-container button {
     padding: 12px 20px;

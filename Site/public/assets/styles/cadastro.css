@@ -58,7 +58,7 @@ main .alternative {
 main .alternative span {
     font-size: 1.1rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
@@ -99,7 +99,7 @@ main form {
     width: 100%;
     display: flex;
     align-items: center;
-    background: #00000056;
+    background: #c6c6c671;
     border-radius: 25px;
     padding: 10px;
     margin: 4px 0 10px 0;
@@ -132,7 +132,7 @@ input[type="text"] {
     font-size: 16px;
     padding: 4px 0;
     outline: none;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 

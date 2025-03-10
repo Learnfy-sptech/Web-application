@@ -17,8 +17,9 @@
 }
 
 .aboutus-image img, .aboutus2-image img {
-    max-width: 400px;
-    height: auto;
+    max-width: 800px;
+    height: 500px;
+    width: 100%;
 }
 
 .aboutus-content, .aboutus2-content {

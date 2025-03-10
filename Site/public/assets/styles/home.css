@@ -52,16 +52,18 @@
 
 #banner {
     display: flex;
-    align-items: start;
-    justify-content: end;
-    width: 70%;
+    align-items: center;
+    justify-content: flex-end;
+    width: 80%;
+    height: 75vh;
     z-index: 2;
 }
 
 #banner img {
-    height: 100%;
-    width: fit-content;
+    max-height: 120%;
+    width: auto;
 }
+
 
 .shape {
     background-color: var(--color-primary-2);

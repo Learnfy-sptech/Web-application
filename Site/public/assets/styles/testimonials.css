@@ -6,8 +6,9 @@
     gap: 48px;
 }
 
-#testimonial_image {
-    width: 500px;
+#avaliacoesImagem {
+    width: 450px;
+    margin-top: 150px;
     height: auto;
 }
 
