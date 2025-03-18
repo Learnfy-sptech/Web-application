@@ -160,6 +160,26 @@ section.images .circle {
     z-index: -1;
 }
 
+
+.form-cadastro select {
+    width: 100%;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 10px 0;
+    outline: none;
+    color: rgb(0, 0, 0);
+    background: #c6c6c671;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 4px 0 10px 0;
+}
+
+.input-email select {
+    padding: 10px 10px 10px 30px; 
+}
+
+
 @media only screen and (min-width: 900px) and (max-width: 1200px) {
     section.images img {
         width: 110%;

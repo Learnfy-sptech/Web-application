@@ -53,10 +53,11 @@
 #banner {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     width: 80%;
     height: 75vh;
     z-index: 2;
+    position: relative;
+    left: 310px;
 }
 
 #banner img {
