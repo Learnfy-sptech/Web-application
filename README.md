@@ -5,7 +5,7 @@ Análise de Dados Educacionais, utilizando dados para promover insights estraté
 ## 💻 Tecnologias
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,nodejs,mysql,github,java,git" alt="Skills" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,nodejs,mysql,github,git" alt="Skills" />
   <br />
 </div>
 
@@ -39,8 +39,8 @@ Este projeto faz parte da iniciativa de Pesquisa e Inovação do segundo semestr
 - Harison Rios [https://github.com/HarisonRios]
 - Lucas Aiello [https://github.com/lucasaiello-dev]
 - Luiza Camara [https://github.com/Luiza-C-Moreira]
+- João Pedro [https://github.com/jpferraz-git]
 - Vinicius Alves [https://github.com/ViniciusAlvesdosSantos]
-
 
 
 ## 📝 Licença
