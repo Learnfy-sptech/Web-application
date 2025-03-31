@@ -15,14 +15,26 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
 app.use("/", indexRouter);
+
+
+// ----------------------------------------------------------------- //
+// CONFIGURAÇÕES PARA CONEXÃO DIRETAMENTE COM NOSSO BUCKET NO AWS S3 //
+// ----------------------------------------------------------------- //
+
+// Traçando rotas para parear com a API da AWS
+const awsRouter = require("./src/routes/aws");
+app.use("/aws", awsRouter);
+
+// ----------------------------------------------------------------- //
+// ----------------------------------------------------------------- //
+// ----------------------------------------------------------------- //
 
 
 app.listen(PORTA_APP, function () {
