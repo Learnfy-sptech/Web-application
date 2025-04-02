@@ -74,9 +74,37 @@ body{
   
 }
 
+canvas {
+  width: 100% !important;
+  height: 400px !important;
+}
 
 header {
   padding: 20px;
   margin-top: 15px;
 
+}
+
+.profile{
+  border-radius: 5px;
+}
+
+.profile:hover{
+  background-color:#660303;
+  transition: 0.3s ease;
+  
+}
+
+.card-layout{
+  width: 30%;
+  border: none; 
+  box-shadow:0 1px 3px rgba(0,0,0,0.12);
+}
+
+.no-border{
+  border: none;
+}
+
+.padding-profile{
+  margin-left: 20px;
 }

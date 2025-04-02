@@ -173,7 +173,7 @@ const ctx1 = document.getElementById('ChartOne');
     data: {
       labels: ['Red', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{
-        label: '# of Votes',
+        label: 'Alunos por região',
         data: [12, 3, 5, 2, 3],
         borderWidth: 1
       }]
@@ -194,7 +194,7 @@ const ctx1 = document.getElementById('ChartOne');
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{
-        label: '# of Votes',
+        label: 'Alunos inadimplentes',
         data: [12, 19, 3, 5, 2, 3],
         borderWidth: 1
       }]
