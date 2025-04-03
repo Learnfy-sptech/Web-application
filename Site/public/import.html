@@ -50,6 +50,7 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Por favor, insira um título para o arquivo!',
+                    confirmButtonColor: '#800000'
                 });
                 return;
             }
@@ -59,6 +60,7 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Por favor, selecione um arquivo!',
+                    confirmButtonColor: '#800000'
                 });
                 return;
             }
@@ -102,6 +104,7 @@
                         icon: 'error',
                         title: 'Erro ao enviar arquivo',
                         text: error.message || 'Ocorreu um erro ao tentar enviar o arquivo',
+                        confirmButtonColor: '#800000'
                     });
                 }
             } catch (error) {
@@ -110,6 +113,7 @@
                     icon: 'error',
                     title: 'Erro de conexão',
                     text: 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.',
+                    confirmButtonColor: '#800000'
                 });
             }
         });
