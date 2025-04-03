@@ -35,7 +35,7 @@
         formData.append('title', title);
 
         try {
-            const response = await fetch('/aws/posts', {
+            const response = await fetch('http://13.217.56.40:3000/aws/posts', {
                 method: 'POST',
                 body: formData,
             });
