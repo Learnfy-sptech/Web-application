@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <title>Learnfy - Importação de arquivos</title>
 </head>
+
 <body>
     <form id="uploadForm" enctype="multipart/form-data">
-        <img src="assets/images/PretoSemTexto.png" alt="Logo Learnfy"/>
+        <img src="assets/images/PretoSemTexto.png" alt="Logo Learnfy" />
         <h2>Enviar Arquivo para S3</h2>
-        
+
         <input type="text" id="title" name="title" placeholder="Título do arquivo" required>
 
         <div class="file-input-container">
@@ -23,13 +25,13 @@
             <input type="file" id="file" name="file" required>
             <div id="fileNameDisplay" style="margin-top: 8px; font-size: 14px; color: #666;"></div>
         </div>
-        
+
         <button type="submit">Enviar Arquivo</button>
     </form>
 
     <script>
         // Mostrar nome do arquivo quando selecionado
-        document.getElementById("file").addEventListener("change", function() {
+        document.getElementById("file").addEventListener("change", function () {
             const fileNameDisplay = document.getElementById("fileNameDisplay");
             if (this.files.length > 0) {
                 fileNameDisplay.textContent = "Arquivo selecionado: " + this.files[0].name;
@@ -39,7 +41,7 @@
         });
 
         document.getElementById("uploadForm").addEventListener("submit", async (event) => {
-            event.preventDefault(); 
+            event.preventDefault();
 
             const fileInput = document.getElementById("file");
             const titleInput = document.getElementById("title");
@@ -82,22 +84,27 @@
                     }
                 });
 
-                const response = await fetch('http://13.217.56.40:3000/aws/posts', {
+                const response = await fetch('/aws/posts', {
                     method: 'POST',
                     body: formData,
                 });
 
+                console.log("Resposta recebida:", response);
+
                 if (response.ok) {
                     const result = await response.json();
+                    console.log("Resposta OK, resetando formulário...");
                     Swal.fire({
                         icon: 'success',
                         title: 'Sucesso!',
                         text: 'Arquivo enviado com sucesso!',
                         footer: `Arquivo: ${file.name}`
+                    }).then(() => {
+                        setTimeout(() => {
+                            document.getElementById("uploadForm").reset();
+                            document.getElementById("fileNameDisplay").textContent = "";
+                        }, 2000); // Redireciona após 2 segundos
                     });
-                    // Limpar formulário após sucesso
-                    document.getElementById("uploadForm").reset();
-                    document.getElementById("fileNameDisplay").textContent = "";
                 } else {
                     const error = await response.json();
                     Swal.fire({
@@ -120,4 +127,5 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

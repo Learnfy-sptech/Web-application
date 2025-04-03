@@ -38,9 +38,11 @@ router.post("/posts", upload.single("file"), async (req, res) => {
     await s3.send(command).then(
         (data) => {
             console.log("Arquivo enviado com sucesso!", data);
+            res.json({ message: "Upload realizado com sucesso!", file: req.file.originalname });
         },
         (err) => {
             console.log("Erro ao enviar arquivo:", err);
+            res.status(500).json({ error: "Erro ao enviar o arquivo para a AWS S3" });
         }
     );
 });
