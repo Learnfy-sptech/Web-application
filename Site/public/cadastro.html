@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <title>Cadastro - Learnfy</title>
 </head>
+
 <body>
     </head>
+
     <body>
         <div class="container">
+
             <!-- Formulário -->
             <div class="form-side">
                 <div class="form-container">
@@ -26,15 +30,18 @@
                             <div class="form-group">
                                 <label for="tipo_conta">Tipo de Conta</label>
                                 <select id="tipo_conta" name="tipo_conta" class="form-control" required>
-                                    <option value="" disabled selected >Selecione o tipo de conta</option>
+                                    <option value="" disabled selected>Selecione o tipo de conta</option>
                                     <option value="GESTOR">Gestor</option>
                                     <option value="DIRETOR ACADEMICO">Diretor Acadêmico</option>
                                     <option value="PROFESSOR">Professor</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-primary" onclick="proximaEtapa(1)">Próximo</button>
+                        <div class="botoes-container">
+                            <a class="botaocadastro" onclick="proximaEtapa(1)">Próximo</a>
+                        </div>
+                        <div class="form-footer">
+                            <a href="login.html">Ja tem conta? Entrar</a>
                         </div>
                     </div>
 
@@ -56,9 +63,9 @@
                             <label for="telefone">Telefone</label>
                             <input type="text" id="telefone" placeholder="Digite seu telefone">
                         </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" onclick="voltarEtapa(0)">Voltar</button>
-                            <button type="button" class="btn btn-primary" onclick="proximaEtapa(2)">Próximo</button>
+                        <div class="botoes-container">
+                            <a class="botaocadastro" onclick="voltarEtapa(0)">Voltar</a>
+                            <a class="botaocadastro" onclick="proximaEtapa(2)">Próximo</a>
                         </div>
                     </div>
 
@@ -72,9 +79,9 @@
                             <label for="confirmacao_senha_input">Confirme sua Senha</label>
                             <input type="password" id="confirmacao_senha_input" placeholder="Confirme sua senha">
                         </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" onclick="voltarEtapa(1)">Voltar</button>
-                            <button type="button" class="btn btn-primary" onclick="proximaEtapa(3)">Próximo</button>
+                        <div class="botao">
+                            <a class="botaocadastro" onclick="voltarEtapa(1)">Voltar</a>
+                            <a class="botaocadastro" onclick="proximaEtapa(3)">Próximo</a>
                         </div>
                     </div>
 
@@ -92,9 +99,9 @@
                             </div>
                             <div id="file-name" class="file-name"></div>
                         </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" onclick="voltarEtapa(2)">Voltar</button>
-                            <button type="button" class="btn btn-primary" onclick="enviarFormulario()">Enviar</button>
+                        <div class="botoes-container">
+                            <a class="botaocadastro" onclick="voltarEtapa(2)">Voltar</a>
+                            <a class="botaocadastro" onclick="enviarFormulario()">Próximo</a>
                         </div>
                     </div>
                 </div>
@@ -107,4 +114,5 @@
         <script src="https://cdn.jsdelivr.net/npm/vanilla-masker@1.2.0/lib/vanilla-masker.min.js"></script>
         <script src="assets/javascript/cadastro.js"></script>
     </body>
+
 </html>

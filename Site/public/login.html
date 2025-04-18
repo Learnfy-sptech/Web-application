@@ -1,48 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Learnfy</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="assets/styles/login.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/styles/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <title>Login - Learnfy</title>
 </head>
-
 <body>
-    <main>
-        <div class="social-media">
-            <a href="index.html"><img src="assets/images/PretoSemTexto.png" alt="Logo"></a>
-            <h1>Login</h1>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="form-side">
+                <div class="form-container">
+                    <div class="form-header">
+                        <a href="index.html"><img src="assets/images/PretoSemTexto.png" alt="Logo Learnfy"></a>
+                        <h1>Learnfy - Login</h1>
+                    </div>
+
+                    <div id="etapa0">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="email_fisico">E-mail</label>
+                                    <input type="email" id="email_fisico" placeholder="Digite seu e-mail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="senha_input">Senha</label>
+                                    <input type="password" id="senha_input" placeholder="Digite sua senha">
+                                </div>
+                                <a href="recuperar-senha.html" class="forgot-password">Esqueci minha senha</a>
+                            </div>
+
+                            <div class="botoes-container">
+                                <a class="botaocadastro" onclick="logar()">Entrar</a>
+                            </div>
+
+                            <div class="form-footer">
+                                <a href="cadastro.html">Não tem conta? Cadastre-se</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="image-side"> </div>
         </div>
-
-        <form action="" class="form-login">
-            <label for="email">Email</label>
-            <div class="input-email">
-                <i class="fas fa-envelope icon"></i>
-                <input id="email_input" type="email" placeholder="Insira seu email">
-            </div>
-
-            <label for="password">Senha</label>
-            <div class="input-password">
-                <i class="fas fa-lock icon"></i>
-                <input id="senha_input" type="password" placeholder="******">
-            </div>
-
-
-            <span href="login.html">Esqueceu sua senha?</span><br>
-            <a href="cadastro.html">Não tem Conta? Cadastre-se</a>
-            <br>
-            <input type="submit" value="Entrar" class="btn-default">
-        </form>
-    </main>
-    <section class="images">
-        <img src="assets/images/mobile.svg" alt="Fotinha de alguma coisa ai">
-        <div class="circle"></div>
-    </section>
-</body>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanilla-masker@1.2.0/lib/vanilla-masker.min.js"></script>
+        <script src="assets/javascript/login.js"></script>
+    </body>
 </html>
