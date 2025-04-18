@@ -56,10 +56,17 @@ body {
 
 .form-footer {
   text-align: center;
+  margin-top: 20px;
 }
 
 .form-footer a:hover {
-  color: #4a0000;
+  color: #ff0000;
+}
+
+.form-footer a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .form-footer h1 {
@@ -68,20 +75,9 @@ body {
   font-size: 15px;
 }
 
-.form-footer a {
-  color: #333;
-  text-decoration: none;
-}
-
 .form-header img {
   height: 60px;
   width: auto;
-}
-
-.form-header h1 {
-  color: #333;
-  margin: 15px 0 0;
-  font-size: 24px;
 }
 
 .etapa {
