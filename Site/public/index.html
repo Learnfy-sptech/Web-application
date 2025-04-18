@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <title>Learnfy - Anlise de Dados Educacionais</title>
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <img src="assets/images/PretoSemTexto.png" alt="Learnfy" id="nav_logo">
+
+            <ul id="nav_list">
+                <li class="nav-item active">
+                    <a href="#home">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#aboutus">Sobre Nós</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testimonials">Avaliações</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#menu">Valores</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#faq">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact">Contate-nos</a>
+                </li>
+            </ul>
+
+            <a href="cadastro.html">
+                <button class="btn-default">
+                    Cadastre-se
+                </button>
+            </a>
+
+            <button id="mobile_btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item active">
+                    <a href="#home">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#aboutus">Sobre Nós</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testimonials">Avaliações</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#menu">Valores</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#faq">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact">Contate-nos</a>
+                </li>
+            </ul>
+
+            <a href="cadastro.html">
+                <button class="btn-default">
+                    Cadastre-se
+                </button>
+            </a>
+
+        </div>
+    </header>
+
+    <main id="content">
+        <section id="home">
+            <div class="shape"></div>
+            <div id="cta">
+                <h1 class="title">
+                    Learn<span>fy</span>
+                </h1>
+
+                <p class="description">
+                    "Transforme a educação com dados precisos para decisões mais inteligentes e estratégicas!"
+                </p>
+
+                <div id="cta_buttons">
+                    <a href="#" class="btn-default">
+                        Saiba Mais!!
+                    </a>
+                </div>
+            </div>
+
+            <div id="banner">
+                <img src="assets/images/home1.svg" alt="Imagem Learnfy">
+            </div>
+        </section>
+
+        <section class="aboutus" id="aboutus">
+            <div class="aboutus-container">
+                <div class="aboutus-image">
+                    <img src="assets/images/home2.svg" alt="Imagem Learnfy">
+                </div>
+                <div class="aboutus-content">
+                    <h2>Transformando dados em decisões.</h2>
+                    <p>Somos a Learnfy, apaixonados por educação e tecnologia. Transformamos dados educacionais em
+                        insights práticos para ajudar instituições a tomar decisões inteligentes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="aboutus2" id="aboutus">
+            <div class="aboutus2-container">
+                <div class="aboutus2-image">
+                    <img src="assets/images/home3.svg" alt="Imagem Learnfy">
+                </div>
+                <div class="aboutus-content">
+                    <h2>A solução inteligente para potencializar sua instituição.</h2>
+                    <p>Com a Learnfy, entregamos visualizações claras e estratégicas para que você analise nossos dados
+                        e tome decisões com confiança.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="menu">
+            <h2 class="section-title">Nossos Princípios</h2>
+            <h3 class="section-subtitle">Valores da Learnfy </h3>
+
+            <div id="dishes">
+                <div class="dish">
+                    <img src="assets/images/1.svg" class="dish-image" alt="">
+                    <h3 class="dish-title">
+                        Qualidade
+                    </h3>
+                    <span class="dish-description">
+                        Compromisso com a excelência em tudo o que fazemos.
+                    </span>
+                </div>
+
+                <div class="dish">
+                    <img src="assets/images/2.svg" class="dish-image" alt="">
+                    <h3 class="dish-title">
+                        Inovação
+                    </h3>
+                    <span class="dish-description">
+                        Buscamos sempre as melhores soluções para nossos clientes.
+                    </span>
+                </div>
+
+                <div class="dish">
+                    <img src="assets/images/3.svg" class="dish-image" alt="">
+                    <h3 class="dish-title">
+                        Sustentabilidade
+                    </h3>
+                    <span class="dish-description">
+                        Nosso compromisso com o meio ambiente e a responsabilidade social
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="data-slider">
+            <div class="slider-content">
+                <h2 class="section-title">Nossas bases de dados, provenientes</h2>
+                <h3 class="section-subtitle">dos maiores órgãos governamentais educacionais</h3>
+            </div>
+            <div class="slider-container">
+                <div class="slide">
+                    <img src="assets/images/1slider.png" alt="Imagem 1 - Learnfy">
+                </div>
+                <div class="slide">
+                    <img src="assets/images/2slider.png" alt="Imagem 2 - Learnfy">
+                </div>
+                <div class="slide">
+                    <img src="assets/images/3slider.png" alt="Imagem 3 - Learnfy">
+                </div>
+                <div class="slide">
+                    <img src="assets/images/4slider.png" alt="Imagem 4 - Learnfy">
+                </div>
+                <button class="slider-button prev" onclick="prevSlide()">❮</button>
+                <button class="slider-button next" onclick="nextSlide()">❯</button>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <img src="assets/images/home4.svg" id="avaliacoesImagem" alt="Imagem Learnfy">
+
+            <div id="testimonials_content">
+                <h2 class="section-title">
+                    Avaliações
+                </h2>
+                <h3 class="section-subtitle">
+                    O que os clientes falam sobre nós
+                </h3>
+
+                <div id="feedbacks">
+                    <div class="feedback">
+                        <img src="assets/images/avatar.jpeg" class="feedback-avatar" alt="Imagem Learnfy">
+
+                        <div class="feedback-content">
+                            <p>
+                                Gustavo Castro
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+                            <p>
+                                "Com os relatórios detalhados, conseguimos entender melhor o desempenho dos alunos e
+                                tomar decisões mais assertivas! #LearnfyLover"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="feedback">
+                        <img src="assets/images/avatar2.jpeg" class="feedback-avatar" alt="">
+
+                        <div class="feedback-content">
+                            <p>
+                                Isabella Viana
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+                            <p>
+                                "A análise de dados nos ajudou a reduzir a evasão e aprimorar nossas estratégias
+                                pedagógicas de forma eficiente!"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feedback">
+                        <img src="assets/images/avatar3.jpeg" class="feedback-avatar" alt="Imagem Learnfy">
+
+                        <div class="feedback-content">
+                            <p>
+                                João Cunha
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+                            <p>
+                                "Otimizamos a gestão e reduzimos custos. Inovação constante com a plataforma Learnify."
+                                <br>#VenhaParaLearnfy #Dados
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+        </section>
+    </main>
+
+
+    <section id="faq">
+        <h2 class="section-title">Perguntas Frequentes</h2>
+        <h3 class="section-subtitle">Tire suas dúvidas sobre a Learnfy</h3>
+        <div class="faq-container">
+            <div class="faq active">
+                <h3 class="faq-title">Por que escolher a Learnfy para análise de dados educacionais?</h3>
+                <p class="faq-text">
+                    A Learnfy oferece soluções integradas que transformam dados em insights estratégicos, otimizando o
+                    desempenho acadêmico e a gestão institucional.
+                </p>
+                <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="faq">
+                <h3 class="faq-title">Como a Learnfy contribui para a melhoria do desempenho acadêmico?</h3>
+                <p class="faq-text">
+                    Nossas análises identificam padrões e tendências nos dados educacionais, permitindo intervenções
+                    personalizadas e suporte contínuo para promover o sucesso dos alunos.
+                </p>
+                <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="faq">
+                <h3 class="faq-title">Quais tecnologias a Learnfy utiliza para análise de dados educacionais?</h3>
+                <p class="faq-text">
+                    Utilizamos ferramentas avançadas de Business Intelligence, machine learning e dashboards interativos
+                    que
+                    transformam dados brutos em informações acionáveis.
+                </p>
+                <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="faq">
+                <h3 class="faq-title">Como os dados educacionais impactam a gestão institucional?</h3>
+                <p class="faq-text">
+                    Ao monitorar indicadores-chave e identificar oportunidades, nossos insights ajudam na alocação
+                    eficiente de
+                    recursos e na tomada de decisões estratégicas.
+                </p>
+                <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="faq">
+                <h3 class="faq-title">A Learnfy oferece suporte técnico e treinamento para a implementação dos
+                    sistemas?</h3>
+                <p class="faq-text">
+                    Sim, nossa equipe especializada está disponível para oferecer suporte contínuo e treinamento,
+                    garantindo a
+                    utilização eficaz e o máximo aproveitamento dos nossos sistemas.
+                </p>
+                <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="faq">
+                <h3 class="faq-title">Quais são os diferenciais dos serviços de análise de dados educacionais da
+                    Learnfy?
+                </h3>
+                <p class="faq-text">
+                    Nossa abordagem única integra expertise em educação e tecnologia, permitindo a criação de soluções
+                    customizadas que geram resultados mensuráveis e transformadores para sua instituição.
+                </p>
+                <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="contact-container">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.2873453233406!2d-46.664188924669986!3d-23.558121278802158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59d2b063f663%3A0xc567c0d16d0bc582!2sS%C3%A3o%20Paulo%20Tech%20School!5e0!3m2!1spt-BR!2sbr!4v1740800366697!5m2!1spt-BR!2sbr"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="form-container">
+                <form action="" class="form-home" id="contactForm">
+                    <label for="name">Nome</label>
+                    <div class="input-name">
+                        <i class="fas fa-user icon"></i>
+                        <input id="name_input" name="user_name" type="text" placeholder="Insira seu nome"> <!-- Adicione name="user_name" -->
+                    </div>
+                
+                    <label for="email">Email</label>
+                    <div class="input-email">
+                        <i class="fas fa-envelope icon"></i>
+                        <input id="email_input" name="user_email" type="email" placeholder="Learnfy@email"> <!-- Adicione name="user_email" -->
+                    </div>
+                
+                    <label for="message">Mensagem</label>
+                    <div class="input-message">
+                        <i class="fas fa-comment-dots icon"></i>
+                        <textarea id="message" name="message" rows="5" required></textarea> <!-- Este já está correto -->
+                    </div>
+                    <button class="btn-default" style="border-radius: 15px;" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer_mid">
+            <div class="footer_mid_cookies">
+                <a href="">Termos de Serviço</a>
+                <a href="">Configurações de Cookies</a>
+                <a href="">Política de Privacidade</a>
+            </div>
+        </div>
+        <div class="footer_icons">
+            <a href="#" class="footer_social"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="footer_social"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer_social"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="footer_social"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+
+        <div class="footer_mid_service_rights">
+            <p>© 2025 Learnfy. Todos os direitos reservados - SPTECH</p>
+        </div>
+    </footer>
+    <script src="assets/javascript/script.js"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/javascript/email.js"></script>
+</body>
+</html>

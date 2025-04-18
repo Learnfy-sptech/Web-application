@@ -1,0 +1,243 @@
+@import url(styles.css);
+
+:root {
+  --color-primary-1: #fbf9f5;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  background-color: var(--color-primary-1);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Lado esquerdo - Formulário */
+.form-side {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  justify-content: center;  
+  align-items: center;     
+}
+
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+
+/* Lado direito - Imagem */
+.image-side {
+  flex: 1;
+  background-image: url("../images/backgroundCad.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Estilos do formulário (mantidos do original) */
+.form-header {
+  text-align: center;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form-footer {
+  text-align: center;
+}
+
+.form-footer a:hover {
+  color: #4a0000;
+}
+
+.form-footer h1 {
+  color: #333;
+  margin: 15px;
+  font-size: 15px;
+}
+
+.form-footer a {
+  color: #333;
+  text-decoration: none;
+}
+
+.form-header img {
+  height: 60px;
+  width: auto;
+}
+
+.form-header h1 {
+  color: #333;
+  margin: 15px 0 0;
+  font-size: 24px;
+}
+
+.etapa {
+  display: none;
+}
+
+.etapa.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #c6c6c671;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 12px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1),
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group input:focus-within,
+.form-group select:focus-within {
+  outline: none;
+  border-color: #800000;
+}
+
+.botoes-container {
+  display: flex;
+  justify-content: center;  /* centraliza os botões horizontalmente */
+  align-items: center;      /* centraliza os botões verticalmente */
+  gap: 20px;                /* espaço entre os botões */
+  margin-top: 30px;
+  width: 100%;              /* Garante que a div ocupe 100% da largura */
+}
+
+.botaocadastro {
+  border: none;
+  padding: 10px 25px;
+  font-weight: 600;
+  color: white;
+  background-color: #800000;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  font-size: 16px;
+  min-width: 100px;
+  max-width: 140px;
+  text-align: center; /* Alinha o texto no centro */
+}
+
+.botaocadastro:hover {
+  background-color: #4a0000;
+  text-decoration: none;
+  color: white;
+}
+
+
+.file-input-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+.file-input-btn {
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  padding: 40px 20px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.file-input-btn:hover {
+  border-color: #000;
+  background-color: #f9f9f9;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.botoes-container {
+  display: flex;
+  justify-content: center; /* centraliza no meio */
+  align-items: center;
+  gap: 16px; /* espaço entre os botões */
+  margin-top: 30px;
+  flex-wrap: wrap; /* evita quebra feia em telas menores */
+}
+
+.botaocadastro {
+  border: none;
+  padding: 10px 25px;
+  font-weight: 600;
+  color: white;
+  background-color: #800000;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+
+.botaocadastro:hover {
+  background-color: #4a0000;
+  text-decoration: none;
+  color: white;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .form-side,
+  .image-side {
+    width: 100%;
+    flex: none;
+  }
+
+  .image-side {
+    height: 300px;
+    order: -1;
+  }
+}

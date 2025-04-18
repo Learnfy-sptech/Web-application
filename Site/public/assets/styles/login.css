@@ -1,0 +1,200 @@
+@import url(styles.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--color-primary-1);
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+main {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main h1 {
+    color: var(--color-primary-6);
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+main a{
+    text-decoration: none;
+    color: var(--color-primary-6);
+
+}
+
+main.social-media {
+    display: flex;
+    align-content: center;
+}
+
+
+main .social-media img {
+    width: 90px;
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+
+
+main .alternative {
+    margin-top: 1rem;
+}
+
+main .alternative span {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+main .alternative span::before, main .alternative span::after {
+    position: absolute;
+    content: '';
+    height: 1px;
+    width: 100px;
+    bottom: 50%;
+    right: 50px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+main .alternative span::after {
+    left: 50px;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-login div {
+    display: flex;
+    flex-direction: row;  
+    justify-content: flex-start; 
+}
+
+.form-login label {
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.form-login span{
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.input-name,
+.input-email,
+.input-password {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #c6c6c671;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 4px 0 10px 0;
+    border: 2px solid transparent;
+    transition: border-color 0.3s cubic-bezier(.25, .01, .25, 1), background 0.2s cubic-bezier(.25, .01, .25, 1);
+}
+
+.input-name:hover,
+.input-email:hover,
+.input-password:hover,
+.input-email:focus-within,
+.input-name:focus-within,
+.input-password:focus-within {
+    border-color: var(--color-primary-6)
+}
+
+.icon {
+    padding: 4px;
+    color: var(--color-primary-5);
+    min-width: 30px;
+    text-align: center;
+}
+
+input[type="email"], 
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 4px 0;
+    outline: none;
+    color: rgb(0, 0, 0);
+}
+
+section.images {
+    width: 50vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 4rem;
+}
+
+section.images img {
+    width: 100%;
+}
+
+section.images .circle {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(45deg, #E8CBC0, #800000);
+    clip-path: circle(40% at right 80%);
+    z-index: -1;
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1200px) {
+    section.images img {
+        width: 110%;
+    }
+
+    section.images .circle {
+        clip-path: circle(35% at right 80%);
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    section.images {
+        display: none;
+        visibility: hidden;
+    }
+
+    main {
+        width: 100vw;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    main h1 {
+        font-size: 2rem;
+    }
+
+    main .alternative span {
+        font-size: 0.8rem;
+    }
+
+    main form label span, main form input[type="submit"] {
+        font-size: 1rem;
+    }
+}
