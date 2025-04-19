@@ -14,7 +14,14 @@
 
 <body>
     <main>
+        <div class="card text-white bg-danger mb-3" style="max-width: 18rem; display: none;" id="card-error">
+            <div class="card-body">
+              <h5 class="card-title">Erro no login</h5>
+              <p class="card-text" id="msg_error"></p>
+            </div>
+          </div>
         <div class="social-media">
+            
             <a href="index.html"><img src="assets/images/PretoSemTexto.png" alt="Logo"></a>
             <h1>Login</h1>
         </div>
@@ -36,7 +43,7 @@
             <span href="login.html">Esqueceu sua senha?</span><br>
             <a href="cadastro.html">Não tem Conta? Cadastre-se</a>
             <br>
-            <input type="submit" value="Entrar" class="btn-default">
+            <input type="submit" value="Entrar" class="btn-default" onclick="autenticar()">
         </form>
     </main>
     <section class="images">
@@ -46,3 +53,4 @@
 </body>
 
 </html>
+<script src="../public/assets/javascript/executeLogin.js"></script>

@@ -14,7 +14,9 @@ var HOST_APP = process.env.APP_HOST;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
+var usuarioRouter = require('./src/routes/usuarios')
 
+app.use("/usuarios", usuarioRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
