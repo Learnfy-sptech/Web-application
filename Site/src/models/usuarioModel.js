@@ -9,9 +9,11 @@ function login(email, senha) {
 }
 
 function cadastrar(email, senha, tipoConta, nome, cpf, telefone) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    console.log('Dados recebidos:', tipoConta, nome, email, cpf, telefone, senha);
 
-    var instrucaoSql = `INSERT INTO usuario(tipoConta, nome, email, cpf, telefone) VALUES (${tipoConta}, ${nome}, ${email}, ${cpf}, ${telefone}, ${senha})`
+    var instrucaoSql = `INSERT INTO usuario(tipoConta, nome, email, cpf, telefone, senha) VALUES ('${tipoConta}', '${nome}', '${email}', '${cpf}', '${telefone}', '${senha}')`
+
+    console.log('Consulta SQL gerada:', instrucaoSql);
 
     return database.executar(instrucaoSql)
 }

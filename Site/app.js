@@ -1,5 +1,5 @@
 var ambiente_processo = 'producao';
-//var ambiente_processo = 'desenvolvimento';
+// var ambiente_processo = 'desenvolvimento';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
@@ -13,24 +13,14 @@ var HOST_APP = process.env.APP_HOST;
 
 var app = express();
 
+// Importação dos routers
 var indexRouter = require("./src/routes/index");
-var usuarioRouter = require('./src/routes/usuarios')
-
-app.use("/usuarios", usuarioRouter);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use(cors());
-
-app.use("/", indexRouter);
-
+var usuarioRouter = require('./src/routes/usuarios');
 
 // ----------------------------------------------------------------- //
 // CONFIGURAÇÕES PARA CONEXÃO DIRETAMENTE COM NOSSO BUCKET NO AWS S3 //
 // ----------------------------------------------------------------- //
 
-// Traçando rotas para parear com a API da AWS
 const awsRouter = require("./src/routes/aws");
 app.use("/aws", awsRouter);
 
@@ -38,17 +28,23 @@ app.use("/aws", awsRouter);
 // ----------------------------------------------------------------- //
 // ----------------------------------------------------------------- //
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
+
+// Definindo as rotas após a definição dos routers
+app.use("/usuarios", usuarioRouter);
+app.use("/", indexRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
-
      ██      ███████  █████  ██████  ███    ██ ███████ ██    ██ 
      ██      ██      ██   ██ ██   ██ ████   ██ ██       ██  ██  
      ██      █████   ███████ ██████  ██ ██  ██ █████     ████   
      ██      ██      ██   ██ ██   ██ ██  ██ ██ ██         ██    
      ███████ ███████ ██   ██ ██   ██ ██   ████ ██         ██    
                                                                                                                                                                                                                                       
-    \n
     📊 Servidor Learnfy iniciado com sucesso! Seus dados estão prontos para serem analisados! 📊
     🚀 Acesse agora e tome decisões mais inteligentes com nossos gráficos: http://${HOST_APP}:${PORTA_APP} 🚀\n\n
     Você está operando em um ambiente: ${process.env.AMBIENTE_PROCESSO}.\n\n
@@ -57,10 +53,3 @@ app.listen(PORTA_APP, function () {
     Para ajustar seu ambiente, edite o arquivo 'app.js'.\n\n
     Vamos transformar dados em decisões inteligentes! 📈\n\n`);
 });
-
-
-
-
-    
-                                        
-

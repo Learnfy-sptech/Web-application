@@ -33,7 +33,7 @@ function cadastrar(req, res){
   var cpf = req.body.cpfVar;
   var telefone = req.body.telefoneVar;
 
-  console.log('[CADASTRAR] Dados recebidos:', { email, senha, tipoConta, nome, cpf, telefone });
+  console.log('[CADASTRAR] Dados recebidos:', req.body); // Verifica todos os dados recebidos
 
   if(email == undefined){
     res.status(400).send("Seu email está undefined");
