@@ -6,8 +6,8 @@ document.getElementById("foto").addEventListener("change", function (e) {
 });
 
 
- // Função que retorna o valor do tipo de conta selecionada
- function getTipoConta() {
+// Função que retorna o valor do tipo de conta selecionada
+function getTipoConta() {
   return document.getElementById("tipo_conta").value;
 }
 
@@ -164,7 +164,68 @@ function voltarEtapa(numEtapa) {
 }
 
 function enviarFormulario() {
-  if (validarEtapa(3)) {
+  var tipoContaVar = document.getElementById('tipo_conta').value
+  var nomeVar = document.getElementById("nome_completo").value;
+  var emailVar = document.getElementById("email_fisico").value;
+  var cpfVar = document.getElementById("cpf").value;
+  var telefoneVar = document.getElementById("telefone").value;
+  var senhaVar = document.getElementById("senha_input").value;
+  var confirmacaoSenhaVar = document.getElementById("confirmacao_senha_input").value;
+
+  // Verificando se há algum campo em branco ou se as senhas não coincidem
+  if (
+    nomeVar === "" ||
+    cpfVar === "" ||
+    telefoneVar === "" ||
+    tipoContaVar === "" ||
+    emailVar === "" ||
+    senhaVar === "" ||
+    confirmacaoSenhaVar === "" ||
+    senhaVar !== confirmacaoSenhaVar
+  ) {
+    DOM.cardErro.style.display = "block";
+    DOM.msgErro.innerText = "Preencha todos os campos e certifique-se de que as senhas coincidem.";
+    setTimeout(sumirMensagem, 5000);
+    return false;
+  }
+
+  console.log('Acabou a validação');
+  fetch("/usuarios/cadastrar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      tipoContaVar: tipoContaVar,
+      nomeVar: nomeVar,
+      emailVar: emailVar,
+      cpfVar: cpfVar,
+      telefoneVar: telefoneVar,
+      senhaVar: senhaVar
+    }),
+  })
+    .then(function (resposta) {
+      console.log("Resposta: ", resposta);
+
+      if (resposta.ok) {
+        DOM.cardErro.style.display = "block";
+        DOM.msgErro.innerText = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+        setTimeout(() => {
+          window.location = "/login.html";
+        }, 2000);
+        limparFormulario();
+      } else {
+        throw Error("Houve um erro ao tentar realizar o cadastro!");
+      }
+    })
+    .catch(function (erro) {
+      console.log(`#ERRO: ${erro}`);
+      DOM.cardErro.style.display = "block";
+      DOM.msgErro.innerText = erro.message;
+      setTimeout(sumirMensagem, 5000);
+    });
+
+  if (resposta.ok) {
     Swal.fire({
       title: "Seja bem-vindo!",
       text: "Cadastro realizado com sucesso!",
@@ -172,7 +233,20 @@ function enviarFormulario() {
       confirmButtonText: "Ok",
       confirmButtonColor: "#800000",
     });
-    return false;
+
+    setTimeout(() => {
+      window.location = "/login.html";
+    }, 2000);
+    limparFormulario();
+  }
+  else {
+    Swal.fire({
+      title: "Erro!",
+      text: "Houve um erro ao tentar realizar o cadastro.",
+      icon: "error",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "#800000",
+    });
   }
 }
 
