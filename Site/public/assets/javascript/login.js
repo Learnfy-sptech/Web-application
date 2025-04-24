@@ -35,6 +35,4 @@ function logar() {
       return false;
     }
 
-    // Se tudo estiver certo, redireciona para a dashboard
-    window.location.href = "dashboard.html";
   }
