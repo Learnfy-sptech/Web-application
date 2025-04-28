@@ -26,6 +26,13 @@
             <div id="fileNameDisplay" style="margin-top: 8px; font-size: 14px; color: #666;"></div>
         </div>
 
+        <label for="tipoDado">Tipo de Dado:</label>
+        <select id="tipoDado" name="tipoDado" required>
+            <option value="">Selecione o tipo</option>
+            <option value="dados_cursos">Cursos</option>
+            <option value="dados_empregabilidade">Empregabilidade</option>
+        </select>
+
         <button type="submit">Enviar Arquivo</button>
     </form>
 
@@ -45,6 +52,7 @@
 
             const fileInput = document.getElementById("file");
             const titleInput = document.getElementById("title");
+            const tipoDadoInput = document.getElementById("tipoDado");
 
 
             if (!titleInput.value.trim()) {
@@ -69,10 +77,22 @@
 
             const file = fileInput.files[0];
             const title = titleInput.value;
+            const tipoDado = tipoDadoInput.value;
+
+            if (!tipoDado) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Por favor, selecione o tipo de dado!',
+                    confirmButtonColor: '#800000'
+                });
+                return;
+            }
 
             const formData = new FormData();
             formData.append('file', file);
             formData.append('title', title);
+            formData.append('tipoDado', tipoDado);
 
             try {
                 Swal.fire({
