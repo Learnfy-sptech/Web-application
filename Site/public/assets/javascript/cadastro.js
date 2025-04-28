@@ -6,8 +6,8 @@ document.getElementById("foto").addEventListener("change", function (e) {
 });
 
 
- // Função que retorna o valor do tipo de conta selecionada
- function getTipoConta() {
+// Função que retorna o valor do tipo de conta selecionada
+function getTipoConta() {
   return document.getElementById("tipo_conta").value;
 }
 
@@ -164,16 +164,68 @@ function voltarEtapa(numEtapa) {
 }
 
 function enviarFormulario() {
-  if (validarEtapa(3)) {
-    Swal.fire({
-      title: "Seja bem-vindo!",
-      text: "Cadastro realizado com sucesso!",
-      icon: "success",
-      confirmButtonText: "Ok",
-      confirmButtonColor: "#800000",
-    });
+  var tipoContaVar = document.getElementById('tipo_conta').value
+  var nomeVar = document.getElementById("nome_completo").value;
+  var emailVar = document.getElementById("email_fisico").value;
+  var cpfVar = document.getElementById("cpf").value;
+  var telefoneVar = document.getElementById("telefone").value;
+  var senhaVar = document.getElementById("senha_input").value;
+  var confirmacaoSenhaVar = document.getElementById("confirmacao_senha_input").value;
+
+  // Verificando se há algum campo em branco ou se as senhas não coincidem
+  if (
+    nomeVar === "" ||
+    cpfVar === "" ||
+    telefoneVar === "" ||
+    tipoContaVar === "" ||
+    emailVar === "" ||
+    senhaVar === "" ||
+    confirmacaoSenhaVar === "" ||
+    senhaVar !== confirmacaoSenhaVar
+  ) {
+    DOM.cardErro.style.display = "block";
+    DOM.msgErro.innerText = "Preencha todos os campos e certifique-se de que as senhas coincidam.";
+    setTimeout(sumirMensagem, 5000);
     return false;
   }
+
+  console.log('Acabou a validação');
+
+  fetch("/usuarios/cadastrar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      tipoContaVar: tipoContaVar,
+      nomeVar: nomeVar,
+      emailVar: emailVar,
+      cpfVar: cpfVar,
+      telefoneVar: telefoneVar,
+      senhaVar: senhaVar
+    }),
+  })
+    .then(function (resposta) {
+      console.log("Resposta: ", resposta);
+
+      if (resposta.ok) {
+        Swal.fire({
+          title: "Seja bem-vindo!",
+          text: "Cadastro realizado com sucesso!",
+          icon: "success",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#800000",
+        });
+        setTimeout(() => {
+          window.location = "/login.html";
+        }, 2000);
+        limparFormulario();
+      }
+    })
+    .catch(function (erro) {
+      console.log(`#ERRO: ${erro}`);
+      setTimeout(sumirMensagem, 5000);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -189,4 +241,60 @@ document.addEventListener("DOMContentLoaded", function () {
       VMasker(this).maskPattern("(99) 9999-9999");
     }
   });
+});
+
+function limparFormulario() {
+  nomeVar.value = "";
+  emailVar.value = "";
+  senhaVar.value = "";
+  confirmacaoSenhaVar.value = "";
+}
+
+document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  const fileInput = document.getElementById('photoInput');
+  const progress = document.getElementById('progress');
+  const message = document.getElementById('message');
+
+  formData.append('foto', fileInput.files[0]);
+
+  try {
+    progress.style.display = 'block';
+    message.textContent = '';
+
+    const response = await fetch('/profile/photo', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include' // Para enviar cookies/token
+    });
+
+    if (!response.ok) {
+      throw new Error('Falha na requisição: ' + response.statusText);
+    }
+
+    let result;
+    try {
+      result = await response.json();
+    } catch (e) {
+      console.log('Erro ao tentar converter a resposta para JSON: ', e);
+      throw new Error('Resposta não é JSON válido');
+    }
+
+    console.log('Resultado da resposta: ', result);
+
+    if (result.photoPath) {
+      document.getElementById('profileImage').src = result.photoPath + '?t=' + Date.now();
+      message.textContent = result.message || 'Foto carregada com sucesso';
+      message.style.color = 'green';
+    } else {
+      throw new Error('Campo photoPath ausente na resposta');
+    }
+  } catch (error) {
+    message.textContent = error.message;
+    message.style.color = 'red';
+  } finally {
+    progress.style.display = 'none';
+  }
 });
