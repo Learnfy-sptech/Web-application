@@ -47,7 +47,7 @@ body {
   height: auto;
 }
 
-ul {
+.main ul {
   padding-right: 2rem;
   padding-top: 6rem;
   display: flex;
@@ -56,24 +56,24 @@ ul {
   list-style: none;
 }
 
-li {
+.main li {
   padding: 8px;
   width: 100%;
   border-radius: 5px;
 }
 
-a {
+.main a {
   cursor: pointer;
   text-decoration: none;
   color: var(--color-primary-1);
   transition: color 0.2s ease-in-out;
 }
 
-a:hover {
+.main a:hover {
   color: var(--color-neutral-1);
 }
 
-li:hover{
+.main li:hover{
   background-color: var(--color-primary-5);
   transition: ease-in 0.2s;
   width: 100;

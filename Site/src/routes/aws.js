@@ -30,7 +30,7 @@ router.post("/posts", upload.single("file"), async (req, res) => {
 
     const command = new PutObjectCommand({
         Bucket: process.env.BUCKET_NAME,
-        Key: `planilhas/${req.file.originalname}`,
+        Key: `planilhas/${req.body.tipoDado}/${req.file.originalname}`,
         Body: req.file.buffer,
         ContentType: req.file.mimetype,
     });

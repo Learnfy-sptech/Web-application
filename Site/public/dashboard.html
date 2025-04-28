@@ -106,7 +106,7 @@
   ).then(response => response.json());
 
   const data = [
-    ['br-sp', 1], // São Paulo em vermelho
+    ['br-sp', 1],
     ...['br-ma', 'br-pa', 'br-sc', 'br-ba', 'br-ap', 'br-ms', 'br-mg', 'br-go', 'br-rs', 'br-to', 'br-pi', 'br-al', 'br-pb', 'br-ce', 'br-se', 'br-rr', 'br-pe', 'br-pr', 'br-es', 'br-rj', 'br-rn', 'br-am', 'br-mt', 'br-df', 'br-ac', 'br-ro'].map(code => [code, 0])
   ];
 
@@ -116,26 +116,19 @@
     },
 
     title: {
-      text: 'Mapa do Brasil - São Paulo em destaque'
+      text: 'Mapa do Brasil'
     },
 
     subtitle: {
-      text: 'Fonte: Highcharts Map + TopoJSON'
+      text: 'Estatísticas educacional'
     },
 
-    mapNavigation: {
-      enabled: true,
-      buttonOptions: {
-        verticalAlign: 'bottom'
-      }
-    },
-
+ 
     colorAxis: {
       min: 0,
       max: 1,
       stops: [
-        [0, '#2980b9'], // Outros estados
-        [1, '#e74c3c']  // São Paulo
+        [0, '#993333']
       ]
     },
 
@@ -145,7 +138,8 @@
       name: 'Estados',
       states: {
         hover: {
-          color: '#f39c12'
+          color: '#800000'
+          
         }
       },
       dataLabels: {
@@ -159,11 +153,10 @@
         }
       },
       borderColor: '#ffffff',
-      borderWidth: 0.5
+      borderWidth: 0.1
     }]
   });
 
-  // Mostrar gráfico e esconder loading
   document.getElementById('loading').style.display = 'none';
   document.getElementById('container').style.display = 'block';
 })();
@@ -173,12 +166,10 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
   <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-          <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
-
+  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="./assets/javascript/dashboard.js"></script>
