@@ -8,6 +8,7 @@
 @import url('aboutus.css');
 @import url('slider.css');
 @import url('contactus.css');
+@import url('dashboard.css');
 
 :root {
     --color-primary-1: #fbf9f5;
@@ -16,9 +17,12 @@
     --color-primary-4: #b35c5c;
     --color-primary-5: #993333;
     --color-primary-6: #800000;
+    --color-primary-7: #6d0000;
 
     --color-neutral-0: #ffffff;
     --color-neutral-1: #1d1d1d;
+    --color-neutral-2: #e9ecef;
+    --color-neutral-3: #adb5bd;
 }
 
 
