@@ -22,7 +22,7 @@
         </a>
         <ul>
           <li>
-            <a href="index.html" class="icon-link" onclick="cleanData()">
+            <a href="index.html" class="icon-link" onclick="clear()">
               <i class='bx bx-home'></i>
               <span>Home</span>
             </a>
@@ -52,7 +52,7 @@
         <div class="out-item icon-link">
           <a href="">
             <i class='bx bx-log-out log-out-item'></i>
-            <span>Sair</span>
+            <span onclick="clear()" >Sair</span>
           </a>
         </div>
       </div>
@@ -62,12 +62,11 @@
         <div class="btn-group ">
           <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <img src="./assets/images/avatarBoss.png" alt=""> <span>Perfil</span>
+            <img src="" alt="" getProfilePhoto() ><span id="name-user"></span>
           </button>
           <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">Action</button>
-            <button class="dropdown-item" type="button">Another action</button>
-            <button class="dropdown-item" type="button">Something else here</button>
+            <button class="dropdown-item" type="button">Perfil</button>
+            <button class="dropdown-item" type="button" onclick="clear()">Sair</button>
           </div>
         </div>
       </header>

@@ -16,7 +16,7 @@
         crossorigin="anonymous" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -93,12 +93,12 @@
         </div>
     </header>
 
-    <main id="content">
+    <main class="content">
         <section id="home">
             <div class="shape"></div>
             <div id="cta">
                 <h1 class="title">
-                    Learn<span>fy</span>
+                    Learn<span id="subtitle">fy</span>
                 </h1>
 
                 <p class="description">
@@ -360,7 +360,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="contact">
         <div class="contact-container">
             <div class="map-container">
@@ -374,19 +374,22 @@
                     <label for="name">Nome</label>
                     <div class="input-name">
                         <i class="fas fa-user icon"></i>
-                        <input id="name_input" name="user_name" type="text" placeholder="Insira seu nome"> <!-- Adicione name="user_name" -->
+                        <input id="name_input" name="user_name" type="text" placeholder="Insira seu nome">
+                        <!-- Adicione name="user_name" -->
                     </div>
-                
+
                     <label for="email">Email</label>
                     <div class="input-email">
                         <i class="fas fa-envelope icon"></i>
-                        <input id="email_input" name="user_email" type="email" placeholder="Learnfy@email"> <!-- Adicione name="user_email" -->
+                        <input id="email_input" name="user_email" type="email" placeholder="Learnfy@email">
+                        <!-- Adicione name="user_email" -->
                     </div>
-                
+
                     <label for="message">Mensagem</label>
                     <div class="input-message">
                         <i class="fas fa-comment-dots icon"></i>
-                        <textarea id="message" name="message" rows="5" required></textarea> <!-- Este já está correto -->
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <!-- Este já está correto -->
                     </div>
                     <button class="btn-default" style="border-radius: 15px;" type="submit">Enviar</button>
                 </form>
@@ -418,4 +421,5 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/javascript/email.js"></script>
 </body>
+
 </html>
