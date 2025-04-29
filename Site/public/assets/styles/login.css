@@ -7,7 +7,7 @@ body {
   height: 100vh;
   overflow: hidden;
   display: flex;
-  background-color: #fbf9f5;
+  background-color: var(--color-primary-1);
 }
 
 .container {
