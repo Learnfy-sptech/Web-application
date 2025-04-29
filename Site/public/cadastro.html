@@ -79,28 +79,9 @@
                             <label for="confirmacao_senha_input">Confirme sua Senha</label>
                             <input type="password" id="confirmacao_senha_input" placeholder="Confirme sua senha">
                         </div>
-                        <div class="botao">
-                            <a class="botaocadastro" onclick="voltarEtapa(1)">Voltar</a>
-                            <a class="botaocadastro" onclick="proximaEtapa(3)">Próximo</a>
-                        </div>
-                    </div>
-
-                    <!-- Etapa 3 - Foto -->
-                    <div id="etapa3" class="etapa">
-                        <div class="form-group">
-                            <label>Foto de Perfil</label>
-                            <div class="file-input-container">
-                                <div class="file-input-btn">
-                                    <p>Clique para selecionar uma foto</p>
-                                    <p><small>Formatos aceitos: PNG, JPG, JPEG</small></p>
-                                </div>
-                                <input type="file" id="photoInput" class="file-input" accept="image/png, image/jpeg, image/jpg">
-                            </div>
-                            <div id="file-name" class="file-name"></div>
-                        </div>
                         <div class="botoes-container">
-                            <a class="botaocadastro" onclick="voltarEtapa(2)">Voltar</a>
-                            <a class="botaocadastro" onclick="enviarFormulario()">Próximo</a>
+                            <a class="botaocadastro" onclick="voltarEtapa(1)">Voltar</a>
+                            <a class="botaocadastro" onclick="enviarFormulario()">Enviar</a>
                         </div>
                     </div>
                 </div>
@@ -110,9 +91,18 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vanilla-masker@1.2.0/lib/vanilla-masker.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
         <script src="./assets/javascript/cadastro.js"></script>
         <script src="./assets/javascript/executeLogin.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#cpf').mask('000.000.000-00');
+                $('#telefone').mask('(00) 00000-0000');
+            });
+        </script>
     </body>
 
 </html>

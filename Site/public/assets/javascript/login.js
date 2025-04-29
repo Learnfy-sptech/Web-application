@@ -1,8 +1,8 @@
 function logar() {
-    const email = document.getElementById("email_fisico").value.trim();
-    const senha = document.getElementById("senha_input").value;
+    const emailVar = document.getElementById("email_input").value;
+    const senhaVar = document.getElementById("senha_input").value;
 
-    if (!email || !senha) {
+    if (!emailVar || !senhaVar) {
       Swal.fire({
         title: "Campos vazios!",
         text: "Por favor, preencha o e-mail e a senha.",
@@ -13,7 +13,7 @@ function logar() {
       return false;
     }
 
-    if (!email.includes("@")) {
+    if (!emailVar.includes("@")) {
       Swal.fire({
         title: "E-mail inválido!",
         text: "Por favor, insira um e-mail válido.",
@@ -24,7 +24,7 @@ function logar() {
       return false;
     }
 
-    if (senha.length < 8) {
+    if (senhaVar.length < 8) {
       Swal.fire({
         title: "Senha muito curta!",
         text: "A senha deve ter pelo menos 8 caracteres.",
@@ -34,8 +34,8 @@ function logar() {
       });
       return false;
     }
-    console.log("cliquei em logar")
-  if (emaiVar == "" || senhaVar == "") {
+    
+  if (emailVar == "" || senhaVar == "") {
     cardErro.style.display = "block"
     msgErro.innerText = "Preencha todos os campos"
     setTimeout(sumirMensagem, 2000)
@@ -47,7 +47,7 @@ function logar() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        emaiVar,
+        emailVar,
         senhaVar
       })
     }).then(function (resposta) {

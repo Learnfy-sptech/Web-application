@@ -1,11 +1,3 @@
-document.getElementById("foto").addEventListener("change", function (e) {
-  const fileName = e.target.files[0]
-    ? e.target.files[0].name
-    : "Nenhum arquivo selecionado";
-  document.getElementById("file-name").textContent = fileName;
-});
-
-
 // Função que retorna o valor do tipo de conta selecionada
 function getTipoConta() {
   return document.getElementById("tipo_conta").value;
@@ -80,7 +72,9 @@ function validarEtapa(numEtapa) {
 
     case 2:
       const senhaVar = document.getElementById("senha_input").value;
-      const confirmacaoSenhaVar = document.getElementById("confirmacao_senha_input").value;
+      const confirmacaoSenhaVar = document.getElementById(
+        "confirmacao_senha_input"
+      ).value;
 
       if (!senhaVar || !confirmacaoSenhaVar) {
         Swal.fire({
@@ -117,30 +111,6 @@ function validarEtapa(numEtapa) {
       return true;
 
     case 3:
-      const foto = document.getElementById("foto");
-      if (foto.files.length === 0) {
-        Swal.fire({
-          title: "Foto obrigatória!",
-          text: "Por favor, selecione uma foto de perfil.",
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#800000",
-        });
-        return false;
-      }
-
-      const fileType = foto.files[0].type;
-      if (!fileType.startsWith("image/") || !/(png|jpg|jpeg)$/i.test(fileType)) {
-        Swal.fire({
-          title: "Formato inválido!",
-          text: "A foto deve ser um arquivo de imagem no formato PNG, JPG ou JPEG.",
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#800000",
-        });
-        return false;
-      }
-      return true;
 
     default:
       return true;
@@ -151,7 +121,9 @@ function validarEtapa(numEtapa) {
 function proximaEtapa(numEtapa) {
   if (validarEtapa(numEtapa - 1)) {
     // Oculta todas as etapas
-    document.querySelectorAll(".etapa").forEach(etapa => etapa.classList.remove("active"));
+    document
+      .querySelectorAll(".etapa")
+      .forEach((etapa) => etapa.classList.remove("active"));
     // Exibe a etapa desejada
     document.getElementById("etapa" + numEtapa).classList.add("active");
   }
@@ -159,18 +131,22 @@ function proximaEtapa(numEtapa) {
 
 // Função para voltar para uma etapa anterior
 function voltarEtapa(numEtapa) {
-  document.querySelectorAll(".etapa").forEach(etapa => etapa.classList.remove("active"));
+  document
+    .querySelectorAll(".etapa")
+    .forEach((etapa) => etapa.classList.remove("active"));
   document.getElementById("etapa" + numEtapa).classList.add("active");
 }
 
 function enviarFormulario() {
-  var tipoContaVar = document.getElementById('tipo_conta').value
+  var tipoContaVar = document.getElementById("tipo_conta").value;
   var nomeVar = document.getElementById("nome_completo").value;
   var emailVar = document.getElementById("email_fisico").value;
   var cpfVar = document.getElementById("cpf").value;
   var telefoneVar = document.getElementById("telefone").value;
   var senhaVar = document.getElementById("senha_input").value;
-  var confirmacaoSenhaVar = document.getElementById("confirmacao_senha_input").value;
+  var confirmacaoSenhaVar = document.getElementById(
+    "confirmacao_senha_input"
+  ).value;
 
   // Verificando se há algum campo em branco ou se as senhas não coincidem
   if (
@@ -184,12 +160,13 @@ function enviarFormulario() {
     senhaVar !== confirmacaoSenhaVar
   ) {
     DOM.cardErro.style.display = "block";
-    DOM.msgErro.innerText = "Preencha todos os campos e certifique-se de que as senhas coincidam.";
+    DOM.msgErro.innerText =
+      "Preencha todos os campos e certifique-se de que as senhas coincidam.";
     setTimeout(sumirMensagem, 5000);
     return false;
   }
 
-  console.log('Acabou a validação');
+  console.log("Acabou a validação");
 
   fetch("/usuarios/cadastrar", {
     method: "POST",
@@ -202,7 +179,7 @@ function enviarFormulario() {
       emailVar: emailVar,
       cpfVar: cpfVar,
       telefoneVar: telefoneVar,
-      senhaVar: senhaVar
+      senhaVar: senhaVar,
     }),
   })
     .then(function (resposta) {
@@ -228,21 +205,6 @@ function enviarFormulario() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  VMasker(document.getElementById("cpf")).maskPattern("999.999.999-99");
-
-  const telefoneInput = document.getElementById("telefone");
-  VMasker(telefoneInput).maskPattern("(99) 9999-9999");
-
-  telefoneInput.addEventListener("input", function () {
-    if (this.value.replace(/\D/g, "").length > 10) {
-      VMasker(this).maskPattern("(99) 99999-9999");
-    } else {
-      VMasker(this).maskPattern("(99) 9999-9999");
-    }
-  });
-});
-
 function limparFormulario() {
   nomeVar.value = "";
   emailVar.value = "";
@@ -250,51 +212,52 @@ function limparFormulario() {
   confirmacaoSenhaVar.value = "";
 }
 
-document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+document.getElementById("uploadForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData();
-  const fileInput = document.getElementById('photoInput');
-  const progress = document.getElementById('progress');
-  const message = document.getElementById('message');
+  const fileInput = document.getElementById("photoInput");
+  const progress = document.getElementById("progress");
+  const message = document.getElementById("message");
 
-  formData.append('foto', fileInput.files[0]);
+  formData.append("foto", fileInput.files[0]);
 
   try {
-    progress.style.display = 'block';
-    message.textContent = '';
+    progress.style.display = "block";
+    message.textContent = "";
 
-    const response = await fetch('/profile/photo', {
-      method: 'POST',
+    const response = await fetch("/profile/photo", {
+      method: "POST",
       body: formData,
-      credentials: 'include' // Para enviar cookies/token
+      credentials: "include", // Para enviar cookies/token
     });
 
     if (!response.ok) {
-      throw new Error('Falha na requisição: ' + response.statusText);
+      throw new Error("Falha na requisição: " + response.statusText);
     }
 
     let result;
     try {
       result = await response.json();
     } catch (e) {
-      console.log('Erro ao tentar converter a resposta para JSON: ', e);
-      throw new Error('Resposta não é JSON válido');
+      console.log("Erro ao tentar converter a resposta para JSON: ", e);
+      throw new Error("Resposta não é JSON válido");
     }
 
-    console.log('Resultado da resposta: ', result);
+    console.log("Resultado da resposta: ", result);
 
     if (result.photoPath) {
-      document.getElementById('profileImage').src = result.photoPath + '?t=' + Date.now();
-      message.textContent = result.message || 'Foto carregada com sucesso';
-      message.style.color = 'green';
+      document.getElementById("profileImage").src =
+        result.photoPath + "?t=" + Date.now();
+      message.textContent = result.message || "Foto carregada com sucesso";
+      message.style.color = "green";
     } else {
-      throw new Error('Campo photoPath ausente na resposta');
+      throw new Error("Campo photoPath ausente na resposta");
     }
   } catch (error) {
     message.textContent = error.message;
-    message.style.color = 'red';
+    message.style.color = "red";
   } finally {
-    progress.style.display = 'none';
+    progress.style.display = "none";
   }
 });
