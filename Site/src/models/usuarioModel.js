@@ -18,28 +18,7 @@ function cadastrar(email, senha, tipoConta, nome, cpf, telefone) {
     return database.executar(instrucaoSql)
 }
 
-async function updateProfilePhoto(userId, photoPath) {
-    const instrucaoSql = `
-        UPDATE usuario 
-        SET foto_perfil_path = '${photoPath}' 
-        WHERE id = ${userId}
-    `;
-    return database.executar(instrucaoSql);
-}
-
-async function getProfilePhoto(userId) {
-    const instrucaoSql = `
-        SELECT foto_perfil_path 
-        FROM usuario 
-        WHERE id = ${userId}
-    `;
-    const resultado = await database.executar(instrucaoSql);
-    return resultado[0]?.foto_perfil_path || null;
-}
-
 module.exports = {
     login,
     cadastrar,
-    updateProfilePhoto,
-    getProfilePhoto
 };
