@@ -1,3 +1,5 @@
 node_modules/
 Site/.env/
 .env
+
+Usando git ignore para teste de upload automático
