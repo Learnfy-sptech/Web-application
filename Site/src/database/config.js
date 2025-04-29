@@ -30,18 +30,19 @@ const mysqlConfig = {
 function executar(instrucao) {
     return new Promise(function (resolve, reject) {
         if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-            mysql.createConnection(mysqlConfig)
-                .then((conexao) => {
-                    return conexao.query(instrucao); // Executa a consulta no MySQL
-                })
-                .then(([resultados]) => {
-                    console.log(resultados); // Log dos resultados
-                    resolve(resultados); // Resolve com os resultados
-                })
-                .catch((erro) => {
-                    console.error('ERRO NA CONEXÃO COM O MYSQL:', erro);
-                    reject(erro); // Rejeita em caso de erro
-                });
+            // Conexão com o SQL Server (produção)
+            sql.connect(sqlServerConfig).then(function () {
+                return sql.query(instrucao); // Executa a consulta no SQL Server
+            }).then(function (resultados) {
+                console.log(resultados); // Log dos resultados
+                resolve(resultados.recordset); // Resolve com os resultados
+            }).catch(function (erro) {
+                reject(erro); // Rejeita em caso de erro
+                console.log('ERRO: ', erro);
+            });
+            sql.on('error', function (erro) {
+                console.error("ERRO NO SQL SERVER (Azure):", erro);
+            });
         } else if (process.env.AMBIENTE_PROCESSO == "producao") {
             // Conexão com o MySQL (desenvolvimento)
             var conexao = mysql.createConnection(mysqlConfig);

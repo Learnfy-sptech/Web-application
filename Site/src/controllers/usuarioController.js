@@ -101,7 +101,7 @@ const uploadProfilePhoto = (req, res) => {
 };
 
 // Obter foto de perfil
-async function getProfilePhoto (req, res) {
+const getProfilePhoto = async (req, res) => {
     try {
         const photoPath = await usuarioModel.getProfilePhoto(req.params.userId);
         
