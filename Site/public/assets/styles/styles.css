@@ -9,6 +9,7 @@
 @import url('slider.css');
 @import url('contactus.css');
 @import url('dashboard.css');
+@import url('edit-person.css');
 
 :root {
     --color-primary-1: #fbf9f5;
