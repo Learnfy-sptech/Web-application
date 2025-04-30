@@ -16,17 +16,37 @@
 <body>
   <div class="main">
     <div class="side-bar">
-      <div class="menu">
+      <div class="logo">
         <a href="index.html">
           <img src="./assets/images/BrancoComTexto.png" alt="Logo Learnfy" />
         </a>
+      </div>
+
+      <div class="menu">
+
+        <img src="./assets/images/no-user-image.gif" alt="" id="avatar">
         <ul>
+
+          <li>
+
+            <a href="index.html" style="display: flex; flex-direction: column;" class="icon-link">
+              <span>Olá adalto <i class='bx bx-pencil'></i></span>
+            </a>
+          </li>
           <li>
             <a href="index.html" class="icon-link" onclick="clear()">
-              <i class='bx bx-home'></i>
+              <i class='bx bx-home-alt-2'></i>
               <span>Home</span>
             </a>
           </li>
+          <li>
+            <a href="index.html" class="icon-link">
+              <i class='bx bx-user'></i>
+              <span>Perfil</span>
+            </a>
+          </li>
+
+
           <li>
             <a href="dashboard.html" class="icon-link">
               <i class='bx bx-line-chart'></i>
@@ -52,111 +72,131 @@
         <div class="out-item icon-link">
           <a href="">
             <i class='bx bx-log-out log-out-item'></i>
-            <span onclick="clear()" >Sair</span>
+            <a href="index.html" onclick="clear()">
+              <span>Sair</span>
+            </a>
+
           </a>
         </div>
       </div>
     </div>
     <div class="main-content">
-  
-      <div class="main-section">
-          <div class="kpi-container">
-            <div class="kpi">
-              <span id="kpi">Taxa de Retenção de Alunos no Semestre</span>
-              <div class="data-info">91.8% dos alunos permanecem ativos </div>
-            </div>
-            
-            <div class="kpi">
-              <span id="kpi">Índice Médio de Satisfação dos Alunos</span>
-              <div class="data-info">Avaliação média de 4.6/5 de feedback institucional</div>
-            </div>
-            
-            <div class="kpi">
-              <span id="kpi">Quantidade de Alunos com Desempenho Crítico</span>
-              <div class="data-info">72 alunos com média avaliativa abaixo de 6.0</div>
-            </div>
-            
-          </div> 
-      <div id="container" style="width: 100%; height: 900px; "></div>
-    </div>
-    
 
-    </body>
+      <div class="main-section">
+        <div class="kpi-container">
+          <div class="kpi">
+            <span id="kpi">Taxa de Retenção de Alunos no Semestre</span>
+            <div class="data-info">91.8% dos alunos permanecem ativos </div>
+          </div>
+
+          <div class="kpi">
+            <span id="kpi">Índice Médio de Satisfação dos Alunos</span>
+            <div class="data-info">Avaliação média de 4.6/5 de feedback institucional</div>
+          </div>
+
+          <div class="kpi">
+            <span id="kpi">Quantidade de Alunos com Desempenho Crítico</span>
+            <div class="data-info">72 alunos com média avaliativa abaixo de 6.0</div>
+          </div>
+
+        </div>
+        <div class="kpi-container">
+          <div class="kpi">
+            <span id="kpi">Taxa de Retenção de Alunos região</span>
+            <div class="data-info">52.1% dos alunos permanecem ativos </div>
+          </div>
+
+          <div class="kpi">
+            <span id="kpi">Quantidade de inscrição de cursos superiores</span>
+            <div class="data-info">298 inscrições no último mês</div>
+          </div>
+
+          <div class="kpi">
+            <span id="kpi">Indice de evasão</span>
+            <div class="data-info">49 alunos nesta região</div>
+          </div>
+
+        </div>
+        <div id="container" style="width: 100%; height: 900px; "></div>
+      </div>
+
+
+</body>
 
 
 </html>
 
 <script>
   (async () => {
-  const topology = await fetch(
-    'https://code.highcharts.com/mapdata/countries/br/br-all.topo.json'
-  ).then(response => response.json());
+    const topology = await fetch(
+      'https://code.highcharts.com/mapdata/countries/br/br-all.topo.json'
+    ).then(response => response.json());
 
-  const data = [
-    ['br-sp', 1],
-    ...['br-ma', 'br-pa', 'br-sc', 'br-ba', 'br-ap', 'br-ms', 'br-mg', 'br-go', 'br-rs', 'br-to', 'br-pi', 'br-al', 'br-pb', 'br-ce', 'br-se', 'br-rr', 'br-pe', 'br-pr', 'br-es', 'br-rj', 'br-rn', 'br-am', 'br-mt', 'br-df', 'br-ac', 'br-ro'].map(code => [code, 0])
-  ];
+    const data = [
+      ['br-sp', 1],
+      ...['br-ma', 'br-pa', 'br-sc', 'br-ba', 'br-ap', 'br-ms', 'br-mg', 'br-go', 'br-rs', 'br-to', 'br-pi', 'br-al', 'br-pb', 'br-ce', 'br-se', 'br-rr', 'br-pe', 'br-pr', 'br-es', 'br-rj', 'br-rn', 'br-am', 'br-mt', 'br-df', 'br-ac', 'br-ro'].map(code => [code, 0])
+    ];
 
-  // Mapa de nomes para siglas
-  const siglasEstados = {
-    'Acre': 'AC', 'Alagoas': 'AL', 'Amapá': 'AP', 'Amazonas': 'AM',
-    'Bahia': 'BA', 'Ceará': 'CE', 'Distrito Federal': 'DF', 'Espírito Santo': 'ES',
-    'Goiás': 'GO', 'Maranhão': 'MA', 'Mato Grosso': 'MT', 'Mato Grosso do Sul': 'MS',
-    'Minas Gerais': 'MG', 'Pará': 'PA', 'Paraíba': 'PB', 'Paraná': 'PR',
-    'Pernambuco': 'PE', 'Piauí': 'PI', 'Rio de Janeiro': 'RJ', 'Rio Grande do Norte': 'RN',
-    'Rio Grande do Sul': 'RS', 'Rondônia': 'RO', 'Roraima': 'RR', 'Santa Catarina': 'SC',
-    'São Paulo': 'SP', 'Sergipe': 'SE', 'Tocantins': 'TO'
-  };
+    // Mapa de nomes para siglas
+    const siglasEstados = {
+      'Acre': 'AC', 'Alagoas': 'AL', 'Amapá': 'AP', 'Amazonas': 'AM',
+      'Bahia': 'BA', 'Ceará': 'CE', 'Distrito Federal': 'DF', 'Espírito Santo': 'ES',
+      'Goiás': 'GO', 'Maranhão': 'MA', 'Mato Grosso': 'MT', 'Mato Grosso do Sul': 'MS',
+      'Minas Gerais': 'MG', 'Pará': 'PA', 'Paraíba': 'PB', 'Paraná': 'PR',
+      'Pernambuco': 'PE', 'Piauí': 'PI', 'Rio de Janeiro': 'RJ', 'Rio Grande do Norte': 'RN',
+      'Rio Grande do Sul': 'RS', 'Rondônia': 'RO', 'Roraima': 'RR', 'Santa Catarina': 'SC',
+      'São Paulo': 'SP', 'Sergipe': 'SE', 'Tocantins': 'TO'
+    };
 
-  Highcharts.mapChart('container', {
-    chart: {
-      map: topology,
-      backgroundColor: '#fafafa'
-    },
-
-    title: {
-      text: 'Mapa do Brasil'
-    },
-
-    subtitle: {
-      text: 'Estatísticas educacionais'
-    },
-
-    colorAxis: {
-      min: 0,
-      max: 1,
-      stops: [
-        [0, '#993333']
-      ]
-    },
-
-    series: [{
-      data: data,
-      joinBy: 'hc-key',
-      name: 'Estados',
-      states: {
-        hover: {
-          backgroundColor: '#fafafa',
-          color: '#800000'
-        }
+    Highcharts.mapChart('container', {
+      chart: {
+        map: topology,
+        backgroundColor: '#fafafa'
       },
-      dataLabels: {
-        enabled: true,
-        formatter: function () {
-          return siglasEstados[this.point.name] || '';
+
+      title: {
+        text: 'Mapa do Brasil'
+      },
+
+      subtitle: {
+        text: 'Estatísticas educacionais'
+      },
+
+      colorAxis: {
+        min: 0,
+        max: 1,
+        stops: [
+          [0, '#993333']
+        ]
+      },
+
+      series: [{
+        data: data,
+        joinBy: 'hc-key',
+        name: 'Estados',
+        states: {
+          hover: {
+            backgroundColor: '#fafafa',
+            color: '#800000'
+          }
         },
-        style: {
-          fontSize: '14px',
-          fontWeight: 'bold',
-          color: '#fafafa',
-          textOutline: 'none'
-        }
-      },
-      borderColor: '#ffffff',
-      borderWidth: 0.1
-    }]
-  });
-})();
+        dataLabels: {
+          enabled: true,
+          formatter: function () {
+            return siglasEstados[this.point.name] || '';
+          },
+          style: {
+            fontSize: '14px',
+            fontWeight: 'bold',
+            color: '#fafafa',
+            textOutline: 'none'
+          }
+        },
+        borderColor: '#ffffff',
+        borderWidth: 0.1
+      }]
+    });
+  })();
 
 
 </script>
@@ -164,10 +204,10 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
   integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="./assets/javascript/dashboard.js"></script>
