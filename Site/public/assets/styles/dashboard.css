@@ -8,117 +8,6 @@
   box-sizing: border-box;
 }
 
-.main {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-}
-
-.side-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: start;
-  position: absolute;
-  min-width: 150px;
-  max-width: 200px;
-  height: 100vh;
-  padding-right: 0.75rem;
-  background-color: var(--color-primary-6);
-  position: relative;
-  border-right: 1px solid var(--color-primary-7);
-  box-shadow: 8px 0 10px -5px rgba(0, 0, 0, 0.2);
-}
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.side-bar img {
-  margin-top: 40px;
-  width: 60px;
-  height: auto;
-}
-
-#avatar{
-  height: 60px;
-  width: auto;
-  border-radius: 100%;
-  border: #fafafa solid 1px;
-}
-
-.main ul {
-  padding-right: 2rem;
-  padding-top: 6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  list-style: none;
-}
-
-.main li {
-  padding: 8px;
-  width: 100%;
-  border-radius: 5px;
-}
-
-.main a {
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--color-primary-1);
-  transition: color 0.2s ease-in-out;
-}
-
-.main a:hover {
-  color: var(--color-neutral-1);
-}
-
-.main li:hover{
-  background-color: var(--color-primary-5);
-  transition: ease-in 0.2s;
-  width: 100;
-}
-
-.icon-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--color-primary-1);
-  transition: color 0.2s ease-in-out;
-}
-
-.icon-link:hover {
-  color: var(--color-neutral-1);
-}
-
-.log-out {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-  gap: 8px;
-  padding-left: 30px;
-  margin-bottom: 30px;
-  color: var(--color-primary-1);
-}
-
-.log-out:hover {
-  color: var(--color-neutral-1);
-  transition: color 0.2s ease-in-out;
-}
-
-.log-out-item:hover {
-  color: var(--color-neutral-1);
-  transition: color 0.2s ease-in-out;
-}
-
-.log-out span:hover {
-  color: var(--color-neutral-1);
-  transition: color 0.2s ease-in-out;
-}
 
 .main-content {
   flex-grow: 1;
@@ -130,11 +19,11 @@
   overflow-y: hidden;
 }
 
-.main-section{
+.main-section {
   gap: 32px;
   display: flex;
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 
