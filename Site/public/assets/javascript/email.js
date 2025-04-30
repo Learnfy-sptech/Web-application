@@ -1,5 +1,5 @@
 
-emailjs.init("DO5jobv4GIdwnKv-7"); 
+emailjs.init("86GigBPlpSf4sdgDf"); 
 
 document.getElementById('contactForm').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -20,7 +20,7 @@ document.getElementById('contactForm').addEventListener('submit', function (even
         return;
     }
 
-    emailjs.sendForm('service_9o4zxmf', 'template_drmb35x', form)
+    emailjs.sendForm('service_wdjdynn', 'template_km7gyn3', form)
         .then(function (response) {
             console.log('Sucesso!', response.status, response.text);
 
