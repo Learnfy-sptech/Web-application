@@ -16,6 +16,7 @@ var app = express();
 // Importação dos routers
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require('./src/routes/usuarios');
+var logsRouter = require('./src/routes/logs')
 
 // ----------------------------------------------------------------- //
 // CONFIGURAÇÕES PARA CONEXÃO DIRETAMENTE COM NOSSO BUCKET NO AWS S3 //
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
+app.use('/logs', logsRouter);
 
 
 app.listen(PORTA_APP, function () {
