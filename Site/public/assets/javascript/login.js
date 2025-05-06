@@ -49,7 +49,7 @@ function logar() {
       resposta.json().then(json => {
         sessionStorage.EMAIL_USUARIO = json.email;
         sessionStorage.NOME_USUARIO = json.nome;
-
+  
         Swal.fire({
           title: "Login realizado com sucesso!",
           text: "Você será redirecionado...",
@@ -57,9 +57,13 @@ function logar() {
           showConfirmButton: false,
           timer: 2000
         });
-
+  
         setTimeout(function () {
-          window.location = "dashboard.html";
+          if (emailVar.includes("@learnfy")) {
+            window.location = "import.html";
+          } else {
+            window.location = "dashboard.html";
+          }
         }, 2000);
       });
     } else {
@@ -73,7 +77,8 @@ function logar() {
         });
       });
     }
-  }).catch(function (erro) {
+  })
+  .catch(function (erro) {
     console.log(erro);
     Swal.fire({
       title: "Erro inesperado",
