@@ -12,20 +12,26 @@
 .main-content {
   flex-grow: 1;
   overflow: hidden;
+  padding: 20px;
   width: 100%;
   height: 100vh;
   background-color: #ffffff;
-  overflow-y: hidden;
 }
 
 .main-section {
   gap: 32px;
+  margin: 20px;
   display: flex;
   height: 100%;
-  overflow-y: auto;
 }
 
-
+.left-content{
+  height: 100%;
+  width: 100%;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+}
 .g-8 {
   gap: 8px;
 }
@@ -68,6 +74,10 @@ header{
   margin: 0 auto;
 }
 
+#container-bar {
+  height: 400px;
+}
+
 
 .loading {
   margin-top: 10em;
@@ -77,13 +87,16 @@ header{
 
 .kpi-container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 40%;
-  height: 100%;
-  gap: 25px;
-  
+  width: 100%;
+  height: 250px;
+  gap: 16px !important;
 }
+
+.kpi-section{
+  display: flex;
+  flex-direction: column;
+}
+
 
 .kpi {
   display: flex;
@@ -92,7 +105,7 @@ header{
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 30%;
+  height: 100%;
   padding: 20px;
   background-color: #fafafa;
   border-radius: 8px;
@@ -100,7 +113,6 @@ header{
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   color: var(--color-neutral-1);
   transition: transform 0.2s, box-shadow 0.2s;
-  gap: 20px;
 }
 
 .kpi:hover {
