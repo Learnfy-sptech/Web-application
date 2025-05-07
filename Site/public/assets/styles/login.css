@@ -245,16 +245,14 @@ body {
   .container {
     flex-direction: column;
     height: auto;
-  }
+    }
 
-  .form-side,
-  .image-side {
+  .form-side {
     width: 100%;
     flex: none;
   }
 
   .image-side {
-    height: 300px;
-    order: -1;
+    display: none;
   }
 }

@@ -224,16 +224,20 @@ body {
   .container {
     flex-direction: column;
     height: auto;
-  }
+    }
 
-  .form-side,
-  .image-side {
+  .form-side {
     width: 100%;
     flex: none;
+    padding: 0;
+  }
+
+
+  .form-side h1{
+    font-size: 25px;
   }
 
   .image-side {
-    height: 300px;
-    order: -1;
+    display: none;
   }
 }
