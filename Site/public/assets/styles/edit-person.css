@@ -80,7 +80,7 @@
 
 .edit-form input:focus,
 .edit-form select:focus {
-  border-color: #007bff;
+  border-color: var(--color-primary-6);
   outline: none;
 }
 
