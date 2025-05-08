@@ -43,13 +43,13 @@
 
 
           <li>
-            <a href="dashboard.html" class="icon-link">
+            <a href="selection-dashboard.html" class="icon-link">
               <i class='bx bx-line-chart'></i>
-              <span>Dashboard</span>
+              <span>Dashboards</span>
             </a>
           </li>
           <li>
-            <a href="#" class="icon-link">
+            <a href="import.html" class="icon-link">
               <i class='bx bx-id-card'></i>
               <span>Gestão</span>
             </a>
@@ -94,18 +94,28 @@
       </div>
 
       <div class="status-cards">
-        <div class="status-card red">
-          <h3>111</h3>
-          <p>Taxa de concluintes</p>
+        <div class="kpi">
+          <span class="kpi-title">Taxa de conclusão no curso selecionado</span>
+          <div class="data-info">
+            <span id="kpi-conclusao">82%</span><br>
+            Taxa de concluentes
+          </div>
         </div>
-        <div class="status-card red">
-          <h3>05</h3>
-          <p>AAAAA</p>
+        <div class="kpi">
+          <span class="kpi-title">Terminaram o curso mas estão empregados</span>
+          <div class="data-info">
+            <span id="kpi-empregados">30%</span><br>
+            dos alunos que terminaram o curso e estão empregados na área
+          </div>
         </div>
-        <div class="status-card red">
-          <h3>00</h3>
-          <p>AAAAA</p>
+        <div class="kpi">
+          <span class="kpi-title">Terminaram o curso mas <strong>NÃO</strong> estão empregados</span>
+          <div class="data-info">
+            <span id="kpi-desempregados">70%</span><br>
+            dos alunos não estão desempregados na área
+          </div>
         </div>
+        
       </div>
 
       <div class="graphs-section">
@@ -146,103 +156,73 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <script>
-  //GRAFICO DE LINHAS 
-Highcharts.chart('container-line', {
-    chart: {
-        type: 'line'
-    },
-    title: {
-        text: 'Taxa de inscritos por área (Mensal)'
-    },
-    subtitle: {
-        text: 'Source: ' +
-            '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
-            'target="_blank">Wikipedia.com</a>'
-    },
-    xAxis: {
-        categories: [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-            'Oct', 'Nov', 'Dec'
-        ]
-    },
-    yAxis: {
-        title: {
-            text: 'Alunos Matriculados (°C)'
-        }
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
-    },
-    series: [{
-        name: 'Reggane',
+  document.addEventListener('DOMContentLoaded', function () {
+    const kpiData = {
+      ti: { concluicao: '91%', empregados: '45%', desempregados: '55%', lineData: [200, 220, 250, 300, 330, 350, 360, 370, 390, 410, 430, 450], barData: [50, 70, 60, 80, 55, 65] },
+      saude: { concluicao: '85%', empregados: '60%', desempregados: '40%', lineData: [180, 190, 210, 230, 250, 270, 290, 300, 310, 320, 330, 340], barData: [40, 60, 50, 70, 45, 55] },
+      educacao: { concluicao: '78%', empregados: '50%', desempregados: '50%', lineData: [150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260], barData: [30, 50, 45, 60, 35, 40] },
+      engenharia: { concluicao: '88%', empregados: '55%', desempregados: '45%', lineData: [170, 190, 200, 220, 250, 270, 290, 300, 310, 330, 340, 360], barData: [60, 80, 70, 90, 75, 85] },
+      direito: { concluicao: '80%', empregados: '40%', desempregados: '60%', lineData: [120, 130, 140, 160, 180, 200, 210, 220, 230, 240, 250, 260], barData: [20, 30, 25, 35, 28, 32] }
+    };
+
+    const select = document.getElementById('search-bar');
+    let lineChart = null;
+    let barChart = null;
+
+    function updateKpis(area) {
+      const data = kpiData[area];
+      if (!data) return;
+      document.getElementById('kpi-conclusao').textContent = data.conclusao;
+      document.getElementById('kpi-empregados').textContent = data.empregados;
+      document.getElementById('kpi-desempregados').textContent = data.desempregados;
+    }
+
+    function updateLineChart(area) {
+      const data = kpiData[area];
+      if (!data) return;
+      lineChart.series[0].setData(data.lineData);
+    }
+
+    function updateBarChart(area) {
+      const data = kpiData[area];
+      if (!data) return;
+      barChart.series[0].setData(data.barData);
+      barChart.series[1].setData(data.barData.map(val => val * 0.6));
+    }
+
+    select.addEventListener('change', function () {
+      const selectedArea = this.value;
+      updateKpis(selectedArea);
+      updateLineChart(selectedArea);
+      updateBarChart(selectedArea);
+    });
+
+    lineChart = Highcharts.chart('container-line', {
+      chart: { type: 'line' },
+      title: { text: 'Taxa de inscritos por área (Mensal)' },
+      xAxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','Oct', 'Nov', 'Dec'] },
+      yAxis: { title: { text: 'Alunos Matriculados' } },
+      series: [{
+        name: 'Inscrições',
         color: '#6d0000',
-        data: [
-            16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
-            22.0, 17.8
-        ]
-    }, {
-        name: 'Tallinn',
-        color: '#cc8585',
-        data: [
-            -2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
-            2.0, -0.9
-        ]
-    }]
-});
+        data: kpiData.ti.lineData
+      }]
+    });
 
-
-//GRAFICO DE BARRAS
-Highcharts.chart('container-bar', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Taxa de evasão (Ano)'
-    },
-    subtitle: {
-        text:
-            'Source: <a target="_blank" ' +
-            'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>'
-    },
-    xAxis: {
-        categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
-        crosshair: true,
-        accessibility: {
-            description: 'Countries'
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: '1000 metric tons (MT)'
-        }
-    },
-    tooltip: {
-        valueSuffix: ' (1000 MT)'
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [
-        {
-            name: 'Corn',
-            color: '#b35c5c',
-            data: [387749, 280000, 129000, 64300, 54000, 34300]
-        },
-        {
-            name: 'Wheat',
-            color: '#800000',
-            data: [45321, 140000, 10000, 140500, 19500, 113500]
-        }
-    ]
-});
-
+    barChart = Highcharts.chart('container-bar', {
+      chart: { type: 'column' },
+      title: { text: 'Taxa de evasão (Ano)' },
+      xAxis: { categories: ['SP', 'RJ', 'MG', 'RS', 'BA', 'PR'], crosshair: true },
+      yAxis: { min: 0, title: { text: 'Alunos' } },
+      series: [{
+        name: 'Evasão',
+        color: '#b35c5c',
+        data: kpiData.ti.barData
+      }, {
+        name: 'Interesse futuro',
+        color: '#800000',
+        data: kpiData.ti.barData.map(val => val * 0.6)
+      }]
+    });
+  });
 </script>
