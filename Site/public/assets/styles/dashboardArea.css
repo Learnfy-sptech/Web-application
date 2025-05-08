@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url(styles.css);
+
+* {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.main-content {
+    flex-grow: 1;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    overflow-y: hidden;
+  }
+
+  .main-section {
+    gap: 32px;
+    display: flex;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  /*Filtro de pesquisa*/
+
+  .filter-section{
+    display: grid;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 10px;
+  }
+
+  .search-container {
+    width: 490px;
+    margin: 0 auto;
+  }
+  
+  .select-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  #search-bar {
+    width: 100%;
+    height: 45px;
+    padding: 0 40px 0 20px; /* espaço para a seta */
+    font-size: 1rem;
+    border: 1px solid #d0cfce;
+    border-radius: 8px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  #search-bar:focus {
+    border-color: #993333;
+    color: #b35c5c;
+    transition: border 0.35s ease, color 0.35s ease;
+  }
+  
+  .select-wrapper i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #993333;
+  }
+  
+  
+
+  /* API */
+  .status-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .status-card {
+    background-color: #f3f3f3;
+    /* Fundo cinza claro */
+    padding: 30px;
+    border-radius: 10px 10px 10px 10px;
+    /* Bordas superiores arredondadas */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-top: 10px solid;
+    /* Define a borda superior */
+  }
+
+  .status-card.red {
+    border-top-color: #7b2c2c;
+    /* Cor vermelha para "Estado de Risco" */
+  }
+  
+  .status-card.red h3{
+    color: #832b2b;
+  }
+
+  .status-card.red p{
+    color: #854545;
+  }
+
+  .status-card h3 {
+    font-size: 60px;
+    color: rgb(0, 0, 0);
+    margin: 0;
+  }
+
+  .status-card p {
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+    margin: 10px 0 0;
+  }
+
+  /* GRÁFICO */
+
+  .graphs-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 1%;
+  }
+
+  
+  /* Gráfico de linhas */
+.highcharts-line-figure,
+.highcharts-data-table-line table {
+    min-width: 90%;
+    max-width: 90%;
+    margin: 10px;
+}
+
+.highcharts-data-table-line table {
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table-line caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table-line th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table-line td,
+.highcharts-data-table-line th,
+.highcharts-data-table-line caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table-line thead tr,
+.highcharts-data-table-line tbody tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table-line tr:hover {
+    background: #f1f7ff;
+}
+
+.highcharts-line-description {
+    margin: 0.3rem 10px;
+}
+
+
+/*GRAFICO DE BARRAS*/
+.highcharts-bar-figure,
+.highcharts-data-table-bar table {
+    min-width: 90%;
+    max-width: 90%;
+    margin: 10px;
+}
+
+#container {
+    height: 400px;
+}
+
+.highcharts-data-table-bar table {
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table-bar caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table-bar th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table-bar td,
+.highcharts-data-table-bar th,
+.highcharts-data-table-bar caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table-bar thead tr,
+.highcharts-data-table-bar tbody tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table-bar tr:hover {
+    background: #f1f7ff;
+}
+
+.highcharts-bar-description {
+    margin: 0.3rem 10px;
+}
+
+
