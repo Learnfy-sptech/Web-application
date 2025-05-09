@@ -60,6 +60,7 @@ header {
 #mobile_menu {
     display: none;
 }
+
 @media screen and (max-width: 1170px) {
     #nav_list,
     #navbar .btn-default {
@@ -72,6 +73,7 @@ header {
       background-color: transparent;
       font-size: 1.5rem;
       cursor: pointer;
+      margin-right: 20px;
     }
   
     #mobile_menu {

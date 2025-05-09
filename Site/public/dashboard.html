@@ -132,205 +132,211 @@
 <script src="./assets/javascript/dashboard.js"></script>
 <script>
   const blockDescription = document.querySelectorAll('.apear');
+  var valor1 = document.getElementById('valor1')
+  var valor2 = document.getElementById('valor2')
+  var valor3 = document.getElementById('valor3')
+  var valor4 = document.getElementById('valor4')
   function inicializarCards() {
-    console.log('inicializei')
-      blockDescription.forEach(el => el.style.display = 'none');
-    
-      return true; 
-    }
-    document.addEventListener('DOMContentLoaded', function () {
-      Highcharts.chart('container-bar', {
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Taxa de evasão por estados em 2024'
-    },
-    xAxis: {
-      type: 'category',
-      labels: {
-        autoRotation: [-45, -90],
-        style: {
-          fontSize: '13px',
-          fontFamily: 'Verdana, sans-serif'
-        }
-      }
-    },
-    yAxis: {
-      min: 0,
-      title: {
-        text: 'Taxa de evasão (%)'
-      },
-      labels: {
-        format: '{value}%'
-      }
-    },
-    legend: {
-      enabled: false
-    },
-    tooltip: {
-      pointFormat: 'Taxa: <b>{point.y:.1f}%</b>'
-    },
-    series: [{
-      name: 'Taxa de evasão',
-      colors: ['#800000'],
-      colorByPoint: true,
-      groupPadding: 0,
-      data: [
-        ['São Paulo', 33.2],
-        ['Rio de Janeiro', 24.3],
-        ['Belo Horizonte', 19.1],
-        ['Brasília', 27.5],
-        ['Salvador', 16.5],
-        ['Curitiba', 15.5],
-        ['Fortaleza', 19.9],
-        ['Manaus', 13.8],
-        ['Recife', 13.2],
-        ['Porto Alegre', 12.5],
-        ['Goiânia', 11.8],
-        ['Belém', 10.9],
-        ['Campinas', 9.8],
-        ['São Luís', 19.1],
-        ['Maceió', 11.9],
-        ['Natal', 9.8],
-        ['Teresina', 14.6],
-        ['João Pessoa', 14.1],
-        ['Cuiabá', 13.7],
-        ['Aracaju', 13.6]
-      ],
-      dataLabels: {
-        enabled: true,
-        format: '{point.y:.1f}%'
-      }
-    }]
-  });
-  (async () => {
-    const topology = await fetch(
-      'https://code.highcharts.com/mapdata/countries/br/br-all.topo.json'
-    ).then(response => response.json());
-
-    const data = [
-      ['br-sp', 0],
-      ...[
-        'br-ma', 'br-pa', 'br-sc', 'br-ba', 'br-ap', 'br-ms', 'br-mg', 'br-go', 'br-rs',
-        'br-to', 'br-pi', 'br-al', 'br-pb', 'br-ce', 'br-se', 'br-rr', 'br-pe', 'br-pr',
-        'br-es', 'br-rj', 'br-rn', 'br-am', 'br-mt', 'br-df', 'br-ac', 'br-ro'
-      ].map(code => [code, 1])
-    ];
-
-    const siglasEstados = {
-      'Acre': 'AC', 'Alagoas': 'AL', 'Amapá': 'AP', 'Amazonas': 'AM',
-      'Bahia': 'BA', 'Ceará': 'CE', 'Distrito Federal': 'DF', 'Espírito Santo': 'ES',
-      'Goiás': 'GO', 'Maranhão': 'MA', 'Mato Grosso': 'MT', 'Mato Grosso do Sul': 'MS',
-      'Minas Gerais': 'MG', 'Pará': 'PA', 'Paraíba': 'PB', 'Paraná': 'PR',
-      'Pernambuco': 'PE', 'Piauí': 'PI', 'Rio de Janeiro': 'RJ', 'Rio Grande do Norte': 'RN',
-      'Rio Grande do Sul': 'RS', 'Rondônia': 'RO', 'Roraima': 'RR', 'Santa Catarina': 'SC',
-      'São Paulo': 'SP', 'Sergipe': 'SE', 'Tocantins': 'TO'
-    };
-
-    const dadosPorEstado = {
-      'AC': { kpi1: 78.5, kpi2: 'Administração', kpi3: 76.3, kpi4: 350 },
-      'AL': { kpi1: 72.3, kpi2: 'Direito', kpi3: 74.9, kpi4: 430 },
-      'AM': { kpi1: 80.1, kpi2: 'Engenharia Civil', kpi3: 81.0, kpi4: 600 },
-      'AP': { kpi1: 75.2, kpi2: 'Pedagogia', kpi3: 78.2, kpi4: 370 },
-      'BA': { kpi1: 70.6, kpi2: 'Enfermagem', kpi3: 72.5, kpi4: 890 },
-      'CE': { kpi1: 76.8, kpi2: 'Medicina', kpi3: 75.1, kpi4: 760 },
-      'DF': { kpi1: 85.5, kpi2: 'Relações Internacionais', kpi3: 84.2, kpi4: 980 },
-      'ES': { kpi1: 83.1, kpi2: 'Ciência da Computação', kpi3: 81.3, kpi4: 740 },
-      'GO': { kpi1: 80.0, kpi2: 'Direito', kpi3: 77.0, kpi4: 560 },
-      'MA': { kpi1: 68.4, kpi2: 'Serviço Social', kpi3: 70.8, kpi4: 490 },
-      'MG': { kpi1: 84.0, kpi2: 'Engenharia de Produção', kpi3: 82.0, kpi4: 970 },
-      'MS': { kpi1: 82.3, kpi2: 'Zootecnia', kpi3: 79.9, kpi4: 510 },
-      'MT': { kpi1: 81.7, kpi2: 'Agronomia', kpi3: 80.5, kpi4: 500 },
-      'PA': { kpi1: 74.6, kpi2: 'Educação Física', kpi3: 75.2, kpi4: 660 },
-      'PB': { kpi1: 77.4, kpi2: 'Psicologia', kpi3: 76.1, kpi4: 410 },
-      'PE': { kpi1: 78.8, kpi2: 'Odontologia', kpi3: 77.3, kpi4: 590 },
-      'PI': { kpi1: 75.5, kpi2: 'História', kpi3: 74.5, kpi4: 420 },
-      'PR': { kpi1: 86.2, kpi2: 'Engenharia de Software', kpi3: 83.7, kpi4: 960 },
-      'RJ': { kpi1: 81.0, kpi2: 'Publicidade e Propaganda', kpi3: 79.1, kpi4: 1040 },
-      'RN': { kpi1: 79.3, kpi2: 'Fisioterapia', kpi3: 77.5, kpi4: 440 },
-      'RO': { kpi1: 76.1, kpi2: 'Ciências Contábeis', kpi3: 75.9, kpi4: 390 },
-      'RR': { kpi1: 74.8, kpi2: 'Letras', kpi3: 73.2, kpi4: 340 },
-      'RS': { kpi1: 85.0, kpi2: 'Arquitetura e Urbanismo', kpi3: 83.1, kpi4: 940 },
-      'SC': { kpi1: 88.3, kpi2: 'Engenharia Mecânica', kpi3: 85.0, kpi4: 910 },
-      'SE': { kpi1: 73.9, kpi2: 'Biomedicina', kpi3: 74.0, kpi4: 380 },
-      'SP': { kpi1: 87.5, kpi2: 'ADS', kpi3: 86.2, kpi4: 1200 },
-      'TO': { kpi1: 75.7, kpi2: 'Tecnologia da Informação', kpi3: 76.8, kpi4: 360 }
-    };
-
-
-    Highcharts.mapChart('container', {
+    blockDescription.forEach(el => el.style.display = 'none');
+    valor1.style.fontSize = '24px'
+    valor2.style.fontSize = '24px'
+    valor3.style.fontSize = '24px'
+    valor4.style.fontSize = '24px'
+    return true;
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    Highcharts.chart('container-bar', {
       chart: {
-        map: topology,
-        backgroundColor: '#fafafa'
+        type: 'column'
       },
-
       title: {
-        text: 'Mapa do Brasil (Clique nos estados para estatísticas)'
+        text: 'Taxa de evasão por capitais em 2024'
       },
-
-      subtitle: {
-        text: 'Estatísticas educacionais'
-      },
-
-      colorAxis: {
-        min: 0,
-        max: 1,
-        stops: [[0, '#993333']]
-      },
-
-      series: [{
-        data: data,
-        joinBy: 'hc-key',
-        name: 'Estados',
-        states: {
-          hover: {
-            backgroundColor: '#fafafa',
-            color: '#800000'
+      xAxis: {
+        type: 'category',
+        labels: {
+          autoRotation: [-45, -90],
+          style: {
+            fontSize: '13px',
+            fontFamily: 'Verdana, sans-serif'
           }
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Taxa de evasão (%)'
         },
+        labels: {
+          format: '{value}%'
+        }
+      },
+      legend: {
+        enabled: false
+      },
+      tooltip: {
+        pointFormat: 'Taxa: <b>{point.y:.1f}%</b>'
+      },
+      series: [{
+        name: 'Taxa de evasão',
+        colors: ['#800000'],
+        colorByPoint: true,
+        groupPadding: 0,
+        data: [
+          ['São Paulo', 33.2],
+          ['Rio de Janeiro', 24.3],
+          ['Belo Horizonte', 19.1],
+          ['Brasília', 27.5],
+          ['Salvador', 16.5],
+          ['Curitiba', 15.5],
+          ['Fortaleza', 19.9],
+          ['Manaus', 13.8],
+          ['Recife', 13.2],
+          ['Porto Alegre', 12.5],
+          ['Goiânia', 11.8],
+          ['Belém', 10.9],
+          ['Campinas', 9.8],
+          ['São Luís', 19.1],
+          ['Maceió', 11.9],
+          ['Natal', 9.8],
+          ['Teresina', 14.6],
+          ['João Pessoa', 14.1],
+          ['Cuiabá', 13.7],
+          ['Aracaju', 13.6]
+        ],
         dataLabels: {
           enabled: true,
-          formatter: function () {
-            return siglasEstados[this.point.name] || '';
-          },
-          style: {
-            fontSize: '14px',
-            fontWeight: 'bold',
-            color: '#fafafa',
-            textOutline: 'none'
-          }
-        },
-        tooltip: {
-          enabled: true,
-          formatter: function () {
-            return 'Clique aqui';
-          }
-        },
-        borderColor: '#ffffff',
-        borderWidth: 0.1,
-
-        point: {
-          events: {
-            click: function () {
-              blockDescription.forEach(el => el.style.display = 'block');
-              const estadoNome = this.name;
-              const estadoSigla = siglasEstados[estadoNome];
-
-              const dados = dadosPorEstado[estadoSigla];
-              if (dados) {
-                document.getElementById('valor1').innerText = dados.kpi1 + '%';
-                document.getElementById('valor2').innerText = dados.kpi2;
-                document.getElementById('valor3').innerText = dados.kpi3 + '%';
-                document.getElementById('valor4').innerText = dados.kpi4;
-              }
-            }
-          }
+          format: '{point.y:.1f}%'
         }
       }]
     });
-  })();
+    (async () => {
+      const topology = await fetch(
+        'https://code.highcharts.com/mapdata/countries/br/br-all.topo.json'
+      ).then(response => response.json());
 
-    })
-  
+      const data = [
+        ['br-sp', 0],
+        ...[
+          'br-ma', 'br-pa', 'br-sc', 'br-ba', 'br-ap', 'br-ms', 'br-mg', 'br-go', 'br-rs',
+          'br-to', 'br-pi', 'br-al', 'br-pb', 'br-ce', 'br-se', 'br-rr', 'br-pe', 'br-pr',
+          'br-es', 'br-rj', 'br-rn', 'br-am', 'br-mt', 'br-df', 'br-ac', 'br-ro'
+        ].map(code => [code, 1])
+      ];
+
+      const siglasEstados = {
+        'Acre': 'AC', 'Alagoas': 'AL', 'Amapá': 'AP', 'Amazonas': 'AM',
+        'Bahia': 'BA', 'Ceará': 'CE', 'Distrito Federal': 'DF', 'Espírito Santo': 'ES',
+        'Goiás': 'GO', 'Maranhão': 'MA', 'Mato Grosso': 'MT', 'Mato Grosso do Sul': 'MS',
+        'Minas Gerais': 'MG', 'Pará': 'PA', 'Paraíba': 'PB', 'Paraná': 'PR',
+        'Pernambuco': 'PE', 'Piauí': 'PI', 'Rio de Janeiro': 'RJ', 'Rio Grande do Norte': 'RN',
+        'Rio Grande do Sul': 'RS', 'Rondônia': 'RO', 'Roraima': 'RR', 'Santa Catarina': 'SC',
+        'São Paulo': 'SP', 'Sergipe': 'SE', 'Tocantins': 'TO'
+      };
+
+      const dadosPorEstado = {
+        'AC': { kpi1: 78.5, kpi2: 'Administração', kpi3: 76.3, kpi4: 350 },
+        'AL': { kpi1: 72.3, kpi2: 'Direito', kpi3: 74.9, kpi4: 430 },
+        'AM': { kpi1: 80.1, kpi2: 'Engenharia Civil', kpi3: 81.0, kpi4: 600 },
+        'AP': { kpi1: 75.2, kpi2: 'Pedagogia', kpi3: 78.2, kpi4: 370 },
+        'BA': { kpi1: 70.6, kpi2: 'Enfermagem', kpi3: 72.5, kpi4: 890 },
+        'CE': { kpi1: 76.8, kpi2: 'Medicina', kpi3: 75.1, kpi4: 760 },
+        'DF': { kpi1: 85.5, kpi2: 'Relações Internacionais', kpi3: 84.2, kpi4: 980 },
+        'ES': { kpi1: 83.1, kpi2: 'Ciência da Computação', kpi3: 81.3, kpi4: 740 },
+        'GO': { kpi1: 80.0, kpi2: 'Direito', kpi3: 77.0, kpi4: 560 },
+        'MA': { kpi1: 68.4, kpi2: 'Serviço Social', kpi3: 70.8, kpi4: 490 },
+        'MG': { kpi1: 84.0, kpi2: 'Engenharia de Produção', kpi3: 82.0, kpi4: 970 },
+        'MS': { kpi1: 82.3, kpi2: 'Zootecnia', kpi3: 79.9, kpi4: 510 },
+        'MT': { kpi1: 81.7, kpi2: 'Agronomia', kpi3: 80.5, kpi4: 500 },
+        'PA': { kpi1: 74.6, kpi2: 'Educação Física', kpi3: 75.2, kpi4: 660 },
+        'PB': { kpi1: 77.4, kpi2: 'Psicologia', kpi3: 76.1, kpi4: 410 },
+        'PE': { kpi1: 78.8, kpi2: 'Odontologia', kpi3: 77.3, kpi4: 590 },
+        'PI': { kpi1: 75.5, kpi2: 'História', kpi3: 74.5, kpi4: 420 },
+        'PR': { kpi1: 86.2, kpi2: 'Engenharia de Software', kpi3: 83.7, kpi4: 960 },
+        'RJ': { kpi1: 81.0, kpi2: 'Publicidade e Propaganda', kpi3: 79.1, kpi4: 1040 },
+        'RN': { kpi1: 79.3, kpi2: 'Fisioterapia', kpi3: 77.5, kpi4: 440 },
+        'RO': { kpi1: 76.1, kpi2: 'Ciências Contábeis', kpi3: 75.9, kpi4: 390 },
+        'RR': { kpi1: 74.8, kpi2: 'Letras', kpi3: 73.2, kpi4: 340 },
+        'RS': { kpi1: 85.0, kpi2: 'Arquitetura e Urbanismo', kpi3: 83.1, kpi4: 940 },
+        'SC': { kpi1: 88.3, kpi2: 'Engenharia Mecânica', kpi3: 85.0, kpi4: 910 },
+        'SE': { kpi1: 73.9, kpi2: 'Biomedicina', kpi3: 74.0, kpi4: 380 },
+        'SP': { kpi1: 87.5, kpi2: 'ADS', kpi3: 86.2, kpi4: 1200 },
+        'TO': { kpi1: 75.7, kpi2: 'Tecnologia da Informação', kpi3: 76.8, kpi4: 360 }
+      };
+
+
+      Highcharts.mapChart('container', {
+        chart: {
+          map: topology,
+          backgroundColor: '#fafafa'
+        },
+
+        title: {
+          text: 'Mapa do Brasil (Clique nos estados para estatísticas)'
+        },
+
+        subtitle: {
+          text: 'Estatísticas educacionais'
+        },
+
+        colorAxis: {
+          min: 0,
+          max: 1,
+          stops: [[0, '#993333']]
+        },
+
+        series: [{
+          data: data,
+          joinBy: 'hc-key',
+          name: 'Estados',
+          states: {
+            hover: {
+              backgroundColor: '#fafafa',
+              color: '#800000'
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            formatter: function () {
+              return siglasEstados[this.point.name] || '';
+            },
+            style: {
+              fontSize: '14px',
+              fontWeight: 'bold',
+              color: '#fafafa',
+              textOutline: 'none'
+            }
+          },
+          tooltip: {
+            enabled: true,
+            formatter: function () {
+              return 'Clique aqui';
+            }
+          },
+          borderColor: '#ffffff',
+          borderWidth: 0.1,
+
+          point: {
+            events: {
+              click: function () {
+                blockDescription.forEach(el => el.style.display = 'block');
+                const estadoNome = this.name;
+                const estadoSigla = siglasEstados[estadoNome];
+
+                const dados = dadosPorEstado[estadoSigla];
+                if (dados) {
+                  valor1.innerText = dados.kpi1 + '%';
+                  valor2.innerText = dados.kpi2;
+                  valor3.innerText = dados.kpi3 + '%';
+                  valor4.innerText = dados.kpi4;
+                }
+              }
+            }
+          }
+        }]
+      });
+    })();
+
+  })
+
 </script>
