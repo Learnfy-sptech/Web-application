@@ -46,6 +46,13 @@ header {
     color: var(--color-neutral-1);
 }
 
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px; 
+}
+
+
 #mobile_btn {
     display: none;
 }

@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @import url(styles.css);
+
+
 * {
   font-family: 'Poppins', sans-serif;
   font-size: 1.05rem;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
-
 
 .main-content {
   flex-grow: 1;

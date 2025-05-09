@@ -89,35 +89,37 @@ section {
 
 .main ul {
     padding-right: 2rem;
-    padding-top: 6rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     list-style: none;
 }
 
-.main li {
-    padding: 8px;
-    width: 100%;
-    border-radius: 5px;
-}
-
-.main a {
+.main ul a {
     cursor: pointer;
     text-decoration: none;
     color: var(--color-primary-1);
-    transition: color 0.2s ease-in-out;
-}
-
-.main a:hover {
-    color: var(--color-neutral-1);
-}
-
-.main li:hover {
+    transition: color 0.6s ease, transform 0.6s ease;
+  }
+  
+  .main ul a:hover {
+    color: #a1a1a1;
+    transform: translateX(4px);
+  }
+  
+  .main li {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+  }
+  
+  .main li:hover {
     background-color: var(--color-primary-5);
-    transition: ease-in 0.2s;
-    width: 100;
-}
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+  
 
 .icon-link {
     display: flex;
@@ -139,8 +141,21 @@ section {
     gap: 8px;
     padding-left: 30px;
     margin-bottom: 30px;
-    color: var(--color-primary-1);
 }
+
+.log-out a {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    padding: 5px;
+    text-decoration: none;
+    color: var(--color-primary-1);
+  }
+  
+  .log-out a:hover {
+    background-color: var(--color-primary-5);
+    color: #a1a1a1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
 
 .log-out:hover {
     color: var(--color-neutral-1);

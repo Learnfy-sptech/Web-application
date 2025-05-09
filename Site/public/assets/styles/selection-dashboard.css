@@ -1,32 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @import url(styles.css);
 
-* {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.05rem;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    box-sizing: border-box;
-}
 
-.main-content {
-    flex-grow: 1;
-    overflow: hidden;
-    width: 100%;
-    height: 100vh;
-    background-color: #ffffff;
-    overflow-y: hidden;
-  }
-
-  .main-section {
-    gap: 32px;
-    display: flex;
-    height: 100%;
-    overflow-y: auto;
-  }
-
-.cards {
+  .cards {
     margin-top: 10%;
     margin-left: 5%;
     width: 100%;
@@ -35,93 +11,73 @@
     display: -webkit-flex;
     justify-content: center;
     -webkit-justify-content: center;
-}
+    gap: 32px;
+    flex-wrap: wrap;
+    font-family: 'Segoe UI', sans-serif;
+  }
 
-.card--1 .card__img,
-.card--1 .card__img--hover {
-    background-image: url('https://img.freepik.com/free-photo/location-symbol-with-landscape-background_23-2149906278.jpg?uid=R70681073&ga=GA1.1.1221188558.1741086998&semt=ais_hybrid&w=740');
-}
-
-.card--2 .card__img,
-.card--2 .card__img--hover {
-    background-image: url('https://img.freepik.com/premium-photo/close-up-teamwork-member-hand-shake_35752-1776.jpg?uid=R70681073&ga=GA1.1.1221188558.1741086998&semt=ais_hybrid&w=740');
-}
-
-.card__img {
-    visibility: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-
-}
-
-.card__info-hover {
-    position: fixed;
-    padding: 16px;
-    width: 100%;
-}
-
-.card__img--hover {
-    transition: 0.3s all ease-out;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    position: absolute;
-    height: 405px;
-    top: 0;
-
-}
-
-.card {
-    margin-right: 5%;
-    transition: all .5s cubic-bezier(0.175, 0.885, 0, 1);
-    background-color: #fff;
-    width: 40%;
+  .card {
     position: relative;
-    border-radius: 1px;
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover {
-    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
-    transform: scale(1.10, 1.10);
-}
-
-.card__info {
-    background-color: #fff;
-    padding: 16px 24px 24px 24px;
-}
-
-.card__category {
-    font-family: 'Poppins', sans-serif;
-    text-transform: uppercase;
-    font-size: 15px;
-    letter-spacing: 2px;
-    font-weight: 500;
-    color: #aa9542;
-}
-
-.card__title {
-    margin-top: 5px;
-    margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif;
-    color: #AD7D52;
-}
-
-.card:hover .card__img--hover {
+    background-color: #000;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    opacity: 0.9;
-}
-
-.card:hover .card__info {
-    background-color: transparent;
-    position: relative;
-}
-
-.card:hover .card__info-hover {
-    opacity: 1;
-}
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.55);
+    transition: filter 0.3s ease;
+  }
+  
+  .card:hover .card__img {
+    filter: brightness(0.75);
+  }
+  
+  .card i {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 1.2rem;
+    color: white;
+    z-index: 999;
+  }
+  
+  .card__info {
+    position: absolute;
+    bottom: 0;
+    padding: 24px;
+    z-index: 2;
+    color: white;
+  }
+  
+  .card__category {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    color: #e3e3e3;
+    margin-bottom: 8px;
+  }
+  
+  .card__title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+  }
+  
