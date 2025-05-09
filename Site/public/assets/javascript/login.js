@@ -62,7 +62,7 @@ function logar() {
           if (emailVar.includes("@learnfy")) {
             window.location = "import.html";
           } else {
-            window.location = "dashboard.html";
+            window.location = "selection-dashboard.html";
           }
         }, 2000);
       });
