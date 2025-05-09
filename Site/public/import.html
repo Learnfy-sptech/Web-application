@@ -4,67 +4,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/styles/import.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+  <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <title>Learnfy - Importação de arquivos</title>
 </head>
 
 <body>
-    <div class="tab-container">
-        <div class="tab-buttons">
-            <button class="tab-button active" onclick="showTab('importar')">Importar Arquivo</button>
-            <button class="tab-button" onclick="showTab('logs')">Ver Logs</button>
-        </div>
-
-        <div id="importar" class="tab-content active">
-            <form id="uploadForm" enctype="multipart/form-data">
-                <img src="assets/images/PretoSemTexto.png" alt="Logo Learnfy" />
-                <h2>Enviar Arquivo para S3</h2>
-                <input type="text" id="title" name="title" placeholder="Título do arquivo" required>
-                <div class="file-input-container">
-                    <label for="file" class="file-input-label">
-                        Selecione um arquivo
-                        <span>Clique para procurar ou arraste o arquivo</span>
-                    </label>
-                    <input type="file" id="file" name="file" required>
-                    <div id="fileNameDisplay" style="margin-top: 8px; font-size: 14px; color: #666;"></div>
-                </div>
-                <label for="tipoDado">Tipo de Dado:</label>
-                <select id="tipoDado" name="tipoDado" required>
-                    <option value="">Selecione o tipo</option>
-                    <option value="dados_cursos">Cursos</option>
-                    <option value="dados_empregabilidade">Empregabilidade</option>
-                </select>
-                <button type="submit">Enviar Arquivo</button>
-            </form>
-        </div>
-        <div id="logs" class="tab-content">
-            <div class="logs-box">
-                <h2>Logs de Processamento</h2>
-                <div class="logs-table-wrapper">
-                    <table id="logsTable">
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Arquivo</th>
-                                <th>Processador</th>
-                                <th>Status</th>
-                                <th>Mensagem</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <div class="pagination">
-                    <button id="prevPage">Anterior</button>
-                    <span id="paginaAtual">Página 1</span>
-                    <button id="nextPage">Próxima</button>
+    <div class="main">
+        <div class="side-bar">
+            <div class="menu">
+              <a href="index.html">
+                <img src="./assets/images/BrancoComTexto.png" alt="Logo Learnfy" />
+              </a>
+              <ul>
+      
+                <li>
+      
+                  <a href="index.html" style="display: flex; flex-direction: column;" class="icon-link">
+                    <img src="./assets/images/no-user-image.gif" alt="" id="avatar">
+                    <span>Olá adauto! <i class='bx bx-pencil'></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html" class="icon-link" onclick="clear()">
+                    <i class='bx bx-home-alt-2'></i>
+                    <span>Home</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="edit-person.html" class="icon-link">
+                    <i class='bx bx-user'></i>
+                    <span>Perfil</span>
+                  </a>
+                </li>
+      
+      
+                <li>
+                  <a href="selection-dashboard.html" class="icon-link">
+                    <i class='bx bx-line-chart'></i>
+                    <span>Dashboards</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="import.html" class="icon-link">
+                    <i class='bx bx-id-card'></i>
+                    <span>Gestão</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+      
+            <div class="log-out">
+              <div class="help-item icon-link">
+                <a href="">
+                  <i class='bx bx-help-circle'></i>
+                  <span>Ajuda</span>
+                </a>
+              </div>
+              <div class="out-item icon-link">
+                <a href="">
+                  <i class='bx bx-log-out log-out-item'></i>
+                  <a href="index.html" onclick="clear()">
+                    <span>Sair</span>
+                  </a>
+      
+                </a>
+              </div>
+            </div>
+          </div>
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTab('importar')">Importar Arquivo</button>
+                <button class="tab-button" onclick="showTab('logs')">Ver Logs</button>
+            </div>
+    
+            <div id="importar" class="tab-content active">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <img src="assets/images/PretoSemTexto.png" alt="Logo Learnfy" />
+                    <h2>Enviar Arquivo para S3</h2>
+                    <input type="text" id="title" name="title" placeholder="Título do arquivo" required>
+                    <div class="file-input-container">
+                        <label for="file" class="file-input-label">
+                            Selecione um arquivo
+                            <span>Clique para procurar ou arraste o arquivo</span>
+                        </label>
+                        <input type="file" id="file" name="file" required>
+                        <div id="fileNameDisplay" style="margin-top: 8px; font-size: 14px; color: #666;"></div>
+                    </div>
+                    <label for="tipoDado">Tipo de Dado:</label>
+                    <select id="tipoDado" name="tipoDado" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="dados_cursos">Cursos</option>
+                        <option value="dados_empregabilidade">Empregabilidade</option>
+                    </select>
+                    <button type="submit">Enviar Arquivo</button>
+                </form>
+            </div>
+            <div id="logs" class="tab-content">
+                <div class="logs-box">
+                    <h2>Logs de Processamento</h2>
+                    <div class="logs-table-wrapper">
+                        <table id="logsTable">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Arquivo</th>
+                                    <th>Processador</th>
+                                    <th>Status</th>
+                                    <th>Mensagem</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <button id="prevPage">Anterior</button>
+                        <span id="paginaAtual">Página 1</span>
+                        <button id="nextPage">Próxima</button>
+                    </div>
                 </div>
             </div>
         </div>
+    
     </div>
 
+</body>
+
+</html>
+    
     <script>
         // Mostrar nome do arquivo quando selecionado
         document.getElementById("file").addEventListener("change", function () {
@@ -249,6 +320,3 @@
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
-
-</html>
