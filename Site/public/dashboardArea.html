@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
-<body>
+<body onload="inicializarCards()">
   <div class="main">
     <div class="side-bar">
       <div class="menu">
@@ -93,22 +93,22 @@
         <div class="kpi">
           <span class="kpi-title">Taxa de conclusão no curso selecionado</span>
           <div class="data-info">
-            <span id="kpi-conclusao">%</span><br>
-            Taxa de concluentes
+            <span id="kpi-conclusao">Selecione uma área</span><br>
+            <p class="apear">Taxa de concluentes</p>
           </div>
         </div>
         <div class="kpi">
           <span class="kpi-title">Terminaram o curso mas estão empregados</span>
           <div class="data-info">
-            <span id="kpi-empregados">%</span><br>
-            dos alunos que terminaram o curso e estão empregados na área
+            <span id="kpi-empregados">Selecione uma área</span><br>
+            <p class="apear">dos alunos que terminaram o curso e estão empregados na área</p>
           </div>
         </div>
         <div class="kpi">
           <span class="kpi-title">Terminaram o curso mas <strong>NÃO</strong> estão empregados</span>
           <div class="data-info">
-            <span id="kpi-desempregados">%</span><br>
-            dos alunos não estão desempregados na área
+            <span id="kpi-desempregados">Selecione uma área</span><br>
+            <p class="apear">dos alunos não estão desempregados na área</p>
           </div>
         </div>
 
@@ -120,7 +120,7 @@
           <figure class="highcharts-line-figure">
             <div id="container-line"></div>
             <p class="highcharts-line-description">
-              This chart shows how data labels can be added to the data series.
+              Este gráfico mostra o números de inscrições em todo brasil seguindo a área selecionada
             </p>
           </figure>
         </div>
@@ -129,8 +129,7 @@
           <figure class="highcharts-bar-figure">
             <div id="container-bar"></div>
             <p class="highcharts-bar-description">
-              A basic column chart comparing estimated corn and wheat production
-              in some countries.
+             Este gráfico mostra a taxa de evasão e interesse futuro no área selecionada
             </p>
           </figure>
         </div>
@@ -152,6 +151,12 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <script>
+const blockDescription = document.querySelectorAll('.apear');
+  function inicializarCards() {
+      blockDescription.forEach(el => el.style.display = 'none');
+    
+      return true; 
+    }
   document.addEventListener('DOMContentLoaded', function () {
     const kpiData = {
       ti: { conclusao: '91%', empregados: '45%', desempregados: '55%', lineData: [200, 220, 250, 300, 330, 350, 360, 370, 390, 410, 430, 450], barData: [50, 70, 60, 80, 55, 65] },
@@ -162,6 +167,7 @@
     };
 
     const select = document.getElementById('search-bar');
+
     let lineChart = null;
     let barChart = null;
 
@@ -186,12 +192,17 @@
       barChart.series[1].setData(data.barData.map(val => val * 0.6));
     }
 
-    select.addEventListener('change', function () {
-      const selectedArea = this.value;
-      updateKpis(selectedArea);
-      updateLineChart(selectedArea);
-      updateBarChart(selectedArea);
-    });
+    function onAreaChange(event) {
+      blockDescription.forEach(el => el.style.display = 'block');
+      const selectedArea = event.target.value;
+      if (kpiData[selectedArea]) {
+        updateKpis(selectedArea);
+        updateLineChart(selectedArea);
+        updateBarChart(selectedArea);
+      }
+    }
+
+    select.addEventListener('change', onAreaChange);
 
     lineChart = Highcharts.chart('container-line', {
       chart: { type: 'line' },
@@ -207,7 +218,7 @@
 
     barChart = Highcharts.chart('container-bar', {
       chart: { type: 'column' },
-      title: { text: 'Taxa de evasão (Ano)' },
+      title: { text: 'Taxa de evasão / Interesse futuro (Ano)' },
       xAxis: { categories: ['SP', 'RJ', 'MG', 'RS', 'BA', 'PR'], crosshair: true },
       yAxis: { min: 0, title: { text: 'Alunos' } },
       series: [{

@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="./assets/styles/dashboard.css" />
 </head>
 
-<body>
+<body onload="inicializarCards()">
   <div class="main">
     <div class="side-bar">
       <div class="menu">
@@ -22,11 +22,11 @@
           <img src="./assets/images/BrancoComTexto.png" alt="Logo Learnfy" />
         </a>
         <ul>
-            <a href="index.html" style="display: flex; flex-direction: column;" class="icon-link">
-              <img src="./assets/images/user.png" alt="Foto de Perfil" id="avatar">
-              <span>Olá, <b>Usuário</b> <i class="fas fa-pen"></i></span>
-            </a>
-            <br>
+          <a href="index.html" style="display: flex; flex-direction: column;" class="icon-link">
+            <img src="./assets/images/user.png" alt="Foto de Perfil" id="avatar">
+            <span>Olá, <b>Usuário</b> <i class="fas fa-pen"></i></span>
+          </a>
+          <br>
           <li>
             <a href="index.html" class="icon-link" onclick="clear()">
               <i class="fas fa-home"></i>
@@ -64,8 +64,8 @@
         <div class="out-item icon-link">
           <a href="index.html" onclick="clear()">
             <i class="fas fa-sign-out-alt"></i>
-              <span>Sair</span>
-            </a>
+            <span>Sair</span>
+          </a>
           </a>
         </div>
       </div>
@@ -79,18 +79,17 @@
             <div class="kpi-section">
               <div class="kpi-container">
                 <div class="kpi">
-                  <span class="kpi-title">Taxa de Retenção de Alunos no Semestre</span>
+                  <span class="kpi-title">Taxa total de evasão do ensino superior</span>
                   <div class="data-info">
-                    <span id="valor1">82%</span><br>
-                    dos alunos continuam matriculados após o semestre letivo
+                    <span id="valor1">Selecione um estado</span><br>
+                    <p class="apear">dos alunos <strong>NÃO </strong>completam os cursos iniciados</p>
                   </div>
                 </div>
 
                 <div class="kpi">
-                  <span class="kpi-title">Alunos com Desempenho Crítico</span>
+                  <span class="kpi-title">Taxa de retenção de alunos por curso com maior procura no Brasil </span>
                   <div class="data-info">
-                    <span id="valor2">125</span><br>
-                    estudantes com média inferior a 6.0 no período
+                    <span id="valor2">Selecione um estado</span><br>
                   </div>
                 </div>
               </div>
@@ -99,16 +98,16 @@
                 <div class="kpi">
                   <span class="kpi-title">Taxa de Retenção Regional</span>
                   <div class="data-info">
-                    <span id="valor3">78%</span><br>
-                    permanência média de alunos nas regiões analisadas
+                    <span id="valor3">Selecione um estado</span><br>
+                    <p class="apear">permanência média de alunos nas regiões analisadas</p>
                   </div>
                 </div>
 
                 <div class="kpi">
-                  <span class="kpi-title">Inscrição em Cursos Superiores</span>
+                  <span class="kpi-title">Inscrições em Cursos Superiores</span>
                   <div class="data-info">
-                    <span id="valor4">315</span><br>
-                    novas matrículas registradas no último mês
+                    <span id="valor4">Selecione um estado</span><br>
+                    <p class="apear">novas matrículas registradas no último mês</p>
                   </div>
                 </div>
               </div>
@@ -132,14 +131,21 @@
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="./assets/javascript/dashboard.js"></script>
 <script>
-  Highcharts.chart('container-bar', {
+  const blockDescription = document.querySelectorAll('.apear');
+  function inicializarCards() {
+    console.log('inicializei')
+      blockDescription.forEach(el => el.style.display = 'none');
+    
+      return true; 
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      Highcharts.chart('container-bar', {
     chart: {
       type: 'column'
     },
     title: {
-      text: 'Inscritos no ENEM por Capitais no ano de 2024'
+      text: 'Taxa de evasão por estados em 2024'
     },
-
     xAxis: {
       type: 'category',
       labels: {
@@ -153,42 +159,49 @@
     yAxis: {
       min: 0,
       title: {
-        text: 'Inscritos (milhares)'
+        text: 'Taxa de evasão (%)'
+      },
+      labels: {
+        format: '{value}%'
       }
     },
     legend: {
       enabled: false
     },
+    tooltip: {
+      pointFormat: 'Taxa: <b>{point.y:.1f}%</b>'
+    },
     series: [{
-      name: 'Inscritos',
-      colors: [
-        '#800000'
-      ],
+      name: 'Taxa de evasão',
+      colors: ['#800000'],
       colorByPoint: true,
       groupPadding: 0,
       data: [
-        ['São Paulo', 33230],
-        ['Rio de Janeiro', 24275],
-        ['Belo Horizonte', 19080],
-        ['Brasília', 27460],
-        ['Salvador', 16510],
-        ['Curitiba', 15451],
-        ['Fortaleza', 19901],
-        ['Manaus', 13820],
-        ['Recife', 13203],
-        ['Porto Alegre', 12503],
-        ['Goiânia', 11801],
-        ['Belém', 10901],
-        ['Campinas', 9810],
-        ['São Luís', 19110],
-        ['Maceió', 11850],
-        ['Natal', 9790],
-        ['Teresina', 14570],
-        ['João Pessoa', 14100],
-        ['Cuiabá', 13660],
-        ['Aracaju', 13620]
-
-      ]
+        ['São Paulo', 33.2],
+        ['Rio de Janeiro', 24.3],
+        ['Belo Horizonte', 19.1],
+        ['Brasília', 27.5],
+        ['Salvador', 16.5],
+        ['Curitiba', 15.5],
+        ['Fortaleza', 19.9],
+        ['Manaus', 13.8],
+        ['Recife', 13.2],
+        ['Porto Alegre', 12.5],
+        ['Goiânia', 11.8],
+        ['Belém', 10.9],
+        ['Campinas', 9.8],
+        ['São Luís', 19.1],
+        ['Maceió', 11.9],
+        ['Natal', 9.8],
+        ['Teresina', 14.6],
+        ['João Pessoa', 14.1],
+        ['Cuiabá', 13.7],
+        ['Aracaju', 13.6]
+      ],
+      dataLabels: {
+        enabled: true,
+        format: '{point.y:.1f}%'
+      }
     }]
   });
   (async () => {
@@ -216,34 +229,35 @@
     };
 
     const dadosPorEstado = {
-      'AC': { kpi1: 78.5, kpi2: 1200, kpi3: 76.3, kpi4: 350 },
-      'AL': { kpi1: 72.3, kpi2: 1800, kpi3: 74.9, kpi4: 430 },
-      'AM': { kpi1: 80.1, kpi2: 950, kpi3: 81.0, kpi4: 600 },
-      'AP': { kpi1: 75.2, kpi2: 1100, kpi3: 78.2, kpi4: 370 },
-      'BA': { kpi1: 70.6, kpi2: 2500, kpi3: 72.5, kpi4: 890 },
-      'CE': { kpi1: 76.8, kpi2: 2100, kpi3: 75.1, kpi4: 760 },
-      'DF': { kpi1: 85.5, kpi2: 700, kpi3: 84.2, kpi4: 980 },
-      'ES': { kpi1: 83.1, kpi2: 650, kpi3: 81.3, kpi4: 740 },
-      'GO': { kpi1: 80.0, kpi2: 1300, kpi3: 77.0, kpi4: 560 },
-      'MA': { kpi1: 68.4, kpi2: 2400, kpi3: 70.8, kpi4: 490 },
-      'MG': { kpi1: 84.0, kpi2: 900, kpi3: 82.0, kpi4: 970 },
-      'MS': { kpi1: 82.3, kpi2: 820, kpi3: 79.9, kpi4: 510 },
-      'MT': { kpi1: 81.7, kpi2: 910, kpi3: 80.5, kpi4: 500 },
-      'PA': { kpi1: 74.6, kpi2: 1700, kpi3: 75.2, kpi4: 660 },
-      'PB': { kpi1: 77.4, kpi2: 1150, kpi3: 76.1, kpi4: 410 },
-      'PE': { kpi1: 78.8, kpi2: 1400, kpi3: 77.3, kpi4: 590 },
-      'PI': { kpi1: 75.5, kpi2: 1250, kpi3: 74.5, kpi4: 420 },
-      'PR': { kpi1: 86.2, kpi2: 800, kpi3: 83.7, kpi4: 960 },
-      'RJ': { kpi1: 81.0, kpi2: 1500, kpi3: 79.1, kpi4: 1040 },
-      'RN': { kpi1: 79.3, kpi2: 1080, kpi3: 77.5, kpi4: 440 },
-      'RO': { kpi1: 76.1, kpi2: 990, kpi3: 75.9, kpi4: 390 },
-      'RR': { kpi1: 74.8, kpi2: 1050, kpi3: 73.2, kpi4: 340 },
-      'RS': { kpi1: 85.0, kpi2: 890, kpi3: 83.1, kpi4: 940 },
-      'SC': { kpi1: 88.3, kpi2: 720, kpi3: 85.0, kpi4: 910 },
-      'SE': { kpi1: 73.9, kpi2: 1020, kpi3: 74.0, kpi4: 380 },
-      'SP': { kpi1: 87.5, kpi2: 1600, kpi3: 86.2, kpi4: 1200 },
-      'TO': { kpi1: 75.7, kpi2: 980, kpi3: 76.8, kpi4: 360 }
+      'AC': { kpi1: 78.5, kpi2: 'Administração', kpi3: 76.3, kpi4: 350 },
+      'AL': { kpi1: 72.3, kpi2: 'Direito', kpi3: 74.9, kpi4: 430 },
+      'AM': { kpi1: 80.1, kpi2: 'Engenharia Civil', kpi3: 81.0, kpi4: 600 },
+      'AP': { kpi1: 75.2, kpi2: 'Pedagogia', kpi3: 78.2, kpi4: 370 },
+      'BA': { kpi1: 70.6, kpi2: 'Enfermagem', kpi3: 72.5, kpi4: 890 },
+      'CE': { kpi1: 76.8, kpi2: 'Medicina', kpi3: 75.1, kpi4: 760 },
+      'DF': { kpi1: 85.5, kpi2: 'Relações Internacionais', kpi3: 84.2, kpi4: 980 },
+      'ES': { kpi1: 83.1, kpi2: 'Ciência da Computação', kpi3: 81.3, kpi4: 740 },
+      'GO': { kpi1: 80.0, kpi2: 'Direito', kpi3: 77.0, kpi4: 560 },
+      'MA': { kpi1: 68.4, kpi2: 'Serviço Social', kpi3: 70.8, kpi4: 490 },
+      'MG': { kpi1: 84.0, kpi2: 'Engenharia de Produção', kpi3: 82.0, kpi4: 970 },
+      'MS': { kpi1: 82.3, kpi2: 'Zootecnia', kpi3: 79.9, kpi4: 510 },
+      'MT': { kpi1: 81.7, kpi2: 'Agronomia', kpi3: 80.5, kpi4: 500 },
+      'PA': { kpi1: 74.6, kpi2: 'Educação Física', kpi3: 75.2, kpi4: 660 },
+      'PB': { kpi1: 77.4, kpi2: 'Psicologia', kpi3: 76.1, kpi4: 410 },
+      'PE': { kpi1: 78.8, kpi2: 'Odontologia', kpi3: 77.3, kpi4: 590 },
+      'PI': { kpi1: 75.5, kpi2: 'História', kpi3: 74.5, kpi4: 420 },
+      'PR': { kpi1: 86.2, kpi2: 'Engenharia de Software', kpi3: 83.7, kpi4: 960 },
+      'RJ': { kpi1: 81.0, kpi2: 'Publicidade e Propaganda', kpi3: 79.1, kpi4: 1040 },
+      'RN': { kpi1: 79.3, kpi2: 'Fisioterapia', kpi3: 77.5, kpi4: 440 },
+      'RO': { kpi1: 76.1, kpi2: 'Ciências Contábeis', kpi3: 75.9, kpi4: 390 },
+      'RR': { kpi1: 74.8, kpi2: 'Letras', kpi3: 73.2, kpi4: 340 },
+      'RS': { kpi1: 85.0, kpi2: 'Arquitetura e Urbanismo', kpi3: 83.1, kpi4: 940 },
+      'SC': { kpi1: 88.3, kpi2: 'Engenharia Mecânica', kpi3: 85.0, kpi4: 910 },
+      'SE': { kpi1: 73.9, kpi2: 'Biomedicina', kpi3: 74.0, kpi4: 380 },
+      'SP': { kpi1: 87.5, kpi2: 'ADS', kpi3: 86.2, kpi4: 1200 },
+      'TO': { kpi1: 75.7, kpi2: 'Tecnologia da Informação', kpi3: 76.8, kpi4: 360 }
     };
+
 
     Highcharts.mapChart('container', {
       chart: {
@@ -299,6 +313,7 @@
         point: {
           events: {
             click: function () {
+              blockDescription.forEach(el => el.style.display = 'block');
               const estadoNome = this.name;
               const estadoSigla = siglasEstados[estadoNome];
 
@@ -316,4 +331,6 @@
     });
   })();
 
+    })
+  
 </script>

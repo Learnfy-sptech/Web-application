@@ -76,7 +76,9 @@ header{
   margin: 0 auto;
 }
 
-
+#container-bar{
+  padding: 8px;
+}
 
 .loading {
   margin-top: 10em;
@@ -89,7 +91,7 @@ header{
   flex-wrap: wrap;
   width: 100%;
   gap: 16px;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
 }
 
 .kpi-section{
