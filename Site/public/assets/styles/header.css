@@ -40,7 +40,10 @@ header {
 
 .nav-item.active a {
     color: var(--color-neutral-1);
-    border-bottom: 3px solid var(--color-primary-4);
+}
+
+.nav-item:hover a {
+    color: var(--color-neutral-1);
 }
 
 #mobile_btn {
