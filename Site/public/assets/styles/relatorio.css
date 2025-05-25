@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url(styles.css);
+
+* {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.05rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.relatorio-general {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3%;
+    font-weight: 550;
+}
+
+.meus-relatorios {
+    overflow-y: auto;
+    width: 95%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3%;
+    padding: 1%;
+    overflow-y: auto;
+}
+
+.relatorio {
+    width: 100%;
+    height: 33%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5%;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1);
+}
+
+.finally-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 95%;
+    height: 15%;
+    padding: 2.5%;
+    padding-right: 0;
+}
+
+.finally-button button {
+    border-radius: 10px;
+    border: 0;
+    padding: 1%;
+    background-color: #993333;
+    color: white;
+    font-weight: 500;
+}
+
+.sessao-relatorio {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1.5%;
+}
+
+.sessao-01 {
+    height: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sessao-relatorio div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sessao-01 div p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+.img-edit-relatorio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
+    width: auto;
+}
+
+.img-edit-relatorio img {
+    width: 22px;
+    height: 22px;
+}
+
+.sessao-02, .sessao-03 {
+    justify-content: space-between;
+    height: 25%;
+}
+
+.sessao-02 p, span {
+    font-size: 15px;
+    margin: 0;
+}
+
+.sessao-03 p, span {
+    font-size: 15px;
+    margin: 0;
+}
+
+.sessao-03 button {
+    height: 100%;
+    border: 0;
+    padding: 1.5%;
+    background-color: #993333;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px; /* ← Aqui! */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+
