@@ -1,15 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 @import url(styles.css);
 
-* {
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  margin: 0;
-  background-color: #f5f6fa;
-  color: #333;
+.home-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 2rem;
+  overflow: hidden;
+  background-color: #ffffff;
 }
 
 .edit-profile-container {
@@ -102,14 +101,4 @@ body {
 
 .btn-default:hover {
   background-color: var(--color-primary-5);
-}
-
-.home-section {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100vh;
-  padding-top: 2rem;
-  overflow: hidden;
-  background-color: #f9f9f9;
 }
