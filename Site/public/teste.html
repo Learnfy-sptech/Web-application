@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edição de perfil - Learnfy</title>
-  <link rel="stylesheet" href="./assets/styles/edit-person.css">
+  <link rel="stylesheet" href="assets/styles/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon" />
+  <title>Document</title>
 </head>
+
 <body>
-  <body>
   <div class="sidebar">
     <div class="logo-details">
       <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
@@ -92,41 +92,39 @@
     </ul>
   </div>
 
-   
   <section class="home-section">
-  <div class="edit-profile-container">
-  <div class="text">Tela de Edição de Perfil</div>
-
-    <div class="profile-picture">
-      <img src="./assets/images/user.png" alt="Foto de perfil" id="profileImage">
-      <input type="file" id="fileInput" accept="image/*">
-    </div>
-
-    <form class="edit-form">
-      <label for="name">Nome Completo</label>
-      <input type="text" id="name" placeholder="Digite seu nome completo">
-
-      <label for="accountType">Tipo de Conta</label>
-      <select id="accountType">
-        <option value="gestor">Gestor</option>
-        <option value="pesquisador">Pesquisador</option>
-        <option value="diretor">Diretor</option>
-      </select>
-
-      <label for="senha">Nova senha</label>
-      <input type="text" name="senha" id="password-change" placeholder="Digite sua nova senha">
-
-      <label for="senha">Confirme sua nova senha</label>
-      <input type="text" name="senha" id="confirm-password" placeholder="Digite sua nova senha novamente">
-
-      <button type="submit" class="btn-default">Salvar Alterações</button>
-    </form>
-  </div>
-</section>
-
-   
+    <div class="text">Dashboard</div>
+  </section>
 
 
-<script src="assets/javascript/sidebar.js"></script>
+  <style>
+    @import url('assets/styles/styles.css');
+    @import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap";
+
+
+    /* Paleta de Cores */
+    :root {
+      --color-primary-1: #fbf9f5;
+      --color-primary-2: #e6adad;
+      --color-primary-3: #cc8585;
+      --color-primary-4: #b35c5c;
+      --color-primary-5: #993333;
+      --color-primary-6: #800000;
+      --color-primary-7: #6d0000;
+
+      --color-neutral-0: #ffffff;
+      --color-neutral-1: #1d1d1d;
+      --color-neutral-2: #e9ecef;
+      --color-neutral-3: #adb5bd;
+    }
+
+
+  
+  </style>
+
+
+
+  <script src="assets/javascript/sidebar.js"></script>
+  
 </body>
 </html>
