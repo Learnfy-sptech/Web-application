@@ -2,11 +2,11 @@
 @import url(styles.css);
 
 * {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.05rem;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -30,7 +30,7 @@ main {
     justify-content: space-evenly;
     align-items: center;
     background-color: #f3f3f3;
-    border-radius:  10px
+    border-radius: 10px;
 }
 
 .titulo {
@@ -41,7 +41,13 @@ main {
     align-items: center;
     padding: 3%;
     margin-top: 2.5%;
-    font-weight: 550;
+}
+
+.titulo h2,
+.titulo input {
+    font-weight: 530;
+    font-size: 2.3em;
+    width: 38%;
 }
 
 .meus-relatorios {
@@ -82,7 +88,7 @@ main {
 }
 
 .finally-button button {
-    border-radius:  10px;
+    border-radius: 10px;
     border: 0;
     padding: 1%;
     background-color: #993333;
@@ -132,17 +138,20 @@ main {
     cursor: pointer;
 }
 
-.sessao-02, .sessao-03 {
+.sessao-02,
+.sessao-03 {
     justify-content: space-between;
     height: 25%;
 }
 
-.sessao-02 p, span {
+.sessao-02 p,
+span {
     font-size: 15px;
     margin: 0;
 }
 
-.sessao-03 p, span {
+.sessao-03 p,
+span {
     font-size: 15px;
     margin: 0;
 }
@@ -164,13 +173,13 @@ main {
 
 #info_relatorio .titulo {
     text-decoration: underline;
-    margin-bottom: 0;
+    position: relative;
 }
 
 .titulo img {
     width: 35px;
     height: 35px;
-    margin-left: 2%;
+    cursor: pointer;
 }
 
 .colunas {
@@ -209,7 +218,8 @@ main {
     gap: 1.1%;
 }
 
-.colunas-buttons input, button {
+.colunas-buttons input,
+button {
     padding: 1.3%;
     font-size: 1em;
     border: 0;
@@ -295,4 +305,29 @@ main {
     font-size: 0.83em;
     color: gray;
     font-style: oblique;
+}
+
+.pop-up {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.todas-colunas {
+    width: 35%;
+    height: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.desfoque {
+    filter: blur(5px);
+    pointer-events: none;
+    /* Impede interação com o fundo */
 }

@@ -76,9 +76,9 @@
                 <div class="navegacao">
                     <a href="" onclick="">Meus Relatórios</a>
                 </div>
-                <h2 class="titulo">
-                    Meus Relatórios
-                </h2>
+                <div class="titulo">
+                    <h2>Meus Relatórios</h2>
+                </div>
                 <div class="meus-relatorios">
                     <div class="relatorio">
                         <div class="sessao-relatorio sessao-01">
@@ -286,10 +286,12 @@
                     <a href="" onclick="trocarTela()">Meus Relatórios</a>/
                     <a href="" id="relatorio_atual">Novo Relatório</a>
                 </div>
-                <h2 class="titulo">
-                    Nome Relatório
-                    <img src="assets/images/edit-text.png" alt="">
-                </h2>
+                <div class="titulo">
+                    <input id="input_nome_relatorio" type="text"
+                        onblur="validarInputVazio('input_nome_relatorio','Nome do Relatório')"
+                        onclick="limparCampo('input_nome_relatorio')" value="Nome do Relatório">
+                    <img src="assets/images/edit-text.png" onclick="limparCampo('input_nome_relatorio')" alt="">
+                </div>
                 <div class="colunas">
                     <p class="subtitulo">Colunas</p>
                     <div class="colunas-buttons">
