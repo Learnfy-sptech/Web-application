@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @import url(styles.css);
 
+<<<<<<< HEAD
 * {
     font-family: 'Poppins', sans-serif;
     font-size: 1.05rem;
@@ -11,6 +12,13 @@
 
 body {
     overflow: hidden;
+=======
+
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
 }
 
 main {
@@ -25,11 +33,19 @@ main {
 .relatorio-general {
     width: 100%;
     height: 100%;
+<<<<<<< HEAD
+=======
+    margin-left: 250px;
+    padding: 2%;
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+<<<<<<< HEAD
     background-color: #f3f3f3;
+=======
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
     border-radius: 10px;
 }
 
@@ -43,6 +59,10 @@ main {
     margin-top: 2.5%;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
 .titulo h2,
 .titulo input {
     font-weight: 530;
@@ -253,6 +273,7 @@ button {
     align-items: flex-start;
     height: 55%;
     width: 95%;
+<<<<<<< HEAD
     border-radius: 10px;
     padding: 1%;
     gap: 1%;
@@ -283,6 +304,9 @@ button {
 
 .campos-selecionados .campo-div-selecao {
     background-color: white;
+=======
+    border-radius: 10px
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
 }
 
 .escolher-filtros {
@@ -316,11 +340,16 @@ button {
 
 .oculto {
     display: none;
+<<<<<<< HEAD
     visibility: hidden;
 }
 
 
 
+=======
+}
+
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
 .navegacao {
     display: flex;
     justify-content: flex-start;
@@ -335,8 +364,14 @@ button {
 
 .navegacao a {
     font-size: 0.83em;
+<<<<<<< HEAD
     color: gray;
     font-style: oblique;
+=======
+    color: rgb(0, 0, 0);
+    font-style: oblique;
+    white-space: nowrap;
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
 }
 
 .pop-up {
@@ -347,6 +382,7 @@ button {
     z-index: 9999;
 }
 
+<<<<<<< HEAD
 .todas-colunas-geral {
     width: 35%;
     height: 60%;
@@ -418,3 +454,21 @@ button {
     padding: 3%;
     font-size: 0.9em;
 }
+=======
+.todas-colunas {
+    width: 35%;
+    height: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.desfoque {
+    filter: blur(5px);
+    pointer-events: none;
+    /* Impede interação com o fundo */
+}
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd

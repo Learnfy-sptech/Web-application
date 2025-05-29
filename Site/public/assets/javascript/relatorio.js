@@ -31,6 +31,7 @@ function validarInputVazio(idElemento, texto) {
 }
 
 function abrirOuFecharTodasColunas() {
+<<<<<<< HEAD
     var elementoPai = document.getElementById('info_relatorio')
     elementoPai.classList.toggle('desfoque')
     var elementoColunas = document.getElementById('todas_colunas_geral')
@@ -85,6 +86,20 @@ function removerCampoNaDiv(id) {
     } else {
         console.log("Parâmetro errado na função 'removerCampoNaDiv(id)'")
     }
+=======
+    elemento = document.getElementById('todas_colunas')
+    elemento.classList.toggle('oculto')
+    elementoPai = document.getElementsByTagName("main")[0]
+    elemento.classList.toggle('desfoque')
+}
+
+function adicionarColuna(elemento) {
+
+}
+
+function removerColuna(elemento) {
+
+>>>>>>> b60375ecacc623710203cd11de39abc5ce65d0fd
 }
 
 var dadosColunasRelatorio = []

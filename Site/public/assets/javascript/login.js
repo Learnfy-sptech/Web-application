@@ -46,9 +46,12 @@ function logar() {
     })
   }).then(function (resposta) {
     if (resposta.ok) {
-      resposta.json().then(json => {
+      resposta.json().then(json => {        
         sessionStorage.EMAIL_USUARIO = json.email;
         sessionStorage.NOME_USUARIO = json.nome;
+        sessionStorage.ID_USUARIO = json.id;
+        sessionStorage.TIPO_CONTA = json.tipoConta;
+        sessionStorage.FOTO_USUARIO = json.foto_perfil_path 
   
         Swal.fire({
           title: "Login realizado com sucesso!",
