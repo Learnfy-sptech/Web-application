@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url(styles.css);
+
+
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.relatorio-general {
+    width: 100%;
+    height: 100%;
+    margin-left: 250px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.titulo {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3%;
+    margin-top: 2.5%;
+}
+
+
+.titulo h2,
+.titulo input {
+    font-weight: 530;
+    font-size: 2.3em;
+    width: 38%;
+}
+
+.meus-relatorios {
+    overflow-y: auto;
+    width: 95%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3%;
+    padding: 1%;
+    overflow-y: auto;
+    border: 4px solid #993333;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1);
+}
+
+.relatorio {
+    width: 100%;
+    height: 33%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5%;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1);
+}
+
+.finally-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 95%;
+    height: 15%;
+    padding: 2.5%;
+    padding-right: 0;
+    gap: 0.85%;
+}
+
+.finally-button button {
+    border-radius: 10px;
+    border: 0;
+    padding: 1%;
+    background-color: #993333;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sessao-relatorio {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1.5%;
+}
+
+.sessao-01 {
+    height: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sessao-relatorio div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sessao-01 div p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+.img-edit-relatorio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
+    width: auto;
+}
+
+.img-edit-relatorio img {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.sessao-02,
+.sessao-03 {
+    justify-content: space-between;
+    height: 25%;
+}
+
+.sessao-02 p,
+span {
+    font-size: 15px;
+    margin: 0;
+}
+
+.sessao-03 p,
+span {
+    font-size: 15px;
+    margin: 0;
+}
+
+.sessao-03 button {
+    height: 100%;
+    border: 0;
+    padding: 1.5%;
+    background-color: #993333;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#info_relatorio .titulo {
+    text-decoration: underline;
+    position: relative;
+}
+
+.titulo img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.colunas {
+    display: flex;
+    width: 95%;
+    height: 40%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5%;
+    margin-bottom: 1%;
+}
+
+.filtros {
+    display: flex;
+    width: 95%;
+    height: 25%;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subtitulo {
+    font-weight: 550;
+    font-size: 1.3em;
+    margin: 0;
+    width: 95%;
+}
+
+.colunas-buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 17%;
+    width: 95%;
+    gap: 1.1%;
+}
+
+.colunas-buttons input,
+button {
+    padding: 1.3%;
+    font-size: 1em;
+    border: 0;
+    width: auto;
+    height: 95%;
+}
+
+.colunas-buttons button {
+    background-color: #993333;
+    font-weight: 550;
+    width: auto;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colunas-buttons input {
+    background-color: white;
+    width: 40%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1);
+}
+
+.campos-selecionados {
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 55%;
+    width: 95%;
+    border-radius: 10px
+}
+
+.escolher-filtros {
+    width: 95%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filtro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+}
+
+.filtro p {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 3%;
+}
+
+.filtro select {
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.oculto {
+    display: none;
+}
+
+.navegacao {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.2%;
+    height: auto;
+    width: 95%;
+    margin-top: 1%;
+    margin-bottom: -3%;
+    padding: 0.7%;
+}
+
+.navegacao a {
+    font-size: 0.83em;
+    color: rgb(0, 0, 0);
+    font-style: oblique;
+    white-space: nowrap;
+}
+
+.pop-up {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.todas-colunas {
+    width: 35%;
+    height: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.desfoque {
+    filter: blur(5px);
+    pointer-events: none;
+    /* Impede interação com o fundo */
+}
