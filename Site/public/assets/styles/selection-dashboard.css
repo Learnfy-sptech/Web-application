@@ -20,7 +20,7 @@ section{
   gap: 32px;
   flex-wrap: wrap;
   margin-top: 100px;  
-  margin-left: 100px;
+  margin-left: 150px;
 }
 
 .card {
@@ -50,6 +50,7 @@ section{
   background-position: center;
   filter: brightness(0.55);
   transition: filter 0.3s ease;
+  border-radius: 20px;
 }
 
 .card:hover .card__img {
