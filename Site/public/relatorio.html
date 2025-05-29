@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/relatorio.css">
+    <title>Relatórios - Learnfy</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="sidebar open">
+        <div class="logo-details">
+            <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
+            <div class="logo_name">Learnfy</div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Pesquisar...">
+                <span class="tooltip">Pesquisar</span>
+            </li>
+
+            <li>
+                <a href="index.html">
+                    <i class="fas fa-home"></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+
+            <li>
+                <a href="edit-person.html">
+                    <i class="fas fa-user"></i>
+                    <span class="links_name">Perfil</span>
+                </a>
+                <span class="tooltip">Perfil</span>
+            </li>
+
+            <li>
+                <a href="relatorio.html">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span class="links_name">Relatorios</span>
+                </a>
+                <span class="tooltip">Gestão</span>
+            </li>
+
+            <li>
+                <a href="import.html">
+                    <i class="fas fa-building"></i>
+                    <span class="links_name">Gestão</span>
+                </a>
+                <span class="tooltip">Gestão</span>
+            </li>
+
+            <li>
+                <a href="selection-dashboard.html">
+                    <i class="fas fa-chart-pie"></i>
+                    <span class="links_name">Escolher Visualização</span>
+                </a>
+                <span class="tooltip">Escolher Visualização</span>
+            </li>
+
+            <li>
+                <a href="ajuda.html">
+                    <i class="fas fa-question-circle"></i>
+                    <span class="links_name">Ajuda</span>
+                </a>
+                <span class="tooltip">Ajuda</span>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    <span class="links_name">Configurações</span>
+                </a>
+                <span class="tooltip">Configurações</span>
+            </li>
+
+            <li class="profile">
+                <div class="profile-details">
+                    <img id="profileImg" alt="Foto de perfil">
+                    <div class="name_job">
+                        <p class="name" id="nomeUsuario"></p>
+                        <small class="job" id="tipoContaUsuario"></small>
+                    </div>
+                </div>
+
+                <i class="fas fa-sign-out-alt" id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+
+    <div class="topbar">
+        <button class="back-button" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i>
+            Voltar
+        </button>
+        <h1 class="page-title">Relatorios</h1>
+    </div>
+
+    <section>
+        <div class="main">
+            <main>
+                <div class="relatorio-general" id="relatorio_general">
+                    <div class="titulo">
+                        <h2>Meus Relatórios</h2>
+                    </div>
+                    <div class="meus-relatorios">
+                        <div class="relatorio">
+                            <div class="sessao-relatorio sessao-01">
+                                <div>
+                                    <p id="nome_relatorio">Nome do Relatório 1</p>
+                                </div>
+                                <div class="img-edit-relatorio">
+                                    <img src="assets/images/edit-text.png" alt="">
+                                    <img src="assets/images/delete.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sessao-relatorio sessao-02">
+                                <p>
+                                    Colunas:
+                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
+                                        Incritos</span>
+                                </p>
+                                <p>
+                                    Filtros:
+                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                                </p>
+                            </div>
+                            <div class="sessao-relatorio sessao-03">
+                                <p>
+                                    Criado em:
+                                    <span id="criado_relatorio">20/06/2025</span>
+                                </p>
+                                <button onclick="exportarRelatorio()">Exportar</button>
+                            </div>
+                        </div>
+                        <div class="relatorio">
+                            <div class="sessao-relatorio sessao-01">
+                                <div>
+                                    <p id="nome_relatorio">Nome do Relatório 1</p>
+                                </div>
+                                <div class="img-edit-relatorio">
+                                    <img src="assets/images/edit-text.png" alt="">
+                                    <img src="assets/images/delete.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sessao-relatorio sessao-02">
+                                <p>
+                                    Colunas:
+                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
+                                        Incritos</span>
+                                </p>
+                                <p>
+                                    Filtros:
+                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                                </p>
+                            </div>
+                            <div class="sessao-relatorio sessao-03">
+                                <p>
+                                    Criado em:
+                                    <span id="criado_relatorio">20/06/2025</span>
+                                </p>
+                                <button onclick="exportarRelatorio()">Exportar</button>
+                            </div>
+                        </div>
+                        <div class="relatorio">
+                            <div class="sessao-relatorio sessao-01">
+                                <div>
+                                    <p id="nome_relatorio">Nome do Relatório 1</p>
+                                </div>
+                                <div class="img-edit-relatorio">
+                                    <img src="assets/images/edit-text.png" alt="">
+                                    <img src="assets/images/delete.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sessao-relatorio sessao-02">
+                                <p>
+                                    Colunas:
+                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
+                                        Incritos</span>
+                                </p>
+                                <p>
+                                    Filtros:
+                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                                </p>
+                            </div>
+                            <div class="sessao-relatorio sessao-03">
+                                <p>
+                                    Criado em:
+                                    <span id="criado_relatorio">20/06/2025</span>
+                                </p>
+                                <button onclick="exportarRelatorio()">Exportar</button>
+                            </div>
+                        </div>
+                        <div class="relatorio">
+                            <div class="sessao-relatorio sessao-01">
+                                <div>
+                                    <p id="nome_relatorio">Nome do Relatório 1</p>
+                                </div>
+                                <div class="img-edit-relatorio">
+                                    <img src="assets/images/edit-text.png" alt="">
+                                    <img src="assets/images/delete.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sessao-relatorio sessao-02">
+                                <p>
+                                    Colunas:
+                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
+                                        Incritos</span>
+                                </p>
+                                <p>
+                                    Filtros:
+                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                                </p>
+                            </div>
+                            <div class="sessao-relatorio sessao-03">
+                                <p>
+                                    Criado em:
+                                    <span id="criado_relatorio">20/06/2025</span>
+                                </p>
+                                <button onclick="exportarRelatorio()">Exportar</button>
+                            </div>
+                        </div>
+                        <div class="relatorio">
+                            <div class="sessao-relatorio sessao-01">
+                                <div>
+                                    <p id="nome_relatorio">Nome do Relatório 1</p>
+                                </div>
+                                <div class="img-edit-relatorio">
+                                    <img src="assets/images/edit-text.png" alt="">
+                                    <img src="assets/images/delete.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sessao-relatorio sessao-02">
+                                <p>
+                                    Colunas:
+                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
+                                        Incritos</span>
+                                </p>
+                                <p>
+                                    Filtros:
+                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                                </p>
+                            </div>
+                            <div class="sessao-relatorio sessao-03">
+                                <p>
+                                    Criado em:
+                                    <span id="criado_relatorio">20/06/2025</span>
+                                </p>
+                                <button onclick="exportarRelatorio()">Exportar</button>
+                            </div>
+                        </div>
+                        <div class="relatorio">
+                            <div class="sessao-relatorio sessao-01">
+                                <div>
+                                    <p id="nome_relatorio">Nome do Relatório 1</p>
+                                </div>
+                                <div class="img-edit-relatorio">
+                                    <img src="assets/images/edit-text.png" alt="">
+                                    <img src="assets/images/delete.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sessao-relatorio sessao-02">
+                                <p>
+                                    Colunas:
+                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
+                                        Incritos</span>
+                                </p>
+                                <p>
+                                    Filtros:
+                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                                </p>
+                            </div>
+                            <div class="sessao-relatorio sessao-03">
+                                <p>
+                                    Criado em:
+                                    <span id="criado_relatorio">20/06/2025</span>
+                                </p>
+                                <button onclick="exportarRelatorio()">Exportar</button>
+                            </div>
+                        </div>
+                        <div class="relatorio">
+                            <div class="sessao-relatorio sessao-01">
+                                <div>
+                                    <p id="nome_relatorio">Nome do Relatório 1</p>
+                                </div>
+                                <div class="img-edit-relatorio">
+                                    <img src="assets/images/edit-text.png" alt="">
+                                    <img src="assets/images/delete.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sessao-relatorio sessao-02">
+                                <p>
+                                    Colunas:
+                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
+                                        Incritos</span>
+                                </p>
+                                <p>
+                                    Filtros:
+                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                                </p>
+                            </div>
+                            <div class="sessao-relatorio sessao-03">
+                                <p>
+                                    Criado em:
+                                    <span id="criado_relatorio">20/06/2025</span>
+                                </p>
+                                <button onclick="exportarRelatorio()">Exportar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="finally-button">
+                        <button onclick="criarNovoRelatorio()">Novo Relatório</button>
+                    </div>
+                </div>
+                <div class="relatorio-general oculto" id="info_relatorio">
+                    <div class="titulo">
+                        <input id="input_nome_relatorio" type="text"
+                            onblur="validarInputVazio('input_nome_relatorio','Nome do Relatório')"
+                            onclick="limparCampo('input_nome_relatorio')" value="Nome do Relatório">
+                        <img src="assets/images/edit-text.png" onclick="limparCampo('input_nome_relatorio')" alt="">
+                    </div>
+                    <div class="colunas">
+                        <p class="subtitulo">Colunas</p>
+                        <div class="colunas-buttons">
+                            <input type="text" placeholder="Digite aqui para pesquisar" onkeydown="procurarColunas()"
+                                name="" id="colunas_search" class="colunas-search">
+                            <button onclick="mostrarTodasColunas()">Ver todas</button>
+                        </div>
+                        <div class="campos-selecionados" id="campos_selecionados">
+                        </div>
+                    </div>
+                    <div class="filtros">
+                        <p class="subtitulo">Filtros (Opcional)</p>
+                        <div class="escolher-filtros">
+                            <div class="filtro">
+                                <p>Ano</p>
+                                <select name="ano" id="filtro_ano">
+                                    <option default selected hidden value="">Selecione</option>
+                                </select>
+                            </div>
+                            <div class="filtro">
+                                <p>Especialização</p>
+                                <select name="especializacao" id="filtro_especializacao">
+                                    <option default selected hidden value="">Selecione</option>
+                                </select>
+                            </div>
+                            <div class="filtro">
+                                <p>Estado</p>
+                                <select name="estado" id="filtro_estado">
+                                    <option default selected hidden value="">Selecione</option>
+                                </select>
+                            </div>
+                            <div class="filtro">
+                                <p>Cidade</p>
+                                <select name="cidade" id="filtro_cidade">
+                                    <option selected hidden value="">Selecione</option>
+                                    <option value=""></option>
+                                    <option value=""></option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <p></p>
+                    </div>
+                    <div class="finally-button">
+                        <button onclick="salvarRelatorio(); exportar()">Salvar e Exportar</button>
+                        <button onclick="salvarRelatorio()">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+        </div>
+        </main>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/javascript/sidebar.js"></script>
+    <script src="assets/javascript/relatorio.js"></script>
+</body>
+
+</html>
