@@ -44,12 +44,7 @@ section {
   padding: 28px 8%;
 }
 
-#profileImg{
-  height: 50px;
-  width: 50px;
-  margin: 20px;
-  border-radius: 100%;
-}
+
 
 .sidebar {
   position: fixed;
@@ -624,4 +619,15 @@ section {
 #container, #container2{
   height: 100%;
   border-radius: 8px;
+}
+
+
+#log_out {
+  color: rgb(255, 255, 255);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+#log_out:hover {
+  color: black;
 }

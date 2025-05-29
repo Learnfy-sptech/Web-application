@@ -45,19 +45,9 @@ document.getElementById("log_out").addEventListener("click", function () {
 window.onload = function () {
   const nome = sessionStorage.getItem("NOME_USUARIO");
   const tipoConta = sessionStorage.getItem("TIPO_CONTA");
-  const foto = sessionStorage.getItem("FOTO_USUARIO");
 
   if (nome && tipoConta) {
     document.getElementById("nomeUsuario").textContent = nome;
     document.getElementById("tipoContaUsuario").textContent = tipoConta;
-  }
-
-  const imagem = document.getElementById("profileImg");
-
-  if (imagem && foto && foto !== "null" && foto !== "undefined") {
-    const caminho = `../upload/${foto}`;
-    imagem.src = caminho;
-  } else {
-    imagem.src = "../images/user.png";
   }
 };

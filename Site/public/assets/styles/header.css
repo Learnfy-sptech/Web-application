@@ -61,6 +61,23 @@ header {
     display: none;
 }
 
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+#profileImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  cursor: pointer;
+  border: 2px solid #fff; 
+}
+
+
 @media screen and (max-width: 1170px) {
     #nav_list,
     #navbar .btn-default {
