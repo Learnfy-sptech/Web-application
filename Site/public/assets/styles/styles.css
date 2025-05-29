@@ -44,6 +44,13 @@ section {
   padding: 28px 8%;
 }
 
+#profileImg{
+  height: 50px;
+  width: 50px;
+  margin: 20px;
+  border-radius: 100%;
+}
+
 .sidebar {
   position: fixed;
   left: 0;
