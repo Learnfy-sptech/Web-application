@@ -96,32 +96,34 @@
 
   <section class="home-section">
     <div class="header-dashboard">
-      <div class="title">
-        <i class="fas fa-arrow-left">Voltar</i>
-        <span>Dashboard Geral </span>
+      <div class="current-page">
+        <button class="back-button" onclick="history.back()">
+          <i class="fas fa-arrow-left"></i>
+          Voltar
+        </button>
+        <h1 class="page-title">Dashboard geral</h1>
       </div>
       <div class="filter">
         <form class="form">
-        <button>
-          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-            aria-labelledby="search">
-            <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
-              stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </button>
-        <input class="input" placeholder="Type your text" required="" type="text">
-        <button class="reset" type="reset">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </form>
+          <button>
+            <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+              aria-labelledby="search">
+              <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <input class="input" placeholder="Filtre por região" required="" type="text">
+          <button class="reset" type="reset">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </form>
         <div class="custom-select-wrapper">
-          <label for="select-example">Escolha uma opção:</label>
           <div class="custom-select">
             <select id="select-example">
-              <option value="" disabled selected>Selecione...</option>
+              <option value="" disabled selected>Filtro por área:</option>
               <option value="1">Opção 1</option>
               <option value="2">Opção 2</option>
               <option value="3">Opção 3</option>
@@ -130,8 +132,8 @@
           </div>
         </div>
         <button class="btn-default btn-filter">
-            <i class="fas fa-filter"> Aplicar filtro</i>
-          </button>
+          <i class="fas fa-filter"> Aplicar filtro</i>
+        </button>
       </div>
     </div>
     <div class="kpi-section">
@@ -164,6 +166,10 @@
       </div>
 
     </div>
+    <div class="graficos">
+      <div id="container"></div>
+    </div>
+
 
   </section>
 
@@ -197,3 +203,54 @@
 </body>
 
 </html>
+<script>
+
+const container = document.getElementById('container')
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Monthly Average Temperature'
+    },
+    subtitle: {
+        text: 'Source: ' +
+            '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+            'target="_blank">Wikipedia.com</a>'
+    },
+    xAxis: {
+        categories: [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+            'Oct', 'Nov', 'Dec'
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'Temperature (°C)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'Reggane',
+        data: [
+            16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
+            22.0, 17.8
+        ]
+    }, {
+        name: 'Tallinn',
+        data: [
+            -2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
+            2.0, -0.9
+        ]
+    }]
+});
+
+</script>

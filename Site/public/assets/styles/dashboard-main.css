@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @import url(styles.css);
 
-
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .kpi-section{
   display: flex;
@@ -32,7 +37,6 @@
   display: flex;
   align-items: center;
   padding-inline: 0.8em;
-  border-radius: var(--border-radius);
   transition: border-radius 0.5s ease;
   background: var(--input-bg,#fff);
 }
@@ -45,6 +49,11 @@
   padding-inline: 0.5em;
   padding-block: 0.7em;
   border: none;
+}
+
+.input::placeholder{
+  color: #333;
+  padding-left: 3px;
 }
 /* styling of animated border */
 .form:before {
@@ -102,13 +111,6 @@ input:not(:placeholder-shown) ~ .reset {
   transition: 0.2s ease-in;
 }
 
-.header-dashboard{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-}
-
 .custom-select-wrapper {
   display: flex;
   flex-direction: column;
@@ -135,7 +137,7 @@ input:not(:placeholder-shown) ~ .reset {
   width: 100%;
   padding: 0.5rem 2.5rem 0.5rem 0.75rem;
   background-color: #fff;
-  border: 1px solid #800000;
+  border: none;
   border-radius: 6px;
   font-size: 1rem;
   color: #333;
@@ -170,7 +172,7 @@ input:not(:placeholder-shown) ~ .reset {
   display: flex;
   flex-direction: row;
   gap: 16px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
