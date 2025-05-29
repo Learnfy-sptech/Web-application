@@ -253,7 +253,36 @@ button {
     align-items: flex-start;
     height: 55%;
     width: 95%;
-    border-radius: 10px
+    border-radius: 10px;
+    padding: 1%;
+    gap: 1%;
+    align-content: flex-start;
+    overflow-y: auto;
+}
+
+.campo-div-selecao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 7px;
+    padding-inline: 1.5%;
+    border-radius: 5px;
+    margin-bottom: 0.7%;
+}
+
+.campo-div-selecao span {
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.campo-div-selecao img {
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+
+.campos-selecionados .campo-div-selecao {
+    background-color: white;
 }
 
 .escolher-filtros {
@@ -372,6 +401,16 @@ button {
     padding: 3%;
     font-size: 0.9em;
     margin-left: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+
+#btn_fechar_colunas img {
+    filter: brightness(0) invert(1);
+    width: 10px;
+    height: 10px;
 }
 
 #selecionar_todos {

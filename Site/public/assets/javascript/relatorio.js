@@ -38,11 +38,14 @@ function abrirOuFecharTodasColunas() {
 }
 
 function adicionarRemoverCampo(elemento) {
-    elemento_input = elemento.querySelector("input")
-    if (elemento_input.checked == false) {
-        elemento_input.checked = true
+    const elementoTexto = elemento.querySelector("span")
+    const elementoInput = elemento.querySelector("input")
+    if (elementoInput.checked == false) {
+        elementoInput.checked = true
+        adicionarCampoNaDiv(elementoTexto.textContent, 'campos_selecionados')
     } else {
-        elemento_input.checked = false
+        elementoInput.checked = false
+        removerCampoNaDiv(elementoTexto.textContent)
     }
 }
 
@@ -55,18 +58,33 @@ function selecionarTodasColunas() {
 
     opcoesColunas.forEach(element => {
         element.querySelector('input').checked = todasColunasSelecionadas
+        if (todasColunasSelecionadas) {
+            adicionarCampoNaDiv(element.querySelector('span').textContent, 'campos_selecionados')
+        } else {
+            removerCampoNaDiv(element.querySelector('span').textContent)
+        }
     });
 
     if (todasColunasSelecionadas) todasColunasSelecionadas = false
     else todasColunasSelecionadas = true
 }
 
-function adicionarCampoNaDiv() {
-
+function adicionarCampoNaDiv(nomeColuna, idDiv) {
+    const div = document.getElementById(idDiv)
+    div.innerHTML += `
+        <div class="campo-div-selecao" id="${nomeColuna}">
+            <span>${nomeColuna}</span>
+            <img src="assets/images/close_red.png" onclick="removerCampoNaDiv('${nomeColuna}')" alt="">
+        </div>
+    `
 }
 
-function removerCampoNaDiv() {
-    
+function removerCampoNaDiv(id) {
+    if (id != null) {
+        document.getElementById(id).remove()
+    } else {
+        console.log("Parâmetro errado na função 'removerCampoNaDiv(id)'")
+    }
 }
 
 var dadosColunasRelatorio = []
