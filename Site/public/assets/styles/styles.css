@@ -44,6 +44,8 @@ section {
   padding: 28px 8%;
 }
 
+
+
 .sidebar {
   position: fixed;
   left: 0;
@@ -617,4 +619,15 @@ section {
 #container, #container2{
   height: 100%;
   border-radius: 8px;
+}
+
+
+#log_out {
+  color: rgb(255, 255, 255);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+#log_out:hover {
+  color: black;
 }

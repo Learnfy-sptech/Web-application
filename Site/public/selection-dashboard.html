@@ -11,7 +11,7 @@
   <title>Seleção das Dashboards - Learnfy</title>
 </head>
 
-<body>
+<body onload="loadProfileImage()">
     <div class="sidebar open">
       <div class="logo-details">
         <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
@@ -80,18 +80,16 @@
           </a>
           <span class="tooltip">Configurações</span>
         </li>
-
-        <li class="profile">
-          <div class="profile-details">
-            <img id="profileImg" alt="Foto de perfil">
-            <div class="name_job">
-              <p class="name" id="nomeUsuario"></p>
-              <small class="job" id="tipoContaUsuario"></small>
-            </div>
-          </div>
-          
-          <i class="fas fa-sign-out-alt" id="log_out"></i>
-        </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img id="profileImg" alt="Foto do usuário">
+                    <div class="name_job">
+                        <p class="name" id="nomeUsuario"></p>
+                        <small class="job" id="tipoContaUsuario"></small>
+                    </div>
+                </div>
+                <i class="fas fa-sign-out-alt" id="log_out"></i>
+            </li>
       </ul>
     </div>
 
@@ -133,6 +131,8 @@
     </div>
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/javascript/sidebar.js"></script>
+  <script src="assets/javascript/awsPhoto.js"></script>
 </body>
 </html>
