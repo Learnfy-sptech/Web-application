@@ -1,23 +1,28 @@
-var express = require("express");
-var router = express.Router();
-const multer = require("multer"); // Middleware para upload de arquivos, já que o express não faz isso nativamente
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const express = require("express");
+const router = express.Router();
+const cors = require("cors");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const dotenv = require("dotenv");
 
+router.use(cors());
 const storage = multer.memoryStorage(); // Armazena o arquivo na memória
 const upload = multer({ storage: storage });
 
 dotenv.config();
 const bucketName = process.env.BUCKET_NAME
 const bucketRegion = process.env.BUCKET_REGION
-const accessKey = process.env.AWS_ACCESS_KEY_ID
-const secretAccess_key = process.env.AWS_SECRET_ACCESS_KEY
+// const accessKeyId = process.env.AWS_ACCESS_KEY_ID
+// const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
 
 const s3 = new S3Client({
-    region: bucketRegion
+    region: bucketRegion,
     // credentials: {
-    //     accessKeyId: accessKey,
-    //     secretAccessKey: secretAccess_key,
+    //     accessKeyId,
+    //     secretAccessKey
     // },
 });
 
@@ -46,5 +51,57 @@ router.post("/posts", upload.single("file"), async (req, res) => {
         }
     );
 });
+
+
+// ATUALIZAR FOTOS DE PERFIL DE USUÁRIO //
+router.post(
+    "/usuarios/:id/imagem-perfil",
+    upload.single("file"),
+    async (req, res) => {
+        const userId = req.params.id;
+        if (!req.file) {
+            return res.status(400).json({ error: "Nenhum arquivo enviado." });
+        }
+
+        const key = `fotos-usuario/${userId}.jpg`;
+        const cmd = new PutObjectCommand({
+            Bucket: bucketName,
+            Key: key,
+            Body: req.file.buffer,
+            ContentType: req.file.mimetype,
+        });
+
+        try {
+            await s3.send(cmd);
+            res.json({ message: "Imagem de perfil enviada com sucesso!" });
+        } catch (err) {
+            console.error("Erro ao enviar imagem:", err);
+            res.status(500).json({ error: "Erro ao enviar a imagem para o S3" });
+        }
+    }
+);
+
+router.get(
+    "/usuarios/:id/importar-imagem",
+    async (req, res) => {
+        const userId = req.params.id;
+        const key = `fotos-usuario/${userId}.jpg`;
+
+        const cmd = new GetObjectCommand({
+            Bucket: bucketName,
+            Key: key
+        });
+
+        try {
+            const url = await getSignedUrl(s3, cmd, { expiresIn: 3600 });
+            res.json({ imageUrl: url });
+        } catch (err) {
+            console.error("Erro ao recuperar imagem:", err);
+            if (err.name === "NoSuchKey" || /NotFound/.test(err.message)) {
+                return res.status(404).json({ error: "Imagem não encontrada." });
+            }
+            res.status(500).json({ error: "Erro ao gerar a URL da imagem" });
+        }
+    });
 
 module.exports = router;

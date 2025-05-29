@@ -27,7 +27,7 @@
     <title>Learnfy - Anlise de Dados Educacionais</title>
 </head>
 
-<body>
+<body onload="loadProfileImage()">
     <header>
         <nav id="navbar">
             <img src="assets/images/PretoSemTexto.png" alt="Learnfy" id="nav_logo">
@@ -437,40 +437,50 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/javascript/email.js"></script>
     <script>
-  window.addEventListener("DOMContentLoaded", function () {
-    const nome = sessionStorage.getItem("NOME_USUARIO");
-    const foto = sessionStorage.getItem("FOTO_USUARIO");
+        async function loadProfileImage() {
+            const imgEl = document.getElementById("profileImg");
+            const userId = sessionStorage.getItem("ID_USUARIO");
+            if (!userId || !imgEl) return;
 
-    if (nome) {
-      const navVisitante = document.getElementById("navVisitante");
-      const navUsuario = document.getElementById("navUsuario");
-      const nomeUsuario = document.getElementById("nomeUsuario");
-      const profileImg = document.getElementById("profileImg");
-
-      // Verificações de segurança
-      if (navVisitante) navVisitante.style.display = "none";
-      if (navUsuario) navUsuario.style.display = "flex";
-      if (nomeUsuario) nomeUsuario.textContent = nome;
-
-      if (profileImg) {
-        if (foto && foto !== "null" && foto !== "undefined") {
-          profileImg.src = `../upload/${foto}`;
-        } else {
-          profileImg.src = "../images/user.png";
+            try {
+                const res = await fetch(`/aws/usuarios/${userId}/importar-imagem`);
+                if (!res.ok) {
+                    // imagem não existe ou outro erro: mantém o src padrão  
+                    console.warn("Não foi possível carregar a imagem de perfil:", res.status);
+                    return;
+                }
+                const { imageUrl } = await res.json();
+                imgEl.src = imageUrl;
+            } catch (err) {
+                console.error("Erro ao carregar imagem de perfil:", err);
+            }
         }
-      }
 
-      // Botão de sair
-      const btnSair = document.getElementById("btnSair");
-      if (btnSair) {
-        btnSair.addEventListener("click", function () {
-          sessionStorage.clear();
-          window.location.href = "index.html"; // Redireciona para home
+        window.addEventListener("DOMContentLoaded", function () {
+            const nome = sessionStorage.getItem("NOME_USUARIO");
+
+            if (nome) {
+                const navVisitante = document.getElementById("navVisitante");
+                const navUsuario = document.getElementById("navUsuario");
+                const nomeUsuario = document.getElementById("nomeUsuario");
+
+                // Verificações de segurança
+                if (navVisitante) navVisitante.style.display = "none";
+                if (navUsuario) navUsuario.style.display = "flex";
+                if (nomeUsuario) nomeUsuario.textContent = nome;
+
+                // Botão de sair
+                const btnSair = document.getElementById("btnSair");
+                if (btnSair) {
+                    btnSair.addEventListener("click", function () {
+                        sessionStorage.clear();
+                        window.location.href = "index.html"; // Redireciona para home
+                    });
+                }
+            }
         });
-      }
-    }
-  });
-</script>
+    </script>
 
 </body>
+
 </html>
