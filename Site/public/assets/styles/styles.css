@@ -578,6 +578,13 @@ section {
  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
 }
 
+.header-dashboard{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 0px 32px 0px;
+}
 #log_out {
   transition: transform 0.2s ease, color 0.2s ease;
   cursor: pointer;
@@ -585,7 +592,7 @@ section {
 
 #log_out:hover {
   transform: scale(1.2);
-  color: #000000; 
+  color: #000000;
 }
 
 
@@ -600,4 +607,9 @@ section {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.current-page{
+  display: flex;
+  gap: 6px;
 }
