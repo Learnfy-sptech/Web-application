@@ -31,18 +31,42 @@ function validarInputVazio(idElemento, texto) {
 }
 
 function abrirOuFecharTodasColunas() {
-    elemento = document.getElementById('todas_colunas')
-    elemento.classList.toggle('oculto')
-    elementoPai = document.getElementsByTagName("main")[0]
-    elemento.classList.toggle('desfoque')
+    var elementoPai = document.getElementById('info_relatorio')
+    elementoPai.classList.toggle('desfoque')
+    var elementoColunas = document.getElementById('todas_colunas_geral')
+    elementoColunas.classList.toggle('oculto')
 }
 
-function adicionarColuna(elemento) {
+function adicionarRemoverCampo(elemento) {
+    elemento_input = elemento.querySelector("input")
+    if (elemento_input.checked == false) {
+        elemento_input.checked = true
+    } else {
+        elemento_input.checked = false
+    }
+}
+
+var todasColunasSelecionadas = true;
+function selecionarTodasColunas() {
+    const divTodasColunas = document.getElementById('todas_colunas')
+    console.log(divTodasColunas)
+    const opcoesColunas = divTodasColunas.querySelectorAll('.option-coluna')
+    console.log(opcoesColunas)
+
+    opcoesColunas.forEach(element => {
+        element.querySelector('input').checked = todasColunasSelecionadas
+    });
+
+    if (todasColunasSelecionadas) todasColunasSelecionadas = false
+    else todasColunasSelecionadas = true
+}
+
+function adicionarCampoNaDiv() {
 
 }
 
-function removerColuna(elemento) {
-
+function removerCampoNaDiv() {
+    
 }
 
 var dadosColunasRelatorio = []

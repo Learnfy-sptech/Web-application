@@ -281,6 +281,61 @@
                     <button onclick="criarNovoRelatorio()">Novo Relatório</button>
                 </div>
             </div>
+            <div class="oculto pop-up todas-colunas-geral" id="todas_colunas_geral">
+                <div class="todas-colunas" id="todas_colunas">
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                        <span>Teste Nome Coluna</span>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                </div>
+                <div class="finally-button">
+                    <button id="selecionar_todos" onclick="selecionarTodasColunas()">Selecionar Todos</button>
+                    <button id="btn_fechar_colunas" onclick="abrirOuFecharTodasColunas()">
+                        Fechar X
+                        <!-- <img src="assets/images/close.png" alt=""> -->
+                    </button>
+                </div>
+            </div>
             <div class="relatorio-general oculto" id="info_relatorio">
                 <div class="navegacao">
                     <a href="" onclick="trocarTela()">Meus Relatórios</a>/
@@ -297,7 +352,7 @@
                     <div class="colunas-buttons">
                         <input type="text" placeholder="Digite aqui para pesquisar" onkeydown="procurarColunas()"
                             name="" id="colunas_search" class="colunas-search">
-                        <button onclick="mostrarTodasColunas()">Ver todas</button>
+                        <button onclick="abrirOuFecharTodasColunas()">Ver todas</button>
                     </div>
                     <div class="campos-selecionados" id="campos_selecionados">
                     </div>
