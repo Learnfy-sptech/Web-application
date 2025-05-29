@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
+body {
+  background-color: #ffffff;
+  color: #333;
+}
+
+.help-container {
+  margin-left: 250px; 
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.help-card {
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.help-card h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.help-card .intro {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.faq .question {
+  margin-bottom: 25px;
+}
+
+.faq .question h3 {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.faq .question p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+}
