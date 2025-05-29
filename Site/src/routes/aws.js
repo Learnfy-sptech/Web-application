@@ -14,11 +14,11 @@ const accessKey = process.env.AWS_ACCESS_KEY_ID
 const secretAccess_key = process.env.AWS_SECRET_ACCESS_KEY
 
 const s3 = new S3Client({
-    region: bucketRegion,
-    credentials: {
-        accessKeyId: accessKey,
-        secretAccessKey: secretAccess_key,
-    },
+    region: bucketRegion
+    // credentials: {
+    //     accessKeyId: accessKey,
+    //     secretAccessKey: secretAccess_key,
+    // },
 });
 
 // Nome do campo do arquivo no formulário que vai no upload

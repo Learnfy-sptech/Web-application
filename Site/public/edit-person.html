@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon" />
 </head>
-
-<body>
-
   <body>
     <div class="sidebar open">
       <div class="logo-details">
@@ -84,12 +81,13 @@
 
         <li class="profile">
           <div class="profile-details">
-            <img src="assets/images/user.png" alt="profileImg">
+            <img id="profileImg" alt="Foto de perfil">
             <div class="name_job">
-              <p class="name">Teste Usuario</p>
-              <small class="job">Gestor</small>
+              <p class="name" id="nomeUsuario"></p>
+              <small class="job" id="tipoContaUsuario"></small>
             </div>
           </div>
+          
           <i class="fas fa-sign-out-alt" id="log_out"></i>
         </li>
       </ul>
@@ -108,20 +106,16 @@
         <div class="text">Tela de Edição de Perfil</div>
 
         <div class="profile-picture">
-          <img src="./assets/images/user.png" alt="Foto de perfil" id="profileImage">
-          <input type="file" id="fileInput" accept="image/*">
+          <img src="assets/images/user.png" alt="Foto de perfil" id="profileImage">
+          <input type="file" id="fileInput" name="foto" accept="image/*">
         </div>
 
-        <form class="edit-form">
-          <label for="name">Nome Completo</label>
+        <form class="edit-form" id="formPerfil" enctype="multipart/form-data">
+          <label for="name">Nome</label>
           <input type="text" id="name" placeholder="Digite seu nome completo">
 
-          <label for="accountType">Tipo de Conta</label>
-          <select id="accountType">
-            <option value="gestor">Gestor</option>
-            <option value="pesquisador">Pesquisador</option>
-            <option value="diretor">Diretor</option>
-          </select>
+          <label for="telefone">Telefone</label>
+          <input type="text" id="telefone" placeholder="Digite seu telefone">
 
           <label for="senha">Nova senha</label>
           <input type="text" name="senha" id="password-change" placeholder="Digite sua nova senha">
@@ -133,11 +127,8 @@
         </form>
       </div>
     </section>
-
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/javascript/sidebar.js"></script>
+    <script src="assets/javascript/edit-person.js"></script>
   </body>
-
 </html>
