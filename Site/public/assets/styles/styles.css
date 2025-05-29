@@ -428,6 +428,67 @@ section {
   }
 }
 
+.card {
+ width: 100%;
+ height: 120px;
+ border-radius: 20px;
+ background-color: #fff;
+ position: relative;
+ padding: 2rem;
+ border: 2px solid #c3c6ce;
+ transition: 0.5s ease-out;
+ overflow: visible;
+}
+
+.card-details {
+ color: black;
+ height: 100%;
+ gap: .5em;
+ display: grid;
+ place-content: center;
+}
+
+.card-button {
+ transform: translate(-50%, 125%);
+ width: 60%;
+ border-radius: 1rem;
+ border: none;
+ background-color: #008bf8;
+ color: #fff;
+ font-size: 1rem;
+ padding: .5rem 1rem;
+ position: absolute;
+ left: 50%;
+ bottom: 0;
+ opacity: 0;
+ transition: 0.3s ease-out;
+}
+
+.text-body {
+ color: rgb(134, 134, 134);
+}
+
+.text-title {
+ font-size: 1.5em;
+ font-weight: bold;
+}
+
+.card:hover {
+ border-color: var(--color-primary-6);
+ box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.header-dashboard {
+  display: flex;
+  justify-content: space-between; 
+  padding-bottom: 32px;
+  align-items: center;
+}
+
+
+
+
+
 .topbar {
   display: flex;
   align-items: center;
@@ -517,26 +578,15 @@ section {
  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
 }
 
-#log_out {
-  transition: transform 0.2s ease, color 0.2s ease;
-  cursor: pointer;
-}
-
-#log_out:hover {
-  transform: scale(1.2);
-  color: #000000; 
-}
-
-
-.nav-usuario {
+.header-dashboard{
   display: flex;
+  width: 100%;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  padding: 0px 0px 32px 0px;
 }
 
-.profile-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
+.current-page{
+  display: flex;
+  gap: 6px;
 }
