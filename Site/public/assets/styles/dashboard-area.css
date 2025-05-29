@@ -17,6 +17,7 @@
 }
 
 .select {
+  margin-top: 125px;
   width: fit-content;
   cursor: pointer;
   position: relative;
@@ -59,6 +60,7 @@
   top: -100px;
   opacity: 0;
   transition: 300ms;
+  z-index: 1;
 }
 
 .select:hover > .options {
