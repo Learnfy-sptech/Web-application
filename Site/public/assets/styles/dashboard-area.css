@@ -16,12 +16,6 @@
   color: #8b8ba7;
 }
 
-.header-dashboard {
-  display: flex;
-  justify-content: flex-end; /* Alinha tudo à direita */
-  align-items: center;
-}
-
 .select {
   width: fit-content;
   cursor: pointer;
