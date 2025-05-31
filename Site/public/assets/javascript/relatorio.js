@@ -20,7 +20,7 @@ function limparCampo(idElemento) {
 }
 
 function validarInputVazio(idElemento, texto) {
-    elemento = document.getElementById(idElemento)
+    const elemento = document.getElementById(idElemento)
     if (elemento.value.length == 0) {
         elemento.value = texto
         inputPreenchido = true
@@ -37,14 +37,10 @@ function abrirOuFecharTodasColunas() {
 function adicionarRemoverCampo(elemento) {
     const elementoInput = elemento.querySelector('input')
     const elementoSpan = elemento.querySelector('span')
-    const elementoId = elementoSpan.textContent.replaceAll(" ", "_").toLowerCase()
     if (elementoInput.checked == false) {
         elementoInput.checked = true
-        dadosColunasRelatorio.push(elementoId)
     } else {
         elementoInput.checked = false
-        const pos = dadosColunasRelatorio.indexOf(elementoId)
-        dadosColunasRelatorio.splice(pos)
     }
 }
 
@@ -56,6 +52,8 @@ function preencherCamposEscolhidos() {
             actualElement.remove()
         })
     }
+
+    alimentarLista()
     dadosColunasRelatorio.forEach((colunaAtual) => {
         adicionarCampoNaDiv(colunaAtual)
     })
@@ -94,6 +92,34 @@ function verificarCamposPreenchidos() {
             inputColuna.checked = true
         } else {
             inputColuna.checked = false
+        }
+    })
+}
+
+var todosSelecionados = false
+function selecionarTodos() {
+    if (todosSelecionados == false) {
+        todosSelecionados = true
+    } else {
+        todosSelecionados = false
+    }
+    const elementoColunas = document.getElementById('todas_colunas')
+    const colunas = elementoColunas.querySelectorAll('div')
+    colunas.forEach((coluna) =>{
+        inputColuna = coluna.querySelector('input')
+        inputColuna.checked = todosSelecionados
+    })
+}
+
+function alimentarLista() {
+    const elementoColunas = document.getElementById('todas_colunas')
+    const colunas = elementoColunas.querySelectorAll('div')
+    dadosColunasRelatorio = []
+    colunas.forEach((coluna) =>{
+        inputColuna = coluna.querySelector('input')
+        conteudoColunaId = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
+        if (inputColuna.checked) {
+            dadosColunasRelatorio.push(conteudoColunaId)
         }
     })
 }
