@@ -61,6 +61,7 @@ function preencherCamposEscolhidos() {
 
 function adicionarCampoNaDiv(idDivColuna) {
     var nomeColuna = idDivColuna.replaceAll("_", " ")
+    nomeColuna = toCapitalize(nomeColuna)
     const div = document.getElementById('campos_selecionados')
     div.innerHTML += `
         <div class="campo-div-selecao" id="${idDivColuna}">
@@ -85,9 +86,9 @@ function verificarCamposPreenchidos() {
     const elementoColunas = document.getElementById('todas_colunas')
     const colunas = elementoColunas.querySelectorAll('div')
 
-    colunas.forEach((coluna) =>{
+    colunas.forEach((coluna) => {
         inputColuna = coluna.querySelector('input')
-        conteudoTextoColuna = coluna.querySelector('span').textContent.replaceAll(" ","_").toLowerCase()
+        conteudoTextoColuna = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
         if (dadosColunasRelatorio.indexOf(conteudoTextoColuna) != -1) {
             inputColuna.checked = true
         } else {
@@ -105,7 +106,7 @@ function selecionarTodos() {
     }
     const elementoColunas = document.getElementById('todas_colunas')
     const colunas = elementoColunas.querySelectorAll('div')
-    colunas.forEach((coluna) =>{
+    colunas.forEach((coluna) => {
         inputColuna = coluna.querySelector('input')
         inputColuna.checked = todosSelecionados
     })
@@ -115,7 +116,7 @@ function alimentarLista() {
     const elementoColunas = document.getElementById('todas_colunas')
     const colunas = elementoColunas.querySelectorAll('div')
     dadosColunasRelatorio = []
-    colunas.forEach((coluna) =>{
+    colunas.forEach((coluna) => {
         inputColuna = coluna.querySelector('input')
         conteudoColunaId = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
         if (inputColuna.checked) {
@@ -124,4 +125,52 @@ function alimentarLista() {
     })
 }
 
+function toCapitalize(string) {
+    return string[0].toUpperCase() + string.slice(1)
+}
+
 var dadosColunasRelatorio = []
+var filtrosSelecionados = {}
+
+
+// Rotas
+function inserirRelatorio() {
+    const nome = document.getElementById('input_nome_relatorio').value
+    const fkUsuario = sessionStorage.ID_USUARIO
+    const colunas = dadosColunasRelatorio
+    const filtros = filtrosSelecionados
+
+    fetch("/relatorio/inserirRelatorio", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nome,
+            fkUsuario,
+            colunas,
+            filtros
+        })
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            Swal.fire({
+                title: "Relatório Salvo com Sucesso!",
+                text: "A partir de agora ele já está disponível para ser importado :)",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            setTimeout(function () {
+                window.location("relatorio.html")
+            }, 2000);
+        }
+    })
+}
+
+function obterTodosRelatorios() {
+
+}
+
+function obterInfoRelatorio() {
+    
+}

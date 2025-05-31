@@ -17,6 +17,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require('./src/routes/usuarios');
 var logsRouter = require('./src/routes/logs')
+var relatorioRouter = require('./src/routes/relatorio')
 
 // ----------------------------------------------------------------- //
 // CONFIGURAÇÕES PARA CONEXÃO DIRETAMENTE COM NOSSO BUCKET NO AWS S3 //
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use('/logs', logsRouter);
+app.use('/relatorio', relatorioRouter)
 
 
 app.listen(PORTA_APP, function () {
