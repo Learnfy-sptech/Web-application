@@ -3,13 +3,10 @@ function criarNovoRelatorio() {
 }
 
 function trocarTelaRelatorio() {
-
     const relatorioGeneral = document.getElementById("relatorio_general");
     const infoRelatorio = document.getElementById("info_relatorio");
-
     relatorioGeneral.classList.toggle("oculto");
     infoRelatorio.classList.toggle("oculto");
-
 }
 
 var inputPreenchido = false
@@ -38,35 +35,67 @@ function abrirOuFecharTodasColunas() {
 }
 
 function adicionarRemoverCampo(elemento) {
-    elemento_input = elemento.querySelector("input")
-    if (elemento_input.checked == false) {
-        elemento_input.checked = true
+    const elementoInput = elemento.querySelector('input')
+    const elementoSpan = elemento.querySelector('span')
+    const elementoId = elementoSpan.textContent.replaceAll(" ", "_").toLowerCase()
+    if (elementoInput.checked == false) {
+        elementoInput.checked = true
+        dadosColunasRelatorio.push(elementoId)
     } else {
-        elemento_input.checked = false
+        elementoInput.checked = false
+        const pos = dadosColunasRelatorio.indexOf(elementoId)
+        dadosColunasRelatorio.splice(pos)
     }
 }
 
-var todasColunasSelecionadas = true;
-function selecionarTodasColunas() {
-    const divTodasColunas = document.getElementById('todas_colunas')
-    console.log(divTodasColunas)
-    const opcoesColunas = divTodasColunas.querySelectorAll('.option-coluna')
-    console.log(opcoesColunas)
-
-    opcoesColunas.forEach(element => {
-        element.querySelector('input').checked = todasColunasSelecionadas
-    });
-
-    if (todasColunasSelecionadas) todasColunasSelecionadas = false
-    else todasColunasSelecionadas = true
+function preencherCamposEscolhidos() {
+    const div = document.getElementById('campos_selecionados')
+    const elementosDiv = div.querySelectorAll('div')
+    if (elementosDiv.length != 0) {
+        elementosDiv.forEach((actualElement) => {
+            actualElement.remove()
+        })
+    }
+    dadosColunasRelatorio.forEach((colunaAtual) => {
+        adicionarCampoNaDiv(colunaAtual)
+    })
 }
 
-function adicionarCampoNaDiv() {
-
+function adicionarCampoNaDiv(idDivColuna) {
+    var nomeColuna = idDivColuna.replaceAll("_", " ")
+    const div = document.getElementById('campos_selecionados')
+    div.innerHTML += `
+        <div class="campo-div-selecao" id="${idDivColuna}">
+            <span>${nomeColuna}</span>
+            <img src="assets/images/close_red.png" onclick="removerCampoNaDiv('${idDivColuna}')" alt="">
+        </div>
+    `
 }
 
-function removerCampoNaDiv() {
-    
+function removerCampoNaDiv(id) {
+    if (id != null) {
+        document.getElementById(id).remove()
+        const position = dadosColunasRelatorio.indexOf(id)
+        dadosColunasRelatorio.splice(position, 1)
+        console.log(dadosColunasRelatorio)
+    } else {
+        console.log("Parâmetro errado na função 'removerCampoNaDiv(id)'")
+    }
+}
+
+function verificarCamposPreenchidos() {
+    const elementoColunas = document.getElementById('todas_colunas')
+    const colunas = elementoColunas.querySelectorAll('div')
+
+    colunas.forEach((coluna) =>{
+        inputColuna = coluna.querySelector('input')
+        conteudoTextoColuna = coluna.querySelector('span').textContent.replaceAll(" ","_").toLowerCase()
+        if (dadosColunasRelatorio.indexOf(conteudoTextoColuna) != -1) {
+            inputColuna.checked = true
+        } else {
+            inputColuna.checked = false
+        }
+    })
 }
 
 var dadosColunasRelatorio = []
