@@ -163,14 +163,51 @@ function inserirRelatorio() {
             setTimeout(function () {
                 window.location("relatorio.html")
             }, 2000);
+        } else {
+            Swal.fire({
+                title: "Não foi possível salvar o relatório",
+                text: "Tente novamente ou informe a central de atendimentos",
+                icon: "error",
+                showConfirmButton: true,
+                timer: 2000
+            })
         }
     })
 }
 
-function obterTodosRelatorios() {
+function obterRelatoriosPorId() {
+    const idUsuario = sessionStorage.ID_USUARIO
+    fetch(`/relatorio/obterRelatoriosPorId/${idUsuario}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }).then(function (resposta) {
+        if (resposta.ok) {
+           
+        }
+    })
+}
+
+function obterInfoRelatorio(elemento) {
+    const idRelatorio = elemento.id
+    fetch(`/relatorio/obterRelatoriosPorId/${idRelatorio}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }).then(function (resposta) {
+        if (resposta.ok) {
+           
+        }
+    })
+}
+
+
+function construirMeusRelatorios(relatorios) {
 
 }
 
-function obterInfoRelatorio() {
-    
+function adicionarRelatorioNaDiv(infoRelatorio) {
+
 }
