@@ -7,3 +7,4 @@ CREATE TABLE relatorio_tb (
     fk_usuario INT NOT NULL,
     FOREIGN KEY (fk_usuario) REFERENCES usuario_tb(id_usuario)
 );
+

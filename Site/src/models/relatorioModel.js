@@ -18,7 +18,7 @@ function inserirRelatorio(nome, fkUsuario, colunas, filtros) {
 
 function obterRelatoriosPorId(id) {
     const instrucaoSql = `
-        SELECT * FROM relatorio_tb where fk_usuario = ?
+        SELECT * FROM relatorio_tb WHERE fk_usuario = ?
     `
     const valores = [id]
     return database.executar(instrucaoSql, valores)
@@ -26,9 +26,17 @@ function obterRelatoriosPorId(id) {
 
 function obterInfoRelatorio(id) {
     const instrucaoSql = `
-        SELECT * FROM relatorio_tb where  = ?
+        SELECT * FROM relatorio_tb WHERE  = ?
     `
     const valores = [id]
+    return database.executar(instrucaoSql, valores)
+}
+
+function obterCidadesPorEstado(estado) {
+    const instrucaoSql = `
+        SELECT * FROM cidade_tb WHERE fk_uf = (SELECT id_uf FROM uf_tb WHERE nome = ?)
+    `
+    const valores = [estado]
     return database.executar(instrucaoSql, valores)
 }
 
@@ -36,4 +44,5 @@ module.exports = {
     inserirRelatorio,
     obterRelatoriosPorId,
     obterInfoRelatorio,
+    obterCidadesPorEstado,
 }

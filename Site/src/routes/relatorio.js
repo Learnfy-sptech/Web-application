@@ -14,4 +14,8 @@ router.get("/relatorio/obterInfoRelatorio/:idRelatorio", function (req, res) {
   relatorioController.obterInfoRelatorio(req, res)
 });
 
+router.get("/relatorio/obterCidadesPorEstado/:estado", function (req, res) {
+  relatorioController.obterCidadesPorEstado(req, res)
+});
+
 module.exports = router;

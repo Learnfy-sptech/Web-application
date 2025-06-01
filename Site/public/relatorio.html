@@ -352,7 +352,8 @@
                     <div class="colunas-buttons">
                         <!-- <input type="text" placeholder="Digite aqui para pesquisar" onkeydown="procurarColunas()"
                             name="" id="colunas_search" class="colunas-search"> -->
-                        <button onclick="abrirOuFecharTodasColunas(); verificarCamposPreenchidos()">Clique aqui para Selecionar</button>
+                        <button onclick="abrirOuFecharTodasColunas(); verificarCamposPreenchidos()">Clique aqui para
+                            Selecionar</button>
                     </div>
                     <div class="campos-selecionados" id="campos_selecionados">
                     </div>
@@ -362,29 +363,42 @@
                     <div class="escolher-filtros">
                         <div class="filtro">
                             <p>Ano</p>
-                            <select name="ano" id="filtro_ano">
-                                <option default selected hidden value="">Selecione</option>
+                            <select name="ano" id="filtro_ano" onchange="adicionarFiltro(this)">
+                                <option default selected hidden>Selecione</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                         <div class="filtro">
                             <p>Especialização</p>
-                            <select name="especializacao" id="filtro_especializacao">
-                                <option default selected hidden value="">Selecione</option>
+                            <select name="especializacao" id="filtro_especializacao" onchange="adicionarFiltro(this)">
+                                <option default selected hidden>Selecione</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                         <div class="filtro">
                             <p>Estado</p>
-                            <select name="estado" id="filtro_estado">
-                                <option default selected hidden value="">Selecione</option>
+                            <select name="estado" id="filtro_estado" onchange="adicionarFiltro(this)">
+                                <option default selected hidden>Selecione</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                         <div class="filtro">
                             <p>Cidade</p>
-                            <select name="cidade" id="filtro_cidade">
-                                <option selected hidden value="">Selecione</option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
+                            <select name="cidade" id="filtro_cidade" onchange="adicionarFiltro(this)">
+                                <option selected hidden>Selecione</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                     </div>
@@ -397,8 +411,8 @@
                     </button>
                 </div>
             </div>
-            </div>
-        </main>
+    </div>
+    </main>
 
 </body>
 

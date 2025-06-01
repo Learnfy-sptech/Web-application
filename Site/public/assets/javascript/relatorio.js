@@ -36,7 +36,6 @@ function abrirOuFecharTodasColunas() {
 
 function adicionarRemoverCampo(elemento) {
     const elementoInput = elemento.querySelector('input')
-    const elementoSpan = elemento.querySelector('span')
     if (elementoInput.checked == false) {
         elementoInput.checked = true
     } else {
@@ -203,11 +202,44 @@ function obterInfoRelatorio(elemento) {
     })
 }
 
+function adicionarFiltro(elemento) {
+    const valorElemento = elemento.value
+    switch(elemento.id) {
+        case "filtro_ano":
+            filtrosSelecionados.ano = valorElemento
+            break;
+        case "filtro_especializacao":
+            filtrosSelecionados.especializacao = valorElemento
+            break;
+        case "filtro_estado":
+            filtrosSelecionados.estado = valorElemento
+            buscarCidadesPorEstado(valorElemento)
+            break;
+        case "filtro_cidade":
+            filtrosSelecionados.cidade = valorElemento
+            break;
+    }
+    console.log(filtrosSelecionados)
+}
+
 
 function construirMeusRelatorios(relatorios) {
-
+    
 }
 
 function adicionarRelatorioNaDiv(infoRelatorio) {
 
+}
+
+function buscarCidadesPorEstado(estado) {
+    fetch(`/relatorio/obterCidadesPorEstado/${estado}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }).then(function (resposta) {
+        if (resposta.ok) {
+           
+        }
+    })
 }

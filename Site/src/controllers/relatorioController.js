@@ -32,14 +32,14 @@ function obterRelatoriosPorId(req, res) {
 
   model.obterRelatoriosPorId(userId).then(function (resposta) {
     res.json(resposta);
-    res.status(200).send("Relatório criado com sucesso!");
+    res.status(200).send("Relatórios por Id obtidos com sucesso!");
   })
     .catch(function (erro) {
       res.status(500).json(erro.sqlMessage);
     });
 }
 
-function obterRelatoriosPorId(req, res) {
+function obterInfoRelatorio(req, res) {
   const idRelatorio = req.params.idRelatorio
 
   if (idRelatorio == undefined) {
@@ -48,7 +48,22 @@ function obterRelatoriosPorId(req, res) {
 
   model.obterInfoRelatorio(userId).then(function (resposta) {
     res.json(resposta);
-    res.status(200).send("Relatório criado com sucesso!");
+    res.status(200).send("Relatórios por Id obtidos com sucesso!");
+  })
+    .catch(function (erro) {
+      res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function obterCidadesPorEstado(req, res) {
+  const estado = req.params.estado
+  if (estado == undefined) {
+    res.status(400).send("Dados inválidos para a requisição!")
+  }
+
+  model.obterCidadesPorEstado(estado).then(function (resposta) {
+    res.json(resposta);
+    res.status(200).send("Cidades obtidas por estado!");
   })
     .catch(function (erro) {
       res.status(500).json(erro.sqlMessage);
@@ -59,4 +74,5 @@ module.exports = {
   inserirRelatorio,
   obterRelatoriosPorId,
   obterInfoRelatorio,
+  obterCidadesPorEstado,
 }
