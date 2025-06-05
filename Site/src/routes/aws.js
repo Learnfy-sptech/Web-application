@@ -15,15 +15,15 @@ const upload = multer({ storage: storage });
 dotenv.config();
 const bucketName = process.env.BUCKET_NAME
 const bucketRegion = process.env.BUCKET_REGION
-// const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-// const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
 
 const s3 = new S3Client({
     region: bucketRegion,
-    // credentials: {
-    //     accessKeyId,
-    //     secretAccessKey
-    // },
+    credentials: {
+        accessKeyId,
+        secretAccessKey
+    },
 });
 
 // Nome do campo do arquivo no formulário que vai no upload

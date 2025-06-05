@@ -136,7 +136,6 @@
   <script src="assets/javascript/awsPhoto.js"></script>
 
   <script>
-    // Function to update the tipoConta display based on account type
     function updateTipoContaDisplay() {
       const tipoConta = sessionStorage.getItem('TIPO_CONTA');
       const tipoContaDisplay = document.getElementById('tipoConta');
@@ -194,13 +193,10 @@
       }, 2000);
     });
 
-    // Update the display on page load
     window.addEventListener('load', function() {
       updateTipoContaDisplay();
       loadProfileImage();
     });
-
   </script>
 </body>
-
 </html>

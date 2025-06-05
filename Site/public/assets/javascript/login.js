@@ -52,6 +52,7 @@ function logar() {
         sessionStorage.ID_USUARIO = json.id;
         sessionStorage.TIPO_CONTA = json.tipoConta;
         sessionStorage.FOTO_USUARIO = json.foto_perfil_path 
+        sessionStorage.TELEFONE_USUARIO = json.telefone;
   
         Swal.fire({
           title: "Login realizado com sucesso!",
