@@ -11,7 +11,7 @@ function trocarTelaRelatorio() {
 
 var inputPreenchido = false
 function limparCampo(idElemento) {
-    elemento = document.getElementById(idElemento)
+    const elemento = document.getElementById(idElemento)
     if (inputPreenchido == false) {
         inputPreenchido = true
         elemento.value = ""
@@ -135,7 +135,7 @@ var filtrosSelecionados = {}
 // Rotas
 function inserirRelatorio() {
     const nome = document.getElementById('input_nome_relatorio').value
-    const fkUsuario = sessionStorage.ID_USUARIO
+    const fkUsuario = 1
     const colunas = dadosColunasRelatorio
     const filtros = filtrosSelecionados
 
@@ -167,9 +167,9 @@ function inserirRelatorio() {
                 title: "Não foi possível salvar o relatório",
                 text: "Tente novamente ou informe a central de atendimentos",
                 icon: "error",
-                showConfirmButton: true,
-                timer: 2000
-            })
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#800000"
+            });
         }
     })
 }
@@ -183,7 +183,7 @@ function obterRelatoriosPorId() {
         },
     }).then(function (resposta) {
         if (resposta.ok) {
-           
+
         }
     })
 }
@@ -197,14 +197,14 @@ function obterInfoRelatorio(elemento) {
         },
     }).then(function (resposta) {
         if (resposta.ok) {
-           
+
         }
     })
 }
 
 function adicionarFiltro(elemento) {
     const valorElemento = elemento.value
-    switch(elemento.id) {
+    switch (elemento.id) {
         case "filtro_ano":
             filtrosSelecionados.ano = valorElemento
             break;
@@ -224,7 +224,7 @@ function adicionarFiltro(elemento) {
 
 
 function construirMeusRelatorios(relatorios) {
-    
+
 }
 
 function adicionarRelatorioNaDiv(infoRelatorio) {
@@ -239,7 +239,7 @@ function buscarCidadesPorEstado(estado) {
         },
     }).then(function (resposta) {
         if (resposta.ok) {
-           
+
         }
     })
 }

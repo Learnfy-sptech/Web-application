@@ -6,15 +6,15 @@ router.post("/inserirRelatorio", function (req, res){
   relatorioController.inserirRelatorio(req, res)
 });
 
-router.get("/relatorio/obterRelatoriosPorId/:idUsuario", function (req, res) {
+router.get("/obterRelatoriosPorId/:idUsuario", function (req, res) {
   relatorioController.obterRelatoriosPorId(req, res)
 });
 
-router.get("/relatorio/obterInfoRelatorio/:idRelatorio", function (req, res) {
+router.get("/obterInfoRelatorio/:idRelatorio", function (req, res) {
   relatorioController.obterInfoRelatorio(req, res)
 });
 
-router.get("/relatorio/obterCidadesPorEstado/:estado", function (req, res) {
+router.get("/obterCidadesPorEstado/:estado", function (req, res) {
   relatorioController.obterCidadesPorEstado(req, res)
 });
 

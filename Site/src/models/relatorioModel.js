@@ -1,43 +1,34 @@
 var database = require("../database/config")
 
 function inserirRelatorio(nome, fkUsuario, colunas, filtros) {
+    console.log('Dados recebidos:', nome, fkUsuario, colunas, filtros);
+
     const instrucaoSql = `
-        INSERT INTO relatorio (nome, colunas, filtros, dt_criacao, fk_usuario) 
-        VALUES (?, ?, ?, NOW(), ?);
+        INSERT INTO relatorio_tb (nome, colunas, filtros, fk_usuario) 
+        VALUES ('${nome}', '${JSON.stringify(colunas)}', '${JSON.stringify(filtros)}', ${fkUsuario});
     `
-
-    const valores = [
-        nome,
-        JSON.stringify(colunas),
-        JSON.stringify(filtros),
-        fkUsuario
-    ]
-
-    return database.executar(instrucaoSql, valores)
+    return database.executar(instrucaoSql)
 }
 
 function obterRelatoriosPorId(id) {
     const instrucaoSql = `
-        SELECT * FROM relatorio_tb WHERE fk_usuario = ?
+        SELECT * FROM relatorio_tb WHERE fk_usuario = ${id};
     `
-    const valores = [id]
-    return database.executar(instrucaoSql, valores)
+    return database.executar(instrucaoSql)
 }
 
 function obterInfoRelatorio(id) {
     const instrucaoSql = `
-        SELECT * FROM relatorio_tb WHERE  = ?
+        SELECT * FROM relatorio_tb WHERE relatorio_id = ${id};
     `
-    const valores = [id]
-    return database.executar(instrucaoSql, valores)
+    return database.executar(instrucaoSql)
 }
 
 function obterCidadesPorEstado(estado) {
     const instrucaoSql = `
-        SELECT * FROM cidade_tb WHERE fk_uf = (SELECT id_uf FROM uf_tb WHERE nome = ?)
+        SELECT * FROM cidade_tb WHERE fk_uf = (SELECT id_uf FROM uf_tb WHERE nome = ${estado});
     `
-    const valores = [estado]
-    return database.executar(instrucaoSql, valores)
+    return database.executar(instrucaoSql)
 }
 
 module.exports = {
