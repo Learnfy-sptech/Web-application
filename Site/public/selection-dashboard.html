@@ -12,86 +12,86 @@
 </head>
 
 <body onload="loadProfileImage()">
-    <div class="sidebar open">
-      <div class="logo-details">
-        <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
-        <div class="logo_name">Learnfy</div>
-        <i class="bx bx-menu" id="btn"></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <i class='bx bx-search'></i>
-          <input type="text" placeholder="Pesquisar...">
-          <span class="tooltip">Pesquisar</span>
-        </li>
-
-        <li>
-          <a href="index.html">
-            <i class="fas fa-home"></i>
-            <span class="links_name">Home</span>
-          </a>
-          <span class="tooltip">Home</span>
-        </li>
-
-        <li>
-          <a href="edit-person.html">
-            <i class="fas fa-user"></i>
-            <span class="links_name">Perfil</span>
-          </a>
-          <span class="tooltip">Perfil</span>
-        </li>
-
-        <li>
-          <a href="relatorio.html">
-            <i class="fas fa-clipboard-list"></i>
-            <span class="links_name">Relatorios</span>
-          </a>
-          <span class="tooltip">Gestão</span>
-        </li>
-
-        <li>
-          <a href="import.html">
-            <i class="fas fa-building"></i>
-            <span class="links_name">Gestão</span>
-          </a>
-          <span class="tooltip">Gestão</span>
-        </li>
-
-        <li>
-          <a href="selection-dashboard.html">
-            <i class="fas fa-chart-pie"></i>
-            <span class="links_name">Escolher Visualização</span>
-          </a>
-          <span class="tooltip">Escolher Visualização</span>
-        </li>
-
-        <li>
-          <a href="ajuda.html">
-            <i class="fas fa-question-circle"></i>
-            <span class="links_name">Ajuda</span>
-          </a>
-          <span class="tooltip">Ajuda</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fas fa-cog"></i>
-            <span class="links_name">Configurações</span>
-          </a>
-          <span class="tooltip">Configurações</span>
-        </li>
-            <li class="profile">
-                <div class="profile-details">
-                    <img id="profileImg" alt="Foto do usuário">
-                    <div class="name_job">
-                        <p class="name" id="nomeUsuario"></p>
-                        <small class="job" id="tipoContaUsuario"></small>
-                    </div>
-                </div>
-                <i class="fas fa-sign-out-alt" id="log_out"></i>
-            </li>
-      </ul>
+  <div class="sidebar open">
+    <div class="logo-details">
+      <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
+      <div class="logo_name">Learnfy</div>
+      <i class="bx bx-menu" id="btn"></i>
     </div>
+    <ul class="nav-list">
+      <li>
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="Pesquisar...">
+        <span class="tooltip">Pesquisar</span>
+      </li>
+
+      <li>
+        <a href="index.html">
+          <i class="fas fa-home"></i>
+          <span class="links_name">Home</span>
+        </a>
+        <span class="tooltip">Home</span>
+      </li>
+
+      <li>
+        <a href="edit-person.html">
+          <i class="fas fa-user"></i>
+          <span class="links_name">Perfil</span>
+        </a>
+        <span class="tooltip">Perfil</span>
+      </li>
+
+      <li>
+        <a href="relatorio.html">
+          <i class="fas fa-clipboard-list"></i>
+          <span class="links_name">Relatorios</span>
+        </a>
+        <span class="tooltip">Gestão</span>
+      </li>
+
+      <li>
+        <a href="import.html">
+          <i class="fas fa-building"></i>
+          <span class="links_name">Gestão</span>
+        </a>
+        <span class="tooltip">Gestão</span>
+      </li>
+
+      <li>
+        <a href="selection-dashboard.html">
+          <i class="fas fa-chart-pie"></i>
+          <span class="links_name">Escolher Visualização</span>
+        </a>
+        <span class="tooltip">Escolher Visualização</span>
+      </li>
+
+      <li>
+        <a href="ajuda.html">
+          <i class="fas fa-question-circle"></i>
+          <span class="links_name">Ajuda</span>
+        </a>
+        <span class="tooltip">Ajuda</span>
+      </li>
+
+      <li>
+        <a href="#">
+          <i class="fas fa-cog"></i>
+          <span class="links_name">Configurações</span>
+        </a>
+        <span class="tooltip">Configurações</span>
+      </li>
+      <li class="profile">
+        <div class="profile-details">
+          <img id="profileImg" alt="Foto do usuário">
+          <div class="name_job">
+            <p class="name" id="nomeUsuario"></p>
+            <small class="job" id="tipoContaUsuario"></small>
+          </div>
+        </div>
+        <i class="fas fa-sign-out-alt" id="log_out"></i>
+      </li>
+    </ul>
+  </div>
 
   <div class="topbar">
     <button class="back-button" onclick="history.back()">
@@ -110,29 +110,97 @@
             style="background-image: url('https://img.freepik.com/free-photo/location-symbol-with-landscape-background_23-2149906278.jpg');">
           </div>
           <div class="card__info">
-            <div class="card__category">Dashboard</div>
-            <div class="card__title">Dados do Brasil inteiro</div>
+            <div class="card__category">Visão</div>
+            <div class="card__title">Dashboard Geral</div>
           </div>
         </a>
       </div>
 
       <div class="card">
-        <a href="dashboard-area.html">
+        <a href="" id="dashboardAreaLink">
           <i class="fas fa-briefcase"></i>
           <div class="card__img"
             style="background-image: url('https://img.freepik.com/premium-photo/close-up-teamwork-member-hand-shake_35752-1776.jpg');">
           </div>
           <div class="card__info">
-            <div class="card__category">Dashboard</div>
-            <div class="card__title"><small class="job" id="tipoContaUsuario"></small></div>
+            <div class="card__category">Area</div>
+            <div class="card__title"><p id="tipoConta"></p></div>
           </div>
+        </a>
       </div>
-      </a>
     </div>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/javascript/sidebar.js"></script>
   <script src="assets/javascript/awsPhoto.js"></script>
+
+  <script>
+    // Function to update the tipoConta display based on account type
+    function updateTipoContaDisplay() {
+      const tipoConta = sessionStorage.getItem('TIPO_CONTA');
+      const tipoContaDisplay = document.getElementById('tipoConta');
+      const tipoContaUsuarioDisplay = document.getElementById('tipoContaUsuario');
+
+      let displayText = 'Dashboard Padrão';
+      let userTypeText = 'Usuário';
+
+      if (tipoConta === 'DIRETOR') {
+        displayText = 'Dashboard Diretor';
+        userTypeText = 'Diretor';
+      } else if (tipoConta === 'GESTOR') {
+        displayText = 'Dashboard Gestor';
+        userTypeText = 'Gestor';
+      } else if (tipoContQUIa === 'PESSADOR') {
+        displayText = 'Dashboard Pesquisador';
+        userTypeText = 'Pesquisador';
+      }
+
+      tipoContaDisplay.textContent = displayText;
+      tipoContaUsuarioDisplay.textContent = userTypeText;
+    }
+
+    document.getElementById('dashboardAreaLink').addEventListener('click', function (event) {
+      event.preventDefault();
+
+      const tipoConta = sessionStorage.getItem('TIPO_CONTA');
+
+      if (tipoConta === 'DIRETOR') {
+        window.location.href = 'dashboard-diretor.html';
+      } else if (tipoConta === 'GESTOR') {
+        window.location.href = 'dashboard-gestor.html';
+      } else if (tipoConta === 'PESQUISADOR') {
+        window.location.href = 'dashboard-pesquisador.html';
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro',
+          text: 'Tipo de conta inválido ou não definido.',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
+
+      Swal.fire({
+        title: 'Carregando Dashboard',
+        text: 'Por favor, aguarde...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+      setTimeout(() => {
+        Swal.close();
+      }, 2000);
+    });
+
+    // Update the display on page load
+    window.addEventListener('load', function() {
+      updateTipoContaDisplay();
+      loadProfileImage();
+    });
+
+  </script>
 </body>
+
 </html>

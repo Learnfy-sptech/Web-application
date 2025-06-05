@@ -66,7 +66,7 @@
             <div class="nav-user-info" id="navUsuario" style="display: none;">
                 <img id="profileImg" alt="Foto do usuário">
                 <span id="nomeUsuario"></span>
-                <a href="dashboard-area.html">
+                <a href="selection-dashboard.html">
                     <button class="btn-default">Dashboard</button>
                 </a>
                 <button id="btnSair" class="btn-default">Sair</button>
@@ -433,10 +433,11 @@
         </div>
     </footer>
     <script src="assets/javascript/script.js"></script>
+    <script src="assets/javascript/awsPhoto.js"></script>
+
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/javascript/email.js"></script>
-    <script src="assets/javascript/awsPhoto.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", function () {
             const nome = sessionStorage.getItem("NOME_USUARIO");
@@ -456,13 +457,30 @@
                 if (btnSair) {
                     btnSair.addEventListener("click", function () {
                         sessionStorage.clear();
-                        window.location.href = "index.html"; // Redireciona para home
+                        window.location.href = "index.html"; 
                     });
                 }
             }
         });
+
+                async function loadProfileImage() {
+            const imgEl = document.getElementById("profileImg");
+            const userId = sessionStorage.getItem("ID_USUARIO");
+            if (!userId || !imgEl) return;
+
+            try {
+                const res = await fetch(`/aws/usuarios/${userId}/importar-imagem`);
+                if (!res.ok) {
+                    // imagem não existe ou outro erro: mantém o src padrão  
+                    console.warn("Não foi possível carregar a imagem de perfil:", res.status);
+                    return;
+                }
+                const { imageUrl } = await res.json();
+                imgEl.src = imageUrl;
+            } catch (err) {
+                console.error("Erro ao carregar imagem de perfil:", err);
+            }
+        }
     </script>
-
 </body>
-
 </html>
