@@ -104,6 +104,20 @@ section {
   height: calc(100% - 140px);
 }
 
+.mobile-buttons,
+.mobile-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.mobile-user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 
 .sidebar li {
   position: relative;
