@@ -1,3 +1,6 @@
+const { SessionCredentialsFilterSensitiveLog } = require("@aws-sdk/client-s3");
+const { application, json } = require("express");
+
 function criarNovoRelatorio() {
     trocarTelaRelatorio()
 }
@@ -135,7 +138,7 @@ var filtrosSelecionados = {}
 // Rotas
 function inserirRelatorio() {
     const nome = document.getElementById('input_nome_relatorio').value
-    const fkUsuario = 1
+    const fkUsuario = sessionStorage.ID_USUARIO
     const colunas = dadosColunasRelatorio
     const filtros = filtrosSelecionados
 
@@ -147,17 +150,17 @@ function inserirRelatorio() {
         body: JSON.stringify({
             nome,
             fkUsuario,
-            colunas,
-            filtros
+            colunas: Array.isArray(colunas) ? colunas : [],
+            filtros: typeof filtros === "object" ? filtros : {}
         })
     }).then(function (resposta) {
         if (resposta.ok) {
             Swal.fire({
                 title: "Relatório Salvo com Sucesso!",
                 text: "A partir de agora ele já está disponível para ser importado :)",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 2000
+                // icon: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#800000"
             })
             setTimeout(function () {
                 window.location("relatorio.html")
@@ -166,13 +169,14 @@ function inserirRelatorio() {
             Swal.fire({
                 title: "Não foi possível salvar o relatório",
                 text: "Tente novamente ou informe a central de atendimentos",
-                icon: "error",
+                // icon: "error",
                 confirmButtonText: "Ok",
                 confirmButtonColor: "#800000"
             });
         }
     })
 }
+
 
 function obterRelatoriosPorId() {
     const idUsuario = sessionStorage.ID_USUARIO
@@ -183,7 +187,9 @@ function obterRelatoriosPorId() {
         },
     }).then(function (resposta) {
         if (resposta.ok) {
-
+            resposta.json().then(json => {
+                construirMeusRelatorios(json)
+            })
         }
     })
 }
@@ -197,26 +203,33 @@ function obterInfoRelatorio(elemento) {
         },
     }).then(function (resposta) {
         if (resposta.ok) {
-
+            Swal.fire({
+                title: "Relatório Salvo com Sucesso!",
+                text: "A partir de agora ele já está disponível para ser importado :)",
+                // icon: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#800000"
+            })
+            obterRelatoriosPorId()
         }
     })
 }
 
 function adicionarFiltro(elemento) {
-    const valorElemento = elemento.value
+    console.log(elemento)
     switch (elemento.id) {
         case "filtro_ano":
-            filtrosSelecionados.ano = valorElemento
+            filtrosSelecionados.ano = elemento.value
             break;
         case "filtro_especializacao":
-            filtrosSelecionados.especializacao = valorElemento
+            filtrosSelecionados.especializacao = elemento.value
             break;
         case "filtro_estado":
-            filtrosSelecionados.estado = valorElemento
-            buscarCidadesPorEstado(valorElemento)
+            filtrosSelecionados.estado = elemento.value
+            buscarCidadesPorEstado(elemento.value)
             break;
         case "filtro_cidade":
-            filtrosSelecionados.cidade = valorElemento
+            filtrosSelecionados.cidade = elemento.value
             break;
     }
     console.log(filtrosSelecionados)
@@ -224,11 +237,49 @@ function adicionarFiltro(elemento) {
 
 
 function construirMeusRelatorios(relatorios) {
+    document.getElementById("meus_relatorios").innerHTML = ''
+    relatorios.forEach((relatorio) => {
+        adicionarRelatorioNaDiv(relatorio)
+    })
 
 }
 
-function adicionarRelatorioNaDiv(infoRelatorio) {
 
+function adicionarRelatorioNaDiv(infoRelatorio) {
+    const divMeusRelatorios = document.getElementById('meus_relatorios')
+
+    const idRelatorioCompleto = `relatorio_${infoRelatorio.id_relatorio}`
+
+    divMeusRelatorios.innerHTML += `
+        <div class="relatorio" id="${idRelatorioCompleto}">
+            <div class="sessao-relatorio sessao-01">
+                <div>
+                    <p id="nome_relatorio">${infoRelatorio.nome}</p>
+                </div>
+                <div class="img-edit-relatorio">
+                    <img src="assets/images/edit-text.png" onclick="editarRelatorio(${idRelatorioCompleto})" alt="">
+                    <img src="assets/images/delete.png" onclick="deletarRelatorio(${idRelatorioCompleto})" alt="">
+                </div>
+            </div>
+            <div class="sessao-relatorio sessao-02">
+                <p>
+                    Colunas:
+                    <span id="colunas_relatorio">${infoRelatorio.colunas}</span>
+                </p>
+                <p>
+                    Filtros:
+                    <span id="filtro_relatorio">${infoRelatorio.filtros}</span>
+                </p>
+            </div>
+            <div class="sessao-relatorio sessao-03">
+                <p>
+                    Criado em:
+                    <span id="criado_relatorio">${infoRelatorio.dt_criacao}</span>
+                </p>
+                <button onclick="exportarRelatorio()">Exportar</button>
+            </div>
+        </div>
+    `
 }
 
 function buscarCidadesPorEstado(estado) {
@@ -242,4 +293,26 @@ function buscarCidadesPorEstado(estado) {
 
         }
     })
+}
+
+function deletarRelatorio(elemento) {
+    const idRelatorio = elemento.id.replace("relatorio_","")
+    fetch(`/relatorio/deletarRelatorioPorId/${idRelatorio}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            Swal.fire({
+                title: "Relatório Deletedo com Sucesso!",
+                text: "Mas você ainda pode gerar outros relatórios, vá em frente :)",
+                // icon: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#800000"
+            })
+            obterRelatoriosPorId()
+        }
+    })
+
 }

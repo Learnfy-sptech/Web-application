@@ -31,9 +31,17 @@ function obterCidadesPorEstado(estado) {
     return database.executar(instrucaoSql)
 }
 
+function deletarRelatorioPorId(id) {
+    const instrucaoSql = `
+        DELETE FROM relatorio_tb WHERE id_relatorio = ${id};
+    `
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     inserirRelatorio,
     obterRelatoriosPorId,
     obterInfoRelatorio,
     obterCidadesPorEstado,
+    deletarRelatorioPorId
 }

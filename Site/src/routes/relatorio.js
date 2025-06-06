@@ -18,4 +18,8 @@ router.get("/obterCidadesPorEstado/:estado", function (req, res) {
   relatorioController.obterCidadesPorEstado(req, res)
 });
 
+router.delete("/deletarRelatorioPorId/:idRelatorio", function (req, res) {
+  relatorioController.deletarRelatorioPorId(req, res)
+})
+
 module.exports = router;

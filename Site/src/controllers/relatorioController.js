@@ -6,7 +6,7 @@ function inserirRelatorio(req, res) {
   const colunas = req.body.colunas
   const filtros = req.body.filtros
 
-  console.log(`[INSERIR RELATÓRIO] Dados recebidos: ${req.body}`)
+  console.log(`[INSERIR RELATÓRIO] Dados recebidos: ${toString(req.body)}`)
 
   if (fkUsuario == undefined ||
     nome == undefined ||
@@ -17,8 +17,7 @@ function inserirRelatorio(req, res) {
   }
 
   model.inserirRelatorio(nome, fkUsuario, colunas, filtros).then(function (resposta) {
-    res.json(resposta);
-    return res.status(200).send("Relatório criado com sucesso!");
+    return res.json(resposta).status(200)
   })
     .catch(function (erro) {
       return res.status(500).json(erro.sqlMessage);
@@ -28,55 +27,71 @@ function inserirRelatorio(req, res) {
 function obterRelatoriosPorId(req, res) {
   const userId = req.params.idUsuario
 
-   console.log(`[OBTER RELATÓRIOS POR ID] Dados recebidos: ${req.params}`)
+  console.log(`[OBTER RELATÓRIOS POR ID] Dados recebidos: ${toString(req.params)}`)
 
   if (userId == undefined) {
-    res.status(400).send("Dados inválidos para a requisição!")
+    return res.status(400).send("Dados inválidos para a requisição!")
   }
 
   model.obterRelatoriosPorId(userId).then(function (resposta) {
-    res.json(resposta);
-    res.status(200).send("Relatórios por Id obtidos com sucesso!");
+    return res.json(resposta).status(200)
   })
     .catch(function (erro) {
-      res.status(500).json(erro.sqlMessage);
+      return res.status(500).json(erro.sqlMessage);
     });
 }
 
 function obterInfoRelatorio(req, res) {
   const idRelatorio = req.params.idRelatorio
 
-  console.log(`[OBTER INFO RELATÓRIO] Dados recebidos: ${req.params}`)
+  console.log(`[OBTER INFO RELATÓRIO] Dados recebidos: ${toString(req.params)}`)
 
   if (idRelatorio == undefined) {
-    res.status(400).send("Dados inválidos para a requisição!")
+    return res.status(400).send("Dados inválidos para a requisição!")
   }
 
   model.obterInfoRelatorio(userId).then(function (resposta) {
-    res.json(resposta);
-    res.status(200).send("Relatórios por Id obtidos com sucesso!");
+    return res.json(resposta).status(200).send('Relatórios por Id obtidos com sucesso!');
   })
     .catch(function (erro) {
-      res.status(500).json(erro.sqlMessage);
+      return res.status(500).json(erro.sqlMessage);
     });
 }
 
 function obterCidadesPorEstado(req, res) {
   const estado = req.params.estado
 
-  console.log(`[OBTER CIDADE POR ESTADO] Dados recebidos: ${req.params}`)
+  console.log(`[OBTER CIDADE POR ESTADO] Dados recebidos: ${toString(req.params)}`)
 
   if (estado == undefined) {
-    res.status(400).send("Dados inválidos para a requisição!")
+    return res.status(400).send("Dados inválidos para a requisição!")
   }
 
   model.obterCidadesPorEstado(estado).then(function (resposta) {
-    res.json(resposta);
-    res.status(200).send("Cidades obtidas por estado!");
+    return res.json(resposta).status(200);
   })
     .catch(function (erro) {
-      res.status(500).json(erro.sqlMessage);
+      return res.status(500).json(erro.sqlMessage);
     });
+}
+
+function deletarRelatorioPorId(req, res) {
+
+  const idRelatorio = req.params.idRelatorio
+
+  console.log(`[DELETAR RELATÓRIO POR ID] Dados recebidos: ${toString(req.params)}`)
+
+  if (idRelatorio == undefined) {
+    return res.status(400).send("Dados inválidos para a requisição!")
+  }
+
+  model.deletarRelatorioPorId(idRelatorio).then(function (resposta) {
+    return res.status(200).send("Relatório deletado com sucesso!")
+  })
+    .catch(function (erro) {
+      return res.status(500).json(erro.sqlMessage);
+    })
+
 }
 
 module.exports = {
@@ -84,4 +99,5 @@ module.exports = {
   obterRelatoriosPorId,
   obterInfoRelatorio,
   obterCidadesPorEstado,
+  deletarRelatorioPorId
 }
