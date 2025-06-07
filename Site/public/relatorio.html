@@ -79,10 +79,9 @@
                 </a>
                 <span class="tooltip">Configurações</span>
             </li>
-
             <li class="profile">
                 <div class="profile-details">
-                    <img id="profileImg" alt="Foto de perfil">
+                    <img id="profileImg" alt="Foto do usuário">
                     <div class="name_job">
                         <p class="name" id="nomeUsuario"></p>
                         <small class="job" id="tipoContaUsuario"></small>
@@ -93,295 +92,203 @@
         </ul>
     </div>
 
-    <div class="topbar">
-        <button class="back-button" onclick="history.back()">
-            <i class="fas fa-arrow-left"></i>
-            Voltar
-        </button>
-        <h1 class="page-title">Relatorios</h1>
-    </div>
-
     <section>
         <div class="main">
             <main>
                 <div class="relatorio-general" id="relatorio_general">
+                    <div class="navegacao">
+                        <button class="back-button" onclick="history.back()">
+                            <i class="fas fa-arrow-left"></i>
+                            Voltar
+                        </button>
+                        <a href="" onclick="">Meus Relatórios</a>
+                    </div>
                     <div class="titulo">
                         <h2>Meus Relatórios</h2>
                     </div>
-                    <div class="meus-relatorios">
-                        <div class="relatorio">
-                            <div class="sessao-relatorio sessao-01">
-                                <div>
-                                    <p id="nome_relatorio">Nome do Relatório 1</p>
-                                </div>
-                                <div class="img-edit-relatorio">
-                                    <img src="assets/images/edit-text.png" alt="">
-                                    <img src="assets/images/delete.png" alt="">
-                                </div>
+                    <div id="meus_relatorios" class="meus-relatorios">
+                        <!-- MODELO RELATÓRIO -->
+                        <!-- <div class="relatorio">
+                        <div class="sessao-relatorio sessao-01">
+                            <div>
+                                <p id="nome_relatorio">Nome do Relatório 1</p>
                             </div>
-                            <div class="sessao-relatorio sessao-02">
-                                <p>
-                                    Colunas:
-                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
-                                        Incritos</span>
-                                </p>
-                                <p>
-                                    Filtros:
-                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
-                                </p>
-                            </div>
-                            <div class="sessao-relatorio sessao-03">
-                                <p>
-                                    Criado em:
-                                    <span id="criado_relatorio">20/06/2025</span>
-                                </p>
-                                <button onclick="exportarRelatorio()">Exportar</button>
+                            <div class="img-edit-relatorio">
+                                <img src="assets/images/edit-text.png" alt="">
+                                <img src="assets/images/delete.png" alt="">
                             </div>
                         </div>
-                        <div class="relatorio">
-                            <div class="sessao-relatorio sessao-01">
-                                <div>
-                                    <p id="nome_relatorio">Nome do Relatório 1</p>
-                                </div>
-                                <div class="img-edit-relatorio">
-                                    <img src="assets/images/edit-text.png" alt="">
-                                    <img src="assets/images/delete.png" alt="">
-                                </div>
-                            </div>
-                            <div class="sessao-relatorio sessao-02">
-                                <p>
-                                    Colunas:
-                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
-                                        Incritos</span>
-                                </p>
-                                <p>
-                                    Filtros:
-                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
-                                </p>
-                            </div>
-                            <div class="sessao-relatorio sessao-03">
-                                <p>
-                                    Criado em:
-                                    <span id="criado_relatorio">20/06/2025</span>
-                                </p>
-                                <button onclick="exportarRelatorio()">Exportar</button>
-                            </div>
+                        <div class="sessao-relatorio sessao-02">
+                            <p>
+                                Colunas:
+                                <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de Incritos</span>
+                            </p>
+                            <p>
+                                Filtros:
+                                <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
+                            </p>
                         </div>
-                        <div class="relatorio">
-                            <div class="sessao-relatorio sessao-01">
-                                <div>
-                                    <p id="nome_relatorio">Nome do Relatório 1</p>
-                                </div>
-                                <div class="img-edit-relatorio">
-                                    <img src="assets/images/edit-text.png" alt="">
-                                    <img src="assets/images/delete.png" alt="">
-                                </div>
-                            </div>
-                            <div class="sessao-relatorio sessao-02">
-                                <p>
-                                    Colunas:
-                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
-                                        Incritos</span>
-                                </p>
-                                <p>
-                                    Filtros:
-                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
-                                </p>
-                            </div>
-                            <div class="sessao-relatorio sessao-03">
-                                <p>
-                                    Criado em:
-                                    <span id="criado_relatorio">20/06/2025</span>
-                                </p>
-                                <button onclick="exportarRelatorio()">Exportar</button>
-                            </div>
+                        <div class="sessao-relatorio sessao-03">
+                            <p>
+                                Criado em:
+                                <span id="criado_relatorio">20/06/2025</span>
+                            </p>
+                            <button onclick="exportarRelatorio()">Exportar</button>
                         </div>
-                        <div class="relatorio">
-                            <div class="sessao-relatorio sessao-01">
-                                <div>
-                                    <p id="nome_relatorio">Nome do Relatório 1</p>
-                                </div>
-                                <div class="img-edit-relatorio">
-                                    <img src="assets/images/edit-text.png" alt="">
-                                    <img src="assets/images/delete.png" alt="">
-                                </div>
-                            </div>
-                            <div class="sessao-relatorio sessao-02">
-                                <p>
-                                    Colunas:
-                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
-                                        Incritos</span>
-                                </p>
-                                <p>
-                                    Filtros:
-                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
-                                </p>
-                            </div>
-                            <div class="sessao-relatorio sessao-03">
-                                <p>
-                                    Criado em:
-                                    <span id="criado_relatorio">20/06/2025</span>
-                                </p>
-                                <button onclick="exportarRelatorio()">Exportar</button>
-                            </div>
-                        </div>
-                        <div class="relatorio">
-                            <div class="sessao-relatorio sessao-01">
-                                <div>
-                                    <p id="nome_relatorio">Nome do Relatório 1</p>
-                                </div>
-                                <div class="img-edit-relatorio">
-                                    <img src="assets/images/edit-text.png" alt="">
-                                    <img src="assets/images/delete.png" alt="">
-                                </div>
-                            </div>
-                            <div class="sessao-relatorio sessao-02">
-                                <p>
-                                    Colunas:
-                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
-                                        Incritos</span>
-                                </p>
-                                <p>
-                                    Filtros:
-                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
-                                </p>
-                            </div>
-                            <div class="sessao-relatorio sessao-03">
-                                <p>
-                                    Criado em:
-                                    <span id="criado_relatorio">20/06/2025</span>
-                                </p>
-                                <button onclick="exportarRelatorio()">Exportar</button>
-                            </div>
-                        </div>
-                        <div class="relatorio">
-                            <div class="sessao-relatorio sessao-01">
-                                <div>
-                                    <p id="nome_relatorio">Nome do Relatório 1</p>
-                                </div>
-                                <div class="img-edit-relatorio">
-                                    <img src="assets/images/edit-text.png" alt="">
-                                    <img src="assets/images/delete.png" alt="">
-                                </div>
-                            </div>
-                            <div class="sessao-relatorio sessao-02">
-                                <p>
-                                    Colunas:
-                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
-                                        Incritos</span>
-                                </p>
-                                <p>
-                                    Filtros:
-                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
-                                </p>
-                            </div>
-                            <div class="sessao-relatorio sessao-03">
-                                <p>
-                                    Criado em:
-                                    <span id="criado_relatorio">20/06/2025</span>
-                                </p>
-                                <button onclick="exportarRelatorio()">Exportar</button>
-                            </div>
-                        </div>
-                        <div class="relatorio">
-                            <div class="sessao-relatorio sessao-01">
-                                <div>
-                                    <p id="nome_relatorio">Nome do Relatório 1</p>
-                                </div>
-                                <div class="img-edit-relatorio">
-                                    <img src="assets/images/edit-text.png" alt="">
-                                    <img src="assets/images/delete.png" alt="">
-                                </div>
-                            </div>
-                            <div class="sessao-relatorio sessao-02">
-                                <p>
-                                    Colunas:
-                                    <span id="colunas_relatorio">Ano, Cidade, Estado, Curso e Quantidade de
-                                        Incritos</span>
-                                </p>
-                                <p>
-                                    Filtros:
-                                    <span id="filtro_relatorio">Ano - 2023, Cidade - São Paulo</span>
-                                </p>
-                            </div>
-                            <div class="sessao-relatorio sessao-03">
-                                <p>
-                                    Criado em:
-                                    <span id="criado_relatorio">20/06/2025</span>
-                                </p>
-                                <button onclick="exportarRelatorio()">Exportar</button>
-                            </div>
-                        </div>
+                    </div> -->
                     </div>
                     <div class="finally-button">
                         <button onclick="criarNovoRelatorio()">Novo Relatório</button>
                     </div>
                 </div>
+                <div class="oculto pop-up todas-colunas-geral" id="todas_colunas_geral">
+                    <div class="todas-colunas" id="todas_colunas">
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 0</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 1</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 2</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 3</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 4</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 5</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 6</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 7</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 8</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 9</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>Teste Nome Coluna 10</span>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                    </div>
+                    <div class="finally-button">
+                        <button id="selecionar_todos" onclick="selecionarTodos()">Selecionar Todos</button>
+                        <button id="btn_fechar_colunas"
+                            onclick="abrirOuFecharTodasColunas(); preencherCamposEscolhidos()">
+                            <span>Fechar</span>
+                            <img src="assets/images/close.png" alt="">
+                        </button>
+                    </div>
+                </div>
                 <div class="relatorio-general oculto" id="info_relatorio">
+                    <div class="navegacao">
+                        <button class="back-button" onclick="history.back()">
+                            <i class="fas fa-arrow-left"></i>
+                            Voltar
+                        </button>
+                        <a href="" onclick="voltarAosMeusRelatorios()">Meus Relatórios</a>/
+                        <a href="" id="relatorio_atual">Novo Relatório</a>
+                    </div>
                     <div class="titulo">
                         <input id="input_nome_relatorio" type="text"
                             onblur="validarInputVazio('input_nome_relatorio','Nome do Relatório')"
                             onclick="limparCampo('input_nome_relatorio')" value="Nome do Relatório">
                         <img src="assets/images/edit-text.png" onclick="limparCampo('input_nome_relatorio')" alt="">
                     </div>
-                    <div class="colunas">
-                        <p class="subtitulo">Colunas</p>
-                        <div class="colunas-buttons">
-                            <input type="text" placeholder="Digite aqui para pesquisar" onkeydown="procurarColunas()"
-                                name="" id="colunas_search" class="colunas-search">
-                            <button onclick="mostrarTodasColunas()">Ver todas</button>
-                        </div>
-                        <div class="campos-selecionados" id="campos_selecionados">
-                        </div>
-                    </div>
                     <div class="filtros">
                         <p class="subtitulo">Filtros (Opcional)</p>
                         <div class="escolher-filtros">
                             <div class="filtro">
                                 <p>Ano</p>
-                                <select name="ano" id="filtro_ano">
-                                    <option default selected hidden value="">Selecione</option>
+                                <select name="ano" id="filtro_ano" onchange="adicionarFiltro(this)">
+                                    <option default selected hidden>Selecione</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div class="filtro">
                                 <p>Especialização</p>
-                                <select name="especializacao" id="filtro_especializacao">
-                                    <option default selected hidden value="">Selecione</option>
+                                <select name="especializacao" id="filtro_especializacao"
+                                    onchange="adicionarFiltro(this)">
+                                    <option default selected hidden>Selecione</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div class="filtro">
                                 <p>Estado</p>
-                                <select name="estado" id="filtro_estado">
-                                    <option default selected hidden value="">Selecione</option>
+                                <select name="estado" id="filtro_estado" onchange="adicionarFiltro(this)">
+                                    <option default selected hidden>Selecione</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div class="filtro">
                                 <p>Cidade</p>
-                                <select name="cidade" id="filtro_cidade">
-                                    <option selected hidden value="">Selecione</option>
-                                    <option value=""></option>
-                                    <option value=""></option>
-                                    <option value=""></option>
+                                <select name="cidade" id="filtro_cidade" onchange="adicionarFiltro(this)">
+                                    <option selected hidden>Selecione</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                         </div>
                         <p></p>
                     </div>
+
+
+                    <div class="colunas">
+                        <p class="subtitulo">Colunas</p>
+                        <div class="colunas-buttons">
+                            <!-- <input type="text" placeholder="Digite aqui para pesquisar" onkeydown="procurarColunas()"
+                            name="" id="colunas_search" class="colunas-search"> -->
+                            <button onclick="abrirOuFecharTodasColunas(); verificarCamposPreenchidos()">Clique aqui para
+                                Selecionar</button>
+                        </div>
+                        <div class="campos-selecionados" id="campos_selecionados">
+                        </div>
+                    </div>
+                    
                     <div class="finally-button">
-                        <button onclick="salvarRelatorio(); exportar()">Salvar e Exportar</button>
-                        <button onclick="salvarRelatorio()">
+                        <button onclick="inserirRelatorio(); exportar()">Salvar e Exportar</button>
+                        <button onclick="inserirRelatorio()">
                             Salvar
                         </button>
                     </div>
                 </div>
         </div>
         </main>
+
     </section>
 
     <script>
-     window.addEventListener('load', function() {
-      loadProfileImage();
-    });
+        window.addEventListener('load', function () {
+            loadProfileImage();
+        });
     </script>
 
     <script src="assets/javascript/awsPhoto.js"></script>
@@ -389,4 +296,5 @@
     <script src="assets/javascript/sidebar.js"></script>
     <script src="assets/javascript/relatorio.js"></script>
 </body>
+
 </html>
