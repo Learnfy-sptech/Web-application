@@ -23,7 +23,7 @@ section{
   margin-left: 150px;
 }
 
-.card-select {
+.card-select{
   position: relative;
   width: 500px;
   min-height: 500px;
@@ -35,9 +35,9 @@ section{
   cursor: pointer;
 }
 
-.card:hover {
+.card-select:hover {
   transform: scale(1.05);
-  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card__img {
@@ -53,11 +53,11 @@ section{
   border-radius: 20px;
 }
 
-.card:hover .card__img {
+.card-select:hover .card__img {
   filter: brightness(0.75);
 }
 
-.card i {
+.card-select i {
   position: absolute;
   top: 16px;
   left: 16px;
