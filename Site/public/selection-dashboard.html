@@ -144,15 +144,15 @@
       let displayText = 'Dashboard Padrão';
       let userTypeText = 'Usuário';
 
-      if (tipoConta === 'DIRETOR') {
+      if (tipoConta === 'DIRETOR ACADEMICO') {
         displayText = 'Dashboard Diretor';
-        userTypeText = 'Diretor';
+        userTypeText = 'DIRETOR ACADEMICO';
       } else if (tipoConta === 'GESTOR') {
         displayText = 'Dashboard Gestor';
-        userTypeText = 'Gestor';
-      } else if (tipoContQUIa === 'PESSADOR') {
+        userTypeText = 'GESTOR';
+      } else if (tipoConta === 'PESQUISADOR') {
         displayText = 'Dashboard Pesquisador';
-        userTypeText = 'Pesquisador';
+        userTypeText = 'PESQUISADOR';
       }
 
       tipoContaDisplay.textContent = displayText;
@@ -164,7 +164,7 @@
 
       const tipoConta = sessionStorage.getItem('TIPO_CONTA');
 
-      if (tipoConta === 'DIRETOR') {
+      if (tipoConta === 'DIRETOR ACADEMICO') {
         window.location.href = 'dashboard-diretor.html';
       } else if (tipoConta === 'GESTOR') {
         window.location.href = 'dashboard-gestor.html';

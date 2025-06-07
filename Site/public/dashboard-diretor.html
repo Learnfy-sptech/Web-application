@@ -104,8 +104,9 @@
         <i class="fas fa-arrow-left"></i>
         Voltar
       </button>
-      <h1 class="page-title">Dashboard - <small class="job" id="tipoContaUsuario"></small></h1>
-
+      <h1 class="page-title">
+        Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
+      </h1>
       <form id="formFiltroCompleto" action="#" method="GET">
         <div class="filter">
           <div class="custom-select-wrapper">
@@ -169,13 +170,37 @@
       </div>
     </div>
   </section>
+</body>
+</html>
   <script src="assets/javascript/sidebar.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/javascript/filterLogic.js"></script>
-</body>
+  <script src="assets/javascript/awsPhoto.js"></script>
 
-</html>
-<script>
+  <script>
+    function mostarNomeH1() {
+      const tipoConta = sessionStorage.getItem('TIPO_CONTA');
+      const tipoContaTitulo = document.getElementById('tipoContaUsuarioTitulo');
+
+      if (tipoConta === 'DIRETOR ACADEMICO') {
+        userTypeText = 'Diretor';
+      } else if (tipoConta === 'GESTOR') {
+        userTypeText = 'Gestor';
+      } else if (tipoConta === 'PESQUISADOR') {
+        userTypeText = 'Pesquisador';
+      }
+
+      if (tipoContaTitulo) tipoContaTitulo.textContent = userTypeText;
+    }
+
+    window.addEventListener('load', function () {
+      mostarNomeH1();
+      loadProfileImage();
+    });
+
+
+
+
   // HIGHCHARTS - Gráficos específicos da dashboard Diretor
   const pieChart = document.getElementById('pieChart')
   const container = document.getElementById('container')

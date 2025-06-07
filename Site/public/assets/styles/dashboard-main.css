@@ -21,7 +21,7 @@
   background: none;
   color: #8b8ba7;
 }
-/* styling of whole input container */
+
 .form {
   --timing: 0.3s;
   --width-of-input: 200px;
@@ -40,7 +40,7 @@
   transition: border-radius 0.5s ease;
   background: var(--input-bg,#fff);
 }
-/* styling of Input */
+
 .input {
   font-size: 0.9rem;
   background-color: transparent;
@@ -55,7 +55,8 @@
   color: #333;
   padding-left: 3px;
 }
-/* styling of animated border */
+ 
+
 .form:before {
   content: "";
   position: absolute;
@@ -69,7 +70,7 @@
   border-radius: 1px;
   transition: transform var(--timing) ease;
 }
-/* Hover on Input */
+
 .form:focus-within {
   border-radius: var(--after-border-radius);
 }
@@ -77,24 +78,24 @@
 input:focus {
   outline: none;
 }
-/* here is code of animated border */
+
 .form:focus-within:before {
   transform: scale(1);
 }
-/* styling of close button */
-/* == you can click the close button to remove text == */
+
+
 .reset {
   border: none;
   background: none;
   opacity: 0;
   visibility: hidden;
 }
-/* close button shown when typing */
+
 input:not(:placeholder-shown) ~ .reset {
   opacity: 1;
   visibility: visible;
 }
-/* sizing svg icons */
+
 .form svg {
   width: 17px;
   margin-top: 3px;
