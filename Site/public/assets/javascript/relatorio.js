@@ -12,6 +12,11 @@ function trocarTelaRelatorio() {
     infoRelatorio.classList.toggle("oculto");
 }
 
+function voltarAosMeusRelatorios() {
+    trocarTelaRelatorio()
+    obterRelatoriosPorId()
+}
+
 var inputPreenchido = false
 function limparCampo(idElemento) {
     const elemento = document.getElementById(idElemento)
@@ -161,10 +166,9 @@ function inserirRelatorio() {
                 // icon: "success",
                 showConfirmButton: true,
                 confirmButtonColor: "#800000"
-            })
-            setTimeout(function () {
-                window.location("relatorio.html")
-            }, 2000);
+            }).then(() => {
+                voltarAosMeusRelatorios();
+            });
         } else {
             Swal.fire({
                 title: "Não foi possível salvar o relatório",
@@ -188,7 +192,16 @@ function obterRelatoriosPorId() {
     }).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(json => {
-                construirMeusRelatorios(json)
+                if (json.length == 0) {
+                    document.getElementById("meus_relatorios").innerHTML = `
+                        <h1 id = "sem_relatorios">Parece que você ainda não tem relatórios...
+                        <a onclick="criarNovoRelatorio()">Crie agora!</a>
+                        </h1>
+                `
+                } else {
+                    construirMeusRelatorios(json)
+                }
+
             })
         }
     })
@@ -296,7 +309,7 @@ function buscarCidadesPorEstado(estado) {
 }
 
 function deletarRelatorio(elemento) {
-    const idRelatorio = elemento.id.replace("relatorio_","")
+    const idRelatorio = elemento.id.replace("relatorio_", "")
     fetch(`/relatorio/deletarRelatorioPorId/${idRelatorio}`, {
         method: "DELETE",
         headers: {
@@ -310,8 +323,9 @@ function deletarRelatorio(elemento) {
                 // icon: "success",
                 showConfirmButton: true,
                 confirmButtonColor: "#800000"
+            }).then(() => {
+                obterRelatoriosPorId()
             })
-            obterRelatoriosPorId()
         }
     })
 
