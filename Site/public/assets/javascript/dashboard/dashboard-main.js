@@ -1,3 +1,8 @@
+ window.addEventListener("load", function () {
+  loadProfileImage();
+});
+
+ 
  document.addEventListener('DOMContentLoaded', function() {
     // Referências aos elementos do DOM
     const formFiltro = document.getElementById('formFiltroCompleto');

@@ -19,8 +19,8 @@ function buscarVagasConcluintes(req, res) {
 
 // KPI: Taxa de Ingressantes
 
-function buscarTaxaIngressantes(req, res) {
-    diretorModel.taxaIngressantes().then(function (resultado) {
+function buscarTotalIngressantes(req, res) {
+    diretorModel.totalIngressantes().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -32,6 +32,7 @@ function buscarTaxaIngressantes(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
 
 
 // KPI: Quantidade de Alunos de escolas privadas
@@ -66,10 +67,10 @@ function buscarAlunosEscolasPublicas(req, res) {
     });
 }
 
-// GRAFICO : Cursos com maior Retorno (ROI)
+// GRAFICO : Area com maior Retorno (ROI)
 
-function buscarCursosMaiorRetorno(req, res) {
-    diretorModel.buscarCursosMaiorRetorno().then(function (resultado) {
+function buscarAreaMaiorRetorno(req, res) {
+    diretorModel.buscarAreaMaiorRetorno().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -84,8 +85,8 @@ function buscarCursosMaiorRetorno(req, res) {
 
 // GRAFICO : Cota por Bolsista
 
-function buscarCotaPorBolsista(req, res) {
-    diretorModel.buscarCotaPorBolsista().then(function (resultado) {
+function buscarBolsistaArea(req, res) {
+    diretorModel.buscarBolsistaArea().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -116,10 +117,10 @@ function buscarFiltroArea(req, res) {
 
 module.exports = {
     buscarVagasConcluintes,
-    buscarTaxaIngressantes,
+    buscarTotalIngressantes,
     buscarAlunosEscolasPrivadas,
     buscarAlunosEscolasPublicas,
-    buscarCursosMaiorRetorno,
-    buscarCotaPorBolsista,
+    buscarAreaMaiorRetorno,
+    buscarBolsistaArea,
     buscarFiltroArea
 };
