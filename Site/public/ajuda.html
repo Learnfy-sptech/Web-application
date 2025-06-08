@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,144 +11,157 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <title>Ajuda - Learnfy</title>
 </head>
+
 <body>
-    <div class="sidebar open">
-      <div class="logo-details">
-        <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
-        <div class="logo_name">Learnfy</div>
-        <i class="bx bx-menu" id="btn"></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <i class='bx bx-search'></i>
-          <input type="text" placeholder="Pesquisar...">
-          <span class="tooltip">Pesquisar</span>
-        </li>
-
-        <li>
-          <a href="index.html">
-            <i class="fas fa-home"></i>
-            <span class="links_name">Home</span>
-          </a>
-          <span class="tooltip">Home</span>
-        </li>
-
-        <li>
-          <a href="edit-person.html">
-            <i class="fas fa-user"></i>
-            <span class="links_name">Perfil</span>
-          </a>
-          <span class="tooltip">Perfil</span>
-        </li>
-
-        <li>
-          <a href="relatorio.html">
-            <i class="fas fa-clipboard-list"></i>
-            <span class="links_name">Relatorios</span>
-          </a>
-          <span class="tooltip">Gestão</span>
-        </li>
-
-        <li>
-          <a href="import.html">
-            <i class="fas fa-building"></i>
-            <span class="links_name">Gestão</span>
-          </a>
-          <span class="tooltip">Gestão</span>
-        </li>
-
-        <li>
-          <a href="selection-dashboard.html">
-            <i class="fas fa-chart-pie"></i>
-            <span class="links_name">Escolher Visualização</span>
-          </a>
-          <span class="tooltip">Escolher Visualização</span>
-        </li>
-
-        <li>
-          <a href="ajuda.html">
-            <i class="fas fa-question-circle"></i>
-            <span class="links_name">Ajuda</span>
-          </a>
-          <span class="tooltip">Ajuda</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fas fa-cog"></i>
-            <span class="links_name">Configurações</span>
-          </a>
-          <span class="tooltip">Configurações</span>
-        </li>
-
-        <li class="profile">
-          <div class="profile-details">
-            <img id="profileImg" alt="Foto de perfil">
-            <div class="name_job">
-              <p class="name" id="nomeUsuario"></p>
-              <small class="job" id="tipoContaUsuario"></small>
-            </div>
-          </div>
-          
-          <i class="fas fa-sign-out-alt" id="log_out"></i>
-        </li>
-      </ul>
+  <div class="sidebar open">
+    <div class="logo-details">
+      <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
+      <div class="logo_name">Learnfy</div>
+      <i class="bx bx-menu" id="btn"></i>
     </div>
+    <ul class="nav-list">
+      <li>
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="Pesquisar...">
+        <span class="tooltip">Pesquisar</span>
+      </li>
+
+      <li>
+        <a href="index.html" class="menu-link"> <i class="fas fa-home"></i>
+          <span class="links_name">Home</span>
+        </a>
+        <span class="tooltip">Home</span>
+      </li>
+
+      <li>
+        <a href="edit-person.html" class="menu-link"> <i class="fas fa-user"></i>
+          <span class="links_name">Perfil</span>
+        </a>
+        <span class="tooltip">Perfil</span>
+      </li>
+
+      <li>
+        <a href="relatorio.html" class="menu-link"> <i class="fas fa-clipboard-list"></i>
+          <span class="links_name">Relatorios</span>
+        </a>
+        <span class="tooltip">Gestão</span>
+      </li>
+
+      <li>
+        <a href="import.html" class="menu-link"> <i class="fas fa-building"></i>
+          <span class="links_name">Gestão</span>
+        </a>
+        <span class="tooltip">Gestão</span>
+      </li>
+
+      <li>
+        <a href="" class="menu-link" id="minha-dashboard-link-dinamico"> <i class="fas fa-chart-pie"></i>
+          <span class="links_name">Minha dashboard</span>
+        </a>
+        <span class="tooltip">Minha dashboard</span>
+      </li>
+
+      <li>
+        <a href="ajuda.html" class="menu-link"> <i class="fas fa-question-circle"></i>
+          <span class="links_name">Ajuda</span>
+        </a>
+        <span class="tooltip">Ajuda</span>
+      </li>
+
+      <li>
+        <a href="#" class="menu-link"> <i class="fas fa-cog"></i>
+          <span class="links_name">Configurações</span>
+        </a>
+        <span class="tooltip">Configurações</span>
+      </li>
+
+      <li class="profile">
+        <div class="profile-details">
+          <img id="profileImg" alt="Foto de perfil">
+          <div class="name_job">
+            <p class="name" id="nomeUsuario"></p>
+            <small class="job" id="tipoContaUsuario"></small>
+          </div>
+        </div>
+        <i class="fas fa-sign-out-alt" id="log_out"></i>
+      </li>
+    </ul>
+  </div>
 
   <div class="topbar">
-  <button class="back-button" onclick="history.back()">
-    <i class="fas fa-arrow-left"></i>
-    Voltar
-  </button>
-  <h1 class="page-title">Painel de Ajuda</h1>
-</div>
+    <button class="back-button" onclick="history.back()">
+      <i class="fas fa-arrow-left"></i>
+      Voltar
+    </button>
+    <h1 class="page-title">Painel de Ajuda</h1>
+  </div>
 
-<section class="help-container">
-  <div class="help-card">
-    <h1>Ajuda com a Dashboard</h1>
-    <p class="intro">Bem-vindo à seção de ajuda da plataforma Learnfy! Aqui você encontrará explicações detalhadas para as dúvidas mais comuns sobre o uso da dashboard, incluindo navegação, gerenciamento de dados e configurações. Confira as perguntas abaixo para aprender mais!</p>
+  <section class="help-container">
+    <div class="help-card">
+      <h1>Ajuda com a Dashboard</h1>
+      <p class="intro">Bem-vindo à seção de ajuda da plataforma Learnfy! Aqui você encontrará explicações detalhadas
+        para as dúvidas mais comuns sobre o uso da dashboard, incluindo navegação, gerenciamento de dados e
+        configurações. Confira as perguntas abaixo para aprender mais!</p>
 
-    <div class="faq">
-      <div class="question">
-        <h3>🏠 Como voltar para a página inicial?</h3>
-        <p>No menu lateral à esquerda, localize o ícone de uma casa com o rótulo "Home". Clique neste ícone para ser redirecionado imediatamente à página inicial da plataforma, onde você pode visualizar um resumo geral das suas atividades e acessar os principais recursos rapidamente.</p>
-      </div>
+      <div class="faq">
+        <div class="question">
+          <h3>🏠 Como voltar para a página inicial?</h3>
+          <p>No menu lateral à esquerda, localize o ícone de uma casa com o rótulo "Home". Clique neste ícone para ser
+            redirecionado imediatamente à página inicial da plataforma, onde você pode visualizar um resumo geral das
+            suas atividades e acessar os principais recursos rapidamente.</p>
+        </div>
 
-      <div class="question">
-        <h3>🧑‍💼 Como edito meu perfil?</h3>
-        <p>Para atualizar suas informações pessoais, vá ao menu lateral e clique no ícone de usuário com o rótulo "Perfil". Você será levado a uma página onde poderá editar detalhes como nome, e-mail, foto de perfil e preferências de notificação. Após fazer as alterações, clique no botão "Salvar" no final da página para confirmar as mudanças.</p>
-      </div>
+        <div class="question">
+          <h3>🧑‍💼 Como edito meu perfil?</h3>
+          <p>Para atualizar suas informações pessoais, vá ao menu lateral e clique no ícone de usuário com o rótulo
+            "Perfil". Você será levado a uma página onde poderá editar detalhes como nome, e-mail, foto de perfil e
+            preferências de notificação. Após fazer as alterações, clique no botão "Salvar" no final da página para
+            confirmar as mudanças.</p>
+        </div>
 
-      <div class="question">
-        <h3>📊 Onde posso gerar dados filtrados?</h3>
-        <p>Para criar relatórios personalizados, acesse a seção "Relatórios" no menu lateral, representada por um ícone de lista. Nessa página, você pode selecionar filtros como intervalo de datas, categorias específicas ou usuários para gerar dados detalhados. Após configurar os filtros, clique em "Gerar Relatório" para visualizar ou exportar os dados no formato desejado, como PDF ou Excel.</p>
-      </div>
+        <div class="question">
+          <h3>📊 Onde posso gerar dados filtrados?</h3>
+          <p>Para criar relatórios personalizados, acesse a seção "Relatórios" no menu lateral, representada por um
+            ícone de lista. Nessa página, você pode selecionar filtros como intervalo de datas, categorias específicas
+            ou usuários para gerar dados detalhados. Após configurar os filtros, clique em "Gerar Relatório" para
+            visualizar ou exportar os dados no formato desejado, como PDF ou Excel.</p>
+        </div>
 
-      <div class="question">
-        <h3>📤 Como enviar arquivos para o S3?</h3>
-        <p>Para enviar arquivos ao armazenamento S3, vá ao menu lateral e clique em "Gestão", identificado por um ícone de blocos. Na página de gestão, localize a seção "Upload de Arquivos". Clique no botão "Selecionar Arquivo", escolha o documento desejado no seu dispositivo e confirme o envio clicando em "Enviar para o S3". Você verá uma notificação confirmando o sucesso do upload.</p>
-      </div>
+        <div class="question">
+          <h3>📤 Como enviar arquivos para o S3?</h3>
+          <p>Para enviar arquivos ao armazenamento S3, vá ao menu lateral e clique em "Gestão", identificado por um
+            ícone de blocos. Na página de gestão, localize a seção "Upload de Arquivos". Clique no botão "Selecionar
+            Arquivo", escolha o documento desejado no seu dispositivo e confirme o envio clicando em "Enviar para o S3".
+            Você verá uma notificação confirmando o sucesso do upload.</p>
+        </div>
 
-      <div class="question">
-        <h3>📊 Como escolher entre a dashboard geral ou específica?</h3>
-        <p>No menu lateral, clique na opção "Escolher Visualização", marcada por um ícone de gráfico de pizza. Você será redirecionado para uma página onde poderá optar entre a "Dashboard Geral", que exibe uma visão ampla de todas as métricas, ou a "Dashboard Específica", que permite focar em áreas específicas, como vendas ou desempenho. Selecione a opção desejada e clique em "Aplicar" para carregar a visualização.</p>
-      </div>
+        <div class="question">
+          <h3>📊 Como escolher entre a dashboard geral ou específica?</h3>
+          <p>No menu lateral, clique na opção "Escolher Visualização", marcada por um ícone de gráfico de pizza. Você
+            será redirecionado para uma página onde poderá optar entre a "Dashboard Geral", que exibe uma visão ampla de
+            todas as métricas, ou a "Dashboard Específica", que permite focar em áreas específicas, como vendas ou
+            desempenho. Selecione a opção desejada e clique em "Aplicar" para carregar a visualização.</p>
+        </div>
 
-      <div class="question">
-        <h3>⚙️ Como acesso as configurações da conta?</h3>
-        <p>Para ajustar as configurações da sua conta, localize o ícone de engrenagem com o rótulo "Configurações" no final do menu lateral. Ao clicar, você será levado a uma página onde pode personalizar preferências como idioma, tema (claro ou escuro), e configurações de notificações por e-mail ou push. Certifique-se de clicar em "Salvar Alterações" antes de sair para que as mudanças sejam aplicadas.</p>
+        <div class="question">
+          <h3>⚙️ Como acesso as configurações da conta?</h3>
+          <p>Para ajustar as configurações da sua conta, localize o ícone de engrenagem com o rótulo "Configurações" no
+            final do menu lateral. Ao clicar, você será levado a uma página onde pode personalizar preferências como
+            idioma, tema (claro ou escuro), e configurações de notificações por e-mail ou push. Certifique-se de clicar
+            em "Salvar Alterações" antes de sair para que as mudanças sejam aplicadas.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-    <script>
-     window.addEventListener('load', function() {
+  <script>
+    window.addEventListener('load', function () {
       loadProfileImage();
     });
-    </script>
+  </script>
 
   <script src="assets/javascript/awsPhoto.js"></script>
   <script src="assets/javascript/sidebar.js"></script>
 </body>
+
 </html>

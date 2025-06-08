@@ -25,63 +25,57 @@
             </li>
 
             <li>
-                <a href="index.html">
-                    <i class="fas fa-home"></i>
+                <a href="index.html" class="menu-link"> <i class="fas fa-home"></i>
                     <span class="links_name">Home</span>
                 </a>
                 <span class="tooltip">Home</span>
             </li>
 
             <li>
-                <a href="edit-person.html">
-                    <i class="fas fa-user"></i>
+                <a href="edit-person.html" class="menu-link"> <i class="fas fa-user"></i>
                     <span class="links_name">Perfil</span>
                 </a>
                 <span class="tooltip">Perfil</span>
             </li>
 
             <li>
-                <a href="relatorio.html">
-                    <i class="fas fa-clipboard-list"></i>
+                <a href="relatorio.html" class="menu-link"> <i class="fas fa-clipboard-list"></i>
                     <span class="links_name">Relatorios</span>
                 </a>
                 <span class="tooltip">Gestão</span>
             </li>
 
             <li>
-                <a href="import.html">
-                    <i class="fas fa-building"></i>
+                <a href="import.html" class="menu-link"> <i class="fas fa-building"></i>
                     <span class="links_name">Gestão</span>
                 </a>
                 <span class="tooltip">Gestão</span>
             </li>
 
             <li>
-                <a href="selection-dashboard.html">
-                    <i class="fas fa-chart-pie"></i>
-                    <span class="links_name">Escolher Visualização</span>
+                <a href="" class="menu-link" id="minha-dashboard-link-dinamico"> <i class="fas fa-chart-pie"></i>
+                    <span class="links_name">Minha dashboard</span>
                 </a>
-                <span class="tooltip">Escolher Visualização</span>
+                <span class="tooltip">Minha dashboard</span>
             </li>
 
             <li>
-                <a href="ajuda.html">
-                    <i class="fas fa-question-circle"></i>
+                <a href="ajuda.html" class="menu-link"> <i class="fas fa-question-circle"></i>
                     <span class="links_name">Ajuda</span>
                 </a>
                 <span class="tooltip">Ajuda</span>
             </li>
 
             <li>
-                <a href="#">
-                    <i class="fas fa-cog"></i>
+                <a href="#" class="menu-link"> <i class="fas fa-cog"></i>
                     <span class="links_name">Configurações</span>
                 </a>
                 <span class="tooltip">Configurações</span>
             </li>
+
             <li class="profile">
                 <div class="profile-details">
-                    <img id="profileImg" alt="Foto do usuário">
+                    <img id="profileImg" alt="Foto de perfil">
                     <div class="name_job">
                         <p class="name" id="nomeUsuario"></p>
                         <small class="job" id="tipoContaUsuario"></small>
@@ -96,12 +90,12 @@
         <div class="main">
             <main>
                 <div class="relatorio-general" id="relatorio_general">
-                    <div class="navegacao">
+                    <div class="topbar">
                         <button class="back-button" onclick="history.back()">
                             <i class="fas fa-arrow-left"></i>
                             Voltar
                         </button>
-                        <a href="" onclick="">Meus Relatórios</a>
+                        <h1 class="page-title">Edição de Perfil</h1>
                     </div>
                     <div class="titulo">
                         <h2>Meus Relatórios</h2>
@@ -272,7 +266,7 @@
                         <div class="campos-selecionados" id="campos_selecionados">
                         </div>
                     </div>
-                    
+
                     <div class="finally-button">
                         <button onclick="inserirRelatorio(); exportar()">Salvar e Exportar</button>
                         <button onclick="inserirRelatorio()">
