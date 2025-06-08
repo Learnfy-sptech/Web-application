@@ -9,15 +9,18 @@ router.get("/empregabilidadePorArea/:area", function (req, res) {
 
 
 // KPI - Oferta Cursos
-router.get("/ofertaCursos", function (req, res) {
-    gestorController.ofertaCursos(req, res);
+router.get("/carregarKpiOfertaCursos/:area", function (req, res) {
+    gestorController.carregarKpiOfertaCursos(req, res);
 });
 
 // KPI - Periodo de maior procura
-router.get("/periodoMaiorProcura/:area", function (req, res) {
-    gestorController.periodoMaiorProcura(req, res);
+router.get("/carregarPeriodoMaiorProcura/:area", function (req, res) {
+    gestorController.carregarPeriodoMaiorProcura(req, res);
 });
 
+router.get("/carregarRetencaoAlunos/:area", function (req, res) {
+    gestorController.carregarRetencaoAlunos(req, res);
+});
 
 // GRAFICO - Salarios com maior procura
 router.get("/salariosMaiorProcura", function (req, res) {

@@ -17,10 +17,25 @@ function empregabilidadePorArea(req, res) {
     });
 }
 
+function carregarRetencaoAlunos(req, res) {
+    var area = req.params.area;
+    gestorModel.carregarRetencaoAlunos(area).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum dado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os dados de empregabilidade.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 // KPI - Oferta Cursos
-function ofertaCursos(req, res) {
-    gestorModel.ofertaCursos().then(function (resultado) {
+function carregarKpiOfertaCursos(req, res) {
+    var area = req.params.area;
+    gestorModel.carregarKpiOfertaCursos(area).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -35,9 +50,9 @@ function ofertaCursos(req, res) {
 
 
 // KPI - Periodo de maior procura
-function periodoMaiorProcura(req, res) {
+function carregarPeriodoMaiorProcura(req, res) {
     const area = req.params.area;
-    gestorModel.periodoMaisProcuradoPorArea(area)
+    gestorModel.carregarPeriodoMaiorProcura(area)
         .then((resultado) => {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
@@ -104,8 +119,9 @@ function buscarFiltroArea(req, res) {
 
 module.exports = {
     empregabilidadePorArea,
-    ofertaCursos,
-    periodoMaiorProcura,
+    carregarKpiOfertaCursos,
+    carregarRetencaoAlunos,
+    carregarPeriodoMaiorProcura,
     salariosMaiorProcura,
     salarioPorArea,
     buscarFiltroArea

@@ -1,16 +1,7 @@
-window.addEventListener("load", function () {
-  mostarNomeH1();
-  loadProfileImage();
-  carregarKpiOfertaCursos();
-  salarioPorAreaGrafico();
-  carregarAreasNoSelect();
-  graficoCursosMaisProcurados();
-  carregarPeriodoMaiorProcura("CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO");
-  carregarEmpregabilidadePorArea("CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO"); 
-});
+const { buscarAlunosEscolasPrivadas } = require("../../../../src/models/diretorModel");
 
-
-function carregarEmpregabilidadePorArea(area) {
+function carregarEmpregabilidadePorArea() {
+  var area = document.getElementById('select-areas').value;
   fetch(`/gestor/empregabilidadePorArea/${area}`, { cache: "no-store" })
     .then((res) => {
       if (!res.ok) throw new Error("Erro ao buscar dados de empregabilidade");
@@ -20,7 +11,7 @@ function carregarEmpregabilidadePorArea(area) {
       if (dados.length > 0) {
         const { nomeArea, totalTrabalham } = dados[0];
         document.getElementById("kpi-empregabilidade").innerText =
-          `${nomeArea.toUpperCase()} - ${Number(totalTrabalham).toLocaleString()} TRABALHAM`;
+          `${Number(totalTrabalham).toLocaleString()} ESTÃO EMPREGADOS`;
       } else {
         document.getElementById("kpi-empregabilidade").innerText = "Nenhum dado encontrado";
       }
@@ -31,9 +22,9 @@ function carregarEmpregabilidadePorArea(area) {
     });
 }
 
-
-function carregarPeriodoMaiorProcura(area) {
-  fetch(`/gestor/periodoMaiorProcura/${area}`, { cache: "no-store" })
+function carregarPeriodoMaiorProcura() {
+  var area = document.getElementById('select-areas').value;
+  fetch(`/gestor/carregarPeriodoMaiorProcura/${area}`, { cache: "no-store" })
     .then(res => {
       if (!res.ok) throw new Error("Erro ao buscar o período por área");
       return res.json();
@@ -53,9 +44,41 @@ function carregarPeriodoMaiorProcura(area) {
     });
 }
 
+function carregarRetencaoAlunos() {
+  var area = document.getElementById('select-areas').value;
+  fetch(`/gestor/carregarRetencaoAlunos/${area}`, { cache: "no-store" })
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao buscar dados de empregabilidade");
+      return res.json();
+    })
+    .then((dados) => {
+      let total_diurno = 0;
+      let total_noturno = 0;
+      let total_ead = 0;
 
+      dados.forEach(item => {
+        if (item.periodo === "Diurno") {
+          total_diurno = item.total_retidos;
+        } else if (item.periodo === "Noturno") {
+          total_noturno = item.total_retidos;
+        } else if (item.periodo === "EAD") {
+          total_ead = item.total_retidos;
+        }
+      });
 
-
+    var texto = `Diurno - ${total_diurno} retidos
+      Noturno - ${total_noturno} retidos
+      EAD - ${total_ead} retidos
+    `;
+        
+        document.getElementById("kpi-retencao-alunos").innerText = texto
+      } 
+    )
+    .catch((err) => {
+      console.error("Erro ao carregar KPI de empregabilidade por área:", err);
+      document.getElementById("kpi-retencao-alunos").innerText = "Erro ao carregar";
+    });
+}
 function carregarAreasNoSelect() {
   fetch("/gestor/filtroArea", { cache: "no-store" })
     .then((res) => {
@@ -83,7 +106,8 @@ function carregarAreasNoSelect() {
 
 
 function carregarKpiOfertaCursos() {
-  fetch("/gestor/ofertaCursos", { cache: "no-store" })
+  var area = document.getElementById('select-areas').value;
+  fetch(`/gestor/carregarKpiOfertaCursos/${area}`, { cache: "no-store" })
     .then(res => {
       if (!res.ok) throw new Error("Erro ao buscar KPI de oferta de cursos");
       return res.json();
@@ -105,12 +129,6 @@ function carregarKpiOfertaCursos() {
       console.error("Erro ao carregar KPI de oferta de cursos:", err);
     });
 }
-
-
-
-
-
-
 
 function salarioPorAreaGrafico() {
   fetch("/gestor/salarioPorArea", { cache: "no-store" })
@@ -241,4 +259,21 @@ function mostarNomeH1() {
   if (tipoContaTitulo) tipoContaTitulo.textContent = userTypeText;
 }
 
+window.carregarKpiOfertaCursos = carregarKpiOfertaCursos;
+window.salarioPorAreaGrafico = salarioPorAreaGrafico;
+window.carregarAreasNoSelect = carregarAreasNoSelect;
+window.graficoCursosMaisProcurados = graficoCursosMaisProcurados;
+window.carregarPeriodoMaiorProcura = carregarPeriodoMaiorProcura;
+window.carregarEmpregabilidadePorArea = carregarEmpregabilidadePorArea; 
 
+document.getElementById("select-areas").addEventListener("change", function () {
+  mostarNomeH1();
+  loadProfileImage();
+  carregarKpiOfertaCursos();
+  carregarRetencaoAlunos();
+  salarioPorAreaGrafico();
+  carregarAreasNoSelect();
+  graficoCursosMaisProcurados();
+  carregarPeriodoMaiorProcura();
+  carregarEmpregabilidadePorArea(); 
+});

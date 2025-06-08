@@ -62,11 +62,10 @@
       </li>
 
       <li>
-        <a href="selection-dashboard.html">
-          <i class="fas fa-chart-pie"></i>
-          <span class="links_name">Escolher Visualização</span>
+        <a href="" class="menu-link" id="minha-dashboard-link-dinamico"> <i class="fas fa-chart-pie"></i>
+          <span class="links_name">Minha dashboard</span>
         </a>
-        <span class="tooltip">Escolher Visualização</span>
+        <span class="tooltip">Minha dashboard</span>
       </li>
 
       <li>
@@ -111,11 +110,19 @@
         <div class="filter">
           <div class="custom-select-wrapper">
             <div class="custom-select">
-              <select id="select-example" name="areaFiltro">
-                <option value="" disabled selected>Filtro por área:</option>
-                <option value="1">Opção 1</option>
-                <option value="2">Opção 2</option>
-                <option value="3">Opção 3</option>
+          <select id="select-areas" name="areaFiltro" onchange="buscarAreaMaiorRetorno(); carregarAreasNoSelect();
+          carregarGraficoBolsistasPorArea(); carregarKpiTotalAlunos(); carregarKpiTotalIngressantes();
+          carregarKpiAlunosPrivados(); carregarKpiAlunosPublicos();">
+                <!-- <option value="" disabled selected>Filtro por área:</option> -->
+                <option value="SERVIÇOS">SERVIÇOS</option>
+                <option value="EDUCAÇÃO">EDUCAÇÃO</option>
+                <option value="HUMANIDADES E ARTES">HUMANIDADES E ARTES</option>
+                <option value="SAÚDE E BEM-ESTAR SOCIAL">SAÚDE E BEM-ESTAR SOCIAL</option>
+                <option value="AGRICULTURA E VETERINÁRIA">AGRICULTURA E VETERINÁRIA</option>
+                <option value="CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO">CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO</option>
+                <option value="ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO">ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO</option>
+                <option value="CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS">CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS</option>
+                
               </select>
               <span class="select-arrow"></span>
             </div>
@@ -179,3 +186,17 @@
 <script src="assets/javascript/sidebar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/javascript/awsPhoto.js"></script>
+
+<script>
+    window.addEventListener("load", function () {
+   mostarNomeH1();
+  loadProfileImage();
+  buscarAreaMaiorRetorno();
+  carregarAreasNoSelect();
+  carregarGraficoBolsistasPorArea();
+  carregarKpiTotalAlunos();
+  carregarKpiTotalIngressantes();
+  carregarKpiAlunosPrivados();
+  carregarKpiAlunosPublicos();
+    });
+  </script>
