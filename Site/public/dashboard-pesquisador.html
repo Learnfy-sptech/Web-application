@@ -111,9 +111,9 @@
         <div class="filter">
           <div class="custom-select-wrapper">
             <div class="custom-select">
-              <select id="select-areas" name="areaFiltro" onchange="getKpiQtdCursantes(); getKpiPessoasTrabalhamNaArea(); getKpiEvasaoPorModalidade();">
+              <select id="select-areas" name="areaFiltro" onchange="mostarNomeH1();getKpiQtdCursantes(); getKpiPessoasTrabalhamNaArea(); 
+              getKpiEvasaoPorModalidade(); getKpiMediaSalarial(); getGraficoCursosMaiorRetorno(); getGraficoProjecaoEvasao();">
                 <!-- <option value="" disabled selected>Filtro por área:</option> -->
-                <option value="OUTROS">OUTROS</option>
                 <option value="SERVIÇOS">SERVIÇOS</option>
                 <option value="EDUCAÇÃO">EDUCAÇÃO</option>
                 <option value="HUMANIDADES E ARTES">HUMANIDADES E ARTES</option>
@@ -142,35 +142,29 @@
     <div class="kpi-section">
       <div class="card">
         <div class="card-details">
-          <p class="text-title">Pessoas que cursam no curso selecionado</p>
+          <p class="text-title">Quantidade de alunos que estão cursando</p>
           <span id="kpiQtdCursantes" class="text-body"></span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-details">
-          <p class="text-title">Pessoas que trabalham na área selecionada</p>
-          <span id="KpiTaxaIngressantes" class="text-body"></span>
+          <p class="text-title">Quantidade de pessoas que estão empregadas</p>
+          <span id="KpiPessoasTrabalhamNaArea" class="text-body"></span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-details">
-          <p class="text-title">Evasão por modalidade</p>
+          <p class="text-title">Quantidade de alunos que evadiram</p>
          <span id="KpiEvasaoModalidade" class="text-body"></span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-details">
-          <p class="text-title card-info">
-            Distribuição de Financiamento Estudantil
-            <i class="fas fa-question card-info-icon"></i>
-            <span class="card-info-tooltip">
-              Mostra a porcentagem de alunos com bolsas ou financiamentos como ProUni, FIES e outros.
-            </span>
-          </p>
-          <p class="text-body">Aqui vai ficar todos os conteúdos</p>
+          <p class="text-title card-info">Média Salarial</p>
+          <p id="KpiMediaSalarial" class="text-body"></p>
         </div>
       </div>
     </div>
@@ -194,7 +188,13 @@
   
     window.addEventListener("load", function () {
       loadProfileImage();
+      mostarNomeH1();
       getKpiQtdCursantes();
+      getKpiPessoasTrabalhamNaArea();
+      getKpiEvasaoPorModalidade();
+      getKpiMediaSalarial();
+      getGraficoCursosMaiorRetorno();
+      getGraficoProjecaoEvasao();
     });
   </script>
 </body>

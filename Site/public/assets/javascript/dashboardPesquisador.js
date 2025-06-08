@@ -88,7 +88,7 @@ function getKpiQtdCursantes() {
         
       console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         
-      kpiQtdCursantes.innerHTML = json.totalTrabalham; 
+      kpiQtdCursantes.innerHTML = json.totalCursantes; 
         
     })
     })
@@ -101,7 +101,7 @@ function getKpiQtdCursantes() {
 function getKpiPessoasTrabalhamNaArea(){
     var filtroArea = document.getElementById('select-areas').value;
     console.log("Valor selecionado no filtroArea:", filtroArea);
-    var KpiTaxaIngressantes = document.getElementById('KpiTaxaIngressantes'); 
+    var KpiPessoasTrabalhamNaArea = document.getElementById('KpiPessoasTrabalhamNaArea'); 
 
   fetch(`/dashboardPesquisador/getKpiPessoasTrabalhamNaArea/${filtroArea}`, {
     method: 'GET',
@@ -114,7 +114,7 @@ function getKpiPessoasTrabalhamNaArea(){
         
       console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         
-      KpiTaxaIngressantes.innerHTML = json.total_cursantes; 
+      KpiPessoasTrabalhamNaArea.innerHTML = json.totalTrabalham; 
         
     })
     })
@@ -140,7 +140,33 @@ function getKpiEvasaoPorModalidade(){
         
       console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         
-      KpiEvasaoModalidade.innerHTML = json.nome; 
+      KpiEvasaoModalidade.innerHTML = json.qtdEvasao; 
+        
+    })
+    })
+    .catch(function (error) {
+        console.log("Eroo" + resposta)
+      console.error(`Erro na obtenção de dados para a KPI ${error.message}`);
+    });
+}
+
+function getKpiMediaSalarial(){
+    var filtroArea = document.getElementById('select-areas').value;
+    console.log("Valor selecionado no filtroArea:", filtroArea);
+    var KpiMediaSalarial = document.getElementById('KpiMediaSalarial'); 
+
+  fetch(`/dashboardPesquisador/getKpiMediaSalarial/${filtroArea}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then(function (resposta) {
+      resposta.json().then(json => {
+        
+      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        
+      KpiMediaSalarial.innerHTML = json.mediaSalarial; 
         
     })
     })
@@ -161,19 +187,15 @@ function getGraficoProjecaoEvasao(){
 window.getKpiQtdCursantes = getKpiQtdCursantes;
 window.getKpiPessoasTrabalhamNaArea = getKpiPessoasTrabalhamNaArea;
 window.getKpiEvasaoPorModalidade = getKpiEvasaoPorModalidade;
+window.getKpiMediaSalarial = getKpiMediaSalarial;
 window.getGraficoCursosMaiorRetorno = getGraficoCursosMaiorRetorno;
 window.getGraficoProjecaoEvasao = getGraficoProjecaoEvasao;
-
-document.addEventListener('DOMContentLoaded', function () {
-  const select = document.getElementById('select-areas');
-
-  select.addEventListener('change', function () {
-    getKpiQtdCursantes(); 
-  });
-});
 
 document.getElementById("select-areas").addEventListener("change", function () {
   getKpiQtdCursantes();
   getKpiPessoasTrabalhamNaArea();
   getKpiEvasaoPorModalidade();
+  getKpiMediaSalarial();
+  getGraficoCursosMaiorRetorno();
+  getGraficoProjecaoEvasao();
 });
