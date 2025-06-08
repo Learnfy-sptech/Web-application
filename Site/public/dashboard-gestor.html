@@ -104,9 +104,9 @@
                 <i class="fas fa-arrow-left"></i>
                 Voltar
             </button>
-      <h1 class="page-title">
-        Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
-      </h1>
+            <h1 class="page-title">
+                Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
+            </h1>
             <form id="formFiltroCompleto" action="#" method="GET">
                 <div class="filter">
                     <div class="custom-select-wrapper">
@@ -116,7 +116,7 @@
                                 <option value="1">Humanidades e Artes</option>
                                 <option value="2">Serviços</option>
                                 <option value="3">Ciências, Matemáticas, Computação</option>
-                                </select>
+                            </select>
                             <span class="select-arrow"></span>
                         </div>
                     </div>
@@ -128,30 +128,34 @@
             </form>
 
             <div id="resultadoFiltro" style="display: none; margin-top: 20px; padding: 10px; border: 1px solid #ccc;">
-                </div>
+            </div>
         </div>
-
         <div class="kpi-section">
             <div class="card">
                 <div class="card-details">
                     <p class="text-title">Crescimento da Oferta de Cursos</p>
-                    <p class="text-body" id="kpi-crescimento-oferta">0%</p> </div>
+                    <div class="text-bodys" id="kpi-crescimento-oferta">Carregando...</div>                    
+                </div>
             </div>
             <div class="card">
                 <div class="card-details">
                     <p class="text-title">Empregabilidade até 12 meses</p>
-                    <p class="text-body" id="kpi-empregabilidade-12meses">0%</p> </div>
+                    <p class="text-body" id="kpi-empregabilidade-12meses">0%</p>
+                </div>
             </div>
             <div class="card">
                 <div class="card-details">
                     <p class="text-title">Salário médio por área</p>
-                    <p class="text-body" id="kpi-salario-medio">R$ 0,00</p> </div>
+                    <p class="text-body" id="kpi-salario-medio">R$ 0,00</p>
+                </div>
             </div>
 
             <div class="card">
                 <div class="card-details">
-                    <p class="text-title">Taxa de inscrição por curso</p>
-                    <p class="text-body" id="kpi-inscricao-curso">0</p> </div>
+                    <p class="text-title">Período com maior procura</p>
+                    <p class="text-body" id="kpi-periodo-maior-procura">Carregando...</p>
+                </div>
+
             </div>
         </div>
 
@@ -164,356 +168,13 @@
             </div>
         </div>
     </section>
-
 </body>
+
 </html>
 
- <script src="assets/javascript/awsPhoto.js"></script>
-  <script>
-    function mostarNomeH1() {
-      const tipoConta = sessionStorage.getItem('TIPO_CONTA');
-      const tipoContaTitulo = document.getElementById('tipoContaUsuarioTitulo');
-
-      if (tipoConta === 'DIRETOR ACADEMICO') {
-        userTypeText = 'Diretor';
-      } else if (tipoConta === 'GESTOR') {
-        userTypeText = 'Gestor';
-      } else if (tipoConta === 'PESQUISADOR') {
-        userTypeText = 'Pesquisador';
-      }
-
-      if (tipoContaTitulo) tipoContaTitulo.textContent = userTypeText;
-    }
-
-    window.addEventListener('load', function () {
-      mostarNomeH1();
-      loadProfileImage();
-    });
-
-    </script>
-    <script src="assets/javascript/sidebar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./assets/javascript/dashboard-gestor.js"></script>
+<script src="assets/javascript/dashboard/dashboard-gestor.js"></script>
 
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Referências aos elementos do DOM
-    const formFiltro = document.getElementById('formFiltroCompleto');
-    const inputRegiao = document.getElementById('inputRegiaoFiltro'); // Campo de região
-    const selectArea = document.getElementById('select-example');
-    const resultadoDiv = document.getElementById('resultadoFiltro');
-
-    // Referências aos elementos KPI específicos da dashboard do Gestor
-    const kpiCrescimentoOferta = document.getElementById('kpi-crescimento-oferta');
-    const kpiEmpregabilidade12Meses = document.getElementById('kpi-empregabilidade-12meses');
-    const kpiSalarioMedio = document.getElementById('kpi-salario-medio');
-    const kpiInscricaoCurso = document.getElementById('kpi-inscricao-curso');
-
-    // Instâncias dos gráficos Highcharts
-    let chartProcuraArea; // container (coluna)
-    let chartPeriodoProcura; // pieChart (pizza)
-
-    // --- FUNÇÕES AUXILIARES ---
-
-    /**
-     * Inicializa todos os gráficos Highcharts com dados vazios/placeholder.
-     */
-    function initCharts() {
-        // Gráfico de Colunas: Cursos com maior procura da área selecionada (ID: container)
-        chartProcuraArea = Highcharts.chart('container', {
-            chart: {
-                type: 'column',
-                colors: ['#800000', '#1d1d1d', '#993333'] // Cores das colunas
-            },
-            title: {
-                text: 'Cursos com maior procura da área selecionada'
-            },
-            xAxis: {
-                categories: [], // Populado pelo backend (nomes dos cursos)
-                labels: { x: -10 }
-            },
-            yAxis: {
-                allowDecimals: false,
-                title: { text: 'Quantidade de Procuras' }
-            },
-            legend: {
-                align: 'right',
-                verticalAlign: 'middle',
-                layout: 'vertical'
-            },
-            series: [
-                // As séries (ex: 'Ano 2023', 'Ano 2024') virão do backend
-                { name: 'Dados de Procura', data: [] } // Exemplo de série inicial
-            ],
-            responsive: {
-                rules: [{
-                    condition: { maxWidth: 500 },
-                    chartOptions: {
-                        legend: { align: 'center', verticalAlign: 'bottom', layout: 'horizontal' },
-                        yAxis: { labels: { align: 'left', x: 0, y: -5 }, title: { text: null } },
-                        subtitle: { text: null },
-                        credits: { enabled: false }
-                    }
-                }]
-            }
-        });
-
-        // Gráfico de Pizza: Período com maior procura (ID: pieChart)
-        chartPeriodoProcura = Highcharts.chart('pieChart', {
-            chart: {
-                type: 'pie',
-                // Cores para as fatias da pizza. Highcharts cicla pelas cores.
-                colors: ['#800000', '#1d1d1d', '#993333', '#cc8585', '#b35c5c']
-            },
-            accessibility: {
-                point: { valueSuffix: '%' }
-            },
-            title: {
-                text: 'Período com maior procura'
-            },
-            subtitle: {
-                text: 'Fonte: Dados Internos' // Ajustado para ser mais genérico
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>'
-            },
-            legend: { enabled: true }, // Geralmente legendas são boas para gráficos de pizza
-            plotOptions: {
-                series: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    borderRadius: 8,
-                    dataLabels: [{
-                        enabled: true,
-                        distance: 20,
-                        format: '{point.name}'
-                    }, {
-                        enabled: true,
-                        distance: -15,
-                        format: '{point.percentage:.0f}%',
-                        style: { fontSize: '0.9em' }
-                    }],
-                    showInLegend: true // Mostrar na legenda para facilitar a leitura
-                }
-            },
-            series: [{
-                name: 'Procura', // Nome da série
-                colorByPoint: true, // Cada fatia terá uma cor do array 'colors'
-                innerSize: '75%',
-                data: [] // Populado pelo backend
-            }]
-        });
-    }
-
-    /**
-     * Simula a busca de dados do backend e atualiza KPIs e gráficos para a dashboard do Gestor.
-     * @param {string} regiao O valor do filtro de região.
-     * @param {string} area O valor do filtro de área.
-     */
-    function fetchDataAndApplyFilters(regiao, area) {
-        resultadoDiv.style.display = 'block';
-        resultadoDiv.innerHTML = '<p style="color: blue;">Carregando dados para Gestor...</p>';
-
-        // --- SIMULAÇÃO DE DADOS DO BACKEND ---
-        // Adapte esta seção para sua integração real com o backend
-        setTimeout(() => {
-            let kpiData = {};
-            let chartData = {};
-
-            // Lógica de simulação baseada nos filtros
-            // Estes são exemplos; adapte a lógica para o que faz sentido para sua dashboard de Gestor
-            if (regiao.toLowerCase().includes('são paulo') && area === '1') { // Exemplo: SP e Humanidades
-                kpiData = {
-                    crescimentoOferta: 12.5,
-                    empregabilidade12Meses: 88,
-                    salarioMedio: 6500.00,
-                    inscricaoCurso: 2500
-                };
-                chartData = {
-                    procuraArea: {
-                        categories: ['Psicologia', 'História'],
-                        series: [{ name: '2023', data: [300, 250] }, { name: '2024', data: [350, 280] }]
-                    },
-                    periodoProcura: {
-                        series: [{ name: 'Manhã', y: 40 }, { name: 'Tarde', y: 35 }, { name: 'Noite', y: 25 }]
-                    }
-                };
-            } else if (area === '1') { // Apenas Humanidades e Artes
-                kpiData = {
-                    crescimentoOferta: 8.0,
-                    empregabilidade12Meses: 80,
-                    salarioMedio: 5000.00,
-                    inscricaoCurso: 1800
-                };
-                chartData = {
-                    procuraArea: {
-                        categories: ['Literatura', 'Música', 'Artes Visuais'],
-                        series: [{ name: '2023', data: [150, 100, 120] }, { name: '2024', data: [180, 110, 140] }]
-                    },
-                    periodoProcura: {
-                        series: [{ name: 'Manhã', y: 30 }, { name: 'Tarde', y: 45 }, { name: 'Noite', y: 25 }]
-                    }
-                };
-            } else if (area === '2') { // Apenas Serviços
-                kpiData = {
-                    crescimentoOferta: 15.0,
-                    empregabilidade12Meses: 75,
-                    salarioMedio: 4200.00,
-                    inscricaoCurso: 2100
-                };
-                chartData = {
-                    procuraArea: {
-                        categories: ['Logística', 'Turismo', 'Gastronomia'],
-                        series: [{ name: '2023', data: [200, 180, 220] }, { name: '2024', data: [230, 200, 250] }]
-                    },
-                    periodoProcura: {
-                        series: [{ name: 'Manhã', y: 20 }, { name: 'Tarde', y: 40 }, { name: 'Noite', y: 40 }]
-                    }
-                };
-            } else if (area === '3') { // Apenas Ciências, Matemáticas, Computação
-                kpiData = {
-                    crescimentoOferta: 10.0,
-                    empregabilidade12Meses: 92,
-                    salarioMedio: 7800.00,
-                    inscricaoCurso: 3500
-                };
-                chartData = {
-                    procuraArea: {
-                        categories: ['Desenvolvimento', 'Data Science', 'Cibersegurança'],
-                        series: [{ name: '2023', data: [400, 350, 300] }, { name: '2024', data: [450, 380, 320] }]
-                    },
-                    periodoProcura: {
-                        series: [{ name: 'Manhã', y: 50 }, { name: 'Tarde', y: 30 }, { name: 'Noite', y: 20 }]
-                    }
-                };
-            } else if (regiao !== "") { // Filtrar apenas por região
-                 kpiData = {
-                    crescimentoOferta: 9.0,
-                    empregabilidade12Meses: 85,
-                    salarioMedio: 5500.00,
-                    inscricaoCurso: 2000
-                };
-                chartData = {
-                    procuraArea: {
-                        categories: [`${regiao} A`, `${regiao} B`],
-                        series: [{ name: '2023', data: [200, 180] }, { name: '2024', data: [220, 200] }]
-                    },
-                    periodoProcura: {
-                        series: [{ name: 'Manhã', y: 33 }, { name: 'Tarde', y: 33 }, { name: 'Noite', y: 34 }]
-                    }
-                };
-            }
-            else { // Nenhum filtro ou filtro padrão
-                kpiData = {
-                    crescimentoOferta: 10.0, // Exemplo de valor
-                    empregabilidade12Meses: 85, // Exemplo de valor
-                    salarioMedio: 5500.00, // Exemplo de valor
-                    inscricaoCurso: 2000 // Exemplo de valor
-                };
-                chartData = {
-                    procuraArea: {
-                        categories: ['Geral X', 'Geral Y', 'Geral Z'],
-                        series: [{ name: '2023', data: [100, 120, 150] }, { name: '2024', data: [130, 150, 180] }]
-                    },
-                    periodoProcura: {
-                        series: [{ name: 'Manhã', y: 30 }, { name: 'Tarde', y: 40 }, { name: 'Noite', y: 30 }]
-                    }
-                };
-            }
-
-            updateKPIs(kpiData);
-            updateCharts(chartData);
-            resultadoDiv.style.display = 'none'; // Esconde a mensagem após o carregamento
-        }, 500); // Simula 0.5 segundos de carregamento
-    }
-
-    /**
-     * Atualiza os valores exibidos nos cartões de KPI.
-     * @param {object} data Objeto contendo os novos valores dos KPIs.
-     */
-    function updateKPIs(data) {
-        if (kpiCrescimentoOferta) kpiCrescimentoOferta.textContent = `${data.crescimentoOferta.toFixed(1)}%`;
-        if (kpiEmpregabilidade12Meses) kpiEmpregabilidade12Meses.textContent = `${data.empregabilidade12Meses}%`;
-        if (kpiSalarioMedio) kpiSalarioMedio.textContent = `R$ ${data.salarioMedio.toFixed(2).replace('.', ',')}`;
-        if (kpiInscricaoCurso) kpiInscricaoCurso.textContent = data.inscricaoCurso;
-    }
-
-    /**
-     * Atualiza os gráficos Highcharts com novos dados.
-     * @param {object} data Objeto contendo os novos dados para cada gráfico.
-     */
-    function updateCharts(data) {
-        // Atualiza Gráfico de Colunas: Cursos com maior procura da área selecionada (container)
-        if (chartProcuraArea && data.procuraArea) {
-            chartProcuraArea.xAxis[0].setCategories(data.procuraArea.categories);
-            // Remove as séries existentes e adiciona as novas
-            while (chartProcuraArea.series.length > 0) {
-                chartProcuraArea.series[0].remove(false);
-            }
-            data.procuraArea.series.forEach(s => {
-                chartProcuraArea.addSeries(s, false); // Adiciona a nova série
-            });
-            chartProcuraArea.redraw(); // Redesenha o gráfico
-        }
-
-        // Atualiza Gráfico de Pizza: Período com maior procura (pieChart)
-        if (chartPeriodoProcura && data.periodoProcura) {
-            chartPeriodoProcura.series[0].setData(data.periodoProcura.series, false); // Atualiza os dados da série de pizza
-            chartPeriodoProcura.redraw();
-        }
-    }
-
-    // --- EVENT LISTENERS E INICIALIZAÇÃO ---
-
-    // Inicializa os gráficos Highcharts
-    initCharts();
-
-    // Adiciona o listener para o formulário de filtro
-    if (formFiltro) {
-        formFiltro.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
-
-            const valorRegiao = inputRegiao.value.trim(); // Pode estar vazio
-            const valorArea = selectArea.value;
-
-            // Validação: Se nenhum filtro foi selecionado ou preenchido
-            if (valorRegiao === "" && (valorArea === "" || valorArea === null)) {
-                resultadoDiv.style.display = 'block';
-                resultadoDiv.innerHTML = '<p style="color: red;">Por favor, digite uma região ou selecione uma área para filtrar.</p>';
-                return;
-            } else {
-                resultadoDiv.style.display = 'none'; // Esconde a mensagem de erro
-            }
-
-            // Chama a função para buscar e aplicar os dados filtrados
-            fetchDataAndApplyFilters(valorRegiao, valorArea);
-        });
-
-        // Opcional: Lógica para o botão de "limpar" (reset) do input de região
-        const searchGroup = formFiltro.querySelector('.group');
-        if (searchGroup) {
-            const resetButton = document.createElement('button');
-            resetButton.setAttribute('type', 'button'); // Importante ser 'button' e não 'submit'
-            resetButton.classList.add('reset-search'); // Adicione uma classe para estilização, se necessário
-            resetButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>`;
-            // Insere o botão de reset após o input
-            // Assume que 'inputRegiao' já existe quando 'searchGroup' é encontrado
-            // e 'inputRegiao.parentNode' é o '.group'
-            inputRegiao.parentNode.insertBefore(resetButton, inputRegiao.nextSibling);
-
-            resetButton.addEventListener('click', function() {
-                inputRegiao.value = ''; // Limpa o campo de texto
-                // Opcional: Chama a função de filtro para atualizar com o filtro de região limpo
-                // fetchDataAndApplyFilters('', selectArea.value);
-            });
-        }
-    }
-
-    // Carrega os dados iniciais (sem filtro) ao carregar a página
-    fetchDataAndApplyFilters("", "");
-});
-</script>
+<script src="assets/javascript/awsPhoto.js"></script>
+<script src="assets/javascript/sidebar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
