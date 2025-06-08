@@ -86,16 +86,16 @@
         </ul>
     </div>
 
-    <section>
+    <section id="principal_section">
         <div class="main">
             <main>
                 <div class="relatorio-general" id="relatorio_general">
-                    <div class="topbar">
+                    <div class="navegacao">
                         <button class="back-button" onclick="history.back()">
                             <i class="fas fa-arrow-left"></i>
                             Voltar
                         </button>
-                        <h1 class="page-title">Edição de Perfil</h1>
+                        <a href="" class="item-navegacao" onclick="obterRelatoriosPorId(); event.preven()">Meus Relatórios</a>
                     </div>
                     <div class="titulo">
                         <h2>Meus Relatórios</h2>
@@ -197,14 +197,13 @@
                             <i class="fas fa-arrow-left"></i>
                             Voltar
                         </button>
-                        <a href="" onclick="voltarAosMeusRelatorios()">Meus Relatórios</a>/
-                        <a href="" id="relatorio_atual">Novo Relatório</a>
+                        <a href="" class="item-navegacao" onclick="voltarAosMeusRelatorios()">Meus Relatórios</a>/
+                        <a href="" onclick="event.preventDefault();" class="item-navegacao" id="relatorio_atual">Novo Relatório</a>
                     </div>
                     <div class="titulo">
                         <input id="input_nome_relatorio" type="text"
                             onblur="validarInputVazio('input_nome_relatorio','Nome do Relatório')"
                             onclick="limparCampo('input_nome_relatorio')" value="Nome do Relatório">
-                        <img src="assets/images/edit-text.png" onclick="limparCampo('input_nome_relatorio')" alt="">
                     </div>
                     <div class="filtros">
                         <p class="subtitulo">Filtros (Opcional)</p>
@@ -212,7 +211,7 @@
                             <div class="filtro">
                                 <p>Ano</p>
                                 <select name="ano" id="filtro_ano" onchange="adicionarFiltro(this)">
-                                    <option default selected hidden>Selecione</option>
+                                    <option value="" selected hidden>Selecione</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -223,7 +222,7 @@
                                 <p>Especialização</p>
                                 <select name="especializacao" id="filtro_especializacao"
                                     onchange="adicionarFiltro(this)">
-                                    <option default selected hidden>Selecione</option>
+                                    <option value="" selected hidden>Selecione</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -233,7 +232,7 @@
                             <div class="filtro">
                                 <p>Estado</p>
                                 <select name="estado" id="filtro_estado" onchange="adicionarFiltro(this)">
-                                    <option default selected hidden>Selecione</option>
+                                    <option value="" selected hidden>Selecione</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -243,7 +242,7 @@
                             <div class="filtro">
                                 <p>Cidade</p>
                                 <select name="cidade" id="filtro_cidade" onchange="adicionarFiltro(this)">
-                                    <option selected hidden>Selecione</option>
+                                    <option value="" selected hidden>Selecione</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -279,16 +278,15 @@
 
     </section>
 
-    <script>
-        window.addEventListener('load', function () {
-            loadProfileImage();
-        });
-    </script>
-
     <script src="assets/javascript/awsPhoto.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/javascript/sidebar.js"></script>
     <script src="assets/javascript/relatorio.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            loadProfileImage(),
+            obterRelatoriosPorId()
+        });
+    </script>
 </body>
-
 </html>

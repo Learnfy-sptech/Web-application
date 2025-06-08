@@ -1,5 +1,15 @@
 const { SessionCredentialsFilterSensitiveLog } = require("@aws-sdk/client-s3");
-const { application, json } = require("express");
+const { clone } = require("chart.js/helpers");
+const { application, json, response } = require("express");
+
+var filtrosSelecionados = {
+    ano: null,
+    especializacao: null,
+    estado: null,
+    cidade: null
+};
+var dadosColunasRelatorio = []
+
 
 function criarNovoRelatorio() {
     trocarTelaRelatorio()
@@ -19,12 +29,13 @@ function voltarAosMeusRelatorios() {
 
 var inputPreenchido = false
 function limparCampo(idElemento) {
-    const elemento = document.getElementById(idElemento)
-    if (inputPreenchido == false) {
-        inputPreenchido = true
-        elemento.value = ""
+    const elemento = document.getElementById(idElemento);
+    if (!elemento) return;
+    if (elemento.value === "Nome do Relatório") {
+        elemento.value = "";
     }
-    elemento.focus()
+    elemento.focus();
+
 }
 
 function validarInputVazio(idElemento, texto) {
@@ -104,20 +115,21 @@ function verificarCamposPreenchidos() {
     })
 }
 
-var todosSelecionados = false
+var todosSelecionados = false;
 function selecionarTodos() {
-    if (todosSelecionados == false) {
-        todosSelecionados = true
-    } else {
-        todosSelecionados = false
-    }
-    const elementoColunas = document.getElementById('todas_colunas')
-    const colunas = elementoColunas.querySelectorAll('div')
+    todosSelecionados = !todosSelecionados;
+    console.log(todosSelecionados);
+    const elementoColunas = document.getElementById('todas_colunas');
+    const colunas = elementoColunas.querySelectorAll('div');
+
     colunas.forEach((coluna) => {
-        inputColuna = coluna.querySelector('input')
-        inputColuna.checked = todosSelecionados
-    })
+        const inputColuna = coluna.querySelector('input');
+        if (inputColuna) {
+            inputColuna.checked = todosSelecionados;
+        }
+    });
 }
+
 
 function alimentarLista() {
     const elementoColunas = document.getElementById('todas_colunas')
@@ -135,10 +147,6 @@ function alimentarLista() {
 function toCapitalize(string) {
     return string[0].toUpperCase() + string.slice(1)
 }
-
-var dadosColunasRelatorio = []
-var filtrosSelecionados = {}
-
 
 // Rotas
 function inserirRelatorio() {
@@ -167,6 +175,7 @@ function inserirRelatorio() {
                 showConfirmButton: true,
                 confirmButtonColor: "#800000"
             }).then(() => {
+                limparCamposRelatorio();
                 voltarAosMeusRelatorios();
             });
         } else {
@@ -209,45 +218,52 @@ function exibirMensagemSemRelatorios() {
         `
 }
 
-function obterInfoRelatorio(elemento) {
-    const idRelatorio = elemento.id
-    fetch(`/relatorio/obterRelatoriosPorId/${idRelatorio}`, {
+function obterInfoRelatorio(idRelatorio) {
+    fetch(`/relatorio/obterInfoRelatorio/${idRelatorio}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         },
     }).then(function (resposta) {
-        if (resposta.ok) {
-            Swal.fire({
-                title: "Relatório Salvo com Sucesso!",
-                text: "A partir de agora ele já está disponível para ser importado :)",
-                // icon: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#800000"
-            })
-            obterRelatoriosPorId()
-        }
+        resposta.json().then(json => {
+            alimentarCamposRelatorio(json[0])
+        })
     })
 }
 
+function alimentarCamposRelatorio(json) {
+    const colunas = json.colunas
+    colunas.forEach(coluna => {
+        dadosColunasRelatorio.push(coluna)
+    })
+    preencherCamposEscolhidos()
+    document.getElementById('input_nome_relatorio').value = json.nome
+    const filtros = document.querySelectorAll('.filtro')
+    console.log(json.filtros)
+}
+
 function adicionarFiltro(elemento) {
-    console.log(elemento)
+    if (!elemento.value) return
+
+    console.log(filtrosSelecionados)
+
     switch (elemento.id) {
         case "filtro_ano":
-            filtrosSelecionados.ano = elemento.value
+            filtrosSelecionados.ano = elemento.value;
             break;
         case "filtro_especializacao":
-            filtrosSelecionados.especializacao = elemento.value
+            filtrosSelecionados.especializacao = elemento.value;
             break;
         case "filtro_estado":
-            filtrosSelecionados.estado = elemento.value
-            buscarCidadesPorEstado(elemento.value)
+            filtrosSelecionados.estado = elemento.value;
+            buscarCidadesPorEstado(elemento.value);
             break;
         case "filtro_cidade":
-            filtrosSelecionados.cidade = elemento.value
+            filtrosSelecionados.cidade = elemento.value;
             break;
     }
-    console.log(filtrosSelecionados)
+
+    console.log(filtrosSelecionados);
 }
 
 
@@ -278,17 +294,17 @@ function adicionarRelatorioNaDiv(infoRelatorio) {
             <div class="sessao-relatorio sessao-02">
                 <p>
                     Colunas:
-                    <span id="colunas_relatorio">${infoRelatorio.colunas}</span>
+                    <span id="colunas_relatorio">${formatarColunas(infoRelatorio.colunas)}</span>
                 </p>
                 <p>
-                    Filtros:
-                    <span id="filtro_relatorio">${infoRelatorio.filtros}</span>
+                    Criado em:
+                    <span id="criado_relatorio">${formatarData(infoRelatorio.dt_criacao)}</span>
                 </p>
             </div>
             <div class="sessao-relatorio sessao-03">
                 <p>
-                    Criado em:
-                    <span id="criado_relatorio">${infoRelatorio.dt_criacao}</span>
+                    Filtros:
+                    <span id="filtro_relatorio">${infoRelatorio.filtros}</span>
                 </p>
                 <button onclick="exportarRelatorio()">Exportar</button>
             </div>
@@ -319,15 +335,68 @@ function deletarRelatorio(elemento) {
     }).then(function (resposta) {
         if (resposta.ok) {
             Swal.fire({
-                title: "Relatório Deletedo com Sucesso!",
-                text: "Mas você ainda pode gerar outros relatórios, vá em frente :)",
-                // icon: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#800000"
-            }).then(() => {
-                obterRelatoriosPorId()
+                title: "Tem certeza?",
+                text: "Essa ação não pode ser desfeita!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#800000",
+                cancelButtonColor: "#d2d2d2",
+                confirmButtonText: "Sim, confirmar!",
+                cancelButtonText: "Cancelar"
+            }).then(resposta => {
+                Swal.fire({
+                    title: "Relatório Deletedo com Sucesso!",
+                    text: "Mas você ainda pode gerar outros relatórios, vá em frente :)",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#800000"
+                }).then(() => {
+                    obterRelatoriosPorId()
+                })
             })
         }
     })
+}
 
+function limparCamposRelatorio() {
+    document.getElementById('campos_selecionados').innerHTML = ''
+    document.getElementById('input_nome_relatorio').value = 'Nome do Relatório'
+    const filtros = document.querySelectorAll('.filtro')
+    filtros.forEach((actualFilter) => {
+        const select = actualFilter.querySelector('select')
+        select.options[0].selected = true;
+    })
+}
+
+function editarRelatorio(elemento) {
+    trocarTelaRelatorio()
+    const idRelatorio = elemento.id.replace("relatorio_", "")
+    obterInfoRelatorio(idRelatorio)
+}
+
+function formatarColunas(colunas) {
+    const colunasFormatadas = [];
+
+    for (let coluna of colunas) {
+        const lengthTotal = colunasFormatadas.join(", ").length;
+
+        if (colunasFormatadas.length >= 4 || lengthTotal >= 50) {
+            colunasFormatadas.push("[...]");
+            break; // Para a adição de mais elementos
+        }
+        colunasFormatadas.push(' ' + toCapitalize(coluna.replaceAll('_', ' ')));
+    }
+    return colunasFormatadas;
+}
+
+function formatarData(dataString) {
+    const data = new Date(dataString);
+
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Mês começa em 0
+    const ano = data.getFullYear();
+
+    const horas = data.getHours().toString().padStart(2, '0');
+    const minutos = data.getMinutes().toString().padStart(2, '0');
+
+    return `${dia}/${mes}/${ano} às ${horas}:${minutos}`;
 }
