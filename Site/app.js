@@ -17,6 +17,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require('./src/routes/usuarios');
 var logsRouter = require('./src/routes/logs')
+var empresaRouter = require("./src/routes/empresa")
 var diretorRouter = require('./src/routes/diretor');
 var gestorRouter = require('./src/routes/gestor');
 
@@ -37,6 +38,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/usuarios", usuarioRouter);
+app.use("/logs", logsRouter);
+app.use("/empresa", empresaRouter);
+
 app.use("/diretor", diretorRouter);
 app.use("/usuarios", usuarioRouter);    
 app.use('/logs', logsRouter);

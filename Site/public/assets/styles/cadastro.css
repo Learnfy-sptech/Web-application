@@ -1,66 +1,132 @@
-@import url(styles.css);
-
-:root {
-  --color-primary-1: #fbf9f5;
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  background-color: var(--color-primary-1);
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fbf9f5;
+    color: #333;
 }
 
+/* Container geral */
 .container {
-  display: flex;
-  width: 100%;
-  height: 100vh;
+    display: flex;
+    min-height: 100vh;
 }
 
-/* Lado esquerdo - Formulário */
+/* Lado esquerdo (formulário) */
 .form-side {
-  flex: 1;
-  padding: 40px;
-  display: flex;
-  justify-content: center;  
-  align-items: center;     
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #ffffff;
 }
 
-
+/* Container do formulário */
 .form-container {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 10px;
-  padding: 30px;
-  box-sizing: border-box;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    background-color: #fafafa;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Lado direito - Imagem */
-.image-side {
-  flex: 1;
-  background-image: url("../images/backgroundCad.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-/* Estilos do formulário (mantidos do original) */
+/* Cabeçalho do formulário */
 .form-header {
-  text-align: center;
-  margin-bottom: 30px;
-  text-align: center;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
+.form-header img {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.form-header h1 {
+    font-size: 24px;
+}
+
+/* Etapas */
+.etapa {
+    display: none;
+}
+
+.etapa.active {
+    display: block;
+}
+
+/* Grupos de formulário */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+input,
+select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Botões */
+.botoes-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.botaocadastro {
+    background-color: #800000;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.botaocadastro:hover {
+  background-color: #4a0000;
+  text-decoration: none;
+  color: white;
+}
+
+/* Rodapé do formulário */
 .form-footer {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.form-footer a:hover {
-  color: #ff0000;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
 }
 
 .form-footer a {
@@ -69,175 +135,60 @@ body {
     transition: color 0.3s;
 }
 
-.form-footer h1 {
-  color: #333;
-  margin: 15px;
-  font-size: 15px;
+.form-footer a:hover {
+  color: #ff0000;
 }
 
-.form-header img {
-  height: 60px;
-  width: auto;
+/* Lado direito (imagem ou decorativo) */
+.image-side {
+  flex: 1;
+  background-image: url("../images/backgroundCad.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
-.etapa {
-  display: none;
+/* Erros */
+#cardErro {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: red;
 }
 
-.etapa.active {
-  display: block;
+#possui-token {
+    color: #800000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #555;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background: #c6c6c671;
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding: 12px;
-  border: 2px solid transparent;
-  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1),
-    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1);
-}
-
-.form-group input:hover,
-.form-group select:hover,
-.form-group input:focus-within,
-.form-group select:focus-within {
-  outline: none;
-  border-color: #800000;
-}
-
-.botoes-container {
-  display: flex;
-  justify-content: center;  
-  align-items: center;     
-  gap: 20px;                
-  margin-top: 30px;
-  width: 100%;              
-}
-
-.botaocadastro {
-  border: none;
-  padding: 10px 25px;
-  font-weight: 600;
-  color: white;
-  background-color: #800000;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  cursor: pointer;
-  font-size: 16px;
-  min-width: 100px;
-  max-width: 140px;
-  text-align: center; 
-}
-
-.botaocadastro:hover {
-  background-color: #4a0000;
-  text-decoration: none;
-  color: white;
-}
-
-
-.file-input-container {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-.file-input-btn {
-  border: 1px dashed #ddd;
-  border-radius: 5px;
-  padding: 40px 20px;
-  text-align: center;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.file-input-btn:hover {
-  border-color: #000;
-  background-color: #f9f9f9;
-}
-
-.file-input {
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.file-name {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #666;
-}
-
-.botoes-container {
-  display: flex;
-  justify-content: center; /* centraliza no meio */
-  align-items: center;
-  gap: 16px; /* espaço entre os botões */
-  margin-top: 30px;
-  flex-wrap: wrap; /* evita quebra feia em telas menores */
-}
-
-.botaocadastro {
-  border: none;
-  padding: 10px 25px;
-  font-weight: 600;
-  color: white;
-  background-color: #800000;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  cursor: pointer;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-
-.botaocadastro:hover {
-  background-color: #4a0000;
-  text-decoration: none;
-  color: white;
+#possui-token:hover {
+    color: #4a0000;
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    height: auto;
+@media screen and (min-width: 768px) {
+    .image-side {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .form-container {
+        padding: 20px;
     }
 
-  .form-side {
-    width: 100%;
-    flex: none;
-    padding: 0;
-  }
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
 
+    .botoes-container {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-  .form-side h1{
-    font-size: 25px;
-  }
-
-  .image-side {
-    display: none;
-  }
+    .botaocadastro {
+        width: 100%;
+    }
 }
