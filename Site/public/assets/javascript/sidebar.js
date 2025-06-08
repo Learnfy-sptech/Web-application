@@ -5,13 +5,13 @@ let navList = document.querySelector(".nav-list");
 
 closeBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
-  navList.classList.toggle("scroll");
+  navList.classList.toggle("scroll"); // Assuming 'scroll' class manages overflow/scrolling
   menuBtnChange();
 });
 
 searchBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
-  navList.classList.toggle("scroll");
+  navList.classList.toggle("scroll"); // Assuming 'scroll' class manages overflow/scrolling
   menuBtnChange();
 });
 
@@ -22,7 +22,6 @@ function menuBtnChange() {
     closeBtn.classList.replace("bx-chevron-left", "bx-menu");
   }
 }
-
 
 document.getElementById("log_out").addEventListener("click", function () {
   Swal.fire({
@@ -50,4 +49,36 @@ window.onload = function () {
     document.getElementById("nomeUsuario").textContent = nome;
     document.getElementById("tipoContaUsuario").textContent = tipoConta;
   }
+
+  const menuLinks = document.querySelectorAll('.nav-list a.menu-link'); 
+  const dashLink = document.getElementById('minha-dashboard-link-dinamico');
+
+  if(dashLink && tipoConta){
+    dashLink.href= `dashboard-${tipoConta.toLowerCase()}.html`;
+  }
+
+  var currentFileName = window.location.pathname.split('/').pop();
+  if (currentFileName === '' || currentFileName === '/') {
+      currentFileName = 'index.html';
+  }
+
+  menuLinks.forEach(link => {
+    link.classList.remove('active');
+  });
+
+  menuLinks.forEach(link => {
+    const linkHref = link.getAttribute('href');
+
+    if (currentFileName === linkHref) {
+      link.classList.add('active');
+    }
+  });
 };
+  menuLinks.forEach(link => {
+    const linkHref = link.getAttribute('href');
+    if (currentPath.endsWith(linkHref)) {
+      link.classList.add('active'); 
+    } else {
+
+    }
+  });
