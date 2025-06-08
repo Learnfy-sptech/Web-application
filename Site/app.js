@@ -1,5 +1,5 @@
 var ambiente_processo = 'producao';
-// var ambiente_processo = 'desenvolvimento';
+var ambiente_processo = 'desenvolvimento';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
@@ -21,6 +21,7 @@ var empresaRouter = require("./src/routes/empresa")
 var diretorRouter = require('./src/routes/diretor');
 var gestorRouter = require('./src/routes/gestor');
 
+var dashboardPesquisadorRouter= require('./src/routes/dashboardPesquisador');
 // ----------------------------------------------------------------- //
 // CONFIGURAÇÕES PARA CONEXÃO DIRETAMENTE COM NOSSO BUCKET NO AWS S3 //
 // ----------------------------------------------------------------- //
@@ -46,6 +47,9 @@ app.use("/usuarios", usuarioRouter);
 app.use('/logs', logsRouter);
 app.use('/gestor', gestorRouter);
 
+
+
+app.use('/dashboardPesquisador', dashboardPesquisadorRouter)
 app.listen(PORTA_APP, function () {
     console.log(`
      ██      ███████  █████  ██████  ███    ██ ███████ ██    ██ 
