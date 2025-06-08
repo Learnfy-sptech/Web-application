@@ -67,7 +67,7 @@ function login(email, senha) {
   );
 
   var instrucaoSql = `
-  SELECT id, nome, email, tipoConta, telefone, foto_perfil_path
+  SELECT id, nome, email, tipo_conta, telefone, foto_perfil_path
   FROM usuario 
   WHERE email = '${email}' AND senha = '${senha}'
 `;

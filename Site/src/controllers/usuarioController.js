@@ -40,12 +40,15 @@ function login(req, res) {
   usuarioModel
     .login(email, senha)
     .then(function (resposta) {
+
+      console.log("Resultado da consulta:", resposta); 
+
       if (resposta.length > 0) {
         return res.status(200).json({
           id: resposta[0].id,
           nome: resposta[0].nome,
           email: resposta[0].email,
-          tipoConta: resposta[0].tipoConta,
+          tipo_conta: resposta[0].tipo_conta,
           telefone: resposta[0].telefone,
           foto_perfil_path: resposta[0].foto_perfil_path
         });

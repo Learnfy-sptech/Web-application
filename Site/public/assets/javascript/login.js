@@ -50,7 +50,7 @@ function logar() {
         sessionStorage.EMAIL_USUARIO = json.email;
         sessionStorage.NOME_USUARIO = json.nome;
         sessionStorage.ID_USUARIO = json.id;
-        sessionStorage.TIPO_CONTA = json.tipoConta;
+        sessionStorage.TIPO_CONTA = json.tipo_conta;
         sessionStorage.FOTO_USUARIO = json.foto_perfil_path 
         sessionStorage.TELEFONE_USUARIO = json.telefone;
   
