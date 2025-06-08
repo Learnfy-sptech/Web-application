@@ -73,30 +73,26 @@ function getKpiMediaSalarial(req, res) {
 }
 
 function getGraficoInstituicoes(req, res) {
-    var area = req.body.area;
-
-    dashboardPesquisadorModel.getGraficoInstituicoes(area)
+    dashboardPesquisadorModel.getGraficoInstituicoes()
         .then(function (resultado) {
             if (resultado.length > 0) {
-                res.status(200).json(resultado[0]);
+                res.status(200).json(resultado); 
             } else {
                 res.status(204).send("Nenhum resultado encontrado!");
             }
         })
         .catch(function (erro) {
             console.log(erro);
-            console.log("Houve um erro ao buscar o resultado do KPI.", erro.sqlMessage);
+            console.log("Houve um erro ao buscar o resultado do gráfico de instituições.", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
         });
 }
 
 function getGraficoProjecaoEvasao(req, res) {
-    var area = req.body.area;
-
-    dashboardPesquisadorModel.getGraficoProjecaoEvasao(area)
+    dashboardPesquisadorModel.getGraficoProjecaoEvasao()
         .then(function (resultado) {
             if (resultado.length > 0) {
-                res.status(200).json(resultado[0]);
+                res.status(200).json(resultado); 
             } else {
                 res.status(204).send("Nenhum resultado encontrado!");
             }
@@ -107,6 +103,7 @@ function getGraficoProjecaoEvasao(req, res) {
             res.status(500).json(erro.sqlMessage);
         });
 }
+
 
 module.exports ={
     getKpiQtdCursantes,
