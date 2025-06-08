@@ -181,7 +181,6 @@ function inserirRelatorio() {
     })
 }
 
-
 function obterRelatoriosPorId() {
     const idUsuario = sessionStorage.ID_USUARIO
     fetch(`/relatorio/obterRelatoriosPorId/${idUsuario}`, {
