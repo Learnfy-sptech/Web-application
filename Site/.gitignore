@@ -1,3 +1,5 @@
 node_modules/
 Site/.env/
 .env
+package-lock.json
+Site/package-lock.json
