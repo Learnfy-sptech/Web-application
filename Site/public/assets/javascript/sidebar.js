@@ -49,13 +49,14 @@ window.onload = function () {
     document.getElementById("tipoContaUsuario").textContent = tipoContaArmazenado;
   }
 
-  const menuLinks = document.querySelectorAll('.nav-list a.menu-link'); 
+  const menuLinks = document.querySelectorAll('.nav-list a.menu-link');
   const dashLink = document.getElementById('minha-dashboard-link-dinamico');
 
   const dashboardMap = {
     'diretor_academico': 'diretor',
     'gestor': 'gestor',
     'pesquisador': 'pesquisador',
+    // Adicione outros mapeamentos aqui se existirem
   };
 
   let dashboardFileNamePart = '';
@@ -79,14 +80,22 @@ window.onload = function () {
       currentFileName = 'index.html';
   }
 
+  // Primeiro, remove a classe 'active' de TODOS os links para uma limpeza
   menuLinks.forEach(link => {
     link.classList.remove('active');
   });
 
+  // Em seguida, adiciona a classe 'active' ao link correto
   menuLinks.forEach(link => {
     const linkHref = link.getAttribute('href');
 
-    if (currentFileName === linkHref) {
+    // Condição principal para ativar o link:
+    // 1. Se o nome do arquivo atual for EXATAMENTE igual ao href do link
+    // OU
+    // 2. Se o link for o da "Minha Dashboard" E a URL atual começar com "dashboard-"
+    //    (indicando que é alguma das páginas de dashboard)
+    if (currentFileName === linkHref ||
+        (link.id === 'minha-dashboard-link-dinamico' && currentFileName.startsWith('dashboard-'))) {
       link.classList.add('active');
     }
   });
