@@ -1,5 +1,3 @@
-const { clone, sign } = require("chart.js/helpers");
-const { application, json, response } = require("express");
 
 var anoFiltro = ""
 var especializacaoFiltro = ""
@@ -14,10 +12,10 @@ function criarNovoRelatorio() {
 }
 
 function trocarTelaRelatorio() {
-    const relatorioGeneral = document.getElementById("relatorio_general");
-    const infoRelatorio = document.getElementById("info_relatorio");
-    relatorioGeneral.classList.toggle("oculto");
-    infoRelatorio.classList.toggle("oculto");
+    const relatorioGeneral = document.getElementById("relatorio_general")
+    const infoRelatorio = document.getElementById("info_relatorio")
+    relatorioGeneral.classList.toggle("oculto")
+    infoRelatorio.classList.toggle("oculto")
 }
 
 function voltarAosMeusRelatorios() {
@@ -25,117 +23,129 @@ function voltarAosMeusRelatorios() {
     obterRelatoriosPorId()
 }
 
+// Funções para inputs
 var inputPreenchido = false
 function limparCampo(idElemento) {
-    const elemento = document.getElementById(idElemento);
-    if (!elemento) return;
+    const elemento = document.getElementById(idElemento)
+    if (!elemento) return
     if (elemento.value === "Nome do Relatório") {
-        elemento.value = "";
+        elemento.value = ""
     }
-    elemento.focus();
-
+    elemento.focus()
 }
 
 function validarInputVazio(idElemento, texto) {
     const elemento = document.getElementById(idElemento)
-    if (elemento.value.length == 0) {
+    if (!elemento) return
+    if (elemento.value.trim().length == 0) {
         elemento.value = texto
         inputPreenchido = true
     }
 }
 
+// Funções para colunas
 function abrirOuFecharTodasColunas() {
-    var elementoPai = document.getElementById('info_relatorio')
+    const elementoPai = document.getElementById('info_relatorio')
     elementoPai.classList.toggle('desfoque')
-    var elementoColunas = document.getElementById('todas_colunas_geral')
+    const elementoColunas = document.getElementById('todas_colunas_geral')
     elementoColunas.classList.toggle('oculto')
 }
 
 function adicionarRemoverCampo(elemento) {
     const elementoInput = elemento.querySelector('input')
-    if (elementoInput.checked == false) {
-        elementoInput.checked = true
-    } else {
-        elementoInput.checked = false
+    if (elementoInput) {
+        elementoInput.checked = !elementoInput.checked
     }
 }
 
 function preencherCamposEscolhidos() {
     const div = document.getElementById('campos_selecionados')
-    const elementosDiv = div.querySelectorAll('div')
-    if (elementosDiv.length != 0) {
-        elementosDiv.forEach((actualElement) => {
-            actualElement.remove()
-        })
+    while (div.firstChild) {
+        div.removeChild(div.firstChild)
     }
 
     alimentarLista()
+
     dadosColunasRelatorio.forEach((colunaAtual) => {
         adicionarCampoNaDiv(colunaAtual)
     })
 }
 
 function adicionarCampoNaDiv(idDivColuna) {
-    var nomeColuna = idDivColuna.replaceAll("_", " ")
+    let nomeColuna = idDivColuna.replaceAll("_", " ")
     nomeColuna = toCapitalize(nomeColuna)
     const div = document.getElementById('campos_selecionados')
-    div.innerHTML += `
+    div.insertAdjacentHTML('beforeend', `
         <div class="campo-div-selecao" id="${idDivColuna}">
             <span>${nomeColuna}</span>
-            <img src="assets/images/close_red.png" onclick="removerCampoNaDiv('${idDivColuna}')" alt="">
+            <img src="assets/images/close_red.png" onclick="removerCampoNaDiv('${idDivColuna}')" alt="Remover campo">
         </div>
-    `
+    `)
 }
 
 function removerCampoNaDiv(id) {
-    if (id != null) {
-        document.getElementById(id).remove()
+    if (id) {
+        const elemento = document.getElementById(id)
+        if (elemento) {
+            elemento.remove()
+        }
         const position = dadosColunasRelatorio.indexOf(id)
-        dadosColunasRelatorio.splice(position, 1)
+        if (position !== -1) {
+            dadosColunasRelatorio.splice(position, 1)
+        }
         console.log(dadosColunasRelatorio)
     } else {
-        console.log("Parâmetro errado na função 'removerCampoNaDiv(id)'")
+        console.warn("Parâmetro inválido em removerCampoNaDiv(id)")
     }
 }
 
 function verificarCamposPreenchidos() {
     const elementoColunas = document.getElementById('todas_colunas')
+    if (!elementoColunas) return
+
     const colunas = elementoColunas.querySelectorAll('div')
 
     colunas.forEach((coluna) => {
-        inputColuna = coluna.querySelector('input')
-        conteudoTextoColuna = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
-        if (dadosColunasRelatorio.indexOf(conteudoTextoColuna) != -1) {
-            inputColuna.checked = true
-        } else {
-            inputColuna.checked = false
+        const inputColuna = coluna.querySelector('input')
+        const textoSpan = coluna.querySelector('span')
+        if (!inputColuna || !textoSpan) return
+
+        const conteudoTextoColuna = textoSpan.textContent.replaceAll(" ", "_").toLowerCase()
+        inputColuna.checked = dadosColunasRelatorio.includes(conteudoTextoColuna)
+    })
+}
+
+var todosSelecionados = false
+function selecionarTodos() {
+    todosSelecionados = !todosSelecionados
+    console.log("Selecionar todos:", todosSelecionados)
+
+    const elementoColunas = document.getElementById('todas_colunas')
+    if (!elementoColunas) return
+
+    const colunas = elementoColunas.querySelectorAll('div')
+
+    colunas.forEach((coluna) => {
+        const inputColuna = coluna.querySelector('input')
+        if (inputColuna) {
+            inputColuna.checked = todosSelecionados
         }
     })
 }
 
-var todosSelecionados = false;
-function selecionarTodos() {
-    todosSelecionados = !todosSelecionados;
-    console.log(todosSelecionados);
-    const elementoColunas = document.getElementById('todas_colunas');
-    const colunas = elementoColunas.querySelectorAll('div');
-
-    colunas.forEach((coluna) => {
-        const inputColuna = coluna.querySelector('input');
-        if (inputColuna) {
-            inputColuna.checked = todosSelecionados;
-        }
-    });
-}
-
-
 function alimentarLista() {
     const elementoColunas = document.getElementById('todas_colunas')
+    if (!elementoColunas) return
+
     const colunas = elementoColunas.querySelectorAll('div')
     dadosColunasRelatorio = []
+
     colunas.forEach((coluna) => {
-        inputColuna = coluna.querySelector('input')
-        conteudoColunaId = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
+        const inputColuna = coluna.querySelector('input')
+        const spanColuna = coluna.querySelector('span')
+        if (!inputColuna || !spanColuna) return
+
+        const conteudoColunaId = spanColuna.textContent.replaceAll(" ", "_").toLowerCase()
         if (inputColuna.checked) {
             dadosColunasRelatorio.push(conteudoColunaId)
         }
@@ -143,12 +153,33 @@ function alimentarLista() {
 }
 
 function toCapitalize(string) {
-    return string[0].toUpperCase() + string.slice(1)
+    if (!string) return ""
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 // Rotas
 function inserirRelatorio() {
-    const nome = document.getElementById('input_nome_relatorio').value
+    const nome = document.getElementById('input_nome_relatorio').value.trim()
+    if (nome === "" || nome === "Nome do Relatório") {
+        Swal.fire({
+            title: "Nome inválido",
+            text: "Por favor, insira um nome válido para o relatório.",
+            icon: "warning",
+            confirmButtonColor: "#800000"
+        })
+        return
+    }
+
+    if (dadosColunasRelatorio.length == 0) {
+        Swal.fire({
+            title: "Selecione as colunas",
+            text: "Por favor, selecione as colunas que farão parte do seu relatório.",
+            icon: "warning",
+            confirmButtonColor: "#800000"
+        })
+        return
+    }
+
     const fkUsuario = sessionStorage.ID_USUARIO
     const colunas = dadosColunasRelatorio
     const filtros = {
@@ -170,56 +201,70 @@ function inserirRelatorio() {
             colunas: Array.isArray(colunas) ? colunas : [],
             filtros: typeof filtros === "object" ? filtros : {}
         })
-    }).then(function (resposta) {
+    }).then(resposta => {
         if (resposta.ok) {
             Swal.fire({
                 title: "Relatório Salvo com Sucesso!",
                 text: "A partir de agora ele já está disponível para ser importado :)",
-                // icon: "success",
                 showConfirmButton: true,
                 confirmButtonColor: "#800000"
             }).then(() => {
-                limparCamposRelatorio();
-                voltarAosMeusRelatorios();
+                limparCamposRelatorio()
+                voltarAosMeusRelatorios()
             });
         } else {
             Swal.fire({
                 title: "Não foi possível salvar o relatório",
                 text: "Tente novamente ou informe a central de atendimentos",
-                // icon: "error",
+                icon: "error",
                 confirmButtonText: "Ok",
                 confirmButtonColor: "#800000"
             });
         }
-    })
+    }).catch(err => {
+        console.error("Erro ao inserir relatório:", err);
+        Swal.fire({
+            title: "Erro de rede",
+            text: "Não foi possível conectar ao servidor.",
+            icon: "error",
+            confirmButtonColor: "#800000"
+        });
+    });
 }
 
 function obterRelatoriosPorId() {
-    const idUsuario = sessionStorage.ID_USUARIO
+    const idUsuario = sessionStorage.ID_USUARIO;
     fetch(`/relatorio/obterRelatoriosPorId/${idUsuario}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
-        },
-    }).then(function (resposta) {
+        }
+    }).then(resposta => {
         if (resposta.ok) {
             resposta.json().then(json => {
-                if (json.length == 0) {
-                    exibirMensagemSemRelatorios()
+                if (!json || json.length === 0) {
+                    exibirMensagemSemRelatorios();
                 } else {
-                    construirMeusRelatorios(json)
+                    construirMeusRelatorios(json);
                 }
-            })
+            });
+        } else {
+            console.error("Falha ao obter relatórios: ", resposta.status);
         }
-    })
+    }).catch(err => {
+        console.error("Erro ao obter relatórios:", err);
+    });
 }
 
 function exibirMensagemSemRelatorios() {
-    document.getElementById("meus_relatorios").innerHTML = `
-            <h1 id = "sem_relatorios">Parece que você ainda não tem relatórios...
-            <a onclick="criarNovoRelatorio()">Crie agora!</a>
+    const div = document.getElementById("meus_relatorios");
+    if (div) {
+        div.innerHTML = `
+            <h1 id="sem_relatorios">Parece que você ainda não tem relatórios...
+            <a href="javascript:void(0)" onclick="criarNovoRelatorio()">Crie agora!</a>
             </h1>
-        `
+        `;
+    }
 }
 
 function obterInfoRelatorio(idRelatorio) {
@@ -227,60 +272,81 @@ function obterInfoRelatorio(idRelatorio) {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
-        },
-    }).then(function (resposta) {
-        resposta.json().then(json => {
-            alimentarCamposRelatorio(json[0])
-        })
-    })
+        }
+    }).then(resposta => {
+        if (resposta.ok) {
+            resposta.json().then(json => {
+                if (json && json[0]) {
+                    alimentarCamposRelatorio(json[0]);
+                }
+            });
+        } else {
+            console.error("Falha ao obter info do relatório:", resposta.status);
+        }
+    }).catch(err => {
+        console.error("Erro ao obter info do relatório:", err);
+    });
 }
 
 function alimentarCamposRelatorio(json) {
-    const colunas = json.colunas
+    if (!json) return;
+    const colunas = json.colunas || []
+    dadosColunasRelatorio = []
     colunas.forEach(coluna => {
         dadosColunasRelatorio.push(coluna)
-    })
-    preencherCamposEscolhidos()
-    document.getElementById('input_nome_relatorio').value = json.nome
-    const filtros = document.querySelectorAll('.filtro')
-    console.log(json.filtros)
+    });
+    preencherCamposEscolhidos();
+
+    const inputNome = document.getElementById('input_nome_relatorio')
+    if (inputNome) inputNome.value = json.nome || ""
+
+    const filtrosJson = json.filtros
+    if (!filtrosJson) return
+
+    Object.entries(filtrosJson).forEach(([chave, valor]) => {
+        const elemento = document.getElementById(`filtro_${chave}`)
+        if (elemento) {
+            elemento.value = valor
+        }
+    });
 }
 
 function adicionarFiltro(elemento) {
-    if (!elemento.value) return
+    if (!elemento || !elemento.value) return
 
     switch (elemento.id) {
         case "filtro_ano":
-            anoFiltro = elemento.value;
-            break;
+            anoFiltro = elemento.value
+            break
         case "filtro_especializacao":
-            especializacaoFiltro = elemento.value;
-            break;
-        case "filtro_curso":
-            cursoFiltro = elemento.value;
+            especializacaoFiltro = elemento.value
             buscarCursosPorEspecializacao(elemento.value)
-            break;
+            break
+        case "filtro_curso":
+            cursoFiltro = elemento.value
+            break
         case "filtro_estado":
-            estadoFiltro = elemento.value;
-            buscarCidadesPorEstado(elemento.value);
-            break;
+            estadoFiltro = elemento.value
+            buscarCidadesPorEstado(elemento.value)
+            break
         case "filtro_cidade":
-            cidadeFiltro = elemento.value;
-            break;
+            cidadeFiltro = elemento.value
+            break
     }
-
 }
 
-
 function construirMeusRelatorios(relatorios) {
-    document.getElementById("meus_relatorios").innerHTML = ''
+    const div = document.getElementById("meus_relatorios")
+    if (!div) return
+
+    div.innerHTML = ""
     relatorios.forEach((relatorio) => {
         adicionarRelatorioNaDiv(relatorio)
     })
 }
 
-
 function adicionarRelatorioNaDiv(infoRelatorio) {
+    if (!infoRelatorio || !infoRelatorio.id_relatorio) return
     const divMeusRelatorios = document.getElementById('meus_relatorios')
 
     const idRelatorioCompleto = `relatorio_${infoRelatorio.id_relatorio}`
@@ -309,7 +375,7 @@ function adicionarRelatorioNaDiv(infoRelatorio) {
             <div class="sessao-relatorio sessao-03">
                 <p>
                     Filtros:
-                    <span id="filtro_relatorio">${infoRelatorio.filtros}</span>
+                    <span id="filtro_relatorio">${formatarFiltros(infoRelatorio.filtros)}</span>
                 </p>
                 <button onclick="exportarRelatorio()">Exportar</button>
             </div>
@@ -332,15 +398,40 @@ function buscarCidadesPorEstado(estado) {
             const id = 'filtro_cidade'
             ativarSelect(id)
             const elemento = document.getElementById(id)
-            elemento.innerHTML = '<option value="" selected hidden>Selecione</option>';
+            elemento.innerHTML = '<option value="" selected hidden>Selecione</option>'
             resposta.json().then(json => {
                 console.log(json)
                 json.forEach(valor => {
-                const option = document.createElement("option");
-                option.value = valor.nome;
-                option.textContent = valor.nome;
-                elemento.appendChild(option);
-            });
+                    const option = document.createElement("option")
+                    option.value = valor.nome
+                    option.textContent = valor.nome
+                    elemento.appendChild(option)
+                })
+            })
+        }
+    })
+}
+
+function buscarCursosPorEspecializacao(especializacao) {
+    fetch(`/relatorio/obterCursosPorEspecializacao/${especializacao}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            const id = 'filtro_curso'
+            ativarSelect(id)
+            const elemento = document.getElementById(id)
+            elemento.innerHTML = '<option value="" selected hidden>Selecione</option>'
+            resposta.json().then(json => {
+                console.log(json)
+                json.forEach(valor => {
+                    const option = document.createElement("option")
+                    option.value = valor.nome
+                    option.textContent = valor.nome
+                    elemento.appendChild(option)
+                })
             })
         }
     })
@@ -385,7 +476,7 @@ function limparCamposRelatorio() {
     const filtros = document.querySelectorAll('.filtro')
     filtros.forEach((actualFilter) => {
         const select = actualFilter.querySelector('select')
-        select.options[0].selected = true;
+        select.options[0].selected = true
     })
 }
 
@@ -396,29 +487,51 @@ function editarRelatorio(elemento) {
 }
 
 function formatarColunas(colunas) {
-    const colunasFormatadas = [];
+    const colunasFormatadas = []
 
     for (let coluna of colunas) {
-        const lengthTotal = colunasFormatadas.join(", ").length;
+        const lengthTotal = colunasFormatadas.join(", ").length
 
         if (colunasFormatadas.length >= 4 || lengthTotal >= 50) {
-            colunasFormatadas.push("[...]");
-            break; // Para a adição de mais elementos
+            colunasFormatadas.push("[...]")
+            break
         }
-        colunasFormatadas.push(' ' + toCapitalize(coluna.replaceAll('_', ' ')));
+        colunasFormatadas.push(' ' + toCapitalize(coluna.replaceAll('_', ' ')))
     }
-    return colunasFormatadas;
+    return colunasFormatadas
 }
 
+function formatarFiltros(filtros) {
+    if (!filtros || Object.keys(filtros).length === 0) return "Nenhum"
+
+    const filtrosFormatados = []
+    const entradas = Object.entries(filtros)
+
+    for (let i = 0; i < entradas.length; i++) {
+        const [chave, valor] = entradas[i]
+        const par = `${toCapitalize(chave)} - ${valor}`
+        const tamanhoAtual = filtrosFormatados.join(" | ").length
+
+        if (filtrosFormatados.length >= 4 || tamanhoAtual + par.length > 60) {
+            filtrosFormatados.push("[...]")
+            break
+        }
+        filtrosFormatados.push(par)
+    }
+
+    return filtrosFormatados.join(" | ")
+}
+
+
 function formatarData(dataString) {
-    const data = new Date(dataString);
+    const data = new Date(dataString)
 
-    const dia = data.getDate().toString().padStart(2, '0');
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Mês começa em 0
-    const ano = data.getFullYear();
+    const dia = data.getDate().toString().padStart(2, '0')
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0')
+    const ano = data.getFullYear()
 
-    const horas = data.getHours().toString().padStart(2, '0');
-    const minutos = data.getMinutes().toString().padStart(2, '0');
+    const horas = data.getHours().toString().padStart(2, '0')
+    const minutos = data.getMinutes().toString().padStart(2, '0')
 
-    return `${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+    return `${dia}/${mes}/${ano} às ${horas}:${minutos}`
 }

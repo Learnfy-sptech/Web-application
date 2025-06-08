@@ -46,11 +46,19 @@ function atualizarRelatorio(id, nome, colunas, filtros) {
     return database.executar(instrucaoSql)
 }
 
+function obterCursosPorEspecializacao(especializacao) {
+    const instrucaoSql = `
+        SELECT nome FROM curso_tb WHERE fk_area = (SELECT id_area FROM area_tb WHERE nome = '${especializacao}');
+    `
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     inserirRelatorio,
     obterRelatoriosPorId,
     obterInfoRelatorio,
     obterCidadesPorEstado,
     deletarRelatorioPorId,
-    atualizarRelatorio
+    atualizarRelatorio,
+    obterCursosPorEspecializacao
 }

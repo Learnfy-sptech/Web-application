@@ -26,5 +26,10 @@ router.put("/atualizarRelatorio", function (req, res) {
     relatorioController.atualizarRelatorio(req, res)
 })
 
+router.get("/obterCursosPorEspecializacao/:especializacao", function (req, res) {
+  relatorioController.obterCursosPorEspecializacao(req, res)
+})
+
+
 module.exports = router;
 

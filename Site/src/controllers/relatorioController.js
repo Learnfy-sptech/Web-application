@@ -54,7 +54,7 @@ function obterInfoRelatorio(req, res) {
     return res.json(resposta).status(200).send('Relatórios por Id obtidos com sucesso!');
   })
     .catch(function (erro) {
-      return res.status(500).json(erro.sqlMessage);
+      return res.status(500).send(erro.sqlMessage);
     });
 }
 
@@ -118,11 +118,27 @@ function atualizarRelatorio(req, res) {
     });
 }
 
+function obterCursosPorEspecializacao(req, res) {
+  const especializacao = req.params.especializacao
+
+  if (especializacao == undefined) {
+    return res.status(400).send("Dados inválidos para a requisição!")
+  }
+
+  model.obterCursosPorEspecializacao(especializacao).then(function (resposta) {
+    return res.json(resposta).status(200);
+  })
+    .catch(function (erro) {
+      return res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
   inserirRelatorio,
   obterRelatoriosPorId,
   obterInfoRelatorio,
   obterCidadesPorEstado,
   deletarRelatorioPorId,
-  atualizarRelatorio
+  atualizarRelatorio,
+  obterCursosPorEspecializacao
 }
