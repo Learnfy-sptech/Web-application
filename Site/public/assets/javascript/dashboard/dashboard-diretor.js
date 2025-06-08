@@ -1,13 +1,14 @@
 window.addEventListener("load", function () {
   mostarNomeH1();
   loadProfileImage();
-  buscarCursosMaiorRetorno();
+  buscarAreaMaiorRetorno();
   carregarAreasNoSelect();
-  carregarGraficoCotaBolsista();
+  carregarGraficoBolsistasPorArea();
   carregarKpiTotalAlunos();
-  carregarKpiTaxaIngressantes();
+  carregarKpiTotalIngressantes();
+  carregarKpiAlunosPrivados();
+  carregarKpiAlunosPublicos();
 });
-
 
 function carregarAreasNoSelect() {
   fetch("/diretor/filtroArea", { cache: "no-store" })
@@ -34,7 +35,6 @@ function carregarAreasNoSelect() {
     });
 }
 
-
 function carregarKpiTotalAlunos() {
   fetch("/diretor/vagasConcluintes", { cache: "no-store" })
     .then((res) => {
@@ -57,49 +57,77 @@ function carregarKpiTotalAlunos() {
     });
 }
 
-
-function carregarKpiTaxaIngressantes() {
-  fetch('/diretor/taxaIngressantes', { cache: 'no-store' })
-    .then(res => {
+function carregarKpiTotalIngressantes() {
+  fetch("/diretor/totalIngressantes", { cache: "no-store" })
+    .then((res) => {
       if (!res.ok) throw new Error("Erro ao buscar taxa de ingressantes.");
       return res.json();
     })
-    .then(dados => {
+    .then((dados) => {
       if (!dados || dados.length === 0) {
         document.getElementById("kpi-ativos").textContent = "Sem dados";
         return;
       }
 
-      // Encontra o registro mais recente com taxa válida
-      let maisRecente = null;
+      const total = dados[0].total_ingressantes;
+      if (total === null || total === undefined) {
+        document.getElementById("kpi-ativos").textContent = "Sem dados de 2023";
+        return;
+      }
 
-      dados.forEach(registro => {
-        if (registro.taxa_ingressantes !== null) {
-          if (!maisRecente || registro.ano > maisRecente.ano) {
-            maisRecente = registro;
-          }
-        }
-      });
+      document.getElementById("kpi-ativos").textContent =
+        total.toLocaleString("pt-BR") + " alunos";
+    })
+    .catch((erro) => {
+      console.error("Erro ao carregar KPI de ingressantes:", erro);
+      document.getElementById("kpi-ativos").textContent = "Erro";
+    });
+}
 
-      if (maisRecente) {
-        const taxaFormatada = (maisRecente.taxa_ingressantes * 100).toFixed(1).replace('.', ',') + "%";
-        document.getElementById("kpi-ativos").textContent = taxaFormatada;
+
+function carregarKpiAlunosPrivados() {
+  fetch('/diretor/alunosEscolasPrivadas', { cache: 'no-store' })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao buscar dados de escolas privadas.");
+      return res.json();
+    })
+    .then(dados => {
+      if (dados.length > 0 && dados[0].total_privada !== null) {
+        document.getElementById("kpi-notas").textContent = dados[0].total_privada;
       } else {
-        document.getElementById("kpi-ativos").textContent = "Sem dados válidos";
+        document.getElementById("kpi-notas").textContent = "Sem dados";
       }
     })
     .catch(erro => {
-      console.error("Erro ao carregar KPI de taxa de ingressantes:", erro);
-      document.getElementById("kpi-ativos").textContent = "Erro";
+      console.error("Erro ao carregar KPI de escolas privadas:", erro);
+      document.getElementById("kpi-notas").textContent = "Erro";
+    });
+}
+
+function carregarKpiAlunosPublicos() {
+  fetch('/diretor/alunosEscolasPublicas', { cache: 'no-store' })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao buscar dados de escolas públicas.");
+      return res.json();
+    })
+    .then(dados => {
+      if (dados.length > 0 && dados[0].total_publica !== null) {
+        document.getElementById("kpi-cursos").textContent = dados[0].total_publica;
+      } else {
+        document.getElementById("kpi-cursos").textContent = "Sem dados";
+      }
+    })
+    .catch(erro => {
+      console.error("Erro ao carregar KPI de escolas públicas:", erro);
+      document.getElementById("kpi-cursos").textContent = "Erro";
     });
 }
 
 
 
 
-
-function buscarCursosMaiorRetorno() {
-  fetch("/diretor/cursosMaiorRetorno", { cache: "no-store" })
+function buscarAreaMaiorRetorno() {
+  fetch("/diretor/areaMaiorRetorno", { cache: "no-store" })
     .then((response) => {
       if (!response.ok) throw new Error("Erro na requisição");
       return response.json();
@@ -107,7 +135,7 @@ function buscarCursosMaiorRetorno() {
     .then((data) => {
       console.log("Cursos com maior retorno:", data);
 
-      const nomesCursos = data.map((item) => item.curso_nome);
+      const nomesAreas = data.map((item) => item.area_nome);
       const mediasSalario = data.map((item) => item.media_salario);
 
       Highcharts.chart("container", {
@@ -115,13 +143,14 @@ function buscarCursosMaiorRetorno() {
           type: "column",
         },
         title: {
-          text: "Top 10 Cursos com Maior Retorno (Salário Médio)",
+          text: "Áreas com Maior Retorno (Salário Médio)",
         },
         xAxis: {
-          categories: nomesCursos,
+          categories: nomesAreas,
           title: {
-            text: "Cursos",
+            text: "Áreas",
           },
+
           labels: {
             rotation: -45,
           },
@@ -155,53 +184,60 @@ function buscarCursosMaiorRetorno() {
 }
 
 
-function carregarGraficoCotaBolsista() {
-  fetch("/diretor/cotaPorBolsista", { cache: "no-store" })
+function carregarGraficoBolsistasPorArea() {
+  fetch("/diretor/bolsistasPorArea", { cache: "no-store" })
     .then((res) => {
       if (!res.ok) throw new Error("Erro ao buscar dados de cota por bolsista");
       return res.json();
     })
     .then((dados) => {
-      console.log("Dados recebidos:", dados);
+      const container = document.getElementById("pieChart"); // usar id correto
+      container.innerHTML = "";
 
-      let totalConcluintes = 0;
-      let totalBolsistas = 0;
+      if (!Array.isArray(dados) || dados.length === 0) {
+        container.innerHTML = "<p>Nenhum dado disponível para exibir o gráfico.</p>";
+        return;
+      }
 
-      dados.forEach((registro) => {
-        totalConcluintes += registro.qtd_concluintes;
-        totalBolsistas += registro.concluintes_bolsistas;
-      });
+      // Montar array de dados: cada área e seus bolsistas
+      const dataPorArea = dados.map((registro) => {
+        return {
+          name: registro.nome_area || "Área não especificada",
+          y: Number(registro.bolsistas) || 0,
+        };
+      }).filter(item => item.y > 0); // filtrar áreas com 0 bolsistas para não aparecer no gráfico
 
-      const totalNaoBolsistas = totalConcluintes - totalBolsistas;
+      if (dataPorArea.length === 0) {
+        container.innerHTML = "<p>Nenhum dado disponível para exibir o gráfico.</p>";
+        return;
+      }
 
-      Highcharts.chart("pieChart", {
+      // Calcular total para mostrar no centro
+      const totalBolsistas = dataPorArea.reduce((acc, cur) => acc + cur.y, 0);
+
+      Highcharts.chart(container, {
         chart: {
           type: "pie",
           events: {
             render() {
               const chart = this;
               const series = chart.series[0];
+
+              if (!series || !series.center) return;
+
               let customLabel = chart.options.chart.custom?.label;
 
               if (!customLabel) {
                 customLabel = chart.options.chart.custom = {
                   label: chart.renderer
-                    .label(
-                      "Total<br/>" + `<strong>${totalConcluintes}</strong>`
-                    )
-                    .css({
-                      color: "#000",
-                      textAnchor: "middle",
-                    })
+                    .label(`Total Bolsistas<br/><strong>${totalBolsistas}</strong>`)
+                    .css({ color: "#000", textAnchor: "middle" })
                     .add(),
                 }.label;
               }
 
               const x = series.center[0] + chart.plotLeft;
-              const y =
-                series.center[1] +
-                chart.plotTop -
-                customLabel.attr("height") / 2;
+              const y = series.center[1] + chart.plotTop - (customLabel.attr("height") || 0) / 2;
 
               customLabel.attr({ x, y });
               customLabel.css({ fontSize: `${series.center[2] / 12}px` });
@@ -209,40 +245,38 @@ function carregarGraficoCotaBolsista() {
           },
         },
         title: {
-          text: "Proporção de Concluintes Bolsistas vs Não Bolsistas",
+          text: "Distribuição de Bolsistas por Área",
         },
         tooltip: {
-          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b> ({point.y})",
         },
         plotOptions: {
           pie: {
             innerSize: "75%",
             allowPointSelect: true,
             cursor: "pointer",
-            dataLabels: [
-              {
-                enabled: true,
-                format: "{point.name}: {point.y}",
-              },
-            ],
+            dataLabels: {
+              enabled: true,
+              format: "{point.name}: {point.y}",
+            },
           },
         },
-        series: [
-          {
-            name: "Alunos",
-            colorByPoint: true,
-            data: [
-              { name: "Bolsistas", y: totalBolsistas },
-              { name: "Não Bolsistas", y: totalNaoBolsistas },
-            ],
-          },
-        ],
+        series: [{
+          name: "Bolsistas",
+          colorByPoint: true,
+          data: dataPorArea,
+        }],
       });
     })
     .catch((erro) => {
-      console.error("Erro ao carregar gráfico de cota por bolsista:", erro);
+      console.error("Erro ao carregar gráfico por área:", erro);
+      const container = document.getElementById("pieChart");
+      container.innerHTML = "<p>Erro ao carregar o gráfico. Tente novamente mais tarde.</p>";
     });
 }
+
+
+
 
 
 function mostarNomeH1() {

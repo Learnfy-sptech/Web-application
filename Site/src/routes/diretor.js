@@ -10,8 +10,8 @@ router.get("/vagasConcluintes", function (req, res) {
 
 // KPI: Taxa de Ingressantes
 
-router.get("/taxaIngressantes", function (req, res) {
-    diretorController.buscarTaxaIngressantes(req, res);
+router.get("/totalIngressantes", function (req, res) {
+    diretorController.buscarTotalIngressantes(req, res);
 });
 
 // KPI: Quantidade de Alunos de escolas privadas
@@ -28,14 +28,14 @@ router.get("/alunosEscolasPublicas", function (req, res) {
 
 // GRAFICO : Cursos com maior Retorno (ROI)
 
-router.get("/cursosMaiorRetorno", function (req, res) {
-    diretorController.buscarCursosMaiorRetorno(req, res);
+router.get("/areaMaiorRetorno", function (req, res) {
+    diretorController.buscarAreaMaiorRetorno(req, res);
 });
 
 // GRAFICO : Cota por Bolsista
 
-router.get("/cotaPorBolsista", function (req, res) {
-    diretorController.buscarCotaPorBolsista(req, res);
+router.get("/bolsistasPorArea", function (req, res) {
+    diretorController.buscarBolsistaArea(req, res);
 });
 
 
