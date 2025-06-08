@@ -232,6 +232,79 @@ function inserirRelatorio() {
     });
 }
 
+function atualizarRelatorio() {
+    const nome = document.getElementById('input_nome_relatorio').value.trim()
+    if (nome === "" || nome === "Nome do Relatório") {
+        Swal.fire({
+            title: "Nome inválido",
+            text: "Por favor, insira um nome válido para o relatório.",
+            icon: "warning",
+            confirmButtonColor: "#800000"
+        })
+        return
+    }
+
+    if (dadosColunasRelatorio.length == 0) {
+        Swal.fire({
+            title: "Selecione as colunas",
+            text: "Por favor, selecione as colunas que farão parte do seu relatório.",
+            icon: "warning",
+            confirmButtonColor: "#800000"
+        })
+        return
+    }
+    const idRelatorio = sessionStorage.ID_RELATORIO_ATUAL
+    const colunas = dadosColunasRelatorio
+    const filtros = {
+        ano: anoFiltro,
+        especializacao: especializacaoFiltro,
+        curso: cursoFiltro,
+        estado: estadoFiltro,
+        cidade: cidadeFiltro
+    }
+
+    fetch("/relatorio/atualizarRelatorio", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nome,
+            idRelatorio,
+            colunas: Array.isArray(colunas) ? colunas : [],
+            filtros: typeof filtros === "object" ? filtros : {}
+        })
+    }).then(resposta => {
+        if (resposta.ok) {
+            Swal.fire({
+                title: "Relatório Editado com Sucesso!",
+                text: "Não se esqueça que poderá modificá-lo novamente quando quiser :)",
+                showConfirmButton: true,
+                confirmButtonColor: "#800000"
+            }).then(() => {
+                limparCamposRelatorio()
+                voltarAosMeusRelatorios()
+            });
+        } else {
+            Swal.fire({
+                title: "Não foi possível editar o relatório",
+                text: "Tente novamente ou informe a central de atendimentos",
+                icon: "error",
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#800000"
+            });
+        }
+    }).catch(err => {
+        console.error("Erro ao editar relatório:", err);
+        Swal.fire({
+            title: "Erro de rede",
+            text: "Não foi possível conectar ao servidor.",
+            icon: "error",
+            confirmButtonColor: "#800000"
+        });
+    });
+}
+
 function obterRelatoriosPorId() {
     const idUsuario = sessionStorage.ID_USUARIO;
     fetch(`/relatorio/obterRelatoriosPorId/${idUsuario}`, {
@@ -459,6 +532,7 @@ function deletarRelatorio(elemento) {
                 Swal.fire({
                     title: "Relatório Deletedo com Sucesso!",
                     text: "Mas você ainda pode gerar outros relatórios, vá em frente :)",
+
                     showConfirmButton: true,
                     confirmButtonColor: "#800000"
                 }).then(() => {
@@ -478,11 +552,26 @@ function limparCamposRelatorio() {
         const select = actualFilter.querySelector('select')
         select.options[0].selected = true
     })
+    document.getElementById("btn_salvar_exportar").onclick = function () {
+        inserirRelatorio()
+        exportarRelatorio()
+    }
+    document.getElementById("btn_salvar").onclick = function () {
+        inserirRelatorio()
+    }
 }
 
-function editarRelatorio(elemento) {
-    trocarTelaRelatorio()
-    const idRelatorio = elemento.id.replace("relatorio_", "")
+async function editarRelatorio(elemento) {
+    document.getElementById("btn_salvar_exportar").onclick = function () {
+        atualizarRelatorio();
+        exportarRelatorio();
+    };
+    document.getElementById("btn_salvar").onclick = function () {
+        atualizarRelatorio();
+    };
+    trocarTelaRelatorio();
+    const idRelatorio = elemento.id.replace("relatorio_", "");
+    sessionStorage.ID_RELATORIO_ATUAL = idRelatorio
     obterInfoRelatorio(idRelatorio)
 }
 
@@ -534,4 +623,8 @@ function formatarData(dataString) {
     const minutos = data.getMinutes().toString().padStart(2, '0')
 
     return `${dia}/${mes}/${ano} às ${horas}:${minutos}`
+}
+
+function exportarRelatorio() {
+
 }
