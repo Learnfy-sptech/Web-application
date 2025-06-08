@@ -9,21 +9,24 @@ const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const dotenv = require("dotenv");
 
 router.use(cors());
-const storage = multer.memoryStorage(); // Armazena o arquivo na memória
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, "./tmp"),
+    filename: (req, file, cb) => cb(null, file.originalname),
+});
 const upload = multer({ storage: storage });
 
 dotenv.config();
 const bucketName = process.env.BUCKET_NAME
 const bucketRegion = process.env.BUCKET_REGION
-// const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-// const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
 
 const s3 = new S3Client({
     region: bucketRegion,
-    // credentials: {
-    //     accessKeyId,
-    //     secretAccessKey
-    // },
+    credentials: {
+        accessKeyId,
+        secretAccessKey
+    },
 });
 
 // Nome do campo do arquivo no formulário que vai no upload
@@ -36,7 +39,7 @@ router.post("/posts", upload.single("file"), async (req, res) => {
     const command = new PutObjectCommand({
         Bucket: process.env.BUCKET_NAME,
         Key: `planilhas/${req.body.tipoDado}/${req.file.originalname}`,
-        Body: req.file.buffer,
+            Body: fs.createReadStream(req.file.path),
         ContentType: req.file.mimetype,
     });
 
@@ -50,6 +53,7 @@ router.post("/posts", upload.single("file"), async (req, res) => {
             res.status(500).json({ error: "Erro ao enviar o arquivo para a AWS S3" });
         }
     );
+    fs.unlinkSync(req.file.path); // Remove o arquivo temporário
 });
 
 
