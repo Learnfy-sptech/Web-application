@@ -5,7 +5,6 @@ function mostarNomeH1() {
       const tipoContaTitulo = document.getElementById('tipoContaUsuarioTitulo');
       
       
-      
       let userTypeText = 'Usuário';
 
       if (tipoConta === 'DIRETOR ACADEMICO') {
