@@ -99,9 +99,6 @@
             <h1 class="page-title">
                 Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
             </h1>
-            <h1 class="page-title">
-                Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
-            </h1>
             <form id="formFiltroCompleto" action="#" method="GET">
                 <div class="filter">
                     <div class="custom-select-wrapper">
@@ -111,7 +108,6 @@
                                 <option value="1">Humanidades e Artes</option>
                                 <option value="2">Serviços</option>
                                 <option value="3">Ciências, Matemáticas, Computação</option>
-                            </select>
                             </select>
                             <span class="select-arrow"></span>
                         </div>
@@ -125,13 +121,13 @@
 
             <div id="resultadoFiltro" style="display: none; margin-top: 20px; padding: 10px; border: 1px solid #ccc;">
             </div>
-            </div>
         </div>
+
         <div class="kpi-section">
             <div class="card">
                 <div class="card-details">
                     <p class="text-title">Crescimento da Oferta de Cursos</p>
-                    <div class="text-bodys" id="kpi-crescimento-oferta">Carregando...</div>                    
+                    <div class="text-bodys" id="kpi-crescimento-oferta">0%</div>
                 </div>
             </div>
             <div class="card">
@@ -139,24 +135,19 @@
                     <p class="text-title">Empregabilidade até 12 meses</p>
                     <p class="text-body" id="kpi-empregabilidade-12meses">0%</p>
                 </div>
-                    <p class="text-body" id="kpi-empregabilidade-12meses">0%</p>
-                </div>
             </div>
             <div class="card">
                 <div class="card-details">
-                    <p class="text-title">Salário médio por área</p>
-                    <p class="text-body" id="kpi-salario-medio">R$ 0,00</p>
-                </div>
+                    <p class="text-title">Salário médio por área (2023)</p>
                     <p class="text-body" id="kpi-salario-medio">R$ 0,00</p>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-details">
-                    <p class="text-title">Período com maior procura</p>
-                    <p class="text-body" id="kpi-periodo-maior-procura">Carregando...</p>
+                    <p class="text-title">Periodo com maior procura (2023)</p>
+                    <p class="text-body" id="kpi-periodo-maior-procura">0</p>
                 </div>
-
             </div>
         </div>
 
@@ -169,13 +160,12 @@
             </div>
         </div>
     </section>
-</body>
 
+</body>
 
 </html>
 
 <script src="assets/javascript/dashboard/dashboard-gestor.js"></script>
-
 
 <script src="assets/javascript/awsPhoto.js"></script>
 <script src="assets/javascript/sidebar.js"></script>

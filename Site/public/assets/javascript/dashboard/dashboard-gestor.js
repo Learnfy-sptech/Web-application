@@ -98,7 +98,7 @@ function salarioPorAreaGrafico() {
           type: "column"
         },
         title: {
-          text: "Salário Médio por Área"
+          text: "Salário Médio por Área (2023)"
         },
         xAxis: {
           categories: categorias,
@@ -164,7 +164,7 @@ Highcharts.chart("pieChart", {
     plotShadow: false,
   },
   title: {
-    text: 'Top 10 Cursos com Maior Procura'
+    text: 'Top 10 Cursos com Maior Procura (2023)'
   },
   tooltip: {
     pointFormat: '<b>{point.percentage:.1f}%</b> ({point.y} inscritos)'
