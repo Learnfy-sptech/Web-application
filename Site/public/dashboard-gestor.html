@@ -30,56 +30,49 @@
             </li>
 
             <li>
-                <a href="index.html">
-                    <i class="fas fa-home"></i>
+                <a href="index.html" class="menu-link"> <i class="fas fa-home"></i>
                     <span class="links_name">Home</span>
                 </a>
                 <span class="tooltip">Home</span>
             </li>
 
             <li>
-                <a href="edit-person.html">
-                    <i class="fas fa-user"></i>
+                <a href="edit-person.html" class="menu-link"> <i class="fas fa-user"></i>
                     <span class="links_name">Perfil</span>
                 </a>
                 <span class="tooltip">Perfil</span>
             </li>
 
             <li>
-                <a href="relatorio.html">
-                    <i class="fas fa-clipboard-list"></i>
+                <a href="relatorio.html" class="menu-link"> <i class="fas fa-clipboard-list"></i>
                     <span class="links_name">Relatorios</span>
                 </a>
                 <span class="tooltip">Gestão</span>
             </li>
 
             <li>
-                <a href="import.html">
-                    <i class="fas fa-building"></i>
+                <a href="import.html" class="menu-link"> <i class="fas fa-building"></i>
                     <span class="links_name">Gestão</span>
                 </a>
                 <span class="tooltip">Gestão</span>
             </li>
 
             <li>
-                <a href="selection-dashboard.html">
-                    <i class="fas fa-chart-pie"></i>
-                    <span class="links_name">Escolher Visualização</span>
-                </a>
-                <span class="tooltip">Escolher Visualização</span>
-            </li>
+        <a href="" class="menu-link" id="minha-dashboard-link-dinamico"> <i class="fas fa-chart-pie"></i>
+          <span class="links_name">Minha dashboard</span>
+        </a>
+        <span class="tooltip">Minha dashboard</span>
+      </li>
 
             <li>
-                <a href="ajuda.html">
-                    <i class="fas fa-question-circle"></i>
+                <a href="ajuda.html" class="menu-link"> <i class="fas fa-question-circle"></i>
                     <span class="links_name">Ajuda</span>
                 </a>
                 <span class="tooltip">Ajuda</span>
             </li>
 
             <li>
-                <a href="#">
-                    <i class="fas fa-cog"></i>
+                <a href="#" class="menu-link"> <i class="fas fa-cog"></i>
                     <span class="links_name">Configurações</span>
                 </a>
                 <span class="tooltip">Configurações</span>
@@ -95,7 +88,6 @@
                 </div>
                 <i class="fas fa-sign-out-alt" id="log_out"></i>
             </li>
-
         </ul>
     </div>
     <section class="home-section">
@@ -104,6 +96,9 @@
                 <i class="fas fa-arrow-left"></i>
                 Voltar
             </button>
+            <h1 class="page-title">
+                Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
+            </h1>
             <h1 class="page-title">
                 Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
             </h1>
@@ -117,6 +112,7 @@
                                 <option value="2">Serviços</option>
                                 <option value="3">Ciências, Matemáticas, Computação</option>
                             </select>
+                            </select>
                             <span class="select-arrow"></span>
                         </div>
                     </div>
@@ -128,6 +124,7 @@
             </form>
 
             <div id="resultadoFiltro" style="display: none; margin-top: 20px; padding: 10px; border: 1px solid #ccc;">
+            </div>
             </div>
         </div>
         <div class="kpi-section">
@@ -142,10 +139,14 @@
                     <p class="text-title">Empregabilidade até 12 meses</p>
                     <p class="text-body" id="kpi-empregabilidade-12meses">0%</p>
                 </div>
+                    <p class="text-body" id="kpi-empregabilidade-12meses">0%</p>
+                </div>
             </div>
             <div class="card">
                 <div class="card-details">
                     <p class="text-title">Salário médio por área</p>
+                    <p class="text-body" id="kpi-salario-medio">R$ 0,00</p>
+                </div>
                     <p class="text-body" id="kpi-salario-medio">R$ 0,00</p>
                 </div>
             </div>
@@ -169,6 +170,7 @@
         </div>
     </section>
 </body>
+
 
 </html>
 

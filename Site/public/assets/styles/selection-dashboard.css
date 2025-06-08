@@ -38,8 +38,9 @@ section {
 }
 
 .card-select:hover {
+.card-select:hover {
   transform: scale(1.05);
-  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card__img {
@@ -57,9 +58,11 @@ section {
 }
 
 .card-select:hover .card__img {
+.card-select:hover .card__img {
   filter: brightness(0.75);
 }
 
+.card-select i {
 .card-select i {
   position: absolute;
   top: 16px;
