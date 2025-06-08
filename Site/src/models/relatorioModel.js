@@ -26,7 +26,7 @@ function obterInfoRelatorio(id) {
 
 function obterCidadesPorEstado(estado) {
     const instrucaoSql = `
-        SELECT * FROM cidade_tb WHERE fk_uf = (SELECT id_uf FROM uf_tb WHERE nome = ${estado});
+        SELECT nome FROM municipio_tb WHERE fk_uf = (SELECT id_uf FROM uf_tb WHERE sigla = '${estado}');
     `
     return database.executar(instrucaoSql)
 }

@@ -1,13 +1,11 @@
-const { SessionCredentialsFilterSensitiveLog } = require("@aws-sdk/client-s3");
-const { clone } = require("chart.js/helpers");
+const { clone, sign } = require("chart.js/helpers");
 const { application, json, response } = require("express");
 
-var filtrosSelecionados = {
-    ano: null,
-    especializacao: null,
-    estado: null,
-    cidade: null
-}
+var anoFiltro = ""
+var especializacaoFiltro = ""
+var cursoFiltro = ""
+var estadoFiltro = ""
+var cidadeFiltro = ""
 var dadosColunasRelatorio = []
 
 
@@ -153,7 +151,13 @@ function inserirRelatorio() {
     const nome = document.getElementById('input_nome_relatorio').value
     const fkUsuario = sessionStorage.ID_USUARIO
     const colunas = dadosColunasRelatorio
-    const filtros = filtrosSelecionados
+    const filtros = {
+        ano: anoFiltro,
+        especializacao: especializacaoFiltro,
+        curso: cursoFiltro,
+        estado: estadoFiltro,
+        cidade: cidadeFiltro
+    }
 
     fetch("/relatorio/inserirRelatorio", {
         method: "POST",
@@ -245,25 +249,26 @@ function alimentarCamposRelatorio(json) {
 function adicionarFiltro(elemento) {
     if (!elemento.value) return
 
-    console.log(filtrosSelecionados)
-
     switch (elemento.id) {
         case "filtro_ano":
-            filtrosSelecionados.ano = elemento.value;
+            anoFiltro = elemento.value;
             break;
         case "filtro_especializacao":
-            filtrosSelecionados.especializacao = elemento.value;
+            especializacaoFiltro = elemento.value;
+            break;
+        case "filtro_curso":
+            cursoFiltro = elemento.value;
+            buscarCursosPorEspecializacao(elemento.value)
             break;
         case "filtro_estado":
-            filtrosSelecionados.estado = elemento.value;
+            estadoFiltro = elemento.value;
             buscarCidadesPorEstado(elemento.value);
             break;
         case "filtro_cidade":
-            filtrosSelecionados.cidade = elemento.value;
+            cidadeFiltro = elemento.value;
             break;
     }
 
-    console.log(filtrosSelecionados);
 }
 
 
@@ -312,6 +317,10 @@ function adicionarRelatorioNaDiv(infoRelatorio) {
     `
 }
 
+function ativarSelect(id) {
+    document.getElementById(id).disabled = false
+}
+
 function buscarCidadesPorEstado(estado) {
     fetch(`/relatorio/obterCidadesPorEstado/${estado}`, {
         method: "GET",
@@ -320,30 +329,42 @@ function buscarCidadesPorEstado(estado) {
         },
     }).then(function (resposta) {
         if (resposta.ok) {
-
+            const id = 'filtro_cidade'
+            ativarSelect(id)
+            const elemento = document.getElementById(id)
+            elemento.innerHTML = '<option value="" selected hidden>Selecione</option>';
+            resposta.json().then(json => {
+                console.log(json)
+                json.forEach(valor => {
+                const option = document.createElement("option");
+                option.value = valor.nome;
+                option.textContent = valor.nome;
+                elemento.appendChild(option);
+            });
+            })
         }
     })
 }
 
 function deletarRelatorio(elemento) {
-    const idRelatorio = elemento.id.replace("relatorio_", "")
-    fetch(`/relatorio/deletarRelatorioPorId/${idRelatorio}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        },
-    }).then(function (resposta) {
-        if (resposta.ok) {
-            Swal.fire({
-                title: "Tem certeza?",
-                text: "Essa ação não pode ser desfeita!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#800000",
-                cancelButtonColor: "#d2d2d2",
-                confirmButtonText: "Sim, confirmar!",
-                cancelButtonText: "Cancelar"
-            }).then(resposta => {
+    Swal.fire({
+        title: "Tem certeza?",
+        text: "Essa ação não pode ser desfeita!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#800000",
+        cancelButtonColor: "#d2d2d2",
+        confirmButtonText: "Sim, confirmar!",
+        cancelButtonText: "Cancelar"
+    }).then(resposta => {
+        if (resposta.isConfirmed) {
+            const idRelatorio = elemento.id.replace("relatorio_", "")
+            fetch(`/relatorio/deletarRelatorioPorId/${idRelatorio}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(function (resposta) {
                 Swal.fire({
                     title: "Relatório Deletedo com Sucesso!",
                     text: "Mas você ainda pode gerar outros relatórios, vá em frente :)",
@@ -356,6 +377,7 @@ function deletarRelatorio(elemento) {
         }
     })
 }
+
 
 function limparCamposRelatorio() {
     document.getElementById('campos_selecionados').innerHTML = ''
