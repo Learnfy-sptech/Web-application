@@ -7,7 +7,7 @@ var filtrosSelecionados = {
     especializacao: null,
     estado: null,
     cidade: null
-};
+}
 var dadosColunasRelatorio = []
 
 
