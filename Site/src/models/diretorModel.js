@@ -3,8 +3,12 @@ var database = require("../database/config");
 // KPI: Vagas por Concluintes
 
 function buscarVagasConcluintes() {
-  var instrucaoSql = `
-`;
+  var instrucaoSql = `SELECT
+    ano,
+    qtd_vagas,
+    qtd_concluintes,
+    (qtd_vagas * 1.0 / NULLIF(qtd_concluintes, 0)) AS vagas_por_concluinte
+FROM curso_ofertado_tb;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -12,8 +16,12 @@ function buscarVagasConcluintes() {
 // KPI: Taxa de Ingressantes
 
 function taxaIngressantes() {
-  var instrucaoSql = `
-`;
+  var instrucaoSql = `SELECT
+    ano,
+    qtd_ingressantes_rede_publica + qtd_ingressantes_rede_privada AS total_ingressantes,
+    qtd_concluintes,
+    ((qtd_ingressantes_rede_publica + qtd_ingressantes_rede_privada) * 1.0 / NULLIF(qtd_concluintes, 0)) AS taxa_ingressantes
+FROM curso_ofertado_tb;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -56,7 +64,12 @@ LIMIT 10;
 // GRAFICO : Cota por Bolsista
 
 function buscarCotaPorBolsista() {
-  var instrucaoSql = `
+  var instrucaoSql = `SELECT
+    ano,
+    qtd_concluintes,
+    qtd_concluintes_rede_publica AS concluintes_bolsistas,
+    (qtd_concluintes_rede_publica * 1.0 / NULLIF(qtd_concluintes, 0)) AS cota_bolsista
+FROM curso_ofertado_tb;
 `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
