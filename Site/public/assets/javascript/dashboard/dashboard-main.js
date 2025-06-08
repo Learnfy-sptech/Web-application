@@ -1,4 +1,174 @@
-/**
+ window.addEventListener("load", function () {
+  loadProfileImage();
+});
+
+ 
+ document.addEventListener('DOMContentLoaded', function() {
+    // Referências aos elementos do DOM
+    const formFiltro = document.getElementById('formFiltroCompleto');
+    const inputRegiao = document.getElementById('inputRegiaoFiltro'); // Adicionei ID ao input
+    const selectArea = document.getElementById('select-example');
+    const resultadoDiv = document.getElementById('resultadoFiltro');
+
+    // Referências aos elementos KPI
+    const kpiEvasao = document.getElementById('kpi-evasao');
+    const kpiEmpregabilidade = document.getElementById('kpi-empregabilidade');
+    const kpiProcura = document.getElementById('kpi-procura');
+    const kpiMatriculas = document.getElementById('kpi-matriculas');
+
+    // Instâncias dos gráficos Highcharts (serão inicializadas na função initCharts)
+    let chartEvasao; // container
+    let chartDemanda; // container2
+    let chartInscricao; // barChartArea (antigo pieChart)
+
+    // --- FUNÇÕES AUXILIARES ---
+
+    /**
+     * Inicializa todos os gráficos Highcharts com dados vazios/placeholder.
+     * Esta função é chamada uma vez ao carregar a página.
+     */
+    function initCharts() {
+        // Gráfico de Taxa de Inscrição por Curso (ID: barChartArea)
+        chartInscricao = Highcharts.chart('barChartArea', {
+            chart: {
+                type: 'bar',
+                colors: ['#800000', '#1d1d1d', '#993333'] // Cores das barras
+            },
+            title: {
+                text: 'Taxa de Inscrição por Curso'
+            },
+            subtitle: {
+                text: 'Dados fornecidos pelo backend'
+            },
+            xAxis: {
+                categories: [], // Populado pelo backend
+                title: { text: 'Cursos' },
+                gridLineWidth: 1,
+                lineWidth: 0
+            },
+            yAxis: {
+                min: 0,
+                title: { text: 'Número de Inscrições', align: 'high' },
+                labels: { overflow: 'justify' },
+                gridLineWidth: 0
+            },
+            tooltip: { valueSuffix: ' inscrições' },
+            plotOptions: {
+                bar: {
+                    borderRadius: '50%',
+                    dataLabels: { enabled: true },
+                    groupPadding: 0.1
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: { enabled: false },
+            series: [{
+                name: 'Inscrições',
+                data: [] // Populado pelo backend
+            }]
+        });
+
+        // Gráfico de Evasão por Curso (%) (ID: container)
+        chartEvasao = Highcharts.chart('container', {
+            chart: {
+                type: 'column',
+                colors: ['#800000', '#1d1d1d', '#993333']
+            },
+            title: {
+                text: 'Evasão por Curso (%)'
+            },
+            subtitle: {
+                text: 'Clique nas colunas para ver detalhes (se aplicável). Dados fornecidos pelo backend'
+            },
+            accessibility: {
+                announceNewData: { enabled: true }
+            },
+            xAxis: {
+                type: 'category',
+                categories: [] // Populado pelo backend
+            },
+            yAxis: {
+                title: { text: 'Porcentagem de Evasão' },
+                labels: { format: '{value:.1f}%' }
+            },
+            legend: { enabled: false },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: { enabled: true, format: '{point.y:.1f}%' },
+                    colorByPoint: true
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> de evasão<br/>'
+            },
+            series: [{
+                name: 'Cursos',
+                data: [] // Populado pelo backend
+            }],
+            drilldown: {
+                breadcrumbs: { position: { align: 'right' } },
+                series: [] // Populado pelo backend, se houver drilldown
+            }
+        });
+
+        // Gráfico de Cursos por Demanda (ID: container2)
+        chartDemanda = Highcharts.chart('container2', {
+            chart: {
+                type: 'column',
+                colors: ['#800000', '#1d1d1d', '#993333']
+            },
+            title: {
+                text: 'Cursos por Demanda'
+            },
+            subtitle: {
+                text: 'Clique nas colunas para ver detalhes (se aplicável). Dados fornecidos pelo backend'
+            },
+            accessibility: {
+                announceNewData: { enabled: true }
+            },
+            xAxis: {
+                type: 'category',
+                categories: [] // Populado pelo backend
+            },
+            yAxis: {
+                title: { text: 'Nível de Demanda' }
+            },
+            legend: { enabled: false },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: { enabled: true, format: '{point.y:.0f}' },
+                    colorByPoint: true
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> de demanda<br/>'
+            },
+            series: [{
+                name: 'Demanda',
+                data: [] // Populado pelo backend
+            }],
+            drilldown: {
+                breadcrumbs: { position: { align: 'right' } },
+                series: [] // Populado pelo backend, se houver drilldown
+            }
+        });
+    }
+
+    /**
      * Simula a busca de dados do backend e atualiza KPIs e gráficos.
      * Em um cenário real, esta função faria uma chamada fetch/AJAX.
      * @param {string} regiao O valor do filtro de região.
@@ -183,3 +353,4 @@
 
     // Carrega os dados iniciais (sem filtro) ao carregar a página
     fetchDataAndApplyFilters("", "");
+});

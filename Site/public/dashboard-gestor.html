@@ -2,340 +2,171 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/styles/styles.css">
-  <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <title>Dashboard | Área</title>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/modules/export-data.js"></script>
-  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-  <link rel="stylesheet" href="./assets/styles/dashboard-area.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Dashboard | Gestor</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" href="./assets/styles/dashboard-area.css" />
 </head>
 
 <body>
-  <div class="sidebar open">
-      <div class="logo-details">
-        <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
-        <div class="logo_name">Learnfy</div>
-        <i class="bx bx-menu" id="btn"></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <i class='bx bx-search'></i>
-          <input type="text" placeholder="Pesquisar...">
-          <span class="tooltip">Pesquisar</span>
-        </li>
+    <div class="sidebar open">
+        <div class="logo-details">
+            <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
+            <div class="logo_name">Learnfy</div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Pesquisar...">
+                <span class="tooltip">Pesquisar</span>
+            </li>
 
-        <li>
-          <a href="index.html">
-            <i class="fas fa-home"></i>
-            <span class="links_name">Home</span>
-          </a>
-          <span class="tooltip">Home</span>
-        </li>
+            <li>
+                <a href="index.html" class="menu-link"> <i class="fas fa-home"></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
 
-        <li>
-          <a href="edit-person.html">
-            <i class="fas fa-user"></i>
-            <span class="links_name">Perfil</span>
-          </a>
-          <span class="tooltip">Perfil</span>
-        </li>
+            <li>
+                <a href="edit-person.html" class="menu-link"> <i class="fas fa-user"></i>
+                    <span class="links_name">Perfil</span>
+                </a>
+                <span class="tooltip">Perfil</span>
+            </li>
 
-        <li>
-          <a href="relatorio.html">
-            <i class="fas fa-clipboard-list"></i>
-            <span class="links_name">Relatorios</span>
-          </a>
-          <span class="tooltip">Gestão</span>
-        </li>
+            <li>
+                <a href="relatorio.html" class="menu-link"> <i class="fas fa-clipboard-list"></i>
+                    <span class="links_name">Relatorios</span>
+                </a>
+                <span class="tooltip">Gestão</span>
+            </li>
 
-        <li>
-          <a href="import.html">
-            <i class="fas fa-building"></i>
-            <span class="links_name">Gestão</span>
-          </a>
-          <span class="tooltip">Gestão</span>
-        </li>
+            <li>
+                <a href="import.html" class="menu-link"> <i class="fas fa-building"></i>
+                    <span class="links_name">Gestão</span>
+                </a>
+                <span class="tooltip">Gestão</span>
+            </li>
 
-        <li>
-          <a href="selection-dashboard.html">
-            <i class="fas fa-chart-pie"></i>
-            <span class="links_name">Escolher Visualização</span>
-          </a>
-          <span class="tooltip">Escolher Visualização</span>
-        </li>
+            <li>
+        <a href="" class="menu-link" id="minha-dashboard-link-dinamico"> <i class="fas fa-chart-pie"></i>
+          <span class="links_name">Minha dashboard</span>
+        </a>
+        <span class="tooltip">Minha dashboard</span>
+      </li>
 
-        <li>
-          <a href="ajuda.html">
-            <i class="fas fa-question-circle"></i>
-            <span class="links_name">Ajuda</span>
-          </a>
-          <span class="tooltip">Ajuda</span>
-        </li>
+            <li>
+                <a href="ajuda.html" class="menu-link"> <i class="fas fa-question-circle"></i>
+                    <span class="links_name">Ajuda</span>
+                </a>
+                <span class="tooltip">Ajuda</span>
+            </li>
 
-        <li>
-          <a href="#">
-            <i class="fas fa-cog"></i>
-            <span class="links_name">Configurações</span>
-          </a>
-          <span class="tooltip">Configurações</span>
-        </li>
+            <li>
+                <a href="#" class="menu-link"> <i class="fas fa-cog"></i>
+                    <span class="links_name">Configurações</span>
+                </a>
+                <span class="tooltip">Configurações</span>
+            </li>
 
-        <li class="profile">
-          <div class="profile-details">
-            <img id="profileImg" alt="Foto de perfil">
-            <div class="name_job">
-              <p class="name" id="nomeUsuario"></p>
-              <small class="job" id="tipoContaUsuario"></small>
+            <li class="profile">
+                <div class="profile-details">
+                    <img id="profileImg" alt="Foto de perfil">
+                    <div class="name_job">
+                        <p class="name" id="nomeUsuario"></p>
+                        <small class="job" id="tipoContaUsuario"></small>
+                    </div>
+                </div>
+                <i class="fas fa-sign-out-alt" id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="header-dashboard">
+            <button class="back-button" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+                Voltar
+            </button>
+            <h1 class="page-title">
+                Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
+            </h1>
+            <form id="formFiltroCompleto" action="#" method="GET">
+                <div class="filter">
+                    <div class="custom-select-wrapper">
+                        <div class="custom-select">
+                            <select id="select-example" name="areaFiltro">
+                                <option value="" disabled selected>Filtro por área:</option>
+                                <option value="1">Humanidades e Artes</option>
+                                <option value="2">Serviços</option>
+                                <option value="3">Ciências, Matemáticas, Computação</option>
+                            </select>
+                            <span class="select-arrow"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-default btn-filter">
+                        <i class="fas fa-filter"> Aplicar filtro</i>
+                    </button>
+                </div>
+            </form>
+
+            <div id="resultadoFiltro" style="display: none; margin-top: 20px; padding: 10px; border: 1px solid #ccc;">
             </div>
-          </div>
-          <i class="fas fa-sign-out-alt" id="log_out"></i>
-        </li>
-
-      </ul>
-    </div>
-  <section class="home-section">
-    <div class="header-dashboard">
-      <button class="back-button" onclick="history.back()">
-        <i class="fas fa-arrow-left"></i>
-        Voltar
-      </button>
-      <h1 class="page-title">Dashboard - <small class="job" id="tipoContaUsuario"></small></h1>
-      <div></div>
-    </div>
-    </div>
-
-
-    <div class="kpi-section">
-      <div class="card">
-        <div class="card-details">
-          <p class="text-title">Evolução do número de cursos por modalidade ao longo do tempo</p>
-          <p class="text-body">Aqui vai ficar todos os conteudos</p>
         </div>
-      </div>
 
-      <div class="card">
-        <div class="card-details">
-          <p class="text-title">Empregabilidade por Área</p>
-          <p class="text-body">Aqui vai ficar todos os conteudos</p>
+        <div class="kpi-section">
+            <div class="card">
+                <div class="card-details">
+                    <p class="text-title">Crescimento da Oferta de Cursos</p>
+                    <div class="text-bodys" id="kpi-crescimento-oferta">0%</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-details">
+                    <p class="text-title">Empregabilidade até 12 meses</p>
+                    <p class="text-body" id="kpi-empregabilidade-12meses">0%</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-details">
+                    <p class="text-title">Salário médio por área (2023)</p>
+                    <p class="text-body" id="kpi-salario-medio">R$ 0,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-details">
+                    <p class="text-title">Periodo com maior procura (2023)</p>
+                    <p class="text-body" id="kpi-periodo-maior-procura">0</p>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="card">
-        <div class="card-details">
-          <p class="text-title">Salário médio por área</p>
-          <p class="text-body">Aqui vai ficar todos os conteudos</p>
+        <div class="graficos">
+            <div class="left-chart">
+                <div id="container"></div>
+            </div>
+            <div class="right-chart">
+                <div id="pieChart"></div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="card">
-        <div class="card-details">
-          <p class="text-title">Taxa de inscrição por curso</p>
-          <p class="text-body">Aqui vai ficar todos os conteudos</p>
-        </div>
-      </div>
-
-    </div>
-    <div class="graficos">
-      <div class="left-chart">
-        <div id="container"></div>
-      </div>
-      <div class="right-chart">
-        <div id="pieChart"></div>
-      </div>
-    </div>
-  </section>
-  <script src="assets/javascript/sidebar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
-<script>
-const pieChart = document.getElementById('pieChart')
-const container = document.getElementById('container')
-Highcharts.chart('pieChart', {
-    chart: {
-        type: 'pie',
-        custom: {},
-        events: {
-            render() {
-                const chart = this,
-                    series = chart.series[0];
-                let customLabel = chart.options.chart.custom.label;
 
-                if (!customLabel) {
-                    customLabel = chart.options.chart.custom.label =
-                        chart.renderer.label(
-                            'Total<br/>' +
-                            '<strong>2 877 820</strong>'
-                        )
-                            .css({
-                                color: '#000',
-                                textAnchor: 'middle'
-                            })
-                            .add();
-                }
+<script src="assets/javascript/dashboard/dashboard-gestor.js"></script>
 
-                const x = series.center[0] + chart.plotLeft,
-                    y = series.center[1] + chart.plotTop -
-                    (customLabel.attr('height') / 2);
-
-                customLabel.attr({
-                    x,
-                    y
-                });
-                // Set font size based on chart diameter
-                customLabel.css({
-                    fontSize: `${series.center[2] / 12}px`
-                });
-            }
-        }
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    title: {
-        text: 'Periodo com maior procura'
-    },
-    subtitle: {
-        text: 'Source: <a>MEC</a>'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>'
-    },
-    legend: {
-        enabled: false
-    },
-    plotOptions: {
-        series: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            borderRadius: 8,
-            dataLabels: [{
-                enabled: true,
-                distance: 20,
-                format: '{point.name}'
-            }, {
-                enabled: true,
-                distance: -15,
-                format: '{point.percentage:.0f}%',
-                style: {
-                    fontSize: '0.9em'
-                }
-            }],
-            showInLegend: true
-        }
-    },
-    series: [{
-        name: 'Registrations',
-        colorByPoint: true,
-        innerSize: '75%',
-        data: [{
-            name: 'EV',
-            y: 23.9
-        }, {
-            name: 'Hybrids',
-            y: 12.6
-        }, {
-            name: 'Diesel',
-            y: 37.0
-        }, {
-            name: 'Petrol',
-            y: 26.4
-        }]
-    }]
-});
-
-
-const chart = Highcharts.chart('container', {
-
-    chart: {
-        type: 'column'
-    },
-
-    title: {
-        text: 'Cursos com maior procura da área selecionada'
-    },
-
-    legend: {
-        align: 'right',
-        verticalAlign: 'middle',
-        layout: 'vertical'
-    },
-
-    xAxis: {
-        categories: ['2021', '2022', '2023', '2024'],
-        labels: {
-            x: -10
-        }
-    },
-
-    yAxis: {
-        allowDecimals: false,
-        title: {
-            text: 'Amount'
-        }
-    },
-
-    series: [{
-        name: 'Ava',
-        data: [34, 39, 53,25]
-    }, {
-        name: 'Dina',
-        data: [27, 21, 22,27]
-    }, {
-        name: 'Malin',
-        data: [41, 34, 32,82]
-    }],
-
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    align: 'center',
-                    verticalAlign: 'bottom',
-                    layout: 'horizontal'
-                },
-                yAxis: {
-                    labels: {
-                        align: 'left',
-                        x: 0,
-                        y: -5
-                    },
-                    title: {
-                        text: null
-                    }
-                },
-                subtitle: {
-                    text: null
-                },
-                credits: {
-                    enabled: false
-                }
-            }
-        }]
-    }
-});
-
-document.getElementById('small').addEventListener('click', function () {
-    chart.setSize(400);
-});
-
-document.getElementById('large').addEventListener('click', function () {
-    chart.setSize(600);
-});
-
-document.getElementById('auto').addEventListener('click', function () {
-    chart.setSize(null);
-});
-
-</script>
+<script src="assets/javascript/awsPhoto.js"></script>
+<script src="assets/javascript/sidebar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

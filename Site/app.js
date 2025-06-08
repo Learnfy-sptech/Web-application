@@ -18,6 +18,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require('./src/routes/usuarios');
 var logsRouter = require('./src/routes/logs')
 var empresaRouter = require("./src/routes/empresa")
+var diretorRouter = require('./src/routes/diretor');
+var gestorRouter = require('./src/routes/gestor');
 
 // ----------------------------------------------------------------- //
 // CONFIGURAÇÕES PARA CONEXÃO DIRETAMENTE COM NOSSO BUCKET NO AWS S3 //
@@ -39,6 +41,10 @@ app.use("/usuarios", usuarioRouter);
 app.use("/logs", logsRouter);
 app.use("/empresa", empresaRouter);
 
+app.use("/diretor", diretorRouter);
+app.use("/usuarios", usuarioRouter);    
+app.use('/logs', logsRouter);
+app.use('/gestor', gestorRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

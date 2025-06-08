@@ -1,14 +1,50 @@
+function loadUserData() {
+  const nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+  const telefoneUsuario = sessionStorage.getItem("TELEFONE_USUARIO");
+
+  if (nomeUsuario) {
+    document.getElementById("name").value = nomeUsuario;
+    document.getElementById("nomeUsuario").textContent = nomeUsuario;
+  }
+  if (telefoneUsuario) {
+    document.getElementById("telefone").value = telefoneUsuario;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const fileInput = document.getElementById("fileInput");
+  const profileImage = document.getElementById("profileImage");
+  const fileStatus = document.getElementById("fileStatus");
+
+  fileInput.addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        profileImage.src = e.target.result;
+        fileStatus.textContent = "Arquivo selecionado";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      fileStatus.textContent = "No file chosen";
+      profileImage.src = "assets/images/user.png";
+    }
+  });
+});
+
 document
   .getElementById("formPerfil")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const nome           = document.getElementById("name").value.trim();
-    const telefone       = document.getElementById("telefone").value.trim();
-    const senha          = document.getElementById("password-change").value.trim();
-    const confirmarSenha = document.getElementById("confirm-password").value.trim();
-    const fileInput      = document.getElementById("fileInput");
-    const userId         = sessionStorage.getItem("ID_USUARIO");
+    const nome = document.getElementById("name").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const senha = document.getElementById("password-change").value.trim();
+    const confirmarSenha = document
+      .getElementById("confirm-password")
+      .value.trim();
+    const fileInput = document.getElementById("fileInput");
+    const userId = sessionStorage.getItem("ID_USUARIO");
 
     if ((senha || confirmarSenha) && senha !== confirmarSenha) {
       return Swal.fire({
@@ -45,9 +81,9 @@ document
     try {
       const formData = new FormData();
       formData.append("id", userId);
-      if (nome)     formData.append("nome", nome);
+      if (nome) formData.append("nome", nome);
       if (telefone) formData.append("telefone", telefone);
-      if (senha)    formData.append("senha", senha);
+      if (senha) formData.append("senha", senha);
 
       const resUser = await fetch("/usuarios/atualizar", {
         method: "POST",
@@ -68,7 +104,7 @@ document
 
       await Swal.fire({
         title: "Sucesso!",
-        text: "Perfil atualizado com sucesso.",
+        text: "Perfil atualizado com sucesso. Para que a nova foto apareça, por favor, saia e entre novamente no sistema.",
         icon: "success",
         confirmButtonText: "Ok",
         confirmButtonColor: "#800000",

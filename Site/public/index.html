@@ -94,17 +94,24 @@
                     <a href="#contact">Contate-nos</a>
                 </li>
             </ul>
-            <a href="login.html">
-                <button class="btn-default">
-                    Login
-                </button>
-            </a>
-            <br>
-            <a href="cadastro.html">
-                <button class="btn-default">
-                    Cadastre-se
-                </button>
-            </a>
+            <!-- VISITANTE -->
+            <div class="mobile-buttons" id="mobileVisitante">
+                <a href="login.html">
+                    <button class="btn-default">Login</button>
+                </a>
+                <br>
+                <a href="cadastro.html">
+                    <button class="btn-default">Cadastre-se</button>
+                </a>
+            </div>
+
+            <!-- USUÁRIO LOGADO -->
+            <div class="mobile-user-info" id="mobileUsuario" style="display: none;">
+                <a href="selection-dashboard.html">
+                    <button class="btn-default">Dashboard</button>
+                </a>
+                <button id="mobileBtnSair" class="btn-default">Sair</button>
+            </div>
         </div>
 
         <button id="mobile_btn">
@@ -439,48 +446,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/javascript/email.js"></script>
     <script>
-        window.addEventListener("DOMContentLoaded", function () {
-            const nome = sessionStorage.getItem("NOME_USUARIO");
 
-            if (nome) {
-                const navVisitante = document.getElementById("navVisitante");
-                const navUsuario = document.getElementById("navUsuario");
-                const nomeUsuario = document.getElementById("nomeUsuario");
 
-                // Verificações de segurança
-                if (navVisitante) navVisitante.style.display = "none";
-                if (navUsuario) navUsuario.style.display = "flex";
-                if (nomeUsuario) nomeUsuario.textContent = nome;
-
-                // Botão de sair
-                const btnSair = document.getElementById("btnSair");
-                if (btnSair) {
-                    btnSair.addEventListener("click", function () {
-                        sessionStorage.clear();
-                        window.location.href = "index.html"; 
-                    });
-                }
-            }
-        });
-
-                async function loadProfileImage() {
-            const imgEl = document.getElementById("profileImg");
-            const userId = sessionStorage.getItem("ID_USUARIO");
-            if (!userId || !imgEl) return;
-
-            try {
-                const res = await fetch(`/aws/usuarios/${userId}/importar-imagem`);
-                if (!res.ok) {
-                    // imagem não existe ou outro erro: mantém o src padrão  
-                    console.warn("Não foi possível carregar a imagem de perfil:", res.status);
-                    return;
-                }
-                const { imageUrl } = await res.json();
-                imgEl.src = imageUrl;
-            } catch (err) {
-                console.error("Erro ao carregar imagem de perfil:", err);
-            }
-        }
     </script>
 </body>
 </html>

@@ -46,6 +46,7 @@ function login(req, res) {
           nome: resposta[0].nome,
           email: resposta[0].email,
           tipoConta: resposta[0].tipoConta,
+          telefone: resposta[0].telefone,
           foto_perfil_path: resposta[0].foto_perfil_path
         });
       } else {
