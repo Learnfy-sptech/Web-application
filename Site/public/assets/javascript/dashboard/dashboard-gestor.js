@@ -2,11 +2,58 @@ window.addEventListener("load", function () {
   mostarNomeH1();
   loadProfileImage();
   carregarKpiOfertaCursos();
-  carregarPeriodoMaiorProcura();
   salarioPorAreaGrafico();
   carregarAreasNoSelect();
   graficoCursosMaisProcurados();
+  carregarPeriodoMaiorProcura("CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO");
+  carregarEmpregabilidadePorArea("CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO"); 
 });
+
+
+function carregarEmpregabilidadePorArea(area) {
+  fetch(`/gestor/empregabilidadePorArea/${area}`, { cache: "no-store" })
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao buscar dados de empregabilidade");
+      return res.json();
+    })
+    .then((dados) => {
+      if (dados.length > 0) {
+        const { nomeArea, totalTrabalham } = dados[0];
+        document.getElementById("kpi-empregabilidade").innerText =
+          `${nomeArea.toUpperCase()} - ${Number(totalTrabalham).toLocaleString()} TRABALHAM`;
+      } else {
+        document.getElementById("kpi-empregabilidade").innerText = "Nenhum dado encontrado";
+      }
+    })
+    .catch((err) => {
+      console.error("Erro ao carregar KPI de empregabilidade por área:", err);
+      document.getElementById("kpi-empregabilidade").innerText = "Erro ao carregar";
+    });
+}
+
+
+function carregarPeriodoMaiorProcura(area) {
+  fetch(`/gestor/periodoMaiorProcura/${area}`, { cache: "no-store" })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao buscar o período por área");
+      return res.json();
+    })
+    .then(dados => {
+      if (dados.length > 0) {
+        const { periodo, total_inscritos } = dados[0];
+        document.getElementById("kpi-periodo-maior-procura").innerText = 
+          `${periodo.toUpperCase()} - ${Number(total_inscritos).toLocaleString()} INSCRITOS`;
+      } else {
+        document.getElementById("kpi-periodo-maior-procura").innerText = "Sem dados";
+      }
+    })
+    .catch(err => {
+      console.error("Erro:", err);
+      document.getElementById("kpi-periodo-maior-procura").innerText = "Erro";
+    });
+}
+
+
 
 
 function carregarAreasNoSelect() {
@@ -61,25 +108,7 @@ function carregarKpiOfertaCursos() {
 
 
 
-function carregarPeriodoMaiorProcura() {
-  fetch("/gestor/periodoMaiorProcura", { cache: "no-store" })
-    .then((res) => {
-      if (!res.ok) throw new Error("Erro ao buscar o período com maior procura");
-      return res.json();
-    })
-    .then((dados) => {
-      if (dados.length > 0) {
-        const { periodo, total_inscritos } = dados[0];
-        document.getElementById("kpi-periodo-maior-procura").innerText = `${periodo} - ${total_inscritos} INSCRITOS`;
-      } else {
-        document.getElementById("kpi-periodo-maior-procura").innerText = "Nenhum dado encontrado";
-      }
-    })
-    .catch((err) => {
-      console.error("Erro ao carregar KPI de período com maior procura:", err);
-      document.getElementById("kpi-periodo-maior-procura").innerText = "Erro ao carregar";
-    });
-}
+
 
 
 

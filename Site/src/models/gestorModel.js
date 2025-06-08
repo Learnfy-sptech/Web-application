@@ -1,5 +1,27 @@
 var database = require("../database/config");
 
+
+// KPI - Empregabilidade pro Area
+
+function empregabilidadePorArea(area) {
+  var instrucaoSql = `
+    SELECT 
+        area.nome AS nomeArea,
+        COUNT(empregabilidade.cbo_2002) AS totalTrabalham
+    FROM 
+        dados_empregabilidade_tb AS empregabilidade
+    JOIN 
+        area_tb AS area ON empregabilidade.fk_area = area.id_area
+    WHERE 
+        empregabilidade.categoria REGEXP 'Empregado'
+        AND area.nome = '${area}';
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
+
 // KPI - Oferta Cursos
 
 function ofertaCursos() {
@@ -23,30 +45,42 @@ ORDER BY
 
 
 // KPI - Periodo de maior procura
-function periodoMaiorProcura() {
-  var instrucaoSql = `
-SELECT 
-    periodo,
-    total_inscritos
-FROM (
-    SELECT 'Diurno' AS periodo, SUM(qtd_incritos_diurno) AS total_inscritos 
-    FROM curso_ofertado_tb
-    WHERE ano = 2023
-    UNION
-    SELECT 'Noturno', SUM(qtd_incritos_noturno) 
-    FROM curso_ofertado_tb
-    WHERE ano = 2023
-    UNION
-    SELECT 'EAD', SUM(qtd_incritos_ead) 
-    FROM curso_ofertado_tb
-    WHERE ano = 2023
-) AS totais
-ORDER BY total_inscritos DESC
-LIMIT 1;
-`;  
+function periodoMaiorProcura(area) {
+  const instrucaoSql = `
+    SELECT 
+        periodo,
+        total_inscritos
+    FROM (
+        SELECT 'Diurno' AS periodo, SUM(c.qtd_incritos_diurno) AS total_inscritos 
+        FROM curso_ofertado_tb c
+        JOIN curso_tb ct ON c.fk_curso = ct.id_curso
+        JOIN area_tb a ON ct.fk_area = a.id_area
+        WHERE a.nome = '${area}' AND c.ano = 2023
+
+        UNION
+
+        SELECT 'Noturno', SUM(c.qtd_incritos_noturno)
+        FROM curso_ofertado_tb c
+        JOIN curso_tb ct ON c.fk_curso = ct.id_curso
+        JOIN area_tb a ON ct.fk_area = a.id_area
+        WHERE a.nome = '${area}' AND c.ano = 2023
+
+        UNION
+
+        SELECT 'EAD', SUM(c.qtd_incritos_ead)
+        FROM curso_ofertado_tb c
+        JOIN curso_tb ct ON c.fk_curso = ct.id_curso
+        JOIN area_tb a ON ct.fk_area = a.id_area
+        WHERE a.nome = '${area}' AND c.ano = 2023
+    ) AS totais
+    ORDER BY total_inscritos DESC
+    LIMIT 1;
+  `;
+
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
+
 
 
 
@@ -99,6 +133,7 @@ function buscarFiltroArea(area) {
 }
 
 module.exports = {
+  empregabilidadePorArea,
   ofertaCursos,
   periodoMaiorProcura,
   salariosMaiorProcura,
