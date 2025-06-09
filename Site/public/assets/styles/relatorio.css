@@ -47,6 +47,10 @@ main {
     width: 38%;
 }
 
+.titulo input {
+    width: 50%;
+}
+
 .meus-relatorios {
     width: 95%;
     height: 80%;
@@ -267,6 +271,7 @@ button {
     padding-inline: 1.5%;
     border-radius: 5px;
     margin-bottom: 0.7%;
+    border: 1px solid black;
 }
 
 .campo-div-selecao span {
@@ -298,8 +303,9 @@ button {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 20%;
+    width: 18%;
 }
+
 
 .filtro p {
     margin: 0;
@@ -312,6 +318,11 @@ button {
     border-radius: 10px;
     width: 100%;
     text-align: center;
+    text-align: start;
+}
+
+.filtro select option {
+    text-align: start;
 }
 
 .oculto {
@@ -329,7 +340,7 @@ button {
     bottom: 35px;
 }
 
-.navegacao a {
+.item-navegacao {
     font-size: 1em;
     color: rgb(0, 0, 0);
     font-style: oblique;
