@@ -93,16 +93,17 @@
         </ul>
     </div>
 
-    <section>
+    <section id="principal_section">
         <div class="main">
             <main>
                 <div class="relatorio-general" id="relatorio_general">
-                    <div class="topbar">
+                    <div class="navegacao">
                         <button class="back-button" onclick="history.back()">
                             <i class="fas fa-arrow-left"></i>
                             Voltar
                         </button>
-                        <h1 class="page-title">Edição de Perfil</h1>
+                        <a href="" class="item-navegacao" onclick="obterRelatoriosPorId(); event.preven()">Meus
+                            Relatórios</a>
                     </div>
                     <div class="titulo">
                         <h2>Meus Relatórios</h2>
@@ -145,48 +146,80 @@
                 <div class="oculto pop-up todas-colunas-geral" id="todas_colunas_geral">
                     <div class="todas-colunas" id="todas_colunas">
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 0</span>
-                            <input type="checkbox" name="" id="">
+                            <span>instituicao_de_ensino</span>
+                            <input type="checkbox" name="fk_ies">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 1</span>
-                            <input type="checkbox" name="" id="">
+                            <span>curso</span>
+                            <input type="checkbox" name="fk_curso">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 2</span>
-                            <input type="checkbox" name="" id="">
+                            <span>ano</span>
+                            <input type="checkbox" name="ano">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 3</span>
-                            <input type="checkbox" name="" id="">
+                            <span>modalidade_ensino</span>
+                            <input type="checkbox" name="modalidade_ensino">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 4</span>
-                            <input type="checkbox" name="" id="">
+                            <span>qtd_vagas</span>
+                            <input type="checkbox" name="qtd_vagas">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 5</span>
-                            <input type="checkbox" name="" id="">
+                            <span>qtd_vagas_diurno</span>
+                            <input type="checkbox" name="qtd_vagas_diurno">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 6</span>
-                            <input type="checkbox" name="" id="">
+                            <span>qtd_vagas_noturno</span>
+                            <input type="checkbox" name="qtd_vagas_noturno">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 7</span>
-                            <input type="checkbox" name="" id="">
+                            <span>qtd_vagas_ead</span>
+                            <input type="checkbox" name="qtd_vagas_ead">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 8</span>
-                            <input type="checkbox" name="" id="">
+                            <span>qtd_incritos</span>
+                            <input type="checkbox" name="qtd_incritos">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 9</span>
-                            <input type="checkbox" name="" id="">
+                            <span>qtd_incritos_diurno</span>
+                            <input type="checkbox" name="qtd_incritos_diurno">
                         </div>
                         <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
-                            <span>Teste Nome Coluna 10</span>
-                            <input type="checkbox" name="" id="">
+                            <span>qtd_incritos_noturno</span>
+                            <input type="checkbox" name="qtd_incritos_noturno">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_incritos_ead</span>
+                            <input type="checkbox" name="qtd_incritos_ead">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_concluintes</span>
+                            <input type="checkbox" name="qtd_concluintes">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_concluintes_diurno</span>
+                            <input type="checkbox" name="qtd_concluintes_diurno">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_concluintes_noturno</span>
+                            <input type="checkbox" name="qtd_concluintes_noturno">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_ingressantes_rede_publica</span>
+                            <input type="checkbox" name="qtd_ingressantes_rede_publica">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_ingressantes_rede_privada</span>
+                            <input type="checkbox" name="qtd_ingressantes_rede_privada">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_concluintes_rede_publica</span>
+                            <input type="checkbox" name="qtd_concluintes_rede_publica">
+                        </div>
+                        <div class="option-coluna" onclick="adicionarRemoverCampo(this)">
+                            <span>qtd_concluintes_rede_privada</span>
+                            <input type="checkbox" name="qtd_concluintes_rede_privada">
                         </div>
                     </div>
                     <div class="finally-button">
@@ -204,14 +237,14 @@
                             <i class="fas fa-arrow-left"></i>
                             Voltar
                         </button>
-                        <a href="" onclick="voltarAosMeusRelatorios()">Meus Relatórios</a>/
-                        <a href="" id="relatorio_atual">Novo Relatório</a>
+                        <a href="" class="item-navegacao" onclick="voltarAosMeusRelatorios()">Meus Relatórios</a>/
+                        <a href="" onclick="event.preventDefault();" class="item-navegacao" id="relatorio_atual">Novo
+                            Relatório</a>
                     </div>
                     <div class="titulo">
                         <input id="input_nome_relatorio" type="text"
                             onblur="validarInputVazio('input_nome_relatorio','Nome do Relatório')"
                             onclick="limparCampo('input_nome_relatorio')" value="Nome do Relatório">
-                        <img src="assets/images/edit-text.png" onclick="limparCampo('input_nome_relatorio')" alt="">
                     </div>
                     <div class="filtros">
                         <p class="subtitulo">Filtros (Opcional)</p>
@@ -219,42 +252,74 @@
                             <div class="filtro">
                                 <p>Ano</p>
                                 <select name="ano" id="filtro_ano" onchange="adicionarFiltro(this)">
-                                    <option default selected hidden>Selecione</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    <option value="" selected>Selecione</option>
+                                    <option value=2023>2023</option>
+                                    <option value=2022>2022</option>
+                                    <option value=2021>2021</option>
                                 </select>
                             </div>
                             <div class="filtro">
                                 <p>Especialização</p>
                                 <select name="especializacao" id="filtro_especializacao"
                                     onchange="adicionarFiltro(this)">
-                                    <option default selected hidden>Selecione</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    <option value="" selected>Selecione</option>
+                                    <option value="ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO">ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO
+                                    </option>
+                                    <option value="EDUCAÇÃO">EDUCAÇÃO</option>
+                                    <option value="HUMANIDADES E ARTES">HUMANIDADES E ARTES</option>
+                                    <option value="CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS">CIÊNCIAS SOCIAIS, NEGÓCIOS E
+                                        DIREITOS</option>
+                                    <option value="SERVIÇOS">SERVIÇOS</option>
+                                    <option value="AGRICULTURA E VETERINÁRIA">AGRICULTURA E VETERINÁRIA</option>
+                                    <option value="CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO">CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO
+                                    </option>
+                                    <option value="SAÚDE E BEM-ESTAR SOCIAL">SAÚDE E BEM-ESTAR SOCIAL</option>
+
+                                </select>
+                            </div>
+                            <div class="filtro">
+                                <p>Curso</p>
+                                <select disabled name="curso" id="filtro_curso" onchange="adicionarFiltro(this)">
+                                    <option value="" selected>Selecione</option>
                                 </select>
                             </div>
                             <div class="filtro">
                                 <p>Estado</p>
                                 <select name="estado" id="filtro_estado" onchange="adicionarFiltro(this)">
-                                    <option default selected hidden>Selecione</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    <option value="" selected>Selecione</option>
+                                    <option value="AC">AC</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AP">AP</option>
+                                    <option value="AM">AM</option>
+                                    <option value="BA">BA</option>
+                                    <option value="CE">CE</option>
+                                    <option value="DF">DF</option>
+                                    <option value="ES">ES</option>
+                                    <option value="GO">GO</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MT">MT</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MG">MG</option>
+                                    <option value="PA">PA</option>
+                                    <option value="PB">PB</option>
+                                    <option value="PR">PR</option>
+                                    <option value="PE">PE</option>
+                                    <option value="PI">PI</option>
+                                    <option value="RJ">RJ</option>
+                                    <option value="RN">RN</option>
+                                    <option value="RS">RS</option>
+                                    <option value="RO">RO</option>
+                                    <option value="RR">RR</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SP">SP</option>
+                                    <option value="SE">SE</option>
+                                    <option value="TO">TO</option>
                                 </select>
                             </div>
                             <div class="filtro">
                                 <p>Cidade</p>
-                                <select name="cidade" id="filtro_cidade" onchange="adicionarFiltro(this)">
-                                    <option selected hidden>Selecione</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                <select disabled name="cidade" id="filtro_cidade" onchange="adicionarFiltro(this)">
+                                    <option value="" selected>Selecione</option>
                                 </select>
                             </div>
                         </div>
@@ -274,9 +339,10 @@
                         </div>
                     </div>
 
-                    <div class="finally-button">
-                        <button onclick="inserirRelatorio(); exportar()">Salvar e Exportar</button>
-                        <button onclick="inserirRelatorio()">
+                    <div class="finally-button" id="div_btn_salvar">
+                        <button id="btn_salvar_exportar" onclick="inserirRelatorio(); exportar()">Salvar e
+                            Exportar</button>
+                        <button id="btn_salvar" onclick="inserirRelatorio()">
                             Salvar
                         </button>
                     </div>
@@ -286,16 +352,115 @@
 
     </section>
 
-    <script>
-        window.addEventListener('load', function () {
-            loadProfileImage();
-        });
-    </script>
-
     <script src="assets/javascript/awsPhoto.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/javascript/sidebar.js"></script>
     <script src="assets/javascript/relatorio.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/FileSaver@2.0.5/dist/FileSaver.min.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            loadProfileImage(),
+                obterRelatoriosPorId()
+        });
+    </script>
+    <script>
+        async function exportarRelatorio(id) {
+            try {
+                const response = await fetch(`/relatorio/buscarDadosRelatorio/${id}`);
+                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+
+                const data = await response.json();
+                console.log('Dados recebidos:', data);
+
+                if (!data || (Array.isArray(data) && data.length === 0) || (typeof data === 'object' && Object.keys(data).length === 0)) {
+                    Swal.fire({
+                        title: "Dados não encontrados",
+                        text: "Não existem dados em nossa base que atendam aos filtros selecionados :(",
+                        icon: "warning",
+                        confirmButtonColor: "#800000"
+                    });
+                    return; // Encerra a função aqui
+                }
+
+                // Se chegou aqui, há dados para exportar
+                await exportToExcel(data, 'relatorio.xlsx');
+
+                // Opcional: Mostrar mensagem de sucesso
+                Swal.fire({
+                    title: "Relatório exportado!",
+                    text: "O arquivo Excel foi gerado com sucesso.",
+                    icon: "success",
+                    confirmButtonColor: "#800000"
+                });
+            } catch (error) {
+                console.error('Erro ao exportar relatório:', error);
+                alert('Falha ao exportar relatório: ' + error.message);
+            }
+        }
+
+        async function exportToExcel(data, filename = 'relatorio.xlsx') {
+            try {
+                if (!data || !Array.isArray(data)) {
+                    throw new Error('Dados inválidos para exportação');
+                }
+
+                const workbook = new ExcelJS.Workbook();
+                const worksheet = workbook.addWorksheet('Relatório');
+
+                if (data.length > 0) {
+                    const headers = Object.keys(data[0]);
+                    const headerRow = worksheet.addRow(headers);
+
+                    headerRow.font = { bold: true };
+                    headerRow.fill = {
+                        type: 'pattern',
+                        pattern: 'solid',
+                        fgColor: { argb: 'FFD3D3D3' }
+                    };
+
+                    data.forEach(item => {
+                        worksheet.addRow(Object.values(item));
+                    });
+
+                    worksheet.columns.forEach(column => {
+                        let maxLength = 0;
+                        column.eachCell({ includeEmpty: true }, cell => {
+                            const columnLength = cell.value ? cell.value.toString().length : 10;
+                            if (columnLength > maxLength) {
+                                maxLength = columnLength;
+                            }
+                        });
+                        column.width = Math.min(maxLength + 2, 50);
+                    });
+                }
+
+                const buffer = await workbook.xlsx.writeBuffer();
+                const blob = new Blob([buffer], {
+                    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                });
+
+                // Tenta usar FileSaver se disponível, senão usa a alternativa
+                if (typeof saveAs !== 'undefined') {
+                    saveAs(blob, filename);
+                } else {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    }, 100);
+                }
+            } catch (error) {
+                console.error('Erro ao exportar:', error);
+                throw error;
+            }
+        }
+    </script>
 </body>
 
 </html>
