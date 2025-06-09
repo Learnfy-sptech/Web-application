@@ -265,15 +265,3 @@ window.carregarAreasNoSelect = carregarAreasNoSelect;
 window.graficoCursosMaisProcurados = graficoCursosMaisProcurados;
 window.carregarPeriodoMaiorProcura = carregarPeriodoMaiorProcura;
 window.carregarEmpregabilidadePorArea = carregarEmpregabilidadePorArea; 
-
-document.getElementById("select-areas").addEventListener("change", function () {
-  mostarNomeH1();
-  loadProfileImage();
-  carregarKpiOfertaCursos();
-  carregarRetencaoAlunos();
-  salarioPorAreaGrafico();
-  carregarAreasNoSelect();
-  graficoCursosMaisProcurados();
-  carregarPeriodoMaiorProcura();
-  carregarEmpregabilidadePorArea(); 
-});

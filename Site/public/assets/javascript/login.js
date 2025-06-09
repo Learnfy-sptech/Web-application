@@ -1,6 +1,8 @@
 function logar() {
   const emailVar = document.getElementById("email_input").value;
   const senhaVar = document.getElementById("senha_input").value;
+  const tipoConta = sessionStorage.getItem("TIPO_CONTA")
+  var exebDash;
 
   if (!emailVar || !senhaVar) {
     Swal.fire({
@@ -46,16 +48,16 @@ function logar() {
     })
   }).then(function (resposta) {
     if (resposta.ok) {
-      resposta.json().then(json => {        
+      resposta.json().then(json => {
         sessionStorage.EMAIL_USUARIO = json.email;
         sessionStorage.NOME_USUARIO = json.nome;
         sessionStorage.ID_USUARIO = json.id;
         sessionStorage.TIPO_CONTA = json.tipo_conta;
-        sessionStorage.FOTO_USUARIO = json.foto_perfil_path 
+        sessionStorage.FOTO_USUARIO = json.foto_perfil_path
         sessionStorage.TELEFONE_USUARIO = json.telefone;
         sessionStorage.SLACK_ID = json.slack_channel_id;
         sessionStorage.ID_EMPRESA = json.idEmpresa;
-  
+
         Swal.fire({
           title: "Login realizado com sucesso!",
           text: "Você será redirecionado...",
@@ -63,12 +65,17 @@ function logar() {
           showConfirmButton: false,
           timer: 2000
         });
-  
+
         setTimeout(function () {
           if (emailVar.includes("@learnfy")) {
             window.location = "import.html";
           } else {
-            window.location = "selection-dashboard.html";
+            if (sessionStorage.TIPO_CONTA === "DIRETOR ACADEMICO") {
+              exebDash = "diretor"
+              window.location = `dashboard-${exebDash}.html`;
+            } else {
+              window.location = `dashboard-${tipoConta}.html`;
+            }
           }
         }, 2000);
       });
@@ -84,14 +91,14 @@ function logar() {
       });
     }
   })
-  .catch(function (erro) {
-    console.log(erro);
-    Swal.fire({
-      title: "Erro inesperado",
-      text: "Houve um erro ao tentar realizar o login.",
-      icon: "error",
-      confirmButtonText: "Ok",
-      confirmButtonColor: "#800000"
+    .catch(function (erro) {
+      console.log(erro);
+      Swal.fire({
+        title: "Erro inesperado",
+        text: "Houve um erro ao tentar realizar o login.",
+        icon: "error",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#800000"
+      });
     });
-  });
 }
