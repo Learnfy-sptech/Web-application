@@ -1,14 +1,84 @@
-window.addEventListener("load", function () {
-  mostarNomeH1();
-  loadProfileImage();
-  carregarKpiOfertaCursos();
-  carregarPeriodoMaiorProcura();
-  salarioPorAreaGrafico();
-  carregarAreasNoSelect();
-  graficoCursosMaisProcurados();
-});
+const { buscarAlunosEscolasPrivadas } = require("../../../../src/models/diretorModel");
 
+function carregarEmpregabilidadePorArea() {
+  var area = document.getElementById('select-areas').value;
+  fetch(`/gestor/empregabilidadePorArea/${area}`, { cache: "no-store" })
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao buscar dados de empregabilidade");
+      return res.json();
+    })
+    .then((dados) => {
+      if (dados.length > 0) {
+        const { nomeArea, totalTrabalham } = dados[0];
+        document.getElementById("kpi-empregabilidade").innerText =
+          `${Number(totalTrabalham).toLocaleString()} ESTÃO EMPREGADOS`;
+      } else {
+        document.getElementById("kpi-empregabilidade").innerText = "Nenhum dado encontrado";
+      }
+    })
+    .catch((err) => {
+      console.error("Erro ao carregar KPI de empregabilidade por área:", err);
+      document.getElementById("kpi-empregabilidade").innerText = "Erro ao carregar";
+    });
+}
 
+function carregarPeriodoMaiorProcura() {
+  var area = document.getElementById('select-areas').value;
+  fetch(`/gestor/carregarPeriodoMaiorProcura/${area}`, { cache: "no-store" })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao buscar o período por área");
+      return res.json();
+    })
+    .then(dados => {
+      if (dados.length > 0) {
+        const { periodo, total_inscritos } = dados[0];
+        document.getElementById("kpi-periodo-maior-procura").innerText = 
+          `${periodo.toUpperCase()} - ${Number(total_inscritos).toLocaleString()} INSCRITOS`;
+      } else {
+        document.getElementById("kpi-periodo-maior-procura").innerText = "Sem dados";
+      }
+    })
+    .catch(err => {
+      console.error("Erro:", err);
+      document.getElementById("kpi-periodo-maior-procura").innerText = "Erro";
+    });
+}
+
+function carregarRetencaoAlunos() {
+  var area = document.getElementById('select-areas').value;
+  fetch(`/gestor/carregarRetencaoAlunos/${area}`, { cache: "no-store" })
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao buscar dados de empregabilidade");
+      return res.json();
+    })
+    .then((dados) => {
+      let total_diurno = 0;
+      let total_noturno = 0;
+      let total_ead = 0;
+
+      dados.forEach(item => {
+        if (item.periodo === "Diurno") {
+          total_diurno = item.total_retidos;
+        } else if (item.periodo === "Noturno") {
+          total_noturno = item.total_retidos;
+        } else if (item.periodo === "EAD") {
+          total_ead = item.total_retidos;
+        }
+      });
+
+    var texto = `Diurno - ${total_diurno} retidos
+      Noturno - ${total_noturno} retidos
+      EAD - ${total_ead} retidos
+    `;
+        
+        document.getElementById("kpi-retencao-alunos").innerText = texto
+      } 
+    )
+    .catch((err) => {
+      console.error("Erro ao carregar KPI de empregabilidade por área:", err);
+      document.getElementById("kpi-retencao-alunos").innerText = "Erro ao carregar";
+    });
+}
 function carregarAreasNoSelect() {
   fetch("/gestor/filtroArea", { cache: "no-store" })
     .then((res) => {
@@ -36,7 +106,8 @@ function carregarAreasNoSelect() {
 
 
 function carregarKpiOfertaCursos() {
-  fetch("/gestor/ofertaCursos", { cache: "no-store" })
+  var area = document.getElementById('select-areas').value;
+  fetch(`/gestor/carregarKpiOfertaCursos/${area}`, { cache: "no-store" })
     .then(res => {
       if (!res.ok) throw new Error("Erro ao buscar KPI de oferta de cursos");
       return res.json();
@@ -58,30 +129,6 @@ function carregarKpiOfertaCursos() {
       console.error("Erro ao carregar KPI de oferta de cursos:", err);
     });
 }
-
-
-
-function carregarPeriodoMaiorProcura() {
-  fetch("/gestor/periodoMaiorProcura", { cache: "no-store" })
-    .then((res) => {
-      if (!res.ok) throw new Error("Erro ao buscar o período com maior procura");
-      return res.json();
-    })
-    .then((dados) => {
-      if (dados.length > 0) {
-        const { periodo, total_inscritos } = dados[0];
-        document.getElementById("kpi-periodo-maior-procura").innerText = `${periodo} - ${total_inscritos} INSCRITOS`;
-      } else {
-        document.getElementById("kpi-periodo-maior-procura").innerText = "Nenhum dado encontrado";
-      }
-    })
-    .catch((err) => {
-      console.error("Erro ao carregar KPI de período com maior procura:", err);
-      document.getElementById("kpi-periodo-maior-procura").innerText = "Erro ao carregar";
-    });
-}
-
-
 
 function salarioPorAreaGrafico() {
   fetch("/gestor/salarioPorArea", { cache: "no-store" })
@@ -212,4 +259,21 @@ function mostarNomeH1() {
   if (tipoContaTitulo) tipoContaTitulo.textContent = userTypeText;
 }
 
+window.carregarKpiOfertaCursos = carregarKpiOfertaCursos;
+window.salarioPorAreaGrafico = salarioPorAreaGrafico;
+window.carregarAreasNoSelect = carregarAreasNoSelect;
+window.graficoCursosMaisProcurados = graficoCursosMaisProcurados;
+window.carregarPeriodoMaiorProcura = carregarPeriodoMaiorProcura;
+window.carregarEmpregabilidadePorArea = carregarEmpregabilidadePorArea; 
 
+document.getElementById("select-areas").addEventListener("change", function () {
+  mostarNomeH1();
+  loadProfileImage();
+  carregarKpiOfertaCursos();
+  carregarRetencaoAlunos();
+  salarioPorAreaGrafico();
+  carregarAreasNoSelect();
+  graficoCursosMaisProcurados();
+  carregarPeriodoMaiorProcura();
+  carregarEmpregabilidadePorArea(); 
+});

@@ -128,9 +128,6 @@
               <span class="select-arrow"></span>
             </div>
           </div>
-          <button type="button" class="btn-default btn-filter">
-            <i class="fas fa-filter"> Aplicar filtro</i>
-          </button>
         </div>
       </form>
 
@@ -180,13 +177,14 @@
       </div>
     </div>
   </section>
+  
+  <script src="assets/javascript/dashboard/dashboard-pesquisador.js"></script>
 
   <script src="assets/javascript/sidebar.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/javascript/awsPhoto.js"></script>
-  <script src="assets/javascript/dashboardPesquisador.js"></script>
-  <script>
-
+    <script>
+  
     window.addEventListener("load", function () {
       loadProfileImage();
       mostarNomeH1();
@@ -194,7 +192,7 @@
       getKpiPessoasTrabalhamNaArea();
       getKpiEvasaoPorModalidade();
       getKpiMediaSalarial();
-      getGraficoCursosMaiorRetorno();
+      getGraficoInstituicoes();
       getGraficoProjecaoEvasao();
     });
   </script>
