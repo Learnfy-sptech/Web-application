@@ -30,6 +30,11 @@ router.get("/obterCursosPorEspecializacao/:especializacao", function (req, res) 
   relatorioController.obterCursosPorEspecializacao(req, res)
 })
 
+router.get("/buscarDadosRelatorio/:idRelatorio", function (req, res) {
+  relatorioController.buscarDadosRelatorio(req, res)
+})
+
+
 
 module.exports = router;
 

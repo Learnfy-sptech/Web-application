@@ -1,12 +1,10 @@
-
-
+var exportToExcel = require("./exportToExcel")
 var anoFiltro = ""
 var especializacaoFiltro = ""
 var cursoFiltro = ""
 var estadoFiltro = ""
 var cidadeFiltro = ""
 var dadosColunasRelatorio = []
-
 
 function criarNovoRelatorio() {
     trocarTelaRelatorio()
@@ -567,7 +565,7 @@ function adicionarRelatorioNaDiv(infoRelatorio) {
                     Filtros:
                     <span id="filtro_relatorio">${formatarFiltros(infoRelatorio.filtros)}</span>
                 </p>
-                <button onclick="exportarRelatorio()">Exportar</button>
+                <button onclick="exportarRelatorio('${infoRelatorio.id_relatorio}')">Exportar</button>
             </div>
         </div>
     `
@@ -698,6 +696,18 @@ function formatarData(dataString) {
     return `${dia}/${mes}/${ano} às ${horas}:${minutos}`
 }
 
-function exportarRelatorio() {
-
+function exportarRelatorio(id) {
+    fetch(`/relatorio/buscarDadosRelatorio/${id}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Erro na requisição');
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+            return exportToExcel(data, `relatorio_${id}.xlsx`);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Falha ao exportar relatório: ' + error.message);
+        });
 }

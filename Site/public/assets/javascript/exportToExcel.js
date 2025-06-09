@@ -1,83 +1,34 @@
-import ExcelJS from 'exceljs';
+// excelExport.js
+const ExcelJS = require('exceljs');
 
-// Função para obter todos os cabeçalhos únicos do conjunto de dados
-function getAllHeaders(data) {
-  const headers = new Set();
-  data.forEach(item => {
-    Object.keys(item).forEach(key => headers.add(key));
-  });
-  return Array.from(headers);
-}
+function exportToExcel(data, filename = 'relatorio.xlsx') {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Relatório');
 
-// Função principal para exportar dados para Excel
-async function exportToExcel(data, filename = `dados.xlsx`) {
-  try {
-    // Validar se existem dados
-    if (!data || data.length === 0) {
-      console.warn('Nenhum dado fornecido para exportar');
-      return;
+    // Adiciona cabeçalhos
+    if (data.length > 0) {
+        const headers = Object.keys(data[0]);
+        worksheet.addRow(headers);
+
+        // Adiciona dados
+        data.forEach(item => {
+            worksheet.addRow(Object.values(item));
+        });
     }
 
-    // Criar nova planilha
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Dados');
-
-    // Obter todos os cabeçalhos possíveis
-    const headers = getAllHeaders(data);
-
-    // Adicionar cabeçalhos
-    worksheet.addRow(headers);
-
-    // Estilizar cabeçalhos
-    const headerRow = worksheet.getRow(1);
-    headerRow.eachCell((cell) => {
-      cell.font = { bold: true };
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFD3D3D3' }
-      };
-      cell.border = {
-        top: { style: 'thin' },
-        left: { style: 'thin' },
-        bottom: { style: 'thin' },
-        right: { style: 'thin' }
-      };
+    // Retorna a promise para ser usada com .then()
+    return workbook.xlsx.writeBuffer().then(buffer => {
+        const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     });
-
-    // Adicionar dados
-    data.forEach(item => {
-      const rowData = headers.map(header => item[header] !== undefined ? item[header] : '');
-      worksheet.addRow(rowData);
-    });
-
-    // Ajustar largura das colunas automaticamente
-    worksheet.columns.forEach(column => {
-      let maxLength = 0;
-      column.eachCell({ includeEmpty: true }, cell => {
-        const columnLength = cell.value ? cell.value.toString().length : 0;
-        if (columnLength > maxLength) {
-          maxLength = columnLength;
-        }
-      });
-      column.width = Math.min(Math.max(maxLength + 2, 10), 50); // Limite entre 10 e 50
-    });
-
-    // Gerar arquivo Excel
-    const buffer = await workbook.xlsx.writeBuffer();
-
-    // Criar e disparar download
-    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-    
-  } catch (error) {
-    console.error('Erro ao gerar arquivo Excel:', error);
-  }
 }
+
+// Exporte no formato CommonJS
+module.exports = { exportToExcel };

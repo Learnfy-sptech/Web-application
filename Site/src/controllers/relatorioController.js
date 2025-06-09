@@ -133,6 +133,22 @@ function obterCursosPorEspecializacao(req, res) {
     });
 }
 
+function buscarDadosRelatorio(req, res) {
+  const idRelatorio = req.params.idRelatorio
+
+  if (idRelatorio == undefined) {
+    return res.status(400).send("Dados inválidos para a requisição!")
+  }
+
+  model.buscarDadosRelatorio(idRelatorio).then(function (resposta) {
+    return res.json(resposta).status(200);
+  })
+    .catch(function (erro) {
+      console.log(erro)
+      return res.status(500).send(erro.sqlMessage);
+    });
+}
+
 module.exports = {
   inserirRelatorio,
   obterRelatoriosPorId,
@@ -140,5 +156,6 @@ module.exports = {
   obterCidadesPorEstado,
   deletarRelatorioPorId,
   atualizarRelatorio,
-  obterCursosPorEspecializacao
+  obterCursosPorEspecializacao,
+  buscarDadosRelatorio
 }
