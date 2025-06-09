@@ -271,6 +271,7 @@ button {
     padding-inline: 1.5%;
     border-radius: 5px;
     margin-bottom: 0.7%;
+    border: 1px solid black;
 }
 
 .campo-div-selecao span {

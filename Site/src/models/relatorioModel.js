@@ -26,7 +26,7 @@ function obterInfoRelatorio(id) {
 
 function obterCidadesPorEstado(estado) {
     const instrucaoSql = `
-        SELECT nome FROM municipio_tb WHERE fk_uf = (SELECT id_uf FROM uf_tb WHERE sigla = '${estado}');
+        SELECT nome FROM municipio_tb WHERE fk_uf = (SELECT id_uf FROM uf_tb WHERE sigla = '${estado}') ORDER BY nome;
     `
     return database.executar(instrucaoSql)
 }
@@ -48,7 +48,7 @@ function atualizarRelatorio(id, nome, colunas, filtros) {
 
 function obterCursosPorEspecializacao(especializacao) {
     const instrucaoSql = `
-        SELECT nome FROM curso_tb WHERE fk_area = (SELECT id_area FROM area_tb WHERE nome = '${especializacao}');
+        SELECT nome FROM curso_tb WHERE fk_area = (SELECT id_area FROM area_tb WHERE nome = '${especializacao}') ORDER BY nome;
     `
     return database.executar(instrucaoSql)
 }

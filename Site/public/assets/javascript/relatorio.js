@@ -1,4 +1,3 @@
-
 var anoFiltro = ""
 var especializacaoFiltro = ""
 var cursoFiltro = ""
@@ -53,99 +52,90 @@ function abrirOuFecharTodasColunas() {
 
 function adicionarRemoverCampo(elemento) {
     const elementoInput = elemento.querySelector('input')
-    if (elementoInput) {
-        elementoInput.checked = !elementoInput.checked
+    if (elementoInput.checked == false) {
+        elementoInput.checked = true
+    } else {
+        elementoInput.checked = false
     }
 }
 
 function preencherCamposEscolhidos() {
     const div = document.getElementById('campos_selecionados')
-    while (div.firstChild) {
-        div.removeChild(div.firstChild)
+    const elementosDiv = div.querySelectorAll('div')
+    if (elementosDiv.length != 0) {
+        elementosDiv.forEach((actualElement) => {
+            actualElement.remove()
+        })
     }
 
     alimentarLista()
-
     dadosColunasRelatorio.forEach((colunaAtual) => {
         adicionarCampoNaDiv(colunaAtual)
     })
 }
 
 function adicionarCampoNaDiv(idDivColuna) {
-    let nomeColuna = idDivColuna.replaceAll("_", " ")
+    var nomeColuna = idDivColuna.replaceAll("_", " ")
     nomeColuna = toCapitalize(nomeColuna)
     const div = document.getElementById('campos_selecionados')
-    div.insertAdjacentHTML('beforeend', `
-        <div class="campo-div-selecao" id="${idDivColuna}">
+    div.innerHTML += `
+        <div class='campo-div-selecao' id='${idDivColuna}'>
             <span>${nomeColuna}</span>
-            <img src="assets/images/close_red.png" onclick="removerCampoNaDiv('${idDivColuna}')" alt="Remover campo">
+            <img src="assets/images/close_red.png" onclick="removerCampoNaDiv('${idDivColuna}')" alt="">
         </div>
-    `)
+    `
 }
 
 function removerCampoNaDiv(id) {
-    if (id) {
+    if (id != null) {
         const elemento = document.getElementById(id)
-        if (elemento) {
-            elemento.remove()
-        }
-        const position = dadosColunasRelatorio.indexOf(id)
-        if (position !== -1) {
-            dadosColunasRelatorio.splice(position, 1)
-        }
+        console.log(elemento)
+        elemento.parentNode.removeChild(elemento)
+        var position = dadosColunasRelatorio.indexOf(id)
+        dadosColunasRelatorio.splice(position, 1)
         console.log(dadosColunasRelatorio)
     } else {
-        console.warn("Parâmetro inválido em removerCampoNaDiv(id)")
+        console.log("Parâmetro errado na função 'removerCampoNaDiv(id)'")
     }
 }
 
 function verificarCamposPreenchidos() {
     const elementoColunas = document.getElementById('todas_colunas')
-    if (!elementoColunas) return
-
     const colunas = elementoColunas.querySelectorAll('div')
 
     colunas.forEach((coluna) => {
-        const inputColuna = coluna.querySelector('input')
-        const textoSpan = coluna.querySelector('span')
-        if (!inputColuna || !textoSpan) return
-
-        const conteudoTextoColuna = textoSpan.textContent.replaceAll(" ", "_").toLowerCase()
-        inputColuna.checked = dadosColunasRelatorio.includes(conteudoTextoColuna)
-    })
-}
-
-var todosSelecionados = false
-function selecionarTodos() {
-    todosSelecionados = !todosSelecionados
-    console.log("Selecionar todos:", todosSelecionados)
-
-    const elementoColunas = document.getElementById('todas_colunas')
-    if (!elementoColunas) return
-
-    const colunas = elementoColunas.querySelectorAll('div')
-
-    colunas.forEach((coluna) => {
-        const inputColuna = coluna.querySelector('input')
-        if (inputColuna) {
-            inputColuna.checked = todosSelecionados
+        inputColuna = coluna.querySelector('input')
+        conteudoTextoColuna = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
+        if (dadosColunasRelatorio.indexOf(conteudoTextoColuna) != -1) {
+            inputColuna.checked = true
+        } else {
+            inputColuna.checked = false
         }
     })
 }
 
-function alimentarLista() {
-    const elementoColunas = document.getElementById('todas_colunas')
-    if (!elementoColunas) return
-
-    const colunas = elementoColunas.querySelectorAll('div')
-    dadosColunasRelatorio = []
+var todosSelecionados = false;
+function selecionarTodos() {
+    todosSelecionados = !todosSelecionados;
+    console.log(todosSelecionados);
+    const elementoColunas = document.getElementById('todas_colunas');
+    const colunas = elementoColunas.querySelectorAll('div');
 
     colunas.forEach((coluna) => {
-        const inputColuna = coluna.querySelector('input')
-        const spanColuna = coluna.querySelector('span')
-        if (!inputColuna || !spanColuna) return
+        const inputColuna = coluna.querySelector('input');
+        if (inputColuna) {
+            inputColuna.checked = todosSelecionados;
+        }
+    });
+}
 
-        const conteudoColunaId = spanColuna.textContent.replaceAll(" ", "_").toLowerCase()
+function alimentarLista() {
+    const elementoColunas = document.getElementById('todas_colunas')
+    const colunas = elementoColunas.querySelectorAll('div')
+    dadosColunasRelatorio = []
+    colunas.forEach((coluna) => {
+        inputColuna = coluna.querySelector('input')
+        conteudoColunaId = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
         if (inputColuna.checked) {
             dadosColunasRelatorio.push(conteudoColunaId)
         }
@@ -153,8 +143,7 @@ function alimentarLista() {
 }
 
 function toCapitalize(string) {
-    if (!string) return ""
-    return string.charAt(0).toUpperCase() + string.slice(1)
+    return string[0].toUpperCase() + string.slice(1)
 }
 
 // Rotas
@@ -330,14 +319,11 @@ function obterRelatoriosPorId() {
 }
 
 function exibirMensagemSemRelatorios() {
-    const div = document.getElementById("meus_relatorios");
-    if (div) {
-        div.innerHTML = `
-            <h1 id="sem_relatorios">Parece que você ainda não tem relatórios...
-            <a href="javascript:void(0)" onclick="criarNovoRelatorio()">Crie agora!</a>
-            </h1>
-        `;
-    }
+    document.getElementById("meus_relatorios").innerHTML = `
+        <h1 id="sem_relatorios">Parece que você ainda não tem relatórios...
+            <a onclick="criarNovoRelatorio()">Crie agora!</a>
+        </h1>
+        `
 }
 
 function obterInfoRelatorio(idRelatorio) {
@@ -346,41 +332,185 @@ function obterInfoRelatorio(idRelatorio) {
         headers: {
             "Content-Type": "application/json"
         }
-    }).then(resposta => {
-        if (resposta.ok) {
-            resposta.json().then(json => {
-                if (json && json[0]) {
-                    alimentarCamposRelatorio(json[0]);
-                }
-            });
-        } else {
-            console.error("Falha ao obter info do relatório:", resposta.status);
-        }
-    }).catch(err => {
-        console.error("Erro ao obter info do relatório:", err);
-    });
+    })
+        .then(resposta => {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                console.error("Falha ao obter info do relatório:", resposta.status);
+            }
+        })
+        .then(json => {
+            if (json && json[0]) {
+                alimentarCamposRelatorio(json[0]);
+            }
+        })
+        .catch(err => {
+            console.error("Erro ao obter info do relatório:", err);
+        });
 }
 
 function alimentarCamposRelatorio(json) {
     if (!json) return;
-    const colunas = json.colunas || []
-    dadosColunasRelatorio = []
-    colunas.forEach(coluna => {
-        dadosColunasRelatorio.push(coluna)
-    });
-    preencherCamposEscolhidos();
 
-    const inputNome = document.getElementById('input_nome_relatorio')
-    if (inputNome) inputNome.value = json.nome || ""
+    console.log("Dados recebidos do banco:", json);
 
-    const filtrosJson = json.filtros
-    if (!filtrosJson) return
+    limparCamposRelatorio();
+        const elementoBotoes = document.getElementById('div_btn_salvar')
+    elementoBotoes.innerHTML = `
+        <button id="btn_salvar_exportar" onclick="atualizarRelatorio(); exportar()">Salvar e
+            Exportar</button>
+        <button id="btn_salvar" onclick="atualizarRelatorio()">
+            Salvar
+        </button>
+    `
+    const inputNome = document.getElementById('input_nome_relatorio');
+    if (inputNome) {
+        inputNome.value = json.nome || "";
+    }
 
-    Object.entries(filtrosJson).forEach(([chave, valor]) => {
-        const elemento = document.getElementById(`filtro_${chave}`)
-        if (elemento) {
-            elemento.value = valor
+    if (Array.isArray(json.colunas)) {
+        dadosColunasRelatorio = [...json.colunas];
+        const div = document.getElementById('campos_selecionados')
+        const elementosDiv = div.querySelectorAll('div')
+        if (elementosDiv.length != 0) {
+            elementosDiv.forEach((actualElement) => {
+                actualElement.remove()
+            })
         }
+
+        const elementoColunas = document.getElementById('todas_colunas')
+        const colunas = elementoColunas.querySelectorAll('div')
+        colunas.forEach((coluna) => {
+            inputColuna = coluna.querySelector('input')
+            conteudoColunaId = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
+            if (inputColuna.checked) {
+                dadosColunasRelatorio.push(conteudoColunaId)
+            }
+        })
+
+        dadosColunasRelatorio.forEach((colunaAtual) => {
+            adicionarCampoNaDiv(colunaAtual)
+        })
+    }
+
+    if (json.filtros) {
+        if (json.filtros.ano) {
+            document.getElementById('filtro_ano').value = json.filtros.ano;
+            anoFiltro = json.filtros.ano;
+        }
+
+        if (json.filtros.especializacao) {
+            document.getElementById('filtro_especializacao').value = json.filtros.especializacao;
+            especializacaoFiltro = json.filtros.especializacao;
+
+            buscarCursosPorEspecializacao(json.filtros.especializacao).then(() => {
+                if (json.filtros.curso) {
+                    document.getElementById('filtro_curso').value = json.filtros.curso;
+                    cursoFiltro = json.filtros.curso;
+                }
+            });
+        }
+
+        // Lógica para estado e cidade (com dependência)
+        if (json.filtros.estado) {
+            document.getElementById('filtro_estado').value = json.filtros.estado;
+            estadoFiltro = json.filtros.estado;
+
+            // Carrega cidades e depois seleciona a correta
+            buscarCidadesPorEstado(json.filtros.estado).then(() => {
+                if (json.filtros.cidade) {
+                    // Aguarda um breve momento para garantir que as opções foram carregadas
+                    setTimeout(() => {
+                        const cidadeSelect = document.getElementById('filtro_cidade');
+                        if (cidadeSelect) {
+                            cidadeSelect.value = json.filtros.cidade;
+                            cidadeFiltro = json.filtros.cidade;
+                        }
+                    }, 300);
+                }
+            });
+        }
+    }
+}
+
+function buscarCidadesPorEstado(estado) {
+    return new Promise((resolve, reject) => {
+        if (!estado) {
+            resolve();
+            return;
+        }
+
+        const cidadeSelect = document.getElementById('filtro_cidade');
+        cidadeSelect.disabled = true;
+        cidadeSelect.innerHTML = '<option value="" selected>Carregando...</option>';
+
+        fetch(`/relatorio/obterCidadesPorEstado/${estado}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+            .then(resposta => {
+                if (!resposta.ok) throw new Error("Erro ao buscar cidades");
+                return resposta.json();
+            })
+            .then(cidades => {
+                cidadeSelect.innerHTML = '<option value="" selected>Selecione</option>';
+                cidades.forEach(cidade => {
+                    const option = document.createElement("option");
+                    option.value = cidade.nome || cidade.id || cidade;
+                    option.textContent = cidade.nome || cidade.id || cidade;
+                    cidadeSelect.appendChild(option);
+                });
+                cidadeSelect.disabled = false;
+                resolve();
+            })
+            .catch(err => {
+                console.error("Erro ao buscar cidades:", err);
+                cidadeSelect.innerHTML = '<option value="" selected>Erro ao carregar</option>';
+                reject(err);
+            });
+    });
+}
+
+function buscarCursosPorEspecializacao(especializacao) {
+    return new Promise((resolve, reject) => {
+        if (!especializacao) {
+            resolve();
+            return;
+        }
+
+        const cursoSelect = document.getElementById('filtro_curso');
+        cursoSelect.disabled = true;
+        cursoSelect.innerHTML = '<option value="" selected>Carregando...</option>';
+
+        fetch(`/relatorio/obterCursosPorEspecializacao/${especializacao}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+            .then(resposta => {
+                if (!resposta.ok) throw new Error("Erro ao buscar cursos");
+                return resposta.json();
+            })
+            .then(cursos => {
+                cursoSelect.innerHTML = '<option value="" selected>Selecione</option>';
+                cursos.forEach(curso => {
+                    const option = document.createElement("option");
+                    option.value = curso.nome || curso.id || curso;
+                    option.textContent = curso.nome || curso.id || curso;
+                    cursoSelect.appendChild(option);
+                });
+                cursoSelect.disabled = false;
+                resolve();
+            })
+            .catch(err => {
+                console.error("Erro ao buscar cursos:", err);
+                cursoSelect.innerHTML = '<option value="" selected>Erro ao carregar</option>';
+                reject(err);
+            });
     });
 }
 
@@ -409,17 +539,13 @@ function adicionarFiltro(elemento) {
 }
 
 function construirMeusRelatorios(relatorios) {
-    const div = document.getElementById("meus_relatorios")
-    if (!div) return
-
-    div.innerHTML = ""
+    document.getElementById("meus_relatorios").innerHTML = ''
     relatorios.forEach((relatorio) => {
         adicionarRelatorioNaDiv(relatorio)
     })
 }
 
 function adicionarRelatorioNaDiv(infoRelatorio) {
-    if (!infoRelatorio || !infoRelatorio.id_relatorio) return
     const divMeusRelatorios = document.getElementById('meus_relatorios')
 
     const idRelatorioCompleto = `relatorio_${infoRelatorio.id_relatorio}`
@@ -460,56 +586,6 @@ function ativarSelect(id) {
     document.getElementById(id).disabled = false
 }
 
-function buscarCidadesPorEstado(estado) {
-    fetch(`/relatorio/obterCidadesPorEstado/${estado}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-    }).then(function (resposta) {
-        if (resposta.ok) {
-            const id = 'filtro_cidade'
-            ativarSelect(id)
-            const elemento = document.getElementById(id)
-            elemento.innerHTML = '<option value="" selected hidden>Selecione</option>'
-            resposta.json().then(json => {
-                console.log(json)
-                json.forEach(valor => {
-                    const option = document.createElement("option")
-                    option.value = valor.nome
-                    option.textContent = valor.nome
-                    elemento.appendChild(option)
-                })
-            })
-        }
-    })
-}
-
-function buscarCursosPorEspecializacao(especializacao) {
-    fetch(`/relatorio/obterCursosPorEspecializacao/${especializacao}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-    }).then(function (resposta) {
-        if (resposta.ok) {
-            const id = 'filtro_curso'
-            ativarSelect(id)
-            const elemento = document.getElementById(id)
-            elemento.innerHTML = '<option value="" selected hidden>Selecione</option>'
-            resposta.json().then(json => {
-                console.log(json)
-                json.forEach(valor => {
-                    const option = document.createElement("option")
-                    option.value = valor.nome
-                    option.textContent = valor.nome
-                    elemento.appendChild(option)
-                })
-            })
-        }
-    })
-}
-
 function deletarRelatorio(elemento) {
     Swal.fire({
         title: "Tem certeza?",
@@ -530,7 +606,7 @@ function deletarRelatorio(elemento) {
                 },
             }).then(function (resposta) {
                 Swal.fire({
-                    title: "Relatório Deletedo com Sucesso!",
+                    title: "Relatório Deletado com Sucesso!",
                     text: "Mas você ainda pode gerar outros relatórios, vá em frente :)",
 
                     showConfirmButton: true,
@@ -552,6 +628,7 @@ function limparCamposRelatorio() {
         const select = actualFilter.querySelector('select')
         select.options[0].selected = true
     })
+
     document.getElementById("btn_salvar_exportar").onclick = function () {
         inserirRelatorio()
         exportarRelatorio()
@@ -559,20 +636,17 @@ function limparCamposRelatorio() {
     document.getElementById("btn_salvar").onclick = function () {
         inserirRelatorio()
     }
+    dadosColunasRelatorio = []
 }
 
-async function editarRelatorio(elemento) {
-    document.getElementById("btn_salvar_exportar").onclick = function () {
-        atualizarRelatorio();
-        exportarRelatorio();
-    };
-    document.getElementById("btn_salvar").onclick = function () {
-        atualizarRelatorio();
-    };
+function editarRelatorio(elemento) {
     trocarTelaRelatorio();
-    const idRelatorio = elemento.id.replace("relatorio_", "");
-    sessionStorage.ID_RELATORIO_ATUAL = idRelatorio
-    obterInfoRelatorio(idRelatorio)
+
+    setTimeout(() => {
+        const idRelatorio = elemento.id.replace("relatorio_", "");
+        sessionStorage.ID_RELATORIO_ATUAL = idRelatorio;
+        obterInfoRelatorio(idRelatorio);
+    }, 100)
 }
 
 function formatarColunas(colunas) {
@@ -591,26 +665,34 @@ function formatarColunas(colunas) {
 }
 
 function formatarFiltros(filtros) {
-    if (!filtros || Object.keys(filtros).length === 0) return "Nenhum"
+    if (!filtros || Object.keys(filtros).length === 0) return "Nenhum";
 
-    const filtrosFormatados = []
-    const entradas = Object.entries(filtros)
+    const filtrosFormatados = [];
+
+    const entradas = Object.entries(filtros).filter(([_, valor]) => {
+        if (valor === null || valor === undefined) return false;
+        if (typeof valor === 'string' && valor.trim() === '') return false;
+        if (Array.isArray(valor) && valor.length === 0) return false;
+        return true;
+    });
+
+    if (entradas.length === 0) return "Nenhum";
 
     for (let i = 0; i < entradas.length; i++) {
-        const [chave, valor] = entradas[i]
-        const par = `${toCapitalize(chave)} - ${valor}`
-        const tamanhoAtual = filtrosFormatados.join(" | ").length
+        const [chave, valor] = entradas[i];
+
+        const valorFormatado = String(valor).trim();
+        const par = `${toCapitalize(chave)} - ${valorFormatado}`;
+        const tamanhoAtual = filtrosFormatados.join(" | ").length;
 
         if (filtrosFormatados.length >= 4 || tamanhoAtual + par.length > 60) {
-            filtrosFormatados.push("[...]")
-            break
+            filtrosFormatados.push("[...]");
+            break;
         }
-        filtrosFormatados.push(par)
+        filtrosFormatados.push(par);
     }
-
-    return filtrosFormatados.join(" | ")
+    return filtrosFormatados.join(" | ");
 }
-
 
 function formatarData(dataString) {
     const data = new Date(dataString)
