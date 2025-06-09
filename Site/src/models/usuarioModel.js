@@ -67,9 +67,19 @@ function login(email, senha) {
   );
 
   var instrucaoSql = `
-  SELECT id, nome, email, tipo_conta, telefone, foto_perfil_path
-  FROM usuario 
-  WHERE email = '${email}' AND senha = '${senha}'
+  SELECT 
+   u.id, 
+   u.nome, 
+   u.email, 
+   u.tipo_conta, 
+   u.telefone, 
+   u.foto_perfil_path,
+   e.id as idEmpresa,
+   e.nomeEmpresa,
+   e.slack_channel_id
+  FROM usuario u
+  JOIN empresa e ON u.fk_empresa = e.id
+  WHERE u.email = '${email}' AND u.senha = '${senha}'
 `;
 
   return database.executar(instrucaoSql);

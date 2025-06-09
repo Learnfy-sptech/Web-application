@@ -43,6 +43,14 @@ document.getElementById("log_out").addEventListener("click", function () {
 window.onload = function () {
   const nome = sessionStorage.getItem("NOME_USUARIO");
   const tipoContaArmazenado = sessionStorage.getItem("TIPO_CONTA");
+  const slackId = sessionStorage.getItem("SLACK_ID");
+  const slackItem = document.getElementById("item-slack");
+  const slackLink = document.getElementById("link-slack");
+
+  if (slackId && slackItem && slackLink) {
+    slackLink.href = `https://slack.com/app_redirect?channel=${slackId}`;
+    slackItem.style.display = "flex";
+  }
 
   if (nome && tipoContaArmazenado) {
     document.getElementById("nomeUsuario").textContent = nome;
@@ -77,7 +85,7 @@ window.onload = function () {
 
   let currentFileName = window.location.pathname.split('/').pop();
   if (currentFileName === '' || currentFileName === '/') {
-      currentFileName = 'index.html';
+    currentFileName = 'index.html';
   }
 
   // Primeiro, remove a classe 'active' de TODOS os links para uma limpeza

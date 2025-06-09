@@ -11,6 +11,14 @@ router.post("/validarToken", function (req, res){
   empresaController.validarToken(req, res)
 });
 
+router.put("/atualizarEmpresa/:idEmpresa", function (req, res){
+  empresaController.atualizarConfigurações(req, res)
+});
+
+router.get("/dadosNotificacao/:idEmpresa", function (req, res){
+  empresaController.receberDadosNotificacao(req, res)
+});
+
 router.delete("/removerEmpresa", function (req, res){
   empresaController.removerEmpresa(req, res)
 });

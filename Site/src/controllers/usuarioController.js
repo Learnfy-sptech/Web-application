@@ -19,8 +19,6 @@ async function cadastrar(req, res) {
 
     const resultado = await usuarioModel.cadastrar({ nome, email, cpf, telefone, senha, tipoConta, token });
 
-    slackService.enviarNotificacaoSlack(`Novo usuário criado: ${nome} (${email})`);
-
     return res.status(200).json({ mensagem: "Usuário criado com sucesso", dados: resultado });
 
   } catch (erro) {
@@ -50,7 +48,9 @@ function login(req, res) {
           email: resposta[0].email,
           tipo_conta: resposta[0].tipo_conta,
           telefone: resposta[0].telefone,
-          foto_perfil_path: resposta[0].foto_perfil_path
+          foto_perfil_path: resposta[0].foto_perfil_path,
+          slack_channel_id: resposta[0].slack_channel_id,
+          idEmpresa: resposta[0].idEmpresa,
         });
       } else {
         return res.status(403).json({ erro: "E-mail e/ou senha inválido(s)" });
