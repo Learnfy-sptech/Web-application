@@ -42,7 +42,7 @@ document.getElementById("log_out").addEventListener("click", function () {
 
 window.onload = function () {
   const nome = sessionStorage.getItem("NOME_USUARIO");
-  const tipoContaArmazenado = sessionStorage.getItem("TIPO_CONTA");
+  var tipoContaArmazenado = sessionStorage.getItem("TIPO_CONTA"); 
   const slackId = sessionStorage.getItem("SLACK_ID");
   const slackItem = document.getElementById("item-slack");
   const slackLink = document.getElementById("link-slack");
@@ -57,20 +57,21 @@ window.onload = function () {
     document.getElementById("tipoContaUsuario").textContent = tipoContaArmazenado;
   }
 
-  const menuLinks = document.querySelectorAll('.nav-list a.menu-link');
+  const menuLinks = document.querySelectorAll('.nav-list a.menu-link'); 
   const dashLink = document.getElementById('minha-dashboard-link-dinamico');
 
-  const dashboardMap = {
-    'diretor_academico': 'diretor',
-    'gestor': 'gestor',
-    'pesquisador': 'pesquisador',
-    // Adicione outros mapeamentos aqui se existirem
-  };
+  if (tipoContaArmazenado === "DIRETOR ACADEMICO") {
+    tipoContaArmazenado = "diretor"; 
+  }
 
   let dashboardFileNamePart = '';
 
   if (tipoContaArmazenado) {
-    const tipoContaLower = tipoContaArmazenado.toLowerCase();
+    const tipoContaLower = tipoContaArmazenado.toLowerCase(); 
+    const dashboardMap = {
+      'gestor': 'gestor',
+      'pesquisador': 'pesquisador',
+    };
 
     if (dashboardMap[tipoContaLower]) {
       dashboardFileNamePart = dashboardMap[tipoContaLower];
@@ -88,22 +89,15 @@ window.onload = function () {
     currentFileName = 'index.html';
   }
 
-  // Primeiro, remove a classe 'active' de TODOS os links para uma limpeza
   menuLinks.forEach(link => {
     link.classList.remove('active');
   });
 
-  // Em seguida, adiciona a classe 'active' ao link correto
   menuLinks.forEach(link => {
     const linkHref = link.getAttribute('href');
 
-    // Condição principal para ativar o link:
-    // 1. Se o nome do arquivo atual for EXATAMENTE igual ao href do link
-    // OU
-    // 2. Se o link for o da "Minha Dashboard" E a URL atual começar com "dashboard-"
-    //    (indicando que é alguma das páginas de dashboard)
     if (currentFileName === linkHref ||
-        (link.id === 'minha-dashboard-link-dinamico' && currentFileName.startsWith('dashboard-'))) {
+      (link.id === 'minha-dashboard-link-dinamico' && currentFileName.startsWith('dashboard-'))) {
       link.classList.add('active');
     }
   });
