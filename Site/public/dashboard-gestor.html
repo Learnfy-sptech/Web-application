@@ -103,13 +103,20 @@
                 <div class="filter">
                     <div class="custom-select-wrapper">
                         <div class="custom-select">
-                            <select id="select-example" name="areaFiltro">
-                                <option value="" disabled selected>Filtro por área:</option>
-                                <option value="1">Humanidades e Artes</option>
-                                <option value="2">Serviços</option>
-                                <option value="3">Ciências, Matemáticas, Computação</option>
-                            </select>
-                            <span class="select-arrow"></span>
+                       <select id="select-areas" name="areaFiltro" onchange="mostarNomeH1();
+                        carregarKpiOfertaCursos(); carregarAreasNoSelect(); carregarPeriodoMaiorProcura();
+                        carregarEmpregabilidadePorArea(); carregarRetencaoAlunos();">
+                <!-- <option value="" disabled selected>Filtro por área:</option> -->
+                <option value="SERVIÇOS">SERVIÇOS</option>
+                <option value="EDUCAÇÃO">EDUCAÇÃO</option>
+                <option value="HUMANIDADES E ARTES">HUMANIDADES E ARTES</option>
+                <option value="SAÚDE E BEM-ESTAR SOCIAL">SAÚDE E BEM-ESTAR SOCIAL</option>
+                <option value="AGRICULTURA E VETERINÁRIA">AGRICULTURA E VETERINÁRIA</option>
+                <option value="CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO">CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO</option>
+                <option value="ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO">ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO</option>
+                <option value="CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS">CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS</option>
+                
+              </select>
                         </div>
                     </div>
 
@@ -126,27 +133,27 @@
         <div class="kpi-section">
             <div class="card">
                 <div class="card-details">
-                    <p class="text-title">Crescimento da Oferta de Cursos</p>
-                    <div class="text-bodys" id="kpi-crescimento-oferta">0%</div>
+                    <p class="text-title">Quantidade de Vagas Ofertadas (2023)</p>
+                    <div class="text-bodys" id="kpi-crescimento-oferta">Carregando...</div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-details">
-                    <p class="text-title">Empregabilidade até 12 meses</p>
-                    <p class="text-body" id="kpi-empregabilidade-12meses">0%</p>
+                    <p class="text-title">Quantidade de Alunos Retidos (2023)</p>
+                    <p class="text-bodys" id="kpi-retencao-alunos">Carregando...</p>
                 </div>
             </div>
             <div class="card">
                 <div class="card-details">
-                    <p class="text-title">Salário médio por área (2023)</p>
-                    <p class="text-body" id="kpi-salario-medio">R$ 0,00</p>
+                    <p class="text-title">Empregabilidade por Área (2023)</p>
+                    <p class="text-body" id="kpi-empregabilidade">Carregando...</p>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-details">
                     <p class="text-title">Periodo com maior procura (2023)</p>
-                    <p class="text-body" id="kpi-periodo-maior-procura">0</p>
+                    <p class="text-body" id="kpi-periodo-maior-procura">Carregando...</p>
                 </div>
             </div>
         </div>
@@ -170,3 +177,17 @@
 <script src="assets/javascript/awsPhoto.js"></script>
 <script src="assets/javascript/sidebar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    window.addEventListener("load", function () {
+  mostarNomeH1();
+  loadProfileImage();
+  carregarRetencaoAlunos();
+  carregarKpiOfertaCursos();
+  salarioPorAreaGrafico();
+  carregarAreasNoSelect();
+  graficoCursosMaisProcurados();
+  carregarPeriodoMaiorProcura();
+  carregarEmpregabilidadePorArea(); 
+    });
+  </script>

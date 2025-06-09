@@ -1,15 +1,3 @@
-window.addEventListener("load", function () {
-  mostarNomeH1();
-  loadProfileImage();
-  buscarAreaMaiorRetorno();
-  carregarAreasNoSelect();
-  carregarGraficoBolsistasPorArea();
-  carregarKpiTotalAlunos();
-  carregarKpiTotalIngressantes();
-  carregarKpiAlunosPrivados();
-  carregarKpiAlunosPublicos();
-});
-
 function carregarAreasNoSelect() {
   fetch("/diretor/filtroArea", { cache: "no-store" })
     .then((res) => {
@@ -276,9 +264,6 @@ function carregarGraficoBolsistasPorArea() {
 }
 
 
-
-
-
 function mostarNomeH1() {
   const tipoConta = sessionStorage.getItem("TIPO_CONTA");
   const tipoContaTitulo = document.getElementById("tipoContaUsuarioTitulo");
@@ -293,3 +278,21 @@ function mostarNomeH1() {
 
   if (tipoContaTitulo) tipoContaTitulo.textContent = userTypeText;
 }
+
+window.carregarAreasNoSelect = carregarAreasNoSelect;
+window.buscarAreaMaiorRetorno = buscarAreaMaiorRetorno;
+window.carregarGraficoBolsistasPorArea = carregarGraficoBolsistasPorArea;
+window.carregarKpiTotalAlunos = carregarKpiTotalAlunos;
+window.carregarKpiTotalIngressantes = carregarKpiTotalIngressantes;
+window.carregarKpiAlunosPrivados = carregarKpiAlunosPrivados;
+window.carregarKpiAlunosPublicos = carregarKpiAlunosPublicos;
+
+document.getElementById("select-areas").addEventListener("change", function () {
+  carregarAreasNoSelect();
+  buscarAreaMaiorRetorno();
+  carregarGraficoBolsistasPorArea();
+  carregarKpiTotalAlunos();
+  carregarKpiTotalIngressantes();
+  carregarKpiAlunosPrivados();
+  carregarKpiAlunosPublicos();
+});
