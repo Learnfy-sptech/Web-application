@@ -39,7 +39,7 @@ function login(req, res) {
     .login(email, senha)
     .then(function (resposta) {
 
-      console.log("Resultado da consulta:", resposta); 
+      console.log("Resultado da consulta:", resposta);
 
       if (resposta.length > 0) {
         return res.status(200).json({
@@ -84,8 +84,27 @@ function atualizar(req, res) {
     });
 }
 
+async function recuperarFuncionarios(req, res) {
+  const idEmpresa = req.params.idEmpresa;
+
+  try {
+    const resposta = await usuarioModel.recuperarFuncionarios(idEmpresa);
+
+    if (resposta && resposta.length > 0) {
+      return res.status(200).json(resposta);
+    } else {
+      return res.status(404).json({ erro: "Nenhum funcionário encontrado" });
+    }
+  } catch (error) {
+    console.error("Erro ao recuperar funcionários:", error);
+    return res.status(500).json({ erro: "Erro ao buscar funcionários" });
+  }
+}
+
+
 module.exports = {
   cadastrar,
   login,
   atualizar,
+  recuperarFuncionarios
 };

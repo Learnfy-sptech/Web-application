@@ -7,8 +7,8 @@ router.post("/cadastrar", function (req, res){
   usuarioController.cadastrar(req, res)
 });
 
-router.get("/verificar", function (req, res){
-  usuarioController.verificar(req, res)
+router.get("/empresa/:idEmpresa", function (req, res){
+  usuarioController.recuperarFuncionarios(req, res)
 });
 
 router.post("/login", function (req, res) {
