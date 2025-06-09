@@ -74,6 +74,7 @@ function logar() {
               exebDash = "diretor"
               window.location = `dashboard-${exebDash}.html`;
             } else {
+              const tipoConta = sessionStorage.getItem("TIPO_CONTA").toLowerCase();
               window.location = `dashboard-${tipoConta}.html`;
             }
           }
