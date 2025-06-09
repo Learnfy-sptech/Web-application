@@ -5,13 +5,13 @@ let navList = document.querySelector(".nav-list");
 
 closeBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
-  navList.classList.toggle("scroll"); // Assuming 'scroll' class manages overflow/scrolling
+  navList.classList.toggle("scroll");
   menuBtnChange();
 });
 
 searchBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
-  navList.classList.toggle("scroll"); // Assuming 'scroll' class manages overflow/scrolling
+  navList.classList.toggle("scroll");
   menuBtnChange();
 });
 
@@ -30,9 +30,8 @@ document.getElementById("log_out").addEventListener("click", function () {
     icon: "warning",
     showCancelButton: true,
     confirmButtonText: "Sim, sair",
-    cancelButtonText: "Cancelar",
-    confirmButtonColor: "#800000",
     cancelButtonColor: "#999999",
+    confirmButtonColor: "#800000",
   }).then((result) => {
     if (result.isConfirmed) {
       sessionStorage.clear();
@@ -43,23 +42,51 @@ document.getElementById("log_out").addEventListener("click", function () {
 
 window.onload = function () {
   const nome = sessionStorage.getItem("NOME_USUARIO");
-  const tipoConta = sessionStorage.getItem("TIPO_CONTA");
+  var tipoContaArmazenado = sessionStorage.getItem("TIPO_CONTA"); 
+  const slackId = sessionStorage.getItem("SLACK_ID");
+  const slackItem = document.getElementById("item-slack");
+  const slackLink = document.getElementById("link-slack");
 
-  if (nome && tipoConta) {
+  if (slackId && slackItem && slackLink) {
+    slackLink.href = `https://slack.com/app_redirect?channel=${slackId}`;
+    slackItem.style.display = "flex";
+  }
+
+  if (nome && tipoContaArmazenado) {
     document.getElementById("nomeUsuario").textContent = nome;
-    document.getElementById("tipoContaUsuario").textContent = tipoConta;
+    document.getElementById("tipoContaUsuario").textContent = tipoContaArmazenado;
   }
 
   const menuLinks = document.querySelectorAll('.nav-list a.menu-link'); 
   const dashLink = document.getElementById('minha-dashboard-link-dinamico');
 
-  if(dashLink && tipoConta){
-    dashLink.href= `dashboard-${tipoConta.toLowerCase()}.html`;
+  if (tipoContaArmazenado === "DIRETOR ACADEMICO") {
+    tipoContaArmazenado = "diretor"; 
   }
 
-  var currentFileName = window.location.pathname.split('/').pop();
+  let dashboardFileNamePart = '';
+
+  if (tipoContaArmazenado) {
+    const tipoContaLower = tipoContaArmazenado.toLowerCase(); 
+    const dashboardMap = {
+      'gestor': 'gestor',
+      'pesquisador': 'pesquisador',
+    };
+
+    if (dashboardMap[tipoContaLower]) {
+      dashboardFileNamePart = dashboardMap[tipoContaLower];
+    } else {
+      dashboardFileNamePart = tipoContaLower;
+    }
+  }
+
+  if (dashLink && dashboardFileNamePart) {
+    dashLink.href = `dashboard-${dashboardFileNamePart}.html`;
+  }
+
+  let currentFileName = window.location.pathname.split('/').pop();
   if (currentFileName === '' || currentFileName === '/') {
-      currentFileName = 'index.html';
+    currentFileName = 'index.html';
   }
 
   menuLinks.forEach(link => {
@@ -69,16 +96,9 @@ window.onload = function () {
   menuLinks.forEach(link => {
     const linkHref = link.getAttribute('href');
 
-    if (currentFileName === linkHref) {
+    if (currentFileName === linkHref ||
+      (link.id === 'minha-dashboard-link-dinamico' && currentFileName.startsWith('dashboard-'))) {
       link.classList.add('active');
     }
   });
 };
-  menuLinks.forEach(link => {
-    const linkHref = link.getAttribute('href');
-    if (currentPath.endsWith(linkHref)) {
-      link.classList.add('active'); 
-    } else {
-
-    }
-  });

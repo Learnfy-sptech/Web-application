@@ -1,13 +1,61 @@
 var database = require("../database/config");
 
-function cadastrar(email, senha, tipoConta, nome, cpf, telefone) {
-  console.log("Dados recebidos:", tipoConta, nome, email, cpf, telefone, senha);
+async function cadastrar({ nome, email, cpf, telefone, senha, tipoConta, token }) {
+  let idEmpresa = null;
 
-  var instrucaoSql = `INSERT INTO usuario(tipoConta, nome, email, cpf, telefone, senha) VALUES ('${tipoConta}', '${nome}', '${email}', '${cpf}', '${telefone}', '${senha}')`;
+  if (token) {
+    const empresa = await buscarEmpresaPorToken(token); 
+    if (!empresa) {
+      throw new Error("Token inválido ou empresa não encontrada.");
+    }
+    idEmpresa = empresa.id;
+  }
 
-  console.log("Consulta SQL gerada:", instrucaoSql);
+  if ([nome, email, cpf, telefone, senha].some(v => typeof v !== 'string')) {
+    throw new Error("Dados inválidos.");
+  }
 
-  return database.executar(instrucaoSql);
+  const instrucaoSQL = `
+    INSERT INTO usuario (nome, email, cpf, telefone, senha, tipo_conta, fk_empresa)
+    VALUES (?, ?, ?, ?, ?, ?, ?);
+  `;
+
+  await database.executar(instrucaoSQL, [nome, email, cpf, telefone, senha, tipoConta, idEmpresa]);
+}
+
+async function buscarEmpresaPorToken(token) {
+  try {
+    const instrucao = `
+      SELECT * FROM empresa
+      WHERE token_acesso = ?;
+    `;
+    const resultado = await database.executar(instrucao, [token]);
+
+    if (resultado.length > 0) {
+      return resultado[0]; 
+    } else {
+      return null;
+    }
+  } catch (erro) {
+    console.error("Erro ao buscar empresa por token:", erro);
+    throw erro;
+  }
+}
+
+async function verificarUsuarioExistente(cpf, email) {
+  const instrucao = `
+    SELECT * FROM usuario WHERE cpf = ? OR email = ?;
+  `;
+  const resultado = await database.executar(instrucao, [cpf, email]);
+  return resultado.length > 0;
+}
+
+async function cadastrarUsuario(nome, email, cpf, telefone, senha, tipoConta, idEmpresa = null) {
+  const instrucao = `
+    INSERT INTO usuario (nome, email, cpf, telefone, senha, tipo_conta, fk_empresa)
+    VALUES (?, ?, ?, ?, ?, ?, ?);
+  `;
+  return await database.executar(instrucao, [nome, email, cpf, telefone, senha, tipoConta, idEmpresa]);
 }
 
 
@@ -19,9 +67,19 @@ function login(email, senha) {
   );
 
   var instrucaoSql = `
-  SELECT id, nome, email, tipoConta, telefone, foto_perfil_path
-  FROM usuario 
-  WHERE email = '${email}' AND senha = '${senha}'
+  SELECT 
+   u.id, 
+   u.nome, 
+   u.email, 
+   u.tipo_conta, 
+   u.telefone, 
+   u.foto_perfil_path,
+   e.id as idEmpresa,
+   e.nomeEmpresa,
+   e.slack_channel_id
+  FROM usuario u
+  JOIN empresa e ON u.fk_empresa = e.id
+  WHERE u.email = '${email}' AND u.senha = '${senha}'
 `;
 
   return database.executar(instrucaoSql);
@@ -29,29 +87,40 @@ function login(email, senha) {
 
 
 function atualizar(id, nome, telefone, senha, foto) {
-  console.log("Atualizando usuário id:", id);
+  const campos = [];
+  const valores = [];
 
-  let campos = [];
-
-  if (nome) campos.push(`nome = '${nome}'`);
-  if (telefone) campos.push(`telefone = '${telefone}'`);
-  if (senha) campos.push(`senha = '${senha}'`);
-  if (foto) campos.push(`foto_perfil_path = '${foto}'`);
+  if (nome) {
+    campos.push("nome = ?");
+    valores.push(nome);
+  }
+  if (telefone) {
+    campos.push("telefone = ?");
+    valores.push(telefone);
+  }
+  if (senha) {
+    campos.push("senha = ?");
+    valores.push(senha);
+  }
+  if (foto) {
+    campos.push("foto_perfil_path = ?");
+    valores.push(foto);
+  }
 
   if (campos.length === 0) {
     throw new Error("Nenhum campo para atualizar");
   }
 
-  const instrucaoSql = `UPDATE usuario SET ${campos.join(", ")} WHERE id = '${id}'`;
+  const instrucaoSql = `UPDATE usuario SET ${campos.join(", ")} WHERE id = ?`;
+  valores.push(id);
 
-  console.log("SQL atualizar usuário:", instrucaoSql);
-  return database.executar(instrucaoSql);
+  return database.executar(instrucaoSql, valores);
 }
-
-
 
 module.exports = {
   cadastrar,
   login,
   atualizar,
+  verificarUsuarioExistente,
+  cadastrarUsuario
 };

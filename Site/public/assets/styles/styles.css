@@ -503,7 +503,7 @@ section {
   color: #1f2937;
   /* Slate-800 */
   display: flex;
-  align-items: center;
+  text-align: center;
   margin-bottom: 12px;
 }
 
@@ -550,14 +550,72 @@ section {
   color: #333;
   margin: 0;
 }
+/* Container that centers everything on the screen */
+.loading {
+  display: flex; /* Use flexbox for centering */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
+  
+  position: fixed; /* Fix to viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  z-index: 9999; /* Ensure it's on top */
+}
 
+/* Styling for the progress bar loader */
+.loader {
+  display: block;
+  --height-of-loader: 4px;
+  --loader-color: var(--color-primary-6); /* Use your defined primary color */
+  width: 300px;
+  height: var(--height-of-loader);
+  border-radius: 30px;
+  position: relative;
+  margin-bottom: 15px; /* Add space between loader bar and text */
+}
+
+/* The animating part of the loader */
+.loader::before {
+  content: "";
+  position: absolute;
+  background: var(--loader-color);
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 30px;
+  animation: moving 1s ease-in-out infinite;
+}
+
+@keyframes moving {
+  50% {
+    width: 100%; /* Expands to full width */
+  }
+  100% {
+    width: 0; /* Shrinks back to zero */
+    right: 0; /* Starts shrinking from the right */
+    left: unset; /* Ensures it shrinks from the right */
+  }
+}
+
+.loading > div:last-child { /* Targets the div containing "Carregando suas informações..." */
+  font-size: 1.2em;
+  color: var(--color-neutral-1); /* Use your dark neutral color for text */
+  text-align: center;
+}
+
+.content-dashboard {
+    display: none; 
+}
 
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-  text-align: center;
+  justify-content: space-around; 
   width: 100%;
   height: 180px;
   border-radius: 20px;
@@ -597,6 +655,7 @@ section {
 
 .text-body {
   font-size: 25px;
+  text-align: center;
   font-weight: 400;
   color: #4b5563;
 }

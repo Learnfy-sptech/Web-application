@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="assets/styles/styles.css" />
   <link rel="stylesheet" href="./assets/styles/dashboard-area.css" />
   <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/modules/export-data.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 </head>
 
-<body onload="loadProfileImage()">
+<body>
   <div class="sidebar open">
     <div class="logo-details">
       <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon" />
@@ -71,6 +71,13 @@
         <span class="tooltip">Ajuda</span>
       </li>
 
+      <li id="item-slack">
+        <a href="#" class="menu-link" id="link-slack" target="_blank"><i class="fa-brands fa-slack"></i>
+          <span class="links_name">Canal da Empresa</span>
+        </a>
+        <span class="tooltip">Slack</span>
+      </li>
+
       <li>
         <a href="#" class="menu-link"> <i class="fas fa-cog"></i>
           <span class="links_name">Configurações</span>
@@ -98,24 +105,29 @@
         <i class="fas fa-arrow-left"></i> Voltar
       </button>
       <h1 class="page-title">
-        Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Usuário</span>
+        Dashboard - <span class="job" id="tipoContaUsuarioTitulo">Pesquisador</span>
       </h1>
       <form id="formFiltroCompleto" action="#" method="GET">
         <div class="filter">
           <div class="custom-select-wrapper">
             <div class="custom-select">
-              <select id="select-example" name="areaFiltro">
-                <option value="" disabled selected>Filtro por área:</option>
-                <option value="1">Opção 1</option>
-                <option value="2">Opção 2</option>
-                <option value="3">Opção 3</option>
+              <select id="select-areas" name="areaFiltro"
+                onchange="mostarNomeH1();getKpiQtdCursantes(); getKpiPessoasTrabalhamNaArea(); 
+              getKpiEvasaoPorModalidade(); getKpiMediaSalarial(); getGraficoCursosMaiorRetorno(); getGraficoProjecaoEvasao();">
+                <!-- <option value="" disabled selected>Filtro por área:</option> -->
+                <option value="SERVIÇOS">SERVIÇOS</option>
+                <option value="EDUCAÇÃO">EDUCAÇÃO</option>
+                <option value="HUMANIDADES E ARTES">HUMANIDADES E ARTES</option>
+                <option value="SAÚDE E BEM-ESTAR SOCIAL">SAÚDE E BEM-ESTAR SOCIAL</option>
+                <option value="AGRICULTURA E VETERINÁRIA">AGRICULTURA E VETERINÁRIA</option>
+                <option value="CIÊNCIAS, MATEMÁTICA E zzzCOMPUTAÇÃO">CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO</option>
+                <option value="ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO">ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO</option>
+                <option value="CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS">CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS</option>
+
               </select>
               <span class="select-arrow"></span>
             </div>
           </div>
-          <button type="submit" class="btn-default btn-filter">
-            <i class="fas fa-filter"> Aplicar filtro</i>
-          </button>
         </div>
       </form>
 
@@ -128,35 +140,29 @@
     <div class="kpi-section">
       <div class="card">
         <div class="card-details">
-          <p class="text-title">Pessoas que cursam no curso selecionado</p>
-          <span class="text-body">Aqui vai ficar todos os conteúdos</span>
+          <p class="text-title">Quantidade de alunos que estão cursando</p>
+          <span id="kpiQtdCursantes" class="text-body"></span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-details">
-          <p class="text-title">Pessoas que trabalham na área selecionada</p>
-          <p class="text-body">Aqui vai ficar todos os conteúdos</p>
+          <p class="text-title">Quantidade de pessoas que estão empregadas</p>
+          <span id="KpiPessoasTrabalhamNaArea" class="text-body"></span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-details">
-          <p class="text-title">Evasão por modalidade</p>
-          <p class="text-body">Aqui vai ficar todos os conteúdos</p>
+          <p class="text-title">Quantidade de alunos que evadiram</p>
+          <span id="KpiEvasaoModalidade" class="text-body"></span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-details">
-          <p class="text-title card-info">
-            Distribuição de Financiamento Estudantil
-            <i class="fas fa-question card-info-icon"></i>
-            <span class="card-info-tooltip">
-              Mostra a porcentagem de alunos com bolsas ou financiamentos como ProUni, FIES e outros.
-            </span>
-          </p>
-          <p class="text-body">Aqui vai ficar todos os conteúdos</p>
+          <p class="text-title card-info">Média Salarial</p>
+          <p id="KpiMediaSalarial" class="text-body"></p>
         </div>
       </div>
     </div>
@@ -171,78 +177,23 @@
       </div>
     </div>
   </section>
+  
+  <script src="assets/javascript/dashboard/dashboard-pesquisador.js"></script>
 
   <script src="assets/javascript/sidebar.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/javascript/awsPhoto.js"></script>
-  <script>
-    function mostarNomeH1() {
-      const tipoConta = sessionStorage.getItem('TIPO_CONTA');
-      const tipoContaTitulo = document.getElementById('tipoContaUsuarioTitulo');
-
-      let userTypeText = 'Usuário';
-
-      if (tipoConta === 'DIRETOR ACADEMICO') {
-        userTypeText = 'Diretor';
-      } else if (tipoConta === 'GESTOR') {
-        userTypeText = 'Gestor';
-      } else if (tipoConta === 'PESQUISADOR') {
-        userTypeText = 'Pesquisador';
-      }
-
-      if (tipoContaTitulo) tipoContaTitulo.textContent = userTypeText;
-    }
-
-    window.addEventListener('load', function () {
-      mostarNomeH1();
+    <script>
+  
+    window.addEventListener("load", function () {
       loadProfileImage();
-    });
-
-
-    Highcharts.chart('container', {
-      chart: { type: 'column' },
-      title: { text: 'Comparação entre instituição privada e pública' },
-      subtitle: {
-        text: 'Fonte: MEC'
-      },
-      xAxis: {
-        categories: ['2021', '2022', '2023'],
-        crosshair: true
-      },
-      yAxis: {
-        min: 0,
-        title: { text: 'Alunos' }
-      },
-      tooltip: { valueSuffix: ' Alunos' },
-      plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
-      series: [
-        { name: 'Privada', data: [387749, 280000, 129000] },
-        { name: 'Pública', data: [45321, 140000, 10000] }
-      ]
-    });
-
-    Highcharts.chart('container2', {
-      chart: { type: 'line' },
-      title: { text: 'Projeção de evasão' },
-      subtitle: {
-        text: 'Fonte: INEP'
-      },
-      xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      },
-      yAxis: { title: { text: 'Evasão' } },
-      plotOptions: {
-        line: {
-          dataLabels: { enabled: true },
-          enableMouseTracking: false
-        }
-      },
-      series: [
-        {
-          name: 'Evasão anual',
-          data: [1600.0, 1800.2, 2003.1, 2700.9, 3200.2, 3600.4, 3900.8, 3800.4, 3500.5, 2090.2, 2221.0]
-        }
-      ]
+      mostarNomeH1();
+      getKpiQtdCursantes();
+      getKpiPessoasTrabalhamNaArea();
+      getKpiEvasaoPorModalidade();
+      getKpiMediaSalarial();
+      getGraficoInstituicoes();
+      getGraficoProjecaoEvasao();
     });
   </script>
 </body>

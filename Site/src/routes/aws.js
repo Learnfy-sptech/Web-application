@@ -9,7 +9,7 @@ const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const dotenv = require("dotenv");
 
 router.use(cors());
-const storage = multer.memoryStorage(); // Armazena o arquivo na memória
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 dotenv.config();
@@ -37,7 +37,7 @@ router.post("/posts", upload.single("file"), async (req, res) => {
         Bucket: process.env.BUCKET_NAME,
         Key: `planilhas/${req.body.tipoDado}/${req.file.originalname}`,
         Body: req.file.buffer,
-        ContentType: req.file.mimetype,
+        ContentType: req.file.mimetype
     });
 
     await s3.send(command).then(
@@ -50,8 +50,8 @@ router.post("/posts", upload.single("file"), async (req, res) => {
             res.status(500).json({ error: "Erro ao enviar o arquivo para a AWS S3" });
         }
     );
+    fs.unlinkSync(req.file.path); // Remove o arquivo temporário
 });
-
 
 // ATUALIZAR FOTOS DE PERFIL DE USUÁRIO //
 router.post(
