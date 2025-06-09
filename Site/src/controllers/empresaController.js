@@ -1,8 +1,9 @@
 const empresaModel = require('../models/empresaModel');
+const { ensureSlackChannelExists, enviarNotificacaoSlack } = require("../services/slackService");
 
 exports.cadastrarEmpresa = async (req, res) => {
   try {
-    const { nomeEmpresa, cnpj, emailEmpresa, telefoneEmpresa } = req.body;
+    const { nomeResponsavel, nomeEmpresa, cnpj, emailEmpresa, telefoneEmpresa } = req.body;
 
     if (!nomeEmpresa || !cnpj || !emailEmpresa || !telefoneEmpresa) {
       return res.status(400).json({ message: 'Campos obrigatórios não preenchidos.' });
@@ -16,6 +17,16 @@ exports.cadastrarEmpresa = async (req, res) => {
     });
 
     console.log("[EMPRESA] Dados de empresa recebidos:", req.body);
+
+    try {
+      const slackChannelId = await ensureSlackChannelExists(nomeEmpresa);
+      await empresaModel.atualizarSlackChannelId(novaEmpresa.id, slackChannelId);
+    } catch (err) {
+      console.error('Erro ao criar canal Slack:', err);
+    }
+
+    await enviarNotificacaoSlack(`Nova empresa cadastrada! - Seja bem vindo(a), ${nomeResponsavel} da empresa (${nomeEmpresa})`);
+
     res.status(201).json({ message: 'Empresa cadastrada com sucesso.', empresa: novaEmpresa });
   } catch (error) {
     console.error('Erro cadastrarEmpresa:', error);
@@ -56,4 +67,29 @@ exports.removerEmpresa = async (req, res) => {
     res.status(500).json({ erro: "Erro ao remover empresa" });
   }
 };
+
+exports.atualizarConfigurações = async (req, res) => {
+  const idEmpresa = req.params.idEmpresa;
+  const { receber_notificacao_global } = req.body;
+
+  try {
+    await empresaModel.alterarStatusNotificacoes(idEmpresa, receber_notificacao_global);
+    res.status(200).send("Configuração atualizada com sucesso");
+  } catch (erro) {
+    res.status(500).json({ erro: erro.message });
+  }
+}
+
+exports.receberDadosNotificacao = async (req, res) => {
+  const idEmpresa = req.params.idEmpresa;
+
+  try {
+    const dados = await empresaModel.dadosNotificacao(idEmpresa);
+    res.status(200).json(dados[0]);
+  } catch (erro) {
+    res.status(500).json({ erro: erro.message });
+  }
+}
+
+
 

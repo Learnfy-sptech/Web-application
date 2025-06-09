@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Dashboard | Gestor</title>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -58,11 +58,11 @@
             </li>
 
             <li>
-        <a href="" class="menu-link" id="minha-dashboard-link-dinamico"> <i class="fas fa-chart-pie"></i>
-          <span class="links_name">Minha dashboard</span>
-        </a>
-        <span class="tooltip">Minha dashboard</span>
-      </li>
+                <a href="" class="menu-link" id="minha-dashboard-link-dinamico"> <i class="fas fa-chart-pie"></i>
+                    <span class="links_name">Minha dashboard</span>
+                </a>
+                <span class="tooltip">Minha dashboard</span>
+            </li>
 
             <li>
                 <a href="ajuda.html" class="menu-link"> <i class="fas fa-question-circle"></i>
@@ -71,8 +71,15 @@
                 <span class="tooltip">Ajuda</span>
             </li>
 
+            <li id="item-slack">
+                <a href="#" class="menu-link" id="link-slack" target="_blank"><i class="fa-brands fa-slack"></i>
+                    <span class="links_name">Canal da Empresa</span>
+                </a>
+                <span class="tooltip">Slack</span>
+            </li>
+
             <li>
-                <a href="#" class="menu-link"> <i class="fas fa-cog"></i>
+                <a href="#" class="menu-link"><i class="fas fa-cog"></i>
                     <span class="links_name">Configurações</span>
                 </a>
                 <span class="tooltip">Configurações</span>
@@ -88,6 +95,7 @@
                 </div>
                 <i class="fas fa-sign-out-alt" id="log_out"></i>
             </li>
+
         </ul>
     </div>
     <section class="home-section">

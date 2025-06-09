@@ -64,12 +64,14 @@ function abrirModalToken() {
 
 // Função de cadastro da empresa
 async function cadastrarEmpresa() {
+  const nomeResponsavel = document.getElementById("nome_completo").value;
   const nomeEmpresa = document.getElementById("nome_empresa").value;
   const cnpj = document.getElementById("cnpj").value;
   const emailEmpresa = document.getElementById("email_empresa").value;
   const telefoneEmpresa = document.getElementById("telefone_empresa").value;
 
   const empresaPayload = {
+    nomeResponsavel,
     nomeEmpresa,
     cnpj,
     emailEmpresa,

@@ -43,13 +43,21 @@ document.getElementById("log_out").addEventListener("click", function () {
 window.onload = function () {
   const nome = sessionStorage.getItem("NOME_USUARIO");
   const tipoContaArmazenado = sessionStorage.getItem("TIPO_CONTA");
+  const slackId = sessionStorage.getItem("SLACK_ID");
+  const slackItem = document.getElementById("item-slack");
+  const slackLink = document.getElementById("link-slack");
+
+  if (slackId && slackItem && slackLink) {
+    slackLink.href = `https://slack.com/app_redirect?channel=${slackId}`;
+    slackItem.style.display = "flex";
+  }
 
   if (nome && tipoContaArmazenado) {
     document.getElementById("nomeUsuario").textContent = nome;
     document.getElementById("tipoContaUsuario").textContent = tipoContaArmazenado;
   }
 
-  const menuLinks = document.querySelectorAll('.nav-list a.menu-link'); 
+  const menuLinks = document.querySelectorAll('.nav-list a.menu-link');
   const dashLink = document.getElementById('minha-dashboard-link-dinamico');
 
   const dashboardMap = {
@@ -76,7 +84,7 @@ window.onload = function () {
 
   let currentFileName = window.location.pathname.split('/').pop();
   if (currentFileName === '' || currentFileName === '/') {
-      currentFileName = 'index.html';
+    currentFileName = 'index.html';
   }
 
   menuLinks.forEach(link => {

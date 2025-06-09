@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Learnfy</title>
+    <link rel="stylesheet" href="assets/styles/edit-person.css">
+    <link rel="stylesheet" href="assets/styles/configuracoes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon" />
+</head>
+
+<body>
+    <div class="sidebar open">
+        <div class="logo-details">
+            <img src="assets/images/BrancoSemTexto.png" alt="Logo" class="icon">
+            <div class="logo_name">Learnfy</div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li><i class='bx bx-search'></i><input type="text" placeholder="Pesquisar..."><span
+                    class="tooltip">Pesquisar</span></li>
+            <li><a href="index.html"><i class="fas fa-home"></i><span class="links_name">Home</span></a><span
+                    class="tooltip">Home</span></li>
+            <li><a href="edit-person.html"><i class="fas fa-user"></i><span class="links_name">Perfil</span></a><span
+                    class="tooltip">Perfil</span></li>
+            <li><a href="relatorio.html"><i class="fas fa-clipboard-list"></i><span
+                        class="links_name">Relatórios</span></a><span class="tooltip">Relatórios</span></li>
+            <li><a href="import.html"><i class="fas fa-building"></i><span class="links_name">Gestão</span></a><span
+                    class="tooltip">Gestão</span></li>
+            <li><a href="selection-dashboard.html"><i class="fas fa-chart-pie"></i><span class="links_name">Minha
+                        dashboard</span></a><span class="tooltip">Dashboard</span></li>
+            <li><a href="ajuda.html"><i class="fas fa-question-circle"></i><span
+                        class="links_name">Ajuda</span></a><span class="tooltip">Ajuda</span></li>
+            <li><a href="#" id="link-slack" target="_blank"><i class="fa-brands fa-slack"></i><span
+                        class="links_name">Canal da Empresa</span></a><span class="tooltip">Slack</span></li>
+            <li><a href="configuracoes.html"><i class="fas fa-cog"></i><span
+                        class="links_name">Configurações</span></a><span class="tooltip">Configurações</span></li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img id="profileImg" alt="Foto de perfil">
+                    <div class="name_job">
+                        <p class="name" id="nomeUsuario"></p>
+                        <small class="job" id="tipoContaUsuario"></small>
+                    </div>
+                </div>
+                <i class="fas fa-sign-out-alt" id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <button class="back-button" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i>
+            Voltar
+        </button>
+        <h1 class="page-title">Configurações de Notificações</h1>
+    </div>
+
+    <!-- Conteúdo -->
+    <section class="home-section">
+        <div class="settings-container">
+            <h2>Configurações da Empresa</h2>
+            <div style="margin-bottom: 30px;">
+                <label style="font-size: 18px; display: flex; align-items: center;">
+                    <input type="checkbox" id="notificacoesGlobais" style="margin-right: 10px;">
+                    Ativar recebimento de notificações gerais da plataforma
+                </label>
+            </div>
+
+            <h2>Usuários Cadastrados na Empresa</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-usuarios">
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="assets/javascript/sidebar.js"></script>
+    <script src="assets/javascript/configuracoes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

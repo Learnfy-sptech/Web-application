@@ -1,32 +1,58 @@
 const AWS = require('aws-sdk');
 const axios = require('axios');
+const mysql = require('mysql2/promise'); // caso precise consultar preferências
 
 const slackToken = process.env.SLACK_BOT_TOKEN;
+const connectionConfig = {
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
+};
 
 exports.handler = async (event) => {
-    for (const record of event.Records) {
-        const body = JSON.parse(record.body);
-        const { nomeEmpresa, nome, email, perfil } = body;
+  const conn = await mysql.createConnection(connectionConfig);
 
-        const channelName = `empresa-${nomeEmpresa.toLowerCase().replace(/\s/g, '-')}`;
+  for (const record of event.Records) {
+    const body = JSON.parse(record.body);
+    const { tipo_notificacao, mensagem, empresas_alvo } = body;
 
-        const slackResponse = await axios.post(
-            'https://slack.com/api/conversations.create',
-            { name: channelName, is_private: true },
-            { headers: { Authorization: `Bearer ${slackToken}` } }
-        );
+    for (const empresaId of empresas_alvo) {
+      const [rows] = await conn.execute(
+        `SELECT * FROM configuracao_notificacao_empresa WHERE fk_empresa = ?`,
+        [empresaId]
+      );
 
-        const channelId = slackResponse.data.channel.id;
+      const config = rows[0];
 
+      if (!config) continue;
+      if (!config.receber_notificacao_global) continue;
+
+      let deveNotificar = false;
+
+      if (tipo_notificacao === 'NOVA_BASE_EMPREGABILIDADE' && config.nova_base_empregabilidade) {
+        deveNotificar = true;
+      } else if (tipo_notificacao === 'NOVA_BASE_ENSINO' && config.nova_base_ensino) {
+        deveNotificar = true;
+      }
+
+      if (deveNotificar) {
         await axios.post(
-            'https://slack.com/api/chat.postMessage',
-            {
-                channel: channelId,
-                text: `🎉 Nova empresa cadastrada: *${nomeEmpresa}*\nResponsável: ${nome} (${perfil})\nEmail: ${email}`
-            },
-            { headers: { Authorization: `Bearer ${slackToken}` } }
+          'https://slack.com/api/chat.postMessage',
+          {
+            channel: '#learnfy-noticias',
+            text: mensagem
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${slackToken}`
+            }
+          }
         );
+      }
     }
+  }
 
-    return { statusCode: 200 };
+  await conn.end();
+  return { statusCode: 200 };
 };

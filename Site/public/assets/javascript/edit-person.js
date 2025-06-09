@@ -86,7 +86,7 @@ document
       if (senha) formData.append("senha", senha);
 
       const resUser = await fetch("/usuarios/atualizar", {
-        method: "POST",
+        method: "PUT",
         body: formData,
       });
       if (!resUser.ok) throw new Error("Falha ao atualizar dados do usuário");

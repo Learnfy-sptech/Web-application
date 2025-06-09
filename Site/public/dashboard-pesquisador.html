@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/styles/styles.css" />
   <link rel="stylesheet" href="./assets/styles/dashboard-area.css" />
   <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -71,6 +71,13 @@
         <span class="tooltip">Ajuda</span>
       </li>
 
+      <li id="item-slack">
+        <a href="#" class="menu-link" id="link-slack" target="_blank"><i class="fa-brands fa-slack"></i>
+          <span class="links_name">Canal da Empresa</span>
+        </a>
+        <span class="tooltip">Slack</span>
+      </li>
+
       <li>
         <a href="#" class="menu-link"> <i class="fas fa-cog"></i>
           <span class="links_name">Configurações</span>
@@ -104,7 +111,8 @@
         <div class="filter">
           <div class="custom-select-wrapper">
             <div class="custom-select">
-              <select id="select-areas" name="areaFiltro" onchange="mostarNomeH1();getKpiQtdCursantes(); getKpiPessoasTrabalhamNaArea(); 
+              <select id="select-areas" name="areaFiltro"
+                onchange="mostarNomeH1();getKpiQtdCursantes(); getKpiPessoasTrabalhamNaArea(); 
               getKpiEvasaoPorModalidade(); getKpiMediaSalarial(); getGraficoCursosMaiorRetorno(); getGraficoProjecaoEvasao();">
                 <!-- <option value="" disabled selected>Filtro por área:</option> -->
                 <option value="SERVIÇOS">SERVIÇOS</option>
@@ -115,7 +123,7 @@
                 <option value="CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO">CIÊNCIAS, MATEMÁTICA E COMPUTAÇÃO</option>
                 <option value="ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO">ENGENHARIA, PRODUÇÃO E CONSTRUÇÃO</option>
                 <option value="CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS">CIÊNCIAS SOCIAIS, NEGÓCIOS E DIREITOS</option>
-                
+
               </select>
               <span class="select-arrow"></span>
             </div>
@@ -150,7 +158,7 @@
       <div class="card">
         <div class="card-details">
           <p class="text-title">Quantidade de alunos que evadiram</p>
-         <span id="KpiEvasaoModalidade" class="text-body"></span>
+          <span id="KpiEvasaoModalidade" class="text-body"></span>
         </div>
       </div>
 
@@ -177,8 +185,8 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/javascript/awsPhoto.js"></script>
   <script src="assets/javascript/dashboardPesquisador.js"></script>
-    <script>
-  
+  <script>
+
     window.addEventListener("load", function () {
       loadProfileImage();
       mostarNomeH1();

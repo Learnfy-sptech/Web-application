@@ -53,6 +53,8 @@ function logar() {
         sessionStorage.TIPO_CONTA = json.tipo_conta;
         sessionStorage.FOTO_USUARIO = json.foto_perfil_path 
         sessionStorage.TELEFONE_USUARIO = json.telefone;
+        sessionStorage.SLACK_ID = json.slack_channel_id;
+        sessionStorage.ID_EMPRESA = json.idEmpresa;
   
         Swal.fire({
           title: "Login realizado com sucesso!",
