@@ -165,6 +165,7 @@ function construirQueryDinamica(colunas, filtros) {
         FROM curso_ofertado_tb
         ${joins}
         ${whereClause}
+        LIMIT 200000
     `;
 }
 

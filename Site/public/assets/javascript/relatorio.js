@@ -1,4 +1,3 @@
-var exportToExcel = require("./exportToExcel")
 var anoFiltro = ""
 var especializacaoFiltro = ""
 var cursoFiltro = ""
@@ -205,7 +204,6 @@ function inserirRelatorio() {
             Swal.fire({
                 title: "Não foi possível salvar o relatório",
                 text: "Tente novamente ou informe a central de atendimentos",
-                icon: "error",
                 confirmButtonText: "Ok",
                 confirmButtonColor: "#800000"
             });
@@ -626,6 +624,11 @@ function limparCamposRelatorio() {
         inserirRelatorio()
     }
     dadosColunasRelatorio = []
+    anoFiltro = ""
+    especializacaoFiltro = ""
+    cursoFiltro = ""
+    estadoFiltro = ""
+    cidadeFiltro = ""
 }
 
 function editarRelatorio(elemento) {
@@ -696,18 +699,81 @@ function formatarData(dataString) {
     return `${dia}/${mes}/${ano} às ${horas}:${minutos}`
 }
 
-function exportarRelatorio(id) {
-    fetch(`/relatorio/buscarDadosRelatorio/${id}`)
-        .then(response => {
-            if (!response.ok) throw new Error('Erro na requisição');
-            return response.json();
-        })
-        .then(data => {
-            console.log(data)
-            return exportToExcel(data, `relatorio_${id}.xlsx`);
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Falha ao exportar relatório: ' + error.message);
-        });
-}
+// async function exportarRelatorio(id) {
+//     try {
+//         const response = await fetch(`/relatorio/buscarDadosRelatorio/${id}`);
+//         if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+        
+//         const data = await response.json();
+//         console.log('Dados recebidos:', data);
+        
+//         await exportToExcel(data, 'relatorio.xlsx');
+//     } catch (error) {
+//         console.error('Erro ao exportar relatório:', error);
+//         alert('Falha ao exportar relatório: ' + error.message);
+//     }
+// }
+
+// async function exportToExcel(data, filename = 'relatorio.xlsx') {
+//     try {
+//         if (!data || !Array.isArray(data)) {
+//             throw new Error('Dados inválidos para exportação');
+//         }
+
+//         const workbook = new ExcelJS.Workbook();
+//         const worksheet = workbook.addWorksheet('Relatório');
+
+//         // Adiciona cabeçalhos com formatação
+//         if (data.length > 0) {
+//             const headers = Object.keys(data[0]);
+//             const headerRow = worksheet.addRow(headers);
+            
+//             // Formata cabeçalhos
+//             headerRow.font = { bold: true };
+//             headerRow.fill = {
+//                 type: 'pattern',
+//                 pattern: 'solid',
+//                 fgColor: { argb: 'FFD3D3D3' }
+//             };
+
+//             // Adiciona dados
+//             data.forEach(item => {
+//                 worksheet.addRow(Object.values(item));
+//             });
+
+//             // Auto ajuste das colunas
+//             worksheet.columns.forEach(column => {
+//                 let maxLength = 0;
+//                 column.eachCell({ includeEmpty: true }, cell => {
+//                     const columnLength = cell.value ? cell.value.toString().length : 10;
+//                     if (columnLength > maxLength) {
+//                         maxLength = columnLength;
+//                     }
+//                 });
+//                 column.width = Math.min(maxLength + 2, 50); // Limita a 50 caracteres
+//             });
+//         } else {
+//             worksheet.addRow(['Nenhum dado disponível para exportação']);
+//         }
+
+//         // Gera o arquivo
+//         const buffer = await workbook.xlsx.writeBuffer();
+//         const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+//         const url = URL.createObjectURL(blob);
+        
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = filename;
+//         document.body.appendChild(a);
+//         a.click();
+        
+//         // Limpeza
+//         setTimeout(() => {
+//             document.body.removeChild(a);
+//             URL.revokeObjectURL(url);
+//         }, 100);
+//     } catch (error) {
+//         console.error('Erro na geração do Excel:', error);
+//         throw error; // Rejeita a promise para ser tratada externamente
+//     }
+// }

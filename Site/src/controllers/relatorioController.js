@@ -1,4 +1,6 @@
+const { response } = require("express")
 var model = require("../models/relatorioModel")
+// var exportJs = require("./public/assets/javascript/exportToExcel.js")
 
 function inserirRelatorio(req, res) {
   const nome = req.body.nome
@@ -141,7 +143,7 @@ function buscarDadosRelatorio(req, res) {
   }
 
   model.buscarDadosRelatorio(idRelatorio).then(function (resposta) {
-    return res.json(resposta).status(200);
+    return res.status(200).json(resposta);
   })
     .catch(function (erro) {
       console.log(erro)
