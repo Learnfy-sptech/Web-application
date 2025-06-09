@@ -85,6 +85,25 @@ function login(email, senha) {
   return database.executar(instrucaoSql);
 }
 
+function recuperarFuncionarios(idEmpresa) {
+  var instrucaoSql = `
+  SELECT 
+    u.id, 
+    u.nome, 
+    u.email, 
+    u.tipo_conta, 
+    u.telefone, 
+    u.foto_perfil_path,
+    e.nomeEmpresa,
+    e.slack_channel_id
+  FROM usuario u
+  JOIN empresa e ON u.fk_empresa = e.id
+  WHERE e.id = ${idEmpresa};
+`;
+
+  return database.executar(instrucaoSql);
+}
+
 
 function atualizar(id, nome, telefone, senha, foto) {
   const campos = [];
@@ -122,5 +141,6 @@ module.exports = {
   login,
   atualizar,
   verificarUsuarioExistente,
-  cadastrarUsuario
+  cadastrarUsuario,
+  recuperarFuncionarios
 };
