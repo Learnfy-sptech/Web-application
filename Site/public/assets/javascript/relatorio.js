@@ -1,3 +1,5 @@
+
+
 var anoFiltro = ""
 var especializacaoFiltro = ""
 var cursoFiltro = ""
@@ -378,17 +380,6 @@ function alimentarCamposRelatorio(json) {
                 actualElement.remove()
             })
         }
-
-        const elementoColunas = document.getElementById('todas_colunas')
-        const colunas = elementoColunas.querySelectorAll('div')
-        colunas.forEach((coluna) => {
-            inputColuna = coluna.querySelector('input')
-            conteudoColunaId = coluna.querySelector('span').textContent.replaceAll(" ", "_").toLowerCase()
-            if (inputColuna.checked) {
-                dadosColunasRelatorio.push(conteudoColunaId)
-            }
-        })
-
         dadosColunasRelatorio.forEach((colunaAtual) => {
             adicionarCampoNaDiv(colunaAtual)
         })
